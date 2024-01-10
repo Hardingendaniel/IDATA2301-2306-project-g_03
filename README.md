@@ -1,2 +1,2 @@
-# IDATA2301-2306-project-g_03
+# IDATA2301/2306_project_g03
 Applikasjonsutvikling og Webuteknologi
