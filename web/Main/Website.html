@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stay Finder</title>
+</head>
+<body>
+
+<div class="header">
+    <div>STAY FINDER</div>
+    <div>
+        <input type="text" placeholder="Search">
+    </div>
+    <div>
+        <button class="login-button">Log In</button>
+    </div>
+</div>
+
+<div class="main">
+    <div class="search-container">
+        <h1>We at Stay Finder want to help you with your booking...</h1>
+        <input class="search-field" type="text" placeholder="Where to?">
+        <input class="search-field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check in date">
+        <input class="search-field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check out date">
+        <select class="search-field">
+            <option>1 adults</option>
+            <option>2 adult</option>
+            <option>3 adults</option>
+        </select>
+        <select class="search-field">
+            <option>1 room</option>
+            <option>2 rooms</option>
+            <option>3 rooms</option>
+        </select>
+        <button class="search-button">SEARCH</button>
+    </div>
+
+
+    <h2>Get the best experience with Stay Finder</h2>
+    <div class="cards">
+        <div class="card">
+            <img src="hotel1.jpg" alt="Hotel 1">
+            <p>OMG Stay Finder is the best!</p>
+        </div>
+        <div class="card">
+            <img src="hotel2.jpg" alt="Hotel 2">
+            <p>These guys have the best deals!</p>
+        </div>
+        <div class="card">
+            <img src="hotel3.jpg" alt="Hotel 3">
+            <p>Stay Finder for the win!</p>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Sign in</h2>
+        </div>
+        <div class="modal-body">
+            <input type="email" placeholder="Email" name="email" required>
+            <div class="password-container">
+                <input type="password" placeholder="Password" name="password" required>
+            </div>
+            <div class="forgot-password">
+                <a href="#">Forgot password?</a>
+            </div>
+            <button type="submit" class="login-button-modal">Sign in</button>
+            <div class="divider">
+                <hr class="left"/>or<hr class="right"/>
+            </div>
+            <button type="submit" class="signup-button-modal">Sign up</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<link rel="stylesheet" href="style.css">
+</body>
+</html>
