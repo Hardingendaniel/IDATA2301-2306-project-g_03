@@ -1,8 +1,10 @@
 .header {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    padding: 80px;
     background-color: #D9E4FF;
+    font-size: 30px;
+    height: 10vh;
 }
 .main {
     padding: 20px;
@@ -20,17 +22,22 @@
     background-color: #e0e0e0;
 }
 .search-field {
-    margin: 10px;
+    float: left;
     padding: 10px;
     width: 200px;
 }
 .search-button {
     padding: 12px 20px;
-    background-color: blue;
+    background-color: #4C73FF;
     color: white;
     border: none;
-    border-radius: 12px;
+    border-radius: 15px;
 }
+
+.search-button:hover {
+    background-color: #0035F5;
+}
+
 .login-button {
     padding: 10px 15px;
     background-color: #EBEBEB;
