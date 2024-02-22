@@ -33,3 +33,16 @@ track of what needs to be done.
 
 ## Sprint 2 / Checkpoint 3
 
+The plan for this sprint Week 8 - Week 12 :
+The plan for this sprint is firstly to work according to the feedback given by the lecturers in checkpoint C2. Some 
+adjustments in the wireframe, database sketch and the use case diagram (more detailed described in issues). In the end
+of this sprint we want to have a closely finished wireframe for computer display. In addition to this we need to create 
+sketches of responsive sites (sketches for mobile phones tablets etc). We will also work towards having a static site 
+with design in place. We will focus on getting a more descriptive and more concise design.md file. It is important to
+set aside time so that the design guidelines for the web is followed.
+
+To achieve what we want for this upcoming sprint we will need to look at the previous sprint. We will continue with what
+went good and adjust according to what didn't. To develop our web and application skills we will as a group work on the
+weekly exercises in both subjects. A crucial part of learning is by doing. In this upcoming sprint there will be 
+scheduled at least one physical work session per week.     
+
