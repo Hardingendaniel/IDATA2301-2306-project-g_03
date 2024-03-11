@@ -34,3 +34,20 @@ window.addEventListener('keydown', function(event) {
         modal.style.display = 'none';
     }
 });
+
+document.getElementById("Shuffle_reviews").addEventListener("click", function () {
+    //Get all the cards
+    let cards = document.querySelector(".card")
+
+    //Check if there are cards to replace
+    if (cards.length > 3) {
+        let hiddenCard = document.querySelector(".card.hidden");
+        if(hiddenCard) {
+            hiddenCard.classList.remove("hidden");
+        }
+        //replace the first card with the new card
+        cards[0].parentNode.replaceChild(hiddenCard, cards[0]);
+    } else {
+        alert("No more cards to be replaced");
+    }
+});

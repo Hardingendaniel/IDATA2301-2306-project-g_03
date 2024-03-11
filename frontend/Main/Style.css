@@ -27,9 +27,7 @@
     border-radius: 15px;
 }
 
-.logo {
-    color: black;
-}
+
 
 .search-bar-container {
     background-color: #f1f1f1;
@@ -82,13 +80,37 @@
     border-radius: 12px;
 }
 
+
 .card .rating {
     color: #4C73FF;
 }
 
+.shuffle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(270deg);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #fff;
+}
+
 .card img {
-    width: 500px;
-    height: auto;
+    height: 300px;
+    width: auto;
     display: block;
     margin: 0 auto;
 }
@@ -234,6 +256,14 @@ input[type="password"] {
 .signup-button-modal i {
     margin-right: 8px;
 }
+
+
+/* body {
+    This removes the horizontal scroll bar
+overflow-x: hidden;
+} */
+
+
 
 
 
