@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+}
+
+footer {
+    background-color: #3E68FF;
+    color: white;
+    padding: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #3E68FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    left: 0;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+}
+
+.footer-content p {
+    margin-right: 1em;
+    width: 50%;
+}
