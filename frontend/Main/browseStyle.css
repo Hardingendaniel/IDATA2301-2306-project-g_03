@@ -5,30 +5,43 @@ body {
     overflow: hidden;
 }
 
-footer {
-    background-color: #3E68FF;
-    color: white;
-    padding: 1em;
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #3E68FF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    bottom: 0;
-}
-
-footer p {
-    margin-left: 2em;
-    width: 50%;
-}
-
 .container {
     width: 80%;
     margin: 0 auto;
 }
 
-nav {
+.search-form {
+    background-color: #f5f5f5; /* Add a light background color */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 2rem; /* Add rounded corners */
+    padding: 10px; /* Add some padding inside */
+    display: flex; /* Inherit flexbox for horizontal arrangement */
+    margin: 0 auto; /* Center the search bar horizontally */
+}
+
+header form {
+    display: flex;
+    margin: 0 auto; /* Center the form horizontally */
+}
+
+header form label {
+    margin-right: 10px; /* Add spacing between labels and inputs */
+}
+
+header form #destination{
+    border-radius: 2rem 0 0 2rem;
+}
+
+header form #rooms{
+    border-radius: 0 2rem 2rem 0;
+}
+
+header form input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+header {
     width: 100%;
     background-color: #7392FF;
     padding: 0.7rem 0;
@@ -37,16 +50,18 @@ nav {
     z-index: 10;
 }
 
-nav .container {
+header .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.search-bar {
-    background-color: hsl(252, 30%, 95%);
+
+#header-search {
     border-radius: 2rem;
     padding: 0.6rem 1rem;
+    border: none;
+    background-color: hsl(252, 30%, 95%);
 }
 
 .search-bar input[type="search"] {
@@ -57,13 +72,13 @@ nav .container {
     color: hsl(252, 30%, 17%);
 }
 
-nav .button {
+header .button {
     display: flex;
     align-items: center;
     gap: 2rem;
 }
 
-.btn {
+.signInButton {
     display: inline-block;
     padding: 0.6rem 2rem;
     font-weight: 500;
@@ -74,6 +89,55 @@ nav .button {
     transition: all 300ms ease;
 }
 
-.btn:hover {
+.signInButton:hover {
     opacity: 0.8;
+}
+
+footer {
+    background-color: #3E68FF;
+    color: white;
+    padding: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #3E68FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+}
+
+footer p {
+    margin-left: 2em;
+    width: 50%;
+}
+
+#signInForm {
+    position: fixed; /* Stay on top of other content */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the form */
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a slight shadow */
+    z-index: 10; /* Ensure the form is on top of other elements */
+}
+
+#overlay {
+    position: fixed; /* Cover the entire screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 9; /* Slightly lower than the form for layering */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition on show/hide */
+}
+
+#overlay.active {
+    opacity: 1; /* Overlay becomes visible */
 }
