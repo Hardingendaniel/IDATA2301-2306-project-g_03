@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h2>Stay Finder</h2>
+        <div class="search-bar">
+            <label>
+                <input type="search" id="header-search" placeholder="search">
+            </label>
+        </div>
+
+        <div class="button">
+            <button class="logInButton">Log in</button>
+        </div>
+    </div>
+    <div class="search-form">
+        <input class="text" type="text" placeholder="Where to?">
+        <input class="text" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check in date">
+        <input class="text" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check out date">
+        <select class="search-field">
+            <option>1 room</option>
+            <option>2 rooms</option>
+            <option>3 rooms</option>
+        </select>
+        <button class="search-button">SEARCH</button>
+    </div>
+</header>
+
+<article>
+    <h2>Villa GOATeid</h2>
+    <div class="star-rating">
+        ★★★★☆
+    </div>
+    <p>4 Star Hotel</p>
+
+    <section class="photo-gallery">
+        <div class="Large-image">
+            <img src="../img/scandic.jpg" alt="Hotel 3">
+            <img src="../img/HotelBeach.jpg" alt="Hotel 3">
+        </div>
+        <div class="Small-image">
+            <img src="../img/scandic.jpg" alt="Hotel 3">
+            <img src="../img/HotelBeach.jpg" alt="Hotel 3">
+        </div>
+
+    </section>
+
+    <section class="hotel-info">
+        <nav>
+            <div class="divider">
+                <link><a href="#Overview">Overview</a>
+                <link><a href="#Rooms">Rooms</a>
+                <link><a href="#Reviews">Reviews</a>
+                <link><a href="#About">About</a>
+                <link><a href="#Location">Location</a>
+            </div>
+        </nav>
+    </section>
+</article>
+
+<footer>
+    <img src="../img/NTNU%20hovedlogo%20-%20hvit%20-%20hoyde.png" width="10%" height="auto" alt="NTNU Logo"/>
+    <p><i>This website is a result of a university group project, performed in the course<span style="color: black">IDATA2301
+                Web technologies</span>, at <span style="color: black">NTNU</span>.
+        All the information provided here is a result of imagination.
+        Any resemblance with real companies or products is a coincidence.
+    </i></p>
+</footer>
+
+<link rel="stylesheet" href="hotelStyle.css">
+
+</body>
+</html>
