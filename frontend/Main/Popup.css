@@ -99,8 +99,10 @@ input[type="password"] {
 }
 
 .login-button:hover {
-    background-color: #0056b3;
+    background-color: lightgray;
+    /*background-color: #0056b3; BLEI LITT STYGT MED BLÅ MEN IDK */
 }
+
 
 /* Divider Style */
 .divider {
@@ -139,3 +141,14 @@ input[type="password"] {
 .signup-button-modal i {
     margin-right: 8px;
 }
+
+.modal-settings {
+    width: 100%;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
