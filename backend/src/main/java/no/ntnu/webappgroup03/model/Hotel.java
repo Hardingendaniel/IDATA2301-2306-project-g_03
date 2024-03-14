@@ -1,10 +1,9 @@
-package no.ntnu.webappgroup03.entity;
+package no.ntnu.webappgroup03.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 
 /**

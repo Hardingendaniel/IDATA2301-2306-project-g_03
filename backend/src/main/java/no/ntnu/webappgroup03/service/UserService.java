@@ -1,8 +1,8 @@
 package no.ntnu.webappgroup03.service;
 
 import java.util.Optional;
-import no.ntnu.webappgroup03.entity.User;
-import no.ntnu.webappgroup03.repositories.UserRepository;
+import no.ntnu.webappgroup03.model.User;
+import no.ntnu.webappgroup03.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

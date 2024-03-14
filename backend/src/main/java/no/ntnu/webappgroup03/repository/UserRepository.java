@@ -1,6 +1,6 @@
-package no.ntnu.webappgroup03.repositories;
+package no.ntnu.webappgroup03.repository;
 
-import no.ntnu.webappgroup03.entity.User;
+import no.ntnu.webappgroup03.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
