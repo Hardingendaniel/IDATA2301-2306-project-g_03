@@ -14,6 +14,10 @@ if (btn) {
     });
 }
 
+//adda ikkje funksjonalitet foreløpig, men trengs mby etter kvart
+function suggestionClick() {
+    document.getElementById("dropdown").classList.toggle("show");
+}
 
 // When the user clicks on (x), close the modal
 if (span) {
