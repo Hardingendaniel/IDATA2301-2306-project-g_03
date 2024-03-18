@@ -1,9 +1,9 @@
 package no.ntnu.webappgroup03.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -20,8 +20,25 @@ public class Hotel {
   private String roomTypes;
   private double price;
 
+  @ManyToMany(mappedBy = "books")
+  private Set<User> users = new HashSet<>();
+
   public Hotel() {
     // Intentionally left blank
+  }
+
+  /**
+   *
+   * @param hotelName     Title of the hotel
+   * @param locationType  The location of the hotel
+   * @param roomTypes     The type of the room
+   * @param price         The price for the hotel
+   */
+  public Hotel(String hotelName, String locationType, String roomTypes, double price) {
+    this.hotelName = hotelName;
+    this.locationType = locationType;
+    this.roomTypes = roomTypes;
+    this.price = price;
   }
 
   public int getId() {
@@ -67,5 +84,15 @@ public class Hotel {
   public boolean isValid() {
     return hotelName != null && !hotelName.equals("");
   }
+
+  /**
+   * Add a user to the user list of the Hotel
+   *
+   * @param user The user to add
+   */
+  public void addUser(User user) {
+    users.add(user);
+  }
+
 }
 

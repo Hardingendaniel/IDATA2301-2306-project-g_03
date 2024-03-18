@@ -10,21 +10,42 @@
 <div class="header">
     <div class="logo">STAY FINDER</div>
     <div class="search-container-header">
-        <input type="text" placeholder="Search">
+        <input list="suggestions" type="text" placeholder="Search">
+        <datalist id ="suggestions">
+            <option>Hotel</option>
+            <option>Pool</option>
+            <option>Gym facilities</option>
+            <option>Hotel with breakfast</option>
+        </datalist>
     </div>
 
     <div>
         <button class="login-button">Log In</button>
-        <button class = "settings"><img src="../img/settings.png" alt="settings"></button>
+        <div class="settings-dropdown">
+            <button class = "settings"><img src="../img/settings.png" alt="settings"></button>
+            <div class="dropdown-content">
+                <a href="#">About</a>
+                <a href="#">Language</a>
+                <a href="#">ion even know</a>
+            </div>
+        </div>
+
     </div>
-
-
 
 </div>
 
 <div class="main">
     <div class="search-bar-container">
-        <input class="search-field" type="text" placeholder="Where to?">
+        <div class = "dropdown">
+            <input list="places" class="search-field" type="text" placeholder="Where to?" onclick="suggestionClick">
+            <datalist id="places">
+                <option>Ålesund</option>
+                <option>Oslo</option>
+                <option>Trondheim</option>
+                <option>Bergen</option>
+            </datalist>
+
+        </div>
         <input class="search-field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check in date">
         <input class="search-field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check out date">
         <select class="search-field">
