@@ -2,7 +2,12 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    overflow: hidden;
+    overflow: scroll;
+}
+
+h2 {
+    color: white;
+    font-weight: bolder;
 }
 
 .container {
@@ -10,44 +15,53 @@ body {
     margin: 0 auto;
 }
 
-.search-form {
+.form {
     background-color: #f5f5f5; /* Add a light background color */
-    border: 1px solid #ccc; /* Add a border */
-    border-radius: 2rem; /* Add rounded corners */
-    padding: 10px; /* Add some padding inside */
+    border-radius: 1.5rem; /* Add rounded corners */
     display: flex; /* Inherit flexbox for horizontal arrangement */
-    margin: 0 auto; /* Center the search bar horizontally */
+    margin: auto; /* Center the search bar horizontally */
+    height: 55px;
+    width: 80%;
+    justify-content: center;
 }
 
-header form {
-    display: flex;
-    margin: 0 auto; /* Center the form horizontally */
+.form-input {
+    width: 100%;
+    text-align: center;
+    font-size: medium;
 }
 
-header form label {
-    margin-right: 10px; /* Add spacing between labels and inputs */
-}
 
 header form #destination{
-    border-radius: 2rem 0 0 2rem;
+    border-radius: 1.5rem 0 0 1.5rem;
 }
 
-header form #rooms{
-    border-radius: 0 2rem 2rem 0;
+header #search_button {
+    border-radius: 0 1.5rem 1.5rem 0;
+    border: none;
+    background: #3E68FF;
+    color: white;
+    cursor: pointer;
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+header #search_button:hover {
+    opacity: 0.8;
 }
 
 header form input[type="text"] {
     padding: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #EBEBEB;
 }
 
 header {
     width: 100%;
     background-color: #7392FF;
     padding: 0.7rem 0;
-    position: fixed;
     top: 0;
     z-index: 10;
+    position: sticky;
 }
 
 header .container {
@@ -56,12 +70,16 @@ header .container {
     justify-content: space-between;
 }
 
-
-#header-search {
-    border-radius: 2rem;
-    padding: 0.6rem 1rem;
+.search-bar {
+    display: flex;
     border: none;
-    background-color: hsl(252, 30%, 95%);
+    border-radius: 1.5rem;
+    padding: 0.6rem 1rem;
+    background-color: #EBEBEB;
+}
+
+.search-bar svg {
+    color: grey;
 }
 
 .search-bar input[type="search"] {
@@ -69,7 +87,7 @@ header .container {
     width: 30vw;
     margin-left: 1rem;
     font-size: 0.9rem;
-    color: hsl(252, 30%, 17%);
+    border: none;
 }
 
 header .button {
@@ -87,27 +105,71 @@ header .button {
     color: white;
     background-color: #3E68FF;
     transition: all 300ms ease;
+    border: none;
 }
 
 .signInButton:hover {
     opacity: 0.8;
 }
-
+/* Main window underneath header */
 .main {
+    border: solid;
     display: flex;
-    justify-content: space-between;
+}
+
+/* Left side of the main window */
+.left {
+    border: solid red;
+    width: 20%;
+}
+
+/* Right side of the main window */
+.right {
+    display: flex;
+    flex-direction: column;
+    border: solid green;
+    width: 80%;
+}
+
+.map {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    position: relative;
+    border: turquoise solid;
+}
+
+.map-button {
+    position: absolute; /* Set the button to absolute positioning */
+    top: 50%; /* Position the button vertically at 50% */
+    left: 50%; /* Position the button horizontally at 50% */
+    transform: translate(-50%, -50%);  /* Center the button within the container */
+    background-color: #3E68FF;
+    border: none;
+    color: white;
+    border-radius: 1.5rem;
+    font-weight: bolder;
+    font-size: large;
+    cursor: pointer;
+    width: 150px;
+    height: 50px;
+}
+
+.map-button:hover {
+    opacity: 0.7;
+}
+
+.map-img {
+    border-radius: 1.5rem;
 }
 
 
 .filter {
     border: solid;
     border-radius: 1rem;
-    width: 30%;
 }
 
-.slidecontainer {
-    width: 100%;
-}
 
 .slider {
     -webkit-appearance: none;
@@ -135,22 +197,16 @@ header .button {
     cursor: pointer;
 }
 
-.flex-container {
+.right {
+    padding: 2rem;
+}
+
+.hotel-info {
     display: flex;
-    flex-direction: column;
+    border: solid;
     justify-content: space-between;
-}
-
-.flex-container > div {
-    background-color: lightgrey;
-    width: 100%;
     margin: 10px;
-    text-align: center;
-    line-height: 75px;
-    font-size: 30px;
 }
-
-
 footer {
     background-color: #3E68FF;
     color: white;
@@ -161,7 +217,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    /*position: absolute; */
     bottom: 0;
 }
 
@@ -169,30 +225,3 @@ footer p {
     margin-left: 2em;
     width: 50%;
 }
-
-#signInForm {
-    position: fixed; /* Stay on top of other content */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Center the form */
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Add a slight shadow */
-    z-index: 10; /* Ensure the form is on top of other elements */
-}
-
-#overlay {
-    position: fixed; /* Cover the entire screen */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    z-index: 9; /* Slightly lower than the form for layering */
-    opacity: 0; /* Initially hidden */
-    transition: opacity 0.3s ease-in-out; /* Smooth transition on show/hide */
-}
-

@@ -11,9 +11,10 @@
         <div class="container">
             <h2>Stay Finder</h2>
             <div class="search-bar">
-                <label>
-                    <input type="search" id="header-search" placeholder="search">
-                </label>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="30" height="30">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+                <input type="search" id="header-search" placeholder="search">
             </div>
 
             <div class="button">
@@ -21,20 +22,21 @@
                 <button class="signInButton">Sign Up</button>
             </div>
         </div>
-        <div class="search-form">
-            <form action="/search" method="GET">
-                <input type="text" name="destination" id="destination" placeholder="Where to?">
-                <input type="text" name="check-in" id="check-in" placeholder="Check-in Date">
-                <input type="text" name="check-out" id="check-out" placeholder="Check-out Date">
-                <input type="text" name="rooms" id="rooms" placeholder="Number of Rooms (min: 1)">
-            </form>
-        </div>
+        <form action="/search" class="form" method="GET">
+            <input type="text" class="form-input" name="destination" id="destination" placeholder="Where to?">
+            <input type="text" class="form-input" name="check-in" id="check-in" placeholder="Check-in Date">
+            <input type="text" class="form-input" name="check-out" id="check-out" placeholder="Check-out Date">
+            <input type="text" class="form-input" name="rooms" id="rooms" placeholder="Number of Rooms (min: 1)">
+            <button type="button" class="form-input" name="search_button" id="search_button">SEARCH</button>
+        </form>
+
     </header>
 
     <div class="main">
         <div class="left">
             <div class="map">
-                <img src="../img/7652611.jpg" height="200" width="200" alt="temporary img"/>
+                <img src="../img/7652611.jpg" class="map-img" height="200" width="300" alt="temporary img"/>
+                <button class="map-button">Show on map</button>
             </div>
             <div class="filter">
                 Filter by:
@@ -65,24 +67,27 @@
         </div>
         <div class="right">
             <div class="flex-container">
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
+                <div class="result">Results from Ålesund: 32 properties found</div>
+                <div class="sort-by">Sort by</div>
+                <div class="hotel-info">
+                    <img src="../img/hotel1.jpg" height="200" alt="hotel 1"/>
+                    Hotel GOATeid
+                    <button class="hotel-button">View deal ></button>
+                </div>
+
+                <div class="hotel-info">
+                    <img src="../img/hotel2.jpg" height="200" alt="hotel 2"/>
+                    Hotel 2
+                    <button class="hotel-button">View deal ></button>
+                </div>
+
+                <div class="hotel-info">
+                    <img src="../img/hotel3.jpg" height="200" alt="hotel 3"/>
+                    Hotel 3
+                    <button class="hotel-button">View deal ></button>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div id="signInForm" style="display: none;">
-        <h2>Sign In</h2>
-        <form>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit">Sign In</button>
-        </form>
-        <button id="closeButton">Close</button>
     </div>
 
     <footer>
