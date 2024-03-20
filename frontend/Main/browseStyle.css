@@ -133,7 +133,7 @@ header .button {
 nav ul {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 1rem 0 0 0;
     display: flex;
     justify-content: center;
 }
@@ -141,7 +141,7 @@ nav ul {
 nav li:not(:last-child)::after {
     content: ">";
     margin: 0 10px;
-    color: #999;
+    color: #106BF4;
 }
 
 nav li:last-child {
@@ -196,13 +196,13 @@ nav a:hover {
     align-items: center;
     margin: 1rem;
     padding: 1rem;
-    border: solid;
+    border: 1px solid rgba(72, 72, 72, 0.5);
     border-radius: 1rem;
     flex-direction: column;
 }
 
 hr {
-    border: solid;
+    border: 1px solid rgba(72, 72, 72, 0.5);
     width: 100%;
 }
 
@@ -269,29 +269,53 @@ hr {
 
 .sort-by {
     display: flex;
-    border: solid;
+    border: 1px solid rgba(72, 72, 72, 0.5);
     border-radius: 1.5rem;
     width: 8%;
     color: #484848;
     justify-content: space-evenly;
     padding: 5px;
+    cursor: pointer;
 }
 
 .sort-by svg {
     color: #484848;
 }
 
-.hotel-info {
+.hotel-card {
     display: flex;
-    border: solid;
+    border: 1px solid rgba(72, 72, 72, 0.5);
     border-radius: 1.5rem;
-    justify-content: space-between;
     margin: 10px;
-
+    position: relative;
 }
 
 .hotel-img {
     border-radius: 1.5rem 0 0 1.5rem;
+}
+
+.hotel-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hotel-info ul {
+    list-style-type: none;
+}
+
+.info-title {
+    font-weight: bolder;
+    font-size: 24px;
+}
+
+.info-meal {
+    color: #106BF4;
+}
+
+.info-price {
+    font-weight: bolder;
+    font-size: 20px;
 }
 
 .hotel-button {
@@ -306,6 +330,10 @@ hr {
     font-size: large;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 1rem;
 }
 
 footer {
