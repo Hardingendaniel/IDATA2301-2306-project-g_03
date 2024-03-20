@@ -41,11 +41,11 @@
     width: 200px;
 }
 .search-button {
-    padding: 12px 20px;
+    git padding: 12px 20px;
     background-color: #4C73FF;
     color: white;
     border: none;
-    border-radius: 15px;
+    border-radius: 0 15px 15px 0;
 }
 
 .search-button:hover {
@@ -214,8 +214,17 @@ overflow-x: hidden;
     vertical-align: middle;
 }
 
+.Why_choose\? {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-
+.Why_choose\?-info_idk {
+    height: 300px;
+    width: 200px;
+}
 
 
 
