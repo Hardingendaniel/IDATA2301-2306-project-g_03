@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.card');
     let currentIndex = 0;
+    const shufflebackwards = document.getElementById("Shuffle_reviews2");
 
     function showCards(index) {
         cards.forEach(card => {
@@ -14,6 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
         cards[index].style.display = 'block';
         cards[nextIndex1].style.display = 'block';
         cards[nextIndex2].style.display = 'block';
+
+        if (index === 0) {
+            shufflebackwards.style.display = 'none';
+        } else {
+            shufflebackwards.style.display = 'block';
+        }
+
     }
     showCards(currentIndex);
 
@@ -21,4 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
         currentIndex = (currentIndex + 1) % cards.length;
         showCards(currentIndex);
     });
+
+    document.getElementById('Shuffle_reviews2').addEventListener('click',()=> {
+        if (currentIndex > 0) {
+            currentIndex = (currentIndex - 1) %cards.length;
+            showCards(currentIndex);
+        }
+    });
 });
+
+

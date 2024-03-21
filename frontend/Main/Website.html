@@ -9,39 +9,45 @@
 
 <div class="header">
     <div class="logo">STAY FINDER</div>
-    <div class="search-container-header">
-        <input type="text" placeholder="Search">
+    <div class="search-bar">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="30" height="30">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        </svg>
+        <input type="search" id="header-search" placeholder="search">
     </div>
-
     <div>
         <button class="login-button">Log In</button>
-        <button class = "settings"><img src="../img/settings.png" alt="settings"></button>
+        <div class="settings-dropdown">
+            <button class = "settings"><img src="../img/settings.png" alt="settings"></button>
+            <div class="dropdown-content">
+                <a href="#">About</a>
+                <a href="#">Language</a>
+                <a href="#">ion even know</a>
+            </div>
+
+        </div>
+
     </div>
-
-
 
 </div>
 
 <div class="main">
-    <div class="search-bar-container">
-        <input class="search-field" type="text" placeholder="Where to?">
-        <input class="search-field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check in date">
-        <input class="search-field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check out date">
-        <select class="search-field">
-            <option>1 adults</option>
-            <option>2 adult</option>
-            <option>3 adults</option>
-        </select>
-        <select class="search-field">
-            <option>1 room</option>
-            <option>2 rooms</option>
-            <option>3 rooms</option>
-        </select>
-        <a href="browsePage.html">
-            <button class="search-button">SEARCH</button>
-        </a>
-    </div>
 
+    <form action="/search" class="form" method="GET">
+        <input list="places" type="text" class="form-input" name="destination" id="destination" placeholder="Where to?" onclick="suggestionClick">
+        <datalist id="places">
+            <option>Ålesund</option>
+            <option>Oslo</option>
+            <option>Trondheim</option>
+            <option>Bergen</option>
+        </datalist>
+        <input type="text" class="form-input" name="check-in" id="check-in" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check in date">
+        <input type="text" class="form-input" name="check-out" id="check-out" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check out date">
+        <input type="text" class="form-input" name="rooms" id="rooms" placeholder="Number of Rooms (min: 1)">
+        <a href="browsePage.html" class="button-link">
+        <button type="button" class="form-input" name="search_button" id="search_button">SEARCH</button>
+        </a>
+    </form>
 
     <h2 class="subheading">Get the best experience with Stay Finder</h2>
     <div class="cards">
@@ -114,6 +120,17 @@
     </div>
 </div>
 
+
+<div class = "Why_choose?">
+    <div clas="info_idk">
+        <p>Why shoulc you choose this site cuh?</p>
+    </div>
+
+    <div></div>
+
+    <div></div>
+</div>
+
 <footer>
     <img src="../img/NTNU%20hovedlogo%20-%20hvit%20-%20hoyde.png" width="10%" height="auto" alt="NTNU Logo"/>
     <p><i>This website is a result of a university group project, performed in the course<span style="color: black">IDATA2301
@@ -126,7 +143,7 @@
 
 <script src="Script.js"></script>
 <script src="Script2.js"></script>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="Style.css">
 <link rel="stylesheet" href="Popup.css">
 </body>
 </html>

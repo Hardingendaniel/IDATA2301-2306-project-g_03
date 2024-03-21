@@ -9,11 +9,16 @@
 <body>
     <header>
         <div class="container">
-            <h2>Stay Finder</h2>
+            <div class="logo">
+                <a href="Website.html">
+                    <button class="logo-button">Stay Finder</button>
+                </a>
+            </div>
             <div class="search-bar">
-                <label>
-                    <input type="search" id="header-search" placeholder="search">
-                </label>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="30" height="30">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+                <input type="search" id="header-search" placeholder="search">
             </div>
 
             <div class="button">
@@ -21,69 +26,151 @@
                 <button class="signInButton">Sign Up</button>
             </div>
         </div>
-        <div class="search-form">
-            <form action="/search" method="GET">
-                <input type="text" name="destination" id="destination" placeholder="Where to?">
-                <input type="text" name="check-in" id="check-in" placeholder="Check-in Date">
-                <input type="text" name="check-out" id="check-out" placeholder="Check-out Date">
-                <input type="text" name="rooms" id="rooms" placeholder="Number of Rooms (min: 1)">
-            </form>
-        </div>
+        <form action="/search" class="form" method="GET">
+            <input list="places" type="text" class="form-input" name="destination" id="destination" placeholder="Where to?" onclick="suggestionClick">
+            <datalist id="places">
+                <option>Ålesund</option>
+                <option>Oslo</option>
+                <option>Trondheim</option>
+                <option>Bergen</option>
+            </datalist>
+            <input type="text" class="form-input" name="check-in" id="check-in" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check in date">
+            <input type="text" class="form-input" name="check-out" id="check-out" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check out date">
+            <input type="text" class="form-input" name="rooms" id="rooms" placeholder="Number of Rooms (min: 1)">
+            <button type="button" class="form-input" name="search_button" id="search_button">SEARCH</button>
+        </form>
     </header>
 
     <div class="main">
         <div class="left">
+            <nav>
+                <ul>
+                    <li><a href="Website.html">Home</a></li>
+                    <li><a href="#">Country</a></li>
+                    <li><a href="#">State</a></li>
+                    <li><a href="#">Town</a></li>
+                </ul>
+            </nav>
             <div class="map">
-                <img src="../img/7652611.jpg" height="200" width="200" alt="temporary img"/>
+                <img src="../img/7652611.jpg" class="map-img" height="200" width="300" alt="temporary img"/>
+                <button class="map-button">Show on map</button>
             </div>
             <div class="filter">
                 Filter by:
+                <hr>
                 <div class="budget">
                     Your budget (per night)
-                    <div class="slidecontainer">
+                    <div class="slider-container">
                         <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
                     </div>
                 </div>
+                <hr>
                 <div class="popular">
-                    popular filters
-                </div>
-                <div class="meals">
-                    Meals
-                </div>
-                <div class="hotel starts">
-                    Hotel Stars
-                    <ul class="star-filter">
-                        <li data-stars="5" class="star"><i class="fas fa-star"></i></li>
-                        <li data-stars="4" class="star"><i class="fas fa-star"></i></li>
-                        <li data-stars="3" class="star"><i class="fas fa-star"></i></li>
-                        <li data-stars="2" class="star"><i class="fas fa-star"></i></li>
-                        <li data-stars="1" class="star"><i class="fas fa-star"></i></li>
+                    Popular filters
+                    <ul>
+                        <li>One type of filter</li>
+                        <li>Another type of filter</li>
                     </ul>
                 </div>
-
+                <hr>
+                <div class="meals">
+                    Meals
+                    <ul>
+                        <li>Buffet</li>
+                        <li>Breakfast included</li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="hotel-stars">
+                    Hotel Stars
+                    <ul class="star-filter">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <hr>
             </div>
         </div>
         <div class="right">
             <div class="flex-container">
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
+                <div class="result">Results from Ålesund: 32 properties found</div>
+                <button class="sort-by">
+                    Sort by
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="20" height="20">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
+                    </svg>
+                </button>
+                </div>
+                <div class="hotel-card">
+                    <img src="../img/hotel1.jpg" class="hotel-img" height="200" width="300" alt="hotel 1"/>
+                    <div class="hotel-info">
+                        <ul>
+                            <li class="info-title">Villa GOATeid</li>
+                            <li class="info-stars">stars</li>
+                            <li class="info-meal">Breakfast included</li>
+                            <li class="info-price">NOK 4,200 night</li>
+                        </ul>
+                    </div>
+                    <div class="view-deal">
+                        <a href="hotelPage.html">
+                            <button class="hotel-button">
+                                View deal
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="20" height="20">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hotel-card">
+                    <img src="../img/hotel2.jpg" class="hotel-img" height="200" width="300" alt="hotel 2"/>
+                    <div class="hotel-info">
+                        <ul>
+                            <li>Hotel 2</li>
+                            <li>stars</li>
+                            <li>Breakfast included</li>
+                            <li>NOK 5,999 night</li>
+                        </ul>
+                    </div>
+                    <div class="view-deal">
+                        <a href="hotelPage.html">
+                            <button class="hotel-button">
+                                View deal
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="20" height="20">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hotel-card">
+                    <img src="../img/hotel3.jpg" class="hotel-img" height="200" width="300" alt="hotel 3"/>
+                    <div class="hotel-info">
+                        <ul>
+                            <li>Urban Ålesund</li>
+                            <li>stars</li>
+                            <li>Breakfast included</li>
+                            <li>NOK 3,999 night</li>
+                        </ul>
+                    </div>
+                    <div class="view-deal">
+                        <a href="hotelPage.html">
+                            <button class="hotel-button">
+                                View deal
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="20" height="20">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </button>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div id="signInForm" style="display: none;">
-        <h2>Sign In</h2>
-        <form>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit">Sign In</button>
-        </form>
-        <button id="closeButton">Close</button>
-    </div>
 
     <footer>
         <img src="../img/NTNU%20hovedlogo%20-%20hvit%20-%20hoyde.png" width="10%" height="auto" alt="NTNU Logo"/>
