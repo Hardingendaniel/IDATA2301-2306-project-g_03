@@ -7,31 +7,36 @@
 <body>
 <header>
     <div class="container">
-        <h1>Stay Finder</h1>
+        <div class="logo">
+            <a href="Website.html">
+                <button class="logo-button">Stay Finder</button>
+            </a>
+        </div>
         <div class="search-bar">
-            <label>
-                <input type="search" id="header-search" placeholder="search">
-            </label>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" width="30" height="30">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+            <input type="search" id="header-search" placeholder="search">
         </div>
 
         <div class="button">
-            <button class="logInButton">Log in</button>
+            <p>Login</p>
+            <button class="signInButton">Sign Up</button>
         </div>
     </div>
-    <div class="search-form">
-        <input class="text" type="text" placeholder="Where to?">
-        <input class="text" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check in date">
-        <input class="text" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check out date">
-        <select class="search-field">
-            <option>1 room</option>
-            <option>2 rooms</option>
-            <option>3 rooms</option>
-        </select>
-        <a href="browsePage.html" target="_blank">
-            <button class="search-button">SEARCH</button>
-        </a>
-
-    </div>
+    <form action="/search" class="form" method="GET">
+        <input list="places" type="text" class="form-input" name="destination" id="destination" placeholder="Where to?" onclick="suggestionClick">
+        <datalist id="places">
+            <option>Ålesund</option>
+            <option>Oslo</option>
+            <option>Trondheim</option>
+            <option>Bergen</option>
+        </datalist>
+        <input type="text" class="form-input" name="check-in" id="check-in" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check in date">
+        <input type="text" class="form-input" name="check-out" id="check-out" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Check out date">
+        <input type="text" class="form-input" name="rooms" id="rooms" placeholder="Number of Rooms (min: 1)">
+        <button type="button" class="form-input" name="search_button" id="search_button">SEARCH</button>
+    </form>
 </header>
 
 <div class="main">

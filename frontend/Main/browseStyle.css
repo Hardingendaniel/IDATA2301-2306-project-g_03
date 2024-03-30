@@ -123,6 +123,8 @@ header .button {
 /* Main window underneath header */
 .main {
     display: flex;
+    width: 80%;
+    margin: auto;
 }
 
 /* Left side of the main window */
@@ -133,7 +135,7 @@ header .button {
 nav ul {
     list-style: none;
     margin: 0;
-    padding: 1rem 0 0 0;
+    padding-top: 1rem;
     display: flex;
     justify-content: center;
 }
@@ -168,9 +170,9 @@ nav a:hover {
 
 .map-button {
     position: absolute; /* Set the button to absolute positioning */
-    top: 50%; /* Position the button vertically at 50% */
-    left: 50%; /* Position the button horizontally at 50% */
-    transform: translate(-50%, -50%);  /* Center the button within the container */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: #3E68FF;
     border: none;
     color: white;
@@ -195,7 +197,6 @@ nav a:hover {
     justify-content: center;
     align-items: center;
     margin: 1rem;
-    padding: 1rem;
     border: 1px solid rgba(72, 72, 72, 0.5);
     border-radius: 1rem;
     flex-direction: column;
@@ -307,6 +308,10 @@ hr {
 .info-title {
     font-weight: bolder;
     font-size: 24px;
+}
+
+.info-stars {
+    color: #3E68FF;
 }
 
 .info-meal {
