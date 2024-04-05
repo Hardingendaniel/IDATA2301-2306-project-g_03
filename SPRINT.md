@@ -44,5 +44,42 @@ set aside time so that the design guidelines for the web is followed.
 To achieve what we want for this upcoming sprint we will need to look at the previous sprint. We will continue with what
 went good and adjust according to what didn't. To develop our web and application skills we will as a group work on the
 weekly exercises in both subjects. A crucial part of learning is by doing. In this upcoming sprint there will be 
-scheduled at least one physical work session per week.     
+scheduled at least one physical work session per week.    
+
+Sprint review:
+The tasks for this sprint was completed. We managed to create a website which were pretty identical to the wireframe 
+sketch, and we are satisfied with this sprint progress. We created three separate html files one for the main page, one
+for the different hotel options and one with detailed information about one specific hotel. By doing so each member of 
+the group could participate in the designing and get the necessary learning. A sketch for a mobile version was also 
+created. We also did some improvements on the database sketch and the user diagram. However, this needs to be further  
+improved before we do more on the backend part of the project. 
+
+What went good?
+In this sprint we made better use of the issues. We also distributed the task in a way that every member knew what they
+were supposed to do. We split up so Daniel worked on the main page of the website, which Sten worked quite a bit on last
+sprint. Sander worked on hotel offer site and sten worked on the hotel description site. We had weekly sessions were we
+discussed the work going forward and informed each other about changes made. 
+
+What went bad? / What can be improved?
+There are a lot of similar elements on each of the three html sites and css files. So now the frontend folder has some 
+duplicated code. This is a thing that needs to be improved up on. For the next sprint we need to define a css file that 
+will contain the elements that are the same on all html files. The website looked weird on larger screens so this issue
+we need to address. A max width and leave white space is a common practice on booking sites. That option should be 
+considered.
+
+## Sprint 3.5 
+
+The plan for this sprint Week 12 - April 14
+The plan for this sprint is to refactor the code a bit . The issue regarding code duplication is being addressed in 
+this sprint. There is also some design choices on the hotel page that need so be decided on and implemented in code. 
+We have decided to use React JS frontend and spring boot rest api. So in this sprint we need to focus on learning and 
+testing out react. We also need to figure out how the design should be implemented on smaller and bigger screens. 
+We need to focus more on the backend. Until now the focus have almost been 100% on the frontend, now we need to have
+a more 50/50 focus on the two ends. For now, it is hard to know exactly what needs to be done at the backend, but this 
+will come as descriptive issues in our GitHub repository as we work on it.
+
+To achieve what we want for this upcoming sprint we will split up the tasks in well-defined issues. We will also have 
+more weekly meetings. One of the meetings or study session should be on school. We should also consider having short
+discord meetings where we can decide on the things we work on separately. Another way of achieving the sprint goals is
+to take more use of our lecturers and asking questions in the lecture/lecture breaks.  
 
