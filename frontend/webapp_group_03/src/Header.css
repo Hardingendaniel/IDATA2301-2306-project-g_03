@@ -1,0 +1,80 @@
+header form #destination{
+    border-radius: 1.5rem 0 0 1.5rem;
+}
+
+header #search_button {
+    border-radius: 0 1.5rem 1.5rem 0;
+    border: none;
+    background: #3E68FF;
+    color: white;
+    cursor: pointer;
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+header #search_button:hover {
+    opacity: 0.8;
+}
+
+header form input[type="text"] {
+    padding: 5px;
+    border: 1px solid #EBEBEB;
+}
+
+header {
+    width: 100%;
+    background-color: #7392FF;
+    padding: 0.7rem 0;
+    top: 0;
+    z-index: 10;
+    position: sticky;
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-bar {
+    display: flex;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 0.6rem 1rem;
+    background-color: #EBEBEB;
+    margin: 0 0 1rem 0;
+}
+
+.search-bar svg {
+    color: #484848;
+}
+
+.search-bar input[type="search"] {
+    background: transparent;
+    width: 30vw;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+    border: none;
+}
+
+header .button {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.signInButton {
+    display: inline-block;
+    padding: 0.6rem 2rem;
+    font-weight: 500;
+    border-radius: 2rem;
+    cursor: pointer;
+    color: white;
+    background-color: #3E68FF;
+    transition: all 300ms ease;
+    border: none;
+}
+
+.signInButton:hover {
+    opacity: 0.8;
+}
