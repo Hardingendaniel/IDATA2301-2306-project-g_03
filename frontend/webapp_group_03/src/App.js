@@ -1,10 +1,12 @@
-
-import  './Footer.css';
-
 import logo from  './img/NTNU hovedlogo - hvit - hoyde.png';
 import './App.css';
+import Header from "./Header";
 import Footer from "./Footer";
-import "./Header";
+import  './Footer.css';
+import './Header.css'
+import Frontpage from "./Frontpage";
+
+
 
 function App() {
   return (
@@ -12,6 +14,11 @@ function App() {
       <header className="header">
           <Header/>
       </header>
+
+        <body className={'body'}>
+        <Frontpage/>
+        </body>
+
       <footer>
           <Footer/>
       </footer>
