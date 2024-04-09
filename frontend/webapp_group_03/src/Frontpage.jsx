@@ -5,7 +5,6 @@ import logo3 from './img/hotel3.jpg'
 import logo4 from './img/HotelBeach.jpg'
 import logo5 from './img/scandic.jpg'
 import logo6 from './img/sengscandic.jpg'
-import shuffle from './shuffle';
 
 function Frontpage () {
     return (

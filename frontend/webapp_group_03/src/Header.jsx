@@ -1,4 +1,6 @@
 import React from "react";
+import popUp from "./popUp";
+
 
 function Header() {
     return (
@@ -29,7 +31,7 @@ function Header() {
                 <input type="search" id="header-search" placeholder="search" />
             </div>
             <div className="button">
-                <button className="logInButton">Log In</button>
+                <button className="logInButton" onClick={popUp}>Log In</button>
                 <button className="signInButton">Sign Up</button>
             </div>
         </div>
