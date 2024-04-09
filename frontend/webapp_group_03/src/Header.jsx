@@ -29,7 +29,7 @@ function Header() {
                 <input type="search" id="header-search" placeholder="search" />
             </div>
             <div className="button">
-                <p>Login</p>
+                <button className="logInButton">Log In</button>
                 <button className="signInButton">Sign Up</button>
             </div>
         </div>
