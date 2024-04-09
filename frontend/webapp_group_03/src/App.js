@@ -4,8 +4,8 @@ import Header from "./Header";
 import Footer from "./Footer";
 import  './Footer.css';
 import './Header.css'
+import './Cards.css'
 import Frontpage from "./Frontpage";
-
 
 
 function App() {
@@ -24,6 +24,8 @@ function App() {
       </footer>
     </div>
   );
+
+
 }
 
 export default App;
