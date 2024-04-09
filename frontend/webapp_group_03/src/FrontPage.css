@@ -5,7 +5,13 @@
     align-items: center;
 }
 
-cards {
+.subheading {
+    font-size: 26px;
+    color: black;
+}
+
+
+.cards {
     display: flex;
     justify-content: space-around;
     position: relative;

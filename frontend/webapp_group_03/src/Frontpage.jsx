@@ -27,21 +27,7 @@ function Frontpage () {
                     <p>Stay Finder for the win!</p>
                     <div className="rating">★★★★★</div>
                 </div>
-                <div className="card">
-                    <img src={logo4} alt="Hotel 3" />
-                    <p>Beautiful room with great prize</p>
-                    <div className="rating">★★★★★</div>
-                </div>
-                <div className="card">
-                    <img src={logo5} alt="Hotel 3" />
-                    <p>Nice hotel for a fair prize Ålesund</p>
-                    <div className="rating">★★★★★</div>
-                </div>
-                <div className="card">
-                    <img src={logo6} alt="Hotel 3" />
-                    <p>Amazing hotel for a fair prize Ålesund</p>
-                    <div className="rating">★★★★★</div>
-                </div>
+
                 <button id="Shuffle_reviews" className="shuffle">
                     <span className="arrow" />
                 </button>
