@@ -3,7 +3,7 @@ import logo from '../../img/hotel1.jpg'
 import logo2 from '../../img/hotel2.jpg'
 import logo3 from '../../img/hotel3.jpg'
 
-export function FrontPage () {
+export function FrontPage() {
     return (
         <div className="main">
 

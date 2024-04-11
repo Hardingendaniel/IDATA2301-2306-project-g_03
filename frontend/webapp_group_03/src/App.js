@@ -2,7 +2,8 @@ import './App.css';
 import  './components/Footer.css';
 import './components/Header.css'
 import './pages/frontpage/FrontPage.css'
-import FrontPage from "./pages/frontpage/FrontPage";
+import './pages/browsepage/browseStyle.css'
+import './pages/hotelpage/hotelStyle.css'
 import { MainContent } from "./MainContent";
 import { BrowserRouter as Router } from "react-router-dom";
 import Footer from "./components/Footer";
