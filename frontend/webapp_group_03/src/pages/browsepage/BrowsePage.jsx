@@ -1,6 +1,7 @@
 import React from "react";
 import img1 from '../../img/7652611.jpg'
 import img2 from '../../img/hotel1.jpg'
+import img3 from '../../img/hotel3.jpg'
 import {NavLink} from "react-router-dom";
 
 export function BrowsePage() {
@@ -142,7 +143,7 @@ export function BrowsePage() {
                 </div>
                 <div className="hotel-card">
                     <img
-                        src="../../img/hotel2.jpg"
+                        src={img3}
                         className="hotel-img"
                         height={200}
                         width={300}
@@ -180,7 +181,7 @@ export function BrowsePage() {
                 </div>
                 <div className="hotel-card">
                     <img
-                        src="../../img/hotel3.jpg"
+                        src={img3}
                         className="hotel-img"
                         height={200}
                         width={300}

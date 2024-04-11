@@ -5,7 +5,7 @@ import logo from '../img/NTNU hovedlogo - hvit - hoyde.png';
 function Footer() {
     return (
         <footer>
-            <img src={logo} width="10%" height="auto" alt="NTNU Logo"/>
+            <img src={logo} width="3%" height="auto" alt="NTNU Logo"/>
             <p>
                 <i>This website is a result of a university group project, performed in the course
                     <span style={{ color: 'black' }}>IDATA2301 Web technologies</span>, at
