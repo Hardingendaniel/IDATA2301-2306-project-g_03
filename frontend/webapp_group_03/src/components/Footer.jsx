@@ -1,6 +1,6 @@
 // Footer.js
 import React from 'react';
-import logo from './img/NTNU hovedlogo - hvit - hoyde.png';
+import logo from '../img/NTNU hovedlogo - hvit - hoyde.png';
 
 function Footer() {
     return (

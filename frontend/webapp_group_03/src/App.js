@@ -1,30 +1,22 @@
-import logo from  './img/NTNU hovedlogo - hvit - hoyde.png';
 import './App.css';
-import Header from "./Header";
-import Footer from "./Footer";
-import  './Footer.css';
-import './Header.css'
-import Frontpage from "./Frontpage";
+import  './components/Footer.css';
+import './components/Header.css'
+import { MainContent } from "./MainContent";
+import { BrowserRouter as Router } from "react-router-dom";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 
-
-
-function App() {
+/**
+ * A component representing the whole application
+ * @return {JSX.Element}
+ * @constructor
+ */
+export function App() {
   return (
-    <div className="App">
-      <header className="header">
-          <Header/>
-      </header>
-
-        <body className={'body'}>
-        <Frontpage/>
-        </body>
-
-      <footer>
-          <Footer/>
-      </footer>
-    </div>
+      <Router>
+        <Header />
+        <MainContent />
+        <Footer />
+      </Router>
   );
 }
-
-export default App;
-
