@@ -1,12 +1,9 @@
 import React from "react";
-import logo from './img/hotel1.jpg'
-import logo2 from './img/hotel2.jpg'
-import logo3 from './img/hotel3.jpg'
-import logo4 from './img/HotelBeach.jpg'
-import logo5 from './img/scandic.jpg'
-import logo6 from './img/sengscandic.jpg'
+import logo from '../../img/hotel1.jpg'
+import logo2 from '../../img/hotel2.jpg'
+import logo3 from '../../img/hotel3.jpg'
 
-function Frontpage () {
+export function FrontPage () {
     return (
         <div className="main">
 
@@ -37,8 +34,6 @@ function Frontpage () {
             </div>
         </div>
     );
-
 }
-
-export default Frontpage;
+export default FrontPage;
 

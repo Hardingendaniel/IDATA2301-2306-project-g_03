@@ -1,5 +1,5 @@
 import {Route, Routes} from "react-router-dom";
-import {Frontpage} from "./pages/frontpage/FrontPage";
+import {FrontPage} from "./pages/frontpage/FrontPage";
 import {BrowsePage} from "./pages/browsepage/BrowsePage"
 import {SignupPage} from "./pages/SignupPage";
 
@@ -12,7 +12,7 @@ export function MainContent() {
   return (
       <main>
         <Routes>
-          <Route path="/" element={<Frontpage />}/>
+          <Route path="/" element={<FrontPage />}/>
           <Route path="/browse" element={<BrowsePage />}/>
           <Route path="/signup" element={<SignupPage />}/>
         </Routes>

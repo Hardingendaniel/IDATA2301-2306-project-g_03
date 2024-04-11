@@ -1,6 +1,8 @@
 import './App.css';
 import  './components/Footer.css';
 import './components/Header.css'
+import './pages/frontpage/FrontPage.css'
+import FrontPage from "./pages/frontpage/FrontPage";
 import { MainContent } from "./MainContent";
 import { BrowserRouter as Router } from "react-router-dom";
 import Footer from "./components/Footer";
@@ -19,6 +21,4 @@ export function App() {
         <Footer />
       </Router>
   );
-
-
 }
