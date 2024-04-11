@@ -113,3 +113,19 @@ header .button {
 .signInButton:hover {
     opacity: 0.8;
 }
+
+.logInButton {
+    display: inline-block;
+    padding: 0.6rem 2rem;
+    font-weight: 500;
+    border-radius: 2rem;
+    cursor: pointer;
+    color: white;
+    background-color: #3E68FF;
+    transition: all 300ms ease;
+    border: none;
+}
+
+.logInButton:hover {
+    opacity: 0.8;
+}

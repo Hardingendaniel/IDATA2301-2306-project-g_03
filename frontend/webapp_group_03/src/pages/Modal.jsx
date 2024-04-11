@@ -1,4 +1,5 @@
 import React from "react";
+import popUp from "./popUp";
 
 function Modal() {
     return (
