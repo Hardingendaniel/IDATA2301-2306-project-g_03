@@ -233,7 +233,6 @@ header .button {
     border-top: 1px solid #ccc;
 }
 
-
 /* Footer ------------- */
 footer {
     background-color: #3E68FF;
@@ -245,7 +244,6 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
     bottom: 0;
 }
 

@@ -1,6 +1,7 @@
 import {Route, Routes} from "react-router-dom";
 import {FrontPage} from "./pages/frontpage/FrontPage";
 import {BrowsePage} from "./pages/browsepage/BrowsePage"
+import {HotelPage} from "./pages/hotelpage/HotelPage"
 import {SignupPage} from "./pages/SignupPage";
 
 /**
@@ -9,13 +10,14 @@ import {SignupPage} from "./pages/SignupPage";
  * @constructor
  */
 export function MainContent() {
-  return (
-      <main>
-        <Routes>
-          <Route path="/" element={<FrontPage />}/>
-          <Route path="/browse" element={<BrowsePage />}/>
-          <Route path="/signup" element={<SignupPage />}/>
-        </Routes>
-      </main>
-  );
+    return (
+        <main>
+            <Routes>
+                <Route path="/" element={<FrontPage/>}/>
+                <Route path="/browse" element={<BrowsePage/>}/>
+                <Route path="/hotel" element={<HotelPage/>}/>
+                <Route path="/signup" element={<SignupPage/>}/>
+            </Routes>
+        </main>
+    );
 }
