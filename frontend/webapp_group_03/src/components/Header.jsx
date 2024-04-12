@@ -1,5 +1,6 @@
 import React from "react";
-//import popUp from "./popUp";
+import Modal from "./Modal/Modal";
+import ModalOpener from "./Modal/Modal";
 
 function Header() {
     return (
@@ -30,7 +31,8 @@ function Header() {
                 <input type="search" id="header-search" placeholder="search" />
             </div>
             <div className="button">
-                <button className="logInButton">Log In</button>
+                {/*<button className="logInButton">Log In</button>*/}
+                <ModalOpener/>
             </div>
         </div>
         <form action="/search" className="form" method="GET">

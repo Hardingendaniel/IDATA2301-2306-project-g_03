@@ -7,6 +7,8 @@ import { MainContent } from "./MainContent";
 import { BrowserRouter as Router } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Modal from "./components/Modal/Modal";
+import React from "react";
 
 /**
  * A component representing the whole application
