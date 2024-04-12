@@ -31,7 +31,6 @@ function Header() {
                 </div>
                 <div className="button">
                     <ModalOpener/>
-                    <button className="signInButton">Sign Up</button>
                 </div>
             </div>
             <form action="/search" className="form" method="GET">

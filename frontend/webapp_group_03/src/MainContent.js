@@ -2,7 +2,6 @@ import {Route, Routes} from "react-router-dom";
 import {FrontPage} from "./pages/frontpage/FrontPage";
 import {BrowsePage} from "./pages/browsepage/BrowsePage"
 import {HotelPage} from "./pages/hotelpage/HotelPage"
-import {SignupPage} from "./pages/SignupPage";
 
 /**
  * Represents the main content of the page
