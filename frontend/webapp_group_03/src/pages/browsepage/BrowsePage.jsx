@@ -11,16 +11,16 @@ export function BrowsePage() {
                 <nav>
                     <ul>
                         <li>
-                            <a href="#">Home</a>
+                            <NavLink to={"/"}>Home</NavLink>
                         </li>
                         <li>
-                            <a href="#">Country</a>
+                            <NavLink to={"/"}>Country</NavLink>
                         </li>
                         <li>
-                            <a href="#">State</a>
+                            <NavLink to={"/"}>State</NavLink>
                         </li>
                         <li>
-                            <a href="#">Town</a>
+                            <NavLink to={"/"}>Town</NavLink>
                         </li>
                     </ul>
                 </nav>
@@ -118,27 +118,7 @@ export function BrowsePage() {
                         <div className="info-price">NOK 4,200 night</div>
                     </div>
                     <div className="view-deal">
-                        <NavLink to={"/hotel"}>
-                            <button className="hotel-button">
-                                View deal
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    stroke="currentColor"
-                                    className="w-6 h-6"
-                                    width={20}
-                                    height={20}
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                    />
-                                </svg>
-                            </button>
-                        </NavLink>
+
                     </div>
                 </div>
                 <div className="hotel-card">
@@ -195,7 +175,6 @@ export function BrowsePage() {
                     </div>
                     <div className="view-deal">
                         <NavLink to={"/hotel"}>
-                            <button className="hotel-button">
                                 View deal
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -213,7 +192,6 @@ export function BrowsePage() {
                                         d="m8.25 4.5 7.5 7.5-7.5 7.5"
                                     />
                                 </svg>
-                            </button>
                         </NavLink>
                     </div>
                 </div>
