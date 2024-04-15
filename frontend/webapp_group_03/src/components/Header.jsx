@@ -1,8 +1,6 @@
 import React from "react";
+import ModalOpener from "./Modal/Modal";
 import {NavLink} from "react-router-dom";
-
-//import popUp from "./popUp";
-
 function Header() {
     return (
         <header>
@@ -32,12 +30,7 @@ function Header() {
                     <input type="search" id="header-search" placeholder="search"/>
                 </div>
                 <div className="button">
-
-                    {/*
-                <button className="logInButton" onClick={popUp}>Log In</button>
-                */}
-
-                    <button className="signInButton">Sign Up</button>
+                    <ModalOpener/>
                 </div>
             </div>
             <form action="/search" className="form" method="GET">
@@ -94,7 +87,6 @@ function Header() {
             </form>
         </header>
     )
-        ;
 }
 
 export default Header;

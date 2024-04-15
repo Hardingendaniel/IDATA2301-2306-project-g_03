@@ -17,7 +17,6 @@ export function MainContent() {
                 <Route path="/" element={<FrontPage/>}/>
                 <Route path="/browse" element={<BrowseHero/>}/>
                 <Route path="/hotel" element={<HotelPage/>}/>
-                <Route path="/signup" element={<SignupPage/>}/>
             </Routes>
         </main>
     );

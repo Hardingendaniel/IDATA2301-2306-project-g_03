@@ -10,7 +10,6 @@
 
 /* The Modal (background) */
 .modal {
-    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -151,5 +150,3 @@ input[type="password"] {
     border-radius: 8px;
     cursor: pointer;
 }
-
-.settings
