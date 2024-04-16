@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cards[index].style.display = 'block';
         cards[nextIndex1].style.display = 'block';
         cards[nextIndex2].style.display = 'block';
-
+gi
         if (index === 0) {
             shufflebackwards.style.display = 'none';
         } else {

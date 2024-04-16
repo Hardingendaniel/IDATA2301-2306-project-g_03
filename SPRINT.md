@@ -83,3 +83,40 @@ more weekly meetings. One of the meetings or study session should be on school. 
 discord meetings where we can decide on the things we work on separately. Another way of achieving the sprint goals is
 to take more use of our lecturers and asking questions in the lecture/lecture breaks.  
 
+Sprint review:
+In this sprint we faced som difficulties. The transformation to react was a bit more challenging than expected. It went
+quite some time figuring out how we should do things. The application didn't work because of some react specific syntax
+and that was hard to get hang on. We managed to transform our project to a React project in the end. We didn't add new
+functionality to the existing project we just made it look how it was before the transformation. Also some lack of 
+communication lead to som unnecessary difficulties. 
+
+What went good? 
+In this sprint each group member dedicated more time to work on the project. We met and worked on our project several 
+times. We managed to solve the problems we were faced and didn't lose motivation because of the difficulties. The first
+transformation of the project were mostly done by Sten and Daniel, the reuse of footer and header. When the 
+transformation first started we hadn't learned about routing and that was later worked quite bit on by Sander. On the 
+end of the sprint Sander also implemented the tailwind css for the styling of the pages. This will be used for the final
+project.
+
+What went bad / What can be improved?
+In this sprint there were a lot of choices to be made. The communication between the group members wasn't always the 
+best. We faced some merge conflicts that could have easily been avoided with better communication. We also didn't do
+much at the backend side of the application, which was planned in the sprint. The group tend to go silent when we don't 
+know what to do. We need to communicate and share our thoughts with each other when we hit a speed bump in the work 
+flow. Daniel dedicated quite some time in the documentation part of the project with issues and such. In the upcoming 
+work other members needs to be more involved.
+
+## Sprint 4
+
+The plan for this sprint april 16th-25th
+This wil be the last sprint meeting with the lecturers. Each group member have a responsibility to dedicate a lot of 
+time to work on the project. Every other day we will work together on the project, and we will fill each other in on 
+what we have done individually. The issues regarding styling the hotel-page and making decisions for different screens 
+is still relevant since it wasn't completed in the last sprint. We need to establish a communication between the front 
+and the backend. Images and text descriptions should be loaded from the backend and not hard coded in the jsx files.
+
+To achieve what we want for this upcoming sprint it is important that every group member starts to use the issues 
+properly. It is easier to keep track of what needs to be done if issues are made along the way. It is important
+that we remind each other to create these issues. In this sprint a lot of things need to be done and therefore there 
+needs to be much more issues than in the previous sprints. 
+
