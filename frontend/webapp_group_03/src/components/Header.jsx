@@ -1,7 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 import ModalOpener from "./Modal/Modal";
 import {NavLink} from "react-router-dom";
+
+
 function Header() {
+
+    const [location, setLocation] = new useState('');
+    const [searchButtonDisabled, setSearchButtonDisabled] = new useState(true);
+
+    //to be worked on
+    function suggestionClick(e) {
+        setLocation(e.target.value)
+        if(!(location === '')){
+          setSearchButtonDisabled(true);
+        }
+    }
+
     return (
         <header>
             <div className="container">
@@ -34,21 +48,17 @@ function Header() {
                 </div>
             </div>
             <form action="/search" className="form" method="GET">
-                <input
-                    list="places"
-                    type="text"
-                    className="form-input"
-                    name="destination"
-                    id="destination"
-                    placeholder="Where to?"
-                    onclick="suggestionClick"
-                />
-                <datalist id="places">
-                    <option>Ålesund</option>
-                    <option>Oslo</option>
-                    <option>Trondheim</option>
-                    <option>Bergen</option>
-                </datalist>
+
+                <select className='form-input'
+                    value={location}
+                    onChange={(e) => suggestionClick(e)}
+                >
+                    <option value="" style={{display: 'none'}}>Where to?</option>
+                    <option value="Ålesund">Ålesund</option>
+                    <option value="Trondheim">Trondheim</option>
+                    <option value="Oslo">Oslo</option>
+                </select>
+
                 <input
                     type="text"
                     className="form-input"
@@ -77,7 +87,7 @@ function Header() {
                 <NavLink to={"/browse"}>
                     <button
                         type="button"
-                        className="form-input"
+                        className="btn py-custom align-text-bottom"
                         name="search_button"
                         id="search_button"
                     >

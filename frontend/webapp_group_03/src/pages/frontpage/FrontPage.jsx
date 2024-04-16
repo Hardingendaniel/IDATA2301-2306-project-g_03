@@ -29,7 +29,7 @@ export function FrontPage() {
     return (
         <div className="main">
             <h2 className="subheading">Get the best experience with Stay Finder</h2>
-            <div className="cards">
+            <div className="flex justify-around relative">
                 {visibleCards().map((card, index) => (
                     <div key={index} className="card">
                         <img src={card.img} alt={`Hotel ${index + 1}`} />
@@ -40,14 +40,14 @@ export function FrontPage() {
 
                 <button
                     id="Shuffle_reviews"
-                    className="shuffle"
+                    className="shuffle col-span-1"
                     onClick={() => setCurrentIndex(currentIndex + 1)}
                 >
                     <span className="arrow" />
                 </button>
                 <button
                     id="Shuffle_reviews2"
-                    className="shuffle2"
+                    className="shuffle2 col-span-1"
                     onClick={() => setCurrentIndex(currentIndex - 1)}
                     style={{ display: currentIndex === 0 ? 'none' : 'block' }}
                 >

@@ -33,6 +33,7 @@ h2 {
     font-size: medium;
 }
 
+
 header form #destination{
     border-radius: 1.5rem 0 0 1.5rem;
 }
@@ -128,4 +129,13 @@ header .button {
 
 .logInButton:hover {
     opacity: 0.8;
+}
+
+.py-custom {
+    padding-top: 1.8rem; /* Adjust this value as needed */
+    padding-bottom: 1.625rem; /* Adjust this value as needed */
+}
+
+.header .button {
+    line-height: 0;
 }

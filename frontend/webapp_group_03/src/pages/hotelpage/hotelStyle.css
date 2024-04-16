@@ -3,6 +3,7 @@ body {
     padding: 0;
     font-family: 'Poppins', sans-serif;
     overflow: auto;
+    height: 100%;
 }
 
 h2 {
@@ -46,6 +47,7 @@ header form #destination{
 
 header #search_button {
     border-radius: 0 1.5rem 1.5rem 0;
+    line-height: 0;
     border: none;
     background: #3E68FF;
     color: white;
@@ -233,21 +235,4 @@ header .button {
     border-top: 1px solid #ccc;
 }
 
-/* Footer ------------- */
-footer {
-    background-color: #3E68FF;
-    color: white;
-    padding: 1em;
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #3E68FF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    bottom: 0;
-}
 
-footer p {
-    margin-left: 2em;
-    width: 50%;
-}

@@ -4,7 +4,8 @@ import logo from '../img/NTNU hovedlogo - hvit - hoyde.png';
 
 function Footer() {
     return (
-        <footer>
+        <div>
+        <footer className= 'footer'>
             <img src={logo} width="10%" height="auto" alt="NTNU Logo"/>
             <p>
                 <i>This website is a result of a university group project, performed in the course
@@ -15,6 +16,7 @@ function Footer() {
                 </i>
             </p>
         </footer>
+        </div>
     );
 }
 export default Footer;
