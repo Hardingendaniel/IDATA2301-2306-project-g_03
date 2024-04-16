@@ -3,94 +3,120 @@ import map from '../../img/7652611.jpg'
 import img1 from '../../img/hotel1.jpg'
 import img2 from '../../img/hotel2.jpg'
 import img3 from '../../img/hotel3.jpg'
+import {NavLink} from "react-router-dom";
 
 const BrowseHero = () => {
     return (
-        <div className="flex justify-center mx-20">
-            <div className="basis-1/4 px-4 py-4">
+        <div className="flex justify-center w-4/5 mx-auto">
 
-                <div className="text-sm breadcrumbs">
-                    <ul>
-                        <li><a>Home</a></li>
-                        <li><a>Country</a></li>
-                        <li><a>State</a></li>
-                        <li>City</li>
+            <div className="drawer lg:drawer-open flex basis-1/4">
+                <input id="my-drawer-2" type="checkbox" className="drawer-toggle"/>
+                <div className="drawer-content flex flex-col items-center justify-center">
+                    {/* Page content here */}
+                    <label htmlFor="my-drawer-2" className="btn bg-main text-white font-bold drawer-button lg:hidden">
+                        Show filter
+                    </label>
+
+                </div>
+                <div className="drawer-side">
+                    <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
+                    <ul className="p-4 w-80 min-h-full bg-base-200 text-base-content">
+                        {/* Sidebar content here */}
+
+                        <div className="text-sm breadcrumbs text-main">
+                            <ul>
+                                <li>
+                                    <NavLink to="/">Home</NavLink>
+                                </li>
+                                <li><a>Country</a></li>
+                                <li><a>State</a></li>
+                                <li>City</li>
+                            </ul>
+                        </div>
+
+                        <div className="relative overflow-hidden flex items-center justify-center flex-col">
+                            <img
+                                src={map}
+                                alt="map"
+                                className="rounded-2xl object-cover"
+                            />
+                            <div
+                                className="absolute w-full h-full top-0 bottom-0 left-0 right-0 flex items-center justify-center">
+                                <div className="btn bg-main text-white font-bold text-xl">Show on map</div>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col w-full py-10">
+
+                            <div className="">
+                                <p>Your budget per night:</p>
+                                <p>Min</p>
+                                <input type="range" min={0} max="100" value="40" className="range range-primary"/>
+                                <p>Max</p>
+                                <input type="range" min={0} max="100" value="40" className="range range-primary"/>
+                            </div>
+                            <div className="divider"></div>
+                            <div className="">
+                                <p>First Filter:</p>
+                                <div className="form-control">
+                                    <label className="label cursor-pointer">
+                                        <span className="label-text">Filter one</span>
+                                        <input type="radio" name="radio-10" className="radio checked:bg-main"
+                                               checked/>
+                                    </label>
+                                </div>
+                                <div className="form-control">
+                                    <label className="label cursor-pointer">
+                                        <span className="label-text">Filter two</span>
+                                        <input type="radio" name="radio-10" className="radio checked:bg-main"
+                                               checked/>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div className="divider"></div>
+                            <div className="">
+                                <p>Meals:</p>
+                                <div className="form-control">
+                                    <label className="label cursor-pointer">
+                                        <span className="label-text">Buffet</span>
+                                        <input type="radio" name="radio-10" className="radio checked:bg-main"
+                                               checked/>
+                                    </label>
+                                </div>
+                                <div className="form-control">
+                                    <label className="label cursor-pointer">
+                                        <span className="label-text">Breakfast included</span>
+                                        <input type="radio" name="radio-10" className="radio checked:bg-main"
+                                               checked/>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div className="divider"></div>
+                            <div className="">
+                                <p>Star rating:</p>
+                                <div className="rating">
+                                    <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
+                                    <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"
+                                           checked/>
+                                    <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
+                                    <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
+                                    <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
+                                </div>
+                            </div>
+                            <div className="divider"></div>
+                            <div className="">Filter 4</div>
+                            <div className="divider"></div>
+                        </div>
+
+
                     </ul>
-                </div>
 
-                <div className="relative overflow-hidden flex items-center justify-center flex-col">
-                    <img
-                        src={map}
-                        alt="map"
-                        className="rounded-2xl object-cover"
-                    />
-                    <div
-                        className="absolute w-full h-full top-0 bottom-0 left-0 right-0 flex items-center justify-center">
-                        <button className="text-xl font-bold px-4 py-2 rounded-2xl text-white bg-main">
-                            Show on map
-                        </button>
-                    </div>
-                </div>
-
-                <div className="flex flex-col w-full py-10">
-
-                    <div className="">
-                        <p>Your budget per night:</p>
-                        <p>Min</p>
-                        <input type="range" min={0} max="100" value="40" className="range range-primary"/>
-                        <p>Max</p>
-                        <input type="range" min={0} max="100" value="40" className="range range-primary"/>
-                    </div>
-                    <div className="divider"></div>
-                    <div className="">
-                        <p>First Filter:</p>
-                        <div className="form-control">
-                            <label className="label cursor-pointer">
-                                <span className="label-text">Filter one</span>
-                                <input type="radio" name="radio-10" className="radio checked:bg-main" checked/>
-                            </label>
-                        </div>
-                        <div className="form-control">
-                            <label className="label cursor-pointer">
-                                <span className="label-text">Filter two</span>
-                                <input type="radio" name="radio-10" className="radio checked:bg-main" checked/>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div className="divider"></div>
-                    <div className="">
-                        <p>Meals:</p>
-                        <div className="form-control">
-                            <label className="label cursor-pointer">
-                                <span className="label-text">Buffet</span>
-                                <input type="radio" name="radio-10" className="radio checked:bg-main" checked/>
-                            </label>
-                        </div>
-                        <div className="form-control">
-                            <label className="label cursor-pointer">
-                                <span className="label-text">Breakfast included</span>
-                                <input type="radio" name="radio-10" className="radio checked:bg-main" checked/>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div className="divider"></div>
-                    <div className="">
-                        <p>Star rating:</p>
-                        <div className="rating">
-                            <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
-                            <input type="radio" name="rating-2" className="mask mask-star-2 bg-main" checked/>
-                            <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
-                            <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
-                            <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
-                        </div>
-                    </div>
-                    <div className="divider"></div>
-                    <div className="">Filter 4</div>
-                    <div className="divider"></div>
                 </div>
             </div>
+
+
             <div className="basis-3/4 px-4 py-4">
                 <div>
                     <h2 className="text-font">Results from Ålesund: 40 properties found</h2>
@@ -107,15 +133,15 @@ const BrowseHero = () => {
                 </div>
 
                 <div className="">
-                    <div className="grid gap-8 md:grid-cols-2 md:items-center md:text-left py-4">
+                    <div className="grid gap-8 md:grid-cols-2 md:items-center md:text-left py- my-5 border rounded-2xl">
                         <div className="relative">
                             <img
                                 src={img1}
                                 alt="Hotel 1"
-                                className="w-full rounded-2xl"
+                                className="w-3/4 rounded-l-2xl"
                             />
                         </div>
-                        <div className="relative">
+                        <div className="relative flex-col">
                             <h1 className="mb-2 text-4xl font-medium text-font">Villa GOATeid</h1>
                             <div className="flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -151,7 +177,7 @@ const BrowseHero = () => {
 
                             <p className="text-main">Breakfast included</p>
                             <p className="text-xl text-font font-bold">NOK 4,200 night</p>
-                            <button className="btn absolute bottom-0 right-0 text-white bg-main">
+                            <button className="btn absolute bottom-0 right-0 text-white bg-main mr-2">
                                 View deal
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -162,12 +188,12 @@ const BrowseHero = () => {
                         </div>
                     </div>
 
-                    <div className="grid gap-8 md:grid-cols-2 md:items-center md:text-left py-4">
-                        <div>
+                    <div className="grid gap-8 md:grid-cols-2 md:items-center md:text-left py-0 my-5 border rounded-2xl">
+                        <div className="">
                             <img
                                 src={img2}
                                 alt="Hotel 2"
-                                className="w-full rounded-2xl"
+                                className="w-3/4 rounded-l-2xl"
                             />
                         </div>
                         <div className="relative">
@@ -206,7 +232,7 @@ const BrowseHero = () => {
 
                             <p className="text-main">Breakfast included</p>
                             <p className="text-xl text-font font-bold">NOK 5,999 night</p>
-                            <button className="btn absolute bottom-0 right-0 text-white bg-main">
+                            <button className="btn absolute bottom-0 right-0 text-white bg-main mr-2">
                                 View deal
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -216,12 +242,12 @@ const BrowseHero = () => {
                         </div>
                     </div>
 
-                    <div className="grid gap-8 md:grid-cols-2 md:items-center md:text-left py-4">
+                    <div className="grid gap-8 md:grid-cols-2 md:items-center md:text-left py-0 my-5 border rounded-2xl">
                         <div>
                             <img
                                 src={img3}
                                 alt="Hotel 3"
-                                className="rounded-2xl"
+                                className="w-3/4 rounded-l-2xl"
                             />
                         </div>
                         <div className="relative">
@@ -258,7 +284,7 @@ const BrowseHero = () => {
 
                             <p className="text-main">Breakfast included</p>
                             <p className="text-xl text-font font-bold">NOK 3,999 night</p>
-                            <button className="btn absolute bottom-0 right-0 text-white bg-main">
+                            <button className="btn absolute bottom-0 right-0 text-white bg-main mr-2">
                                 View deal
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
