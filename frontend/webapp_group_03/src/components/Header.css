@@ -139,3 +139,9 @@ header .button {
 .header .button {
     line-height: 0;
 }
+
+.custom-datepicker {
+    height: 55px; /* Adjust as needed */
+    display: inline-block;
+    vertical-align: middle;
+}

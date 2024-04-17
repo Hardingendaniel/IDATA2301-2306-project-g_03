@@ -11,6 +11,7 @@
 }
 
 
+
 .cards {
     display: flex;
     justify-content: space-around;
@@ -29,6 +30,11 @@
 .card .rating {
     color: #4C73FF;
 }
+
+.custom-color {
+    color: #4C73FF;
+}
+
 
 .shuffle {
     width: 50px;

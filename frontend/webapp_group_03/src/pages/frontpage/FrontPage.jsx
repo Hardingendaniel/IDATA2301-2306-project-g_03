@@ -14,6 +14,7 @@ export function FrontPage() {
     // Track the current index of the shown card
     const [currentIndex, setCurrentIndex] = useState(0);
 
+
     // Calculate and update the visible cards based on the current index
     const visibleCards = () => {
         const totalCards = cardsData.length;
@@ -33,8 +34,8 @@ export function FrontPage() {
                 {visibleCards().map((card, index) => (
                     <div key={index} className="card">
                         <img src={card.img} alt={`Hotel ${index + 1}`} />
-                        <p>{card.text}</p>
-                        <div className="rating">{card.rating}</div>
+                        <p className='justify-center'>{card.text}</p>
+                        <div className="justify-center custom-color">{card.rating}</div>
                     </div>
                 ))}
 
@@ -54,6 +55,7 @@ export function FrontPage() {
                     <span className="arrow2" />
                 </button>
             </div>
+
         </div>
     );
 }
