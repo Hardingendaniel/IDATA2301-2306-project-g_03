@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Represents a hotel
  */
-@Entity
+@Entity(name = "hotels")
 public class Hotel {
 
   @Id
@@ -20,7 +20,7 @@ public class Hotel {
   private String roomTypes;
   private double price;
 
-  @ManyToMany(mappedBy = "books")
+  @ManyToMany(mappedBy = "hotels")
   private Set<User> users = new HashSet<>();
 
   public Hotel() {
