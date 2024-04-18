@@ -31,10 +31,10 @@ public class UserService {
   }
 
   /**
-   * Add a book to the database.
+   * Add a user to the database.
    *
-   * @param user The book to add
-   * @return Tru on success, false if the book was not added.
+   * @param user The user to add
+   * @return True on success, false if the user was not added.
    */
   public boolean add(User user) {
     boolean added = false;
@@ -73,16 +73,16 @@ public class UserService {
   }
 
   /**
-   * Try to update a book in the application state (database).
+   * Try to update a user in the application state (database).
    *
    * @param id   ID of the user to update
    * @param user The updated user values
    * @return null on success, error message on error
    */
   public String update(int id, User user) {
-    User existingBook = findById(id);
+    User existingUser = findById(id);
     String errorMessage = null;
-    if (existingBook == null) {
+    if (existingUser == null) {
       errorMessage = "No user with id " + id + " found";
     }
     if (user == null || !user.isValid()) {
@@ -113,7 +113,6 @@ public class UserService {
    *         .findByAuthorsFirstNameContainingIgnoreCaseAndGenreNameContainingIgnoreCase(author, genre);
    *   }
    *
-   */
 
   /**
    * Get the number of users in the database.

@@ -36,16 +36,16 @@ public class HotelService {
   }
 
   /**
-   * Add an author to the application state (persist in the database).
+   * Add a Hotel to the application state (persist in the database).
    *
-   * @param hotel Author to persist
-   * @return true when author added, false on error
+   * @param hotel Hotel to persist
+   * @return true when Hotel added, false on error
    */
   public boolean add(Hotel hotel) {
     boolean added = false;
     if (hotel != null && hotel.isValid()) {
-      Hotel existingAuthor = findById(hotel.getId());
-      if (existingAuthor == null) {
+      Hotel existingHotel = findById(hotel.getId());
+      if (existingHotel == null) {
         hotelRepository.save(hotel);
         added = true;
       }
@@ -68,25 +68,25 @@ public class HotelService {
   }
 
   /**
-   * Update an author in the application state (persist in the database).
+   * Update an hotel in the application state (persist in the database).
    *
-   * @param author Author to update
+   * @param hotel Hotel to update
    * @return null on success, error message on error
    */
-  public String update(Integer id, Hotel author) {
+  public String update(Integer id, Hotel hotel) {
     // Error checking first
     String errorMessage = null;
     Hotel existingHotel = findById(id);
     if (existingHotel == null) {
       errorMessage = "No hotel with id " + id + " found";
-    } else if (author == null || !author.isValid()) {
+    } else if (hotel == null || !hotel.isValid()) {
       errorMessage = "Wrong data in request body";
-    } else if (author.getId() != id) {
+    } else if (hotel.getId() != id) {
       errorMessage = "Hotel ID in the URL does not match the ID in JSON data (response body)";
     }
 
     if (errorMessage == null) {
-      hotelRepository.save(author);
+      hotelRepository.save(hotel);
     }
     return errorMessage;
   }
