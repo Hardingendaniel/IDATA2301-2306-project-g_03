@@ -14,19 +14,12 @@
 	<name>web-app-group03</name>
 	<description>Project for exam in web-app</description>
 	<properties>
-		<java.version>19</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<!-- Exclude snakeyaml to avoid security issues -->
-			<exclusions>
-				<exclusion>
-					<groupId>org.yaml</groupId>
-					<artifactId>snakeyaml</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<!-- For MySQL access and JPA -->
