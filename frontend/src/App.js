@@ -1,5 +1,4 @@
 import './App.css';
-import  './components/Footer.css';
 import './components/Header.css';
 import './pages/frontpage/FrontPage.css';
 import './pages/browsepage/browseStyle.css';
