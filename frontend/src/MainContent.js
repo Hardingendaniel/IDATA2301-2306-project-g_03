@@ -1,5 +1,6 @@
 import {Route, Routes} from "react-router-dom";
-import {FrontPage} from "./pages/frontpage/FrontPage";
+import FrontPage from "./pages/frontpage/FrontPage";
+import Frontpage2 from "./pages/frontpage/Frontpage2";
 import {HotelPage} from "./pages/hotelpage/HotelPage"
 import BrowseHero from "./pages/browsepage/BrowseHero";
 

@@ -14,8 +14,10 @@ module.exports = {
     },
     colors: {
       main: '#3E68FF',
+      header: '#7392FF',
       white: '#ffffff',
       font: "#484848",
+      inputField: "#EBEBEB"
     },
     borderRadius: {
       '2xl': '1rem',
