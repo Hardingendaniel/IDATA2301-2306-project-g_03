@@ -68,7 +68,7 @@ public class HotelService {
   }
 
   /**
-   * Update an hotel in the application state (persist in the database).
+   * Update a hotel in the application state (persist in the database).
    *
    * @param hotel Hotel to update
    * @return null on success, error message on error

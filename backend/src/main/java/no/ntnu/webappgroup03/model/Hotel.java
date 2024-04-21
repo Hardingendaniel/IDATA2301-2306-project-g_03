@@ -20,6 +20,8 @@ public class Hotel {
   private String roomTypes;
   private double price;
 
+  private String description;
+
   @ManyToMany(mappedBy = "hotels")
   private Set<User> users = new HashSet<>();
 
@@ -34,11 +36,12 @@ public class Hotel {
    * @param roomTypes     The type of the room
    * @param price         The price for the hotel
    */
-  public Hotel(String hotelName, String locationType, String roomTypes, double price) {
+  public Hotel(String hotelName, String locationType, String roomTypes, double price , String description) {
     this.hotelName = hotelName;
     this.locationType = locationType;
     this.roomTypes = roomTypes;
     this.price = price;
+    this.description = description;
   }
 
   public int getId() {
@@ -79,6 +82,14 @@ public class Hotel {
 
   public void setPrice(double price) {
     this.price = price;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
   }
 
   public boolean isValid() {
