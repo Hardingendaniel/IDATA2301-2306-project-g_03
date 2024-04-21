@@ -13,7 +13,7 @@ export function MainContent() {
     return (
         <main>
             <Routes>
-                <Route path="/" element={<FrontPage/>}/>
+                <Route path="/" element={<Frontpage2/>}/>
                 <Route path="/browse" element={<BrowseHero/>}/>
                 <Route path="/hotel" element={<HotelPage/>}/>
             </Routes>
