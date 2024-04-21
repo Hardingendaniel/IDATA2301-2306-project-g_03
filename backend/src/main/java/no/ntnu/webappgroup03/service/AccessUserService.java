@@ -23,6 +23,7 @@ import java.util.Optional;
  */
 @Service
 public class AccessUserService implements UserDetailsService {
+
   private static final int MIN_PASSWORD_LENGTH = 6;
   @Autowired
   UserRepository userRepository;
@@ -69,8 +70,11 @@ public class AccessUserService implements UserDetailsService {
   /**
    * Try to create a new user.
    *
-   * @param email Email of the new user
-   * @param password Plaintext password of the new user
+   * @param firstName   First Name of the user.
+   * @param lastName    Last Name of the user.
+   * @param email       Email of the new user.
+   * @param phoneNumber the Phone Number of the user.
+   * @param password    Plaintext password of the new user
    * @return null when user created, error message on error
    */
   public String tryCreateNewUser(String firstName, String lastName, String email,
@@ -108,11 +112,11 @@ public class AccessUserService implements UserDetailsService {
   /**
    * Create a new user in the database.
    *
-   * @param firstName The users first name.
-   * @param lastName The users last name.
-   * @param email The users email address.
+   * @param firstName   The users first name.
+   * @param lastName    The users last name.
+   * @param email       The users email address.
    * @param phoneNumber the users phone number
-   * @param password the users password
+   * @param password    the users password
    */
   private void createUser(String firstName, String lastName, String email,
       int phoneNumber, String password) {
