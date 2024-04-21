@@ -6,29 +6,29 @@ import img3 from '../../img/hotel3.jpg'
 function Frontpage2() {
     return (
         <div>
-            <div className="static navbar h-48 bg-header flex flex-col">
+            <div className="static navbar h-80 bg-header flex flex-col">
                 <div className="flex flex-col text-white text-2xl font-bold">
                     <p>We at Stay Finder want to help you</p>
                     <p>Booking...</p>
                     <p>More text... more...</p>
                 </div>
 
-                <form action="/browse" className="absolute top-52 flex h-20 justify-center" method="GET">
+                <form action="/browse" className="absolute top-80 flex h-20 justify-center" method="GET">
                     <div className="join">
-                        <input className="input input-bordered join-item rounded-l-2xl h-20 w-96 bg-inputField"
+                        <input className="input input-bordered join-item rounded-l-2xl h-16 w-96 bg-inputField"
                                placeholder="Where to?"/>
-                        <input className="input input-bordered join-item rounded-l-2xl h-20 w-96 bg-inputField"
+                        <input className="input input-bordered join-item rounded-l-2xl h-16 w-96 bg-inputField"
                                placeholder="Check in date - Check out date"/>
-                        <input className="input input-bordered join-item rounded-l-2xl h-20 w-96 bg-inputField"
+                        <input className="input input-bordered join-item rounded-l-2xl h-16 w-96 bg-inputField"
                                placeholder="2 adults - 1 room"/>
                         <button
-                            className="btn join-item rounded-r-2xl bg-main text-white text-lg font-bold h-20 w-1/4">SEARCH
+                            className="btn join-item rounded-r-2xl bg-main text-white text-lg font-bold h-16 w-1/4">SEARCH
                         </button>
                     </div>
                 </form>
             </div>
 
-            <div className="carousel rounded-box pt-10">
+            <div className="carousel rounded-box pt-52">
                 <div className="carousel-item">
                     <img src="https://daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg" alt="Burger"/>
                 </div>
