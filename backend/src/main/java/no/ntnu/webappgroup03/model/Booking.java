@@ -15,15 +15,14 @@ import java.util.Date;
  */
 @Entity(name="booking")
 public class Booking  {
-  //TODO hør med Gørtsærn!
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "userId", referencedColumnName = "id")
+  //@JoinColumn(name = "userId", referencedColumnName = "id")
   private User user;
-  @OneToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "hotelId", referencedColumnName = "id")
+  @ManyToOne(fetch = FetchType.EAGER)
+  //@JoinColumn(name = "hotelId", referencedColumnName = "id")
   private Hotel hotel;
   private Date startDate;
   private Date endDate;
