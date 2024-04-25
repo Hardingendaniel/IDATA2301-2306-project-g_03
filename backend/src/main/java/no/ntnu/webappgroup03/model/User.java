@@ -34,7 +34,8 @@ public class User {
   private boolean active = true;
   @JsonIgnore
   @ManyToMany(fetch = FetchType.EAGER)
-  private Set<Hotel> hotels = new HashSet<>();
+  //TODO: finne ut av relasjonen
+  private Set<Booking> bookings = new HashSet<>();
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "user_role",
       joinColumns = @JoinColumn(name = "user_id"),
