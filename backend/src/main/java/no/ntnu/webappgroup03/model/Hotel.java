@@ -16,11 +16,10 @@ public class Hotel {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
   private String hotelName;
-  private String locationType;
+  private String description;
+  private String location;
   private String roomTypes;
   private double price;
-
-  private String description;
 
   @ManyToMany(mappedBy = "hotels")
   private Set<User> users = new HashSet<>();
@@ -30,15 +29,18 @@ public class Hotel {
   }
 
   /**
+   * Constructor for hotels.
    *
-   * @param hotelName     Title of the hotel
-   * @param locationType  The location of the hotel
-   * @param roomTypes     The type of the room
-   * @param price         The price for the hotel
+   * @param hotelName   Title of the hotel
+   * @param description The description of the hotel
+   * @param location    The location of the hotel
+   * @param roomTypes   The type of the room
+   * @param price       The price for the hotel
    */
-  public Hotel(String hotelName, String locationType, String roomTypes, double price , String description) {
+  public Hotel(String hotelName, String description, String location,
+      String roomTypes, double price) {
     this.hotelName = hotelName;
-    this.locationType = locationType;
+    this.location = location;
     this.roomTypes = roomTypes;
     this.price = price;
     this.description = description;
@@ -60,12 +62,12 @@ public class Hotel {
     this.hotelName = hotelName;
   }
 
-  public String getLocationType() {
-    return locationType;
+  public String getLocation() {
+    return location;
   }
 
-  public void setLocationType(String locationType) {
-    this.locationType = locationType;
+  public void setLocation(String locationType) {
+    this.location = locationType;
   }
 
   public String getRoomTypes() {
