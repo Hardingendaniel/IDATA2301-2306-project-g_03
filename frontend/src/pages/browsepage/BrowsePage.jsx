@@ -5,25 +5,14 @@ import img1 from '../../img/hotel1.jpg'
 import img2 from '../../img/hotel2.jpg'
 import img3 from '../../img/hotel3.jpg'
 import {NavLink} from "react-router-dom";
+import SearchForm from "../../components/SearchForm";
 
 const BrowsePage = () => {
     return (
         <div className="">
 
-            <div className="static navbar h-16 bg-header flex flex-col">
-
-                <form action="/browse" className="absolute top-24 flex h-20 justify-center  w-4/5 mb-8" method="GET">
-                    <div className="join w-full flex">
-                        <input className="input input-bordered join-item h-14 bg-inputField" placeholder="Where to?"/>
-                        <input className="input input-bordered join-item h-14 bg-inputField" placeholder="Start date"/>
-                        <input className="input input-bordered join-item h-14 bg-inputField" placeholder="End date"/>
-                        <input className="input input-bordered join-item h-14 bg-inputField" placeholder="Rooms"/>
-
-                        <button
-                            className="btn join-item rounded-r-2xl bg-main text-white text-lg font-bold h-14 w-1/5">SEARCH
-                        </button>
-                    </div>
-                </form>
+            <div className="static navbar h-14 bg-header flex flex-col">
+                <SearchForm/>
             </div>
 
             <div className=" flex justify-center w-4/5 mx-auto pt-20">
@@ -153,9 +142,9 @@ const BrowsePage = () => {
                         </button>
                     </div>
                     <div className="flex flex-col justify-center ">
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
+                        <ProductCard/>
+                        <ProductCard/>
+                        <ProductCard/>
                     </div>
                 </div>
             </div>
