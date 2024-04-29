@@ -17,6 +17,7 @@ module.exports = {
       header: '#7392FF',
       white: '#ffffff',
       font: "#484848",
+      lightgrey: "#D9D9D9",
       inputField: "#EBEBEB"
     },
     borderRadius: {
