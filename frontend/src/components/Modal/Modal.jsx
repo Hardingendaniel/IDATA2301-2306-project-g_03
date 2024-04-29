@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './Modal.css';
 
-function ModalOpener() {
+function ModalOpener1() {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -50,4 +50,4 @@ function ModalOpener() {
     );
 }
 
-export default ModalOpener;
+export default ModalOpener1;
