@@ -120,3 +120,35 @@ properly. It is easier to keep track of what needs to be done if issues are made
 that we remind each other to create these issues. In this sprint a lot of things need to be done and therefore there 
 needs to be much more issues than in the previous sprints. 
 
+Sprint review: In this sprint we didn't achieve all the things we wanted to. There were several times we were scheduling
+meetings, but no one took the initiative to start the call. The group  didn't have the best motivation and were
+waiting to have the checkpoint instead of trying the best we could before the checkpoint. We managed to make some 
+progress in the backend aspect of the project by redesigning the relationship diagram and implementing it in code, but 
+there is still a lot to do. The frontend of the application is beginning to look similar to how we want it according to 
+the wireframe. In terms of backend functionality added to the application we worked on this together on a single 
+computer. The frontend parts were split into three. The group continued to work on the three different sites where every
+member had responsibility for one each.
+
+What went good?
+The group were better at creating and using the issues for this sprint and therefore the tasks got clearer. We didn't 
+face so many merge conflicts because of the better planning.
+
+What went bad? / What can be improved?
+The motivation wasn't good enough across the group and scheduled work sessions were dropped because no one took the 
+initiative, this lead to slower progress then we aimed for. Meeting and working on scheduled sessions will be important
+for the upcoming sprint.
+
+## Sprint 5
+
+25th april- 5 may
+In this sprint we will implement frontend functionality that is a result of the data on the backend/server. The search 
+form should be mapped to hotels that exist at the backend. Another thing we will work on in this sprint is to make the
+design more responsive, but this will not be the main focus. We need to discuss what the admin functionality should be 
+and try to implement different functionality based on what role you are assigned on the website. The concrete 
+functionality will be described more in the issues for this sprint.
+
+To achieve what we want we have decided to be more strict on the planned work schedules. We have decided to work on
+tuesday, wednesday and friday on school for a longer session. More session will be scheduled as we see the need, but 
+every member has to meet physically for these sessions. We will attempt to implement frontend functionality first on the
+backend side before implementing it visually at the frontend.
+
