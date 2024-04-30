@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Buisness logic related to Hotels.
+ * Business logic related to Hotels.
  */
 @Service
 public class HotelService {
