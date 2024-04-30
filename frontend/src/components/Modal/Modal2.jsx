@@ -76,7 +76,6 @@ export function ModalOpener1() {
                         type="submit"
                         className="w-full bg-blue-700 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded my-3"
                     >
-                        Not a member? Sign up
                         <SignUpWindow/>
                     </btn>
                 </form>
