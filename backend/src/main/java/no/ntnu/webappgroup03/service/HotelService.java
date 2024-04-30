@@ -1,5 +1,7 @@
 package no.ntnu.webappgroup03.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.repository.HotelRepository;
@@ -22,6 +24,26 @@ public class HotelService {
    */
   public Iterable<Hotel> getAll() {
     return hotelRepository.findAll();
+  }
+
+  /**
+   * Filters the hotels based on location
+   *
+   * @param location the location of the hotel
+   * @return hotelsByLocation the hotel with desired location.
+   */
+  public Iterable<Hotel> getAllHotelsByLocation(String location) {
+    //Retrieve all hotels from the repository
+    Iterable<Hotel> allHotels = getAll();
+
+    //Filter hotels by location
+    List<Hotel> hotelsByLocation = new ArrayList<>();
+    for (Hotel hotel : allHotels) {
+      if (hotel.getLocation().equalsIgnoreCase(location)) {
+        hotelsByLocation.add(hotel);
+      }
+    }
+    return hotelsByLocation;
   }
 
   /**
