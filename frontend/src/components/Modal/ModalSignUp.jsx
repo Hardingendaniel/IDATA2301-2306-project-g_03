@@ -62,6 +62,13 @@ export function SignUpWindow() {
                         required
                         className="w-full p-2 my-2 border border-gray-300 rounded rounded-lg"
                     />
+                    <input
+                        type="Phone number"
+                        placeholder="Phone number"
+                        name="phoneNumber"
+                        required
+                        className="w-full p-2 my-2 border border-gray-300 rounded rounded-lg"
+                    />
                     <div className="relative">
                         <input
                             type="password"
