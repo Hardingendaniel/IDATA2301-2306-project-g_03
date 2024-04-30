@@ -23,13 +23,12 @@ function SearchForm() {
 
     return (
 
-        <form action="/browse" className="absolute justify-center  w-4/5 mb-8" method="GET">
-            <div className="join w-full flex ">
+        <form action="/browse" className="justify-center w-4/5 mb-8" method="GET">
+            <div className="join w-full flex justify-center">
 
-                <select className='w-1/4 rounded-s-2xl'
+                <select className='w-1/5 join-item rounded-s-2xl'
                         value={location}
-                        onChange={(e) => suggestionClick(e)}
-                >
+                        onChange={(e) => suggestionClick(e)}>
                     <option value="" style={{display: 'none'}}>Where to?</option>
                     <option value="Ålesund">Ålesund</option>
                     <option value="Trondheim">Trondheim</option>
@@ -38,27 +37,20 @@ function SearchForm() {
                     <option value="Sten">Sten</option>
                 </select>
 
-                <div className='flex  w-1/5'>
+                <DatePicker
+                    selected={startDate} onChange={(date) => setStartDate(date)}
+                    placeholderText="Check In Date"
+                    className="custom-datepicker join-item h-14"
+                />
 
-                    <DatePicker
-                        selected={startDate} onChange={(date) => setStartDate(date)}
-                        placeholderText="Check In Date"
-                        className="custom-datepicker"
-                    />
+                <DatePicker
+                    selected={endDate} onChange={(date) => setEndDate(date)}
+                    placeholderText="Check Out Date"
+                    className="custom-datepicker join-item h-14"
+                />
 
-                </div>
 
-                <div className='flex w-1/5'>
-
-                    <DatePicker
-                        selected={endDate} onChange={(date) => setEndDate(date)}
-                        placeholderText="Check Out Date"
-                        className="custom-datepicker"
-                    />
-
-                </div>
-
-                <select className=' w-1/5'
+                <select className='join-item w-1/5'
                 >
                     <option value="" style={{display: 'none'}}>Number of Rooms</option>
                     <option value="">1</option>

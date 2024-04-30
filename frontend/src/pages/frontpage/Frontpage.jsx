@@ -1,14 +1,10 @@
 import React, {useState} from "react";
-import DatePicker from "react-datepicker";
 import logo from "../../img/hotel1.jpg";
 import logo2 from "../../img/hotel2.jpg";
 import logo3 from "../../img/hotel3.jpg";
 import SearchForm from "../../components/SearchForm";
 
 function Frontpage() {
-
-
-
     const cardsData = [
         { img: logo, text: "OMG Stay Finder is the best!", rating: "★★★★★" },
         { img: logo2, text: "These guys have the best deals!", rating: "★★★★★" },
@@ -17,7 +13,6 @@ function Frontpage() {
 
     // Track the current index of the shown card
     const [currentIndex, setCurrentIndex] = useState(0);
-
 
     // Calculate and update the visible cards based on the current index
     const visibleCards = () => {
@@ -30,8 +25,6 @@ function Frontpage() {
 
         return indexes.map(index => cardsData[index]);
     };
-
-
 
     return (
         <div>
