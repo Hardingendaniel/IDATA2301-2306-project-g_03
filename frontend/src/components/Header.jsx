@@ -7,9 +7,9 @@ const Header = () => {
         <div className="navbar bg-header">
             <div className="navbar-start">
                 <NavLink to="/">
-                    <a className="btn btn-ghost rounded-2xl text-xl font-bold text-white">
+                    <div className="btn btn-ghost rounded-2xl text-xl font-bold text-white">
                         Stay Finder
-                    </a>
+                    </div>
                 </NavLink>
             </div>
             <div className="navbar-center relative text-font mx-auto">
@@ -25,9 +25,9 @@ const Header = () => {
             </div>
 
             <div className="navbar-end">
-                <a className="btn btn-ghost rounded-2xl text-xl font-bold text-white">
+                <div className="btn btn-ghost rounded-2xl text-xl font-bold text-white">
                     <ModalOpener/>
-                </a>
+                </div>
             </div>
         </div>
     );

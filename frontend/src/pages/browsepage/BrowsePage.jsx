@@ -1,17 +1,13 @@
 import React from "react";
 import map from '../../img/7652611.jpg'
-import ProductCard from "../../components/ProductCard";
-import img1 from '../../img/hotel1.jpg'
-import img2 from '../../img/hotel2.jpg'
-import img3 from '../../img/hotel3.jpg'
 import {NavLink} from "react-router-dom";
+import ProductCard from "../../components/ProductCard";
 import SearchForm from "../../components/SearchForm";
 
 const BrowsePage = () => {
     return (
         <div className="">
-
-            <div className="static navbar h-14 bg-header flex flex-col">
+            <div className="navbar h-20 bg-header flex flex-col">
                 <SearchForm/>
             </div>
 
@@ -28,15 +24,14 @@ const BrowsePage = () => {
                     <div className="drawer-side">
                         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                         <ul className="p-4 w-80 min-h-full text-base-content">
-                            {/* Sidebar content here */}
 
                             <div className="text-sm breadcrumbs text-main">
                                 <ul>
                                     <li>
                                         <NavLink to="/">Home</NavLink>
                                     </li>
-                                    <li><a>Country</a></li>
-                                    <li><a>State</a></li>
+                                    <li>Country</li>
+                                    <li>State</li>
                                     <li>City</li>
                                 </ul>
                             </div>
