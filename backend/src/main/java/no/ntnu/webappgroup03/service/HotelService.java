@@ -30,7 +30,7 @@ public class HotelService {
    * Filters the hotels based on location
    *
    * @param location the location of the hotel
-   * @return hotelsByLocation the hotel with desired location.
+   * @return hotelsByLocation the hotels with desired location.
    */
   public Iterable<Hotel> getAllHotelsByLocation(String location) {
     //Retrieve all hotels from the repository
