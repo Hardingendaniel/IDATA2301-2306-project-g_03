@@ -1,7 +1,7 @@
 // All code for sending requests to backend is stored in this file
 
 // The base path where the API is running, loaded from the REACT_BASE_URL environment variable
-import {getCookie} from "./cookies";
+import {getCookie} from "./tools";
 import {HttpResponseError} from "./HttpResponseError";
 
 const API_BASE_URL = process.env.REACT_APP_BASE_URL;

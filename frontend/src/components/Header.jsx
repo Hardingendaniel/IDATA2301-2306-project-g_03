@@ -1,6 +1,6 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
-import ModalOpener from "./Modal/Modal2";
+import {Login} from "./Modal/Login";
 
 const Header = () => {
     return (
@@ -25,8 +25,8 @@ const Header = () => {
             </div>
 
             <div className="navbar-end">
-                <div className="btn btn-ghost rounded-2xl text-xl font-bold text-white">
-                    <ModalOpener/>
+                <div className="">
+                    <Login/>
                 </div>
             </div>
         </div>

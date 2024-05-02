@@ -44,7 +44,7 @@ const BrowsePage = () => {
                                 />
                                 <div
                                     className="absolute w-full h-full top-0 bottom-0 left-0 right-0 flex items-center justify-center">
-                                    <div className="btn bg-main text-white font-bold text-xl">Show on map</div>
+                                    <div className="btn bg-main text-white font-bold text-xl hover:bg-header">Show on map</div>
                                 </div>
                             </div>
 

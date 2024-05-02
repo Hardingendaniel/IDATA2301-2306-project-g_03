@@ -58,7 +58,7 @@ const ProductCard = () => {
                             <span className="font-normal text-font text-base">/night</span>
                         </p>
                         <NavLink to="/hotel">
-                            <div className="btn text-white font-bold bg-main hover:bg-header">View deal</div>
+                            <div className="btn text-white font-bold rounded-2xl bg-main hover:bg-header">View deal</div>
                         </NavLink>
                     </div>
                 </div>
