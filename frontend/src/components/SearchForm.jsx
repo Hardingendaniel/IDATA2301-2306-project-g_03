@@ -59,7 +59,7 @@ function SearchForm() {
                 </select>
 
                 <button
-                    className="btn join-item rounded-r-2xl bg-main text-white text-lg font-bold h-14 w-1/5">SEARCH
+                    className="btn join-item rounded-r-2xl bg-main text-white text-lg font-bold h-14 w-1/5 hover:bg-header">SEARCH
                 </button>
             </div>
         </form>
