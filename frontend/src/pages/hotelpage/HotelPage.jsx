@@ -1,14 +1,38 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import scandic from '../../img/scandic.jpg';
 import hotel1 from '../../img/hotel1.jpg';
 import hotel3 from '../../img/hotel3.jpg';
 import map from "../../img/7652611.jpg";
 
 export function HotelPage() {
+    const [hotelData, setHotelData] = useState([]);
+
+    // Using fetch instead of axios atm.
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/api/hotels');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                setHotelData(data);
+            } catch (error) {
+                console.error('Error fetching data: ', error);
+            }
+        };
+
+        fetchData().catch(error => console.error('Failed to fetch data:', error));
+    }, []);
+
     return (
         <div className="flex flex-col items-center w-4/5 mx-auto">
             <main className="my-4 w-4/5 mx-auto">
-                <h1 className="text-4xl font-bold  my-4">Villa GoatEid</h1>
+                <h1 className="text-4xl font-bold  my-4">{hotelData.map(hotel => (
+                    <li key={hotel.id}>{hotel.name}</li>
+                ))}
+
+                </h1>
                 <div className="text-yellow-400 text-xl ">★★★★☆</div>
 
                 <div className="grid grid-cols-3 gap-4 my-4">

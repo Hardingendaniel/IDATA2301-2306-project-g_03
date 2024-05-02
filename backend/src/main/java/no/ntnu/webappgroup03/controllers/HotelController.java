@@ -1,5 +1,6 @@
 package no.ntnu.webappgroup03.controllers;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.service.HotelService;
@@ -60,6 +61,15 @@ public class HotelController {
    */
   private Hotel findHotelById(Integer id) {
     return hotels.get(id);
+  }
+
+  /**
+   * Get all hotels
+   *
+   * @return return all the hotels
+   */
+  public List<Hotel> getAllHotels() {
+    return hotelService.findAllHotels();
   }
 
 }
