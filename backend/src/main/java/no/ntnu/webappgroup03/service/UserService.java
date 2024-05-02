@@ -1,10 +1,11 @@
 package no.ntnu.webappgroup03.service;
 
-import java.util.Optional;
 import no.ntnu.webappgroup03.model.User;
 import no.ntnu.webappgroup03.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -26,7 +27,7 @@ public class UserService {
    * @param id ID of the user to look up
    * @return The user or null if none found
    */
-  public User findById(Integer id) {
+  public User findUserById(Integer id) {
     return userRepository.findById(id).orElse(null);
   }
 
@@ -63,9 +64,9 @@ public class UserService {
    * @param id ID of the user to delete
    * @return true when deleted, false on error
    */
-  public boolean delete(int id) {
+  public boolean deleteUser(int id) {
     boolean deleted = false;
-    if (findById(id) != null) {
+    if (findUserById(id) != null) {
       userRepository.deleteById(id);
       deleted = true;
     }
@@ -79,8 +80,8 @@ public class UserService {
    * @param user The updated user values
    * @return null on success, error message on error
    */
-  public String update(int id, User user) {
-    User existingUser = findById(id);
+  public String updateUser(int id, User user) {
+    User existingUser = findUserById(id);
     String errorMessage = null;
     if (existingUser == null) {
       errorMessage = "No user with id " + id + " found";
