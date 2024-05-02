@@ -13,9 +13,9 @@ public class UserService {
   private UserRepository userRepository;
 
   /**
-   * Get all hotel currently stored in the application state (database).
+   * Get all user currently stored in the application state (database).
    *
-   * @return all hotels.
+   * @return all users.
    */
   public Iterable<User> getAll() {
     return userRepository.findAll();
