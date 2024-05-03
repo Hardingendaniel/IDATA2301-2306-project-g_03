@@ -6,9 +6,9 @@ import SearchForm from "../../components/SearchForm";
 
 function Frontpage() {
     const cardsData = [
-        { img: logo, text: "OMG Stay Finder is the best!", rating: "★★★★★" },
-        { img: logo2, text: "These guys have the best deals!", rating: "★★★★★" },
-        { img: logo3, text: "Stay Finder for the win!", rating: "★★★★★" }
+        { img: logo, hotelName: "Villa Gåseid", review: "A wonderful place to stay" , rating: "★★★★★" },
+        { img: logo2, hotelName: "Totens fineste", review: "Amazing view and price" , rating: "★★★★★" },
+        { img: logo3, hotelName: "Jugend Hotel", review: "Beautiful historic hotel" , rating: "★★★★★" }
     ];
 
     // Track the current index of the shown card
@@ -44,13 +44,16 @@ function Frontpage() {
             </div>
 
 
-            <h2 className="subheading mt-4">Get the best experience with Stay Finder</h2>
+            <h2 className="mt-4 text-center text text-2xl">Get the best experience with Stay Finder</h2>
             <div className="flex justify-around relative">
                 {visibleCards().map((card, index) => (
                     <div key={index} className="card">
-                        <img src={card.img} alt={`Hotel ${index + 1}`}/>
-                        <p className='justify-center'>{card.text}</p>
-                        <div className="justify-center custom-color">{card.rating}</div>
+                        <img src={card.img} alt={`Hotel ${index + 1}`} className="w-full h-48 object-cover rounded-lg"/>
+                        <div className="text-center p-4">
+                            <h3 className="text-lg font-semibold">{card.hotelName}</h3>
+                            <p className="text-lg font-semibold">{card.review}</p>
+                            <div className="text-yellow-500 mt-2">{card.rating}</div>
+                        </div>
                     </div>
                 ))}
 
