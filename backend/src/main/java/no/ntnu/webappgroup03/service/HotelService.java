@@ -18,6 +18,24 @@ public class HotelService {
   private HotelRepository hotelRepository;
 
   /**
+   * Constructor class for hotel service class
+   *
+   * @param hotelRepository hotelRepository
+   */
+  public HotelService(HotelRepository hotelRepository) {
+    this.hotelRepository = hotelRepository;
+  }
+
+  /**
+   * Find all the hotels and returns it in a list
+   *
+   * @return a list of all hotels
+   */
+  public List<Hotel> findAllHotels() {
+    return (List<Hotel>) hotelRepository.findAll();
+  }
+
+  /**
    * Return all hotels.
    *
    * @return all hotels.

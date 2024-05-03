@@ -8,6 +8,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,13 +17,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 /**
  * Creates AuthenticationManager - set up authentication type.
  */
-@Configuration
+@EnableWebSecurity
 public class SecurityConfiguration {
-
   /**
    * A service providing our users from the database
    */
@@ -53,15 +56,15 @@ public class SecurityConfiguration {
   public SecurityFilterChain configureAuthorizationFilterChain(HttpSecurity http) throws Exception {
     // Allow JWT authentication
     http.cors(AbstractHttpConfigurer::disable)
-        .csrf(AbstractHttpConfigurer::disable)
-        .authorizeHttpRequests(requests -> requests
-            .requestMatchers("/api/authenticate").permitAll()
-            .requestMatchers("/api/signup").permitAll()
-            .requestMatchers("/api/products").permitAll()
-            .anyRequest().authenticated())
-        .sessionManagement(management -> management
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+            .csrf(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests(requests -> requests
+                    .requestMatchers("/api/authenticate").permitAll()
+                    .requestMatchers("/api/signup").permitAll()
+                    .requestMatchers("/api/products").permitAll()
+                    .anyRequest().authenticated())
+            .sessionManagement(management -> management
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     return http.build();
   }
 
@@ -84,5 +87,15 @@ public class SecurityConfiguration {
   @Bean
   public PasswordEncoder getPasswordEncoder() {
     return new BCryptPasswordEncoder();
+  }
+
+  protected void configure(HttpSecurity http) throws Exception {
+    http.cors(cors -> cors.configurationSource(request -> {
+              CorsConfiguration config = new CorsConfiguration();
+              config.applyPermitDefaultValues();
+              return config;
+            }))
+            .authorizeRequests()
+            .anyRequest().authenticated();
   }
 }

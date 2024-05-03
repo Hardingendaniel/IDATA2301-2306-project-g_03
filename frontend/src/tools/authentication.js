@@ -1,8 +1,9 @@
 // Authentication stuff
 // Code adapted from https://github.com/strazdinsg/web-examples/blob/main/public_html/examples/react/15-react-jwt-auth/src/tools/authentication.js
 
-import {deleteCookie, getCookie, setCookie} from "./cookies";
+import {deleteCookie, getCookie, setCookie} from "./tools";
 import {asyncApiRequest} from "./requests";
+import {redirect} from "react-router-dom";
 
 /**
  * Get the currently authenticated user
