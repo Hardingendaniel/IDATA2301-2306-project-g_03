@@ -21,7 +21,7 @@ const BrowsePage = () => {
                             Show filter
                         </label>
                     </div>
-                    <div className="drawer-side">
+                    <div className="drawer-side mb-8">
                         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                         <ul className="p-4 w-80 min-h-full text-base-content">
                             <div className="relative overflow-hidden flex items-center justify-center flex-col">

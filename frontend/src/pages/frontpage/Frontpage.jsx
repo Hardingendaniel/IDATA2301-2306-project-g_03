@@ -48,14 +48,14 @@ function Frontpage() {
 
 
             <h2 className="mt-4 text-center text text-2xl">Get the best experience with Stay Finder</h2>
-            <div className="flex justify-around relative">
+            <div className="flex justify-evenly relative w-4-5 mr-28 ml-28">
                 {visibleCards().map((card, index) => (
                     <div key={index} className="card">
-                        <img src={card.img} alt={`Hotel ${index + 1}`} className="w-full h-48 object-cover rounded-lg"/>
+                        <img src={card.img} alt={`Hotel ${index + 1}`} className="w-full h-48 object-cover rounded-t-2xl"/>
                         <div className="text-center p-4">
                             <h3 className="text-lg font-semibold">{card.hotelName}</h3>
                             <p className="text-lg font-semibold">{card.review}</p>
-                            <div className="text-yellow-500 mt-2">{card.rating}</div>
+                            <div className="mt-2 custom-color">{card.rating}</div>
                         </div>
                     </div>
                 ))}
@@ -77,49 +77,65 @@ function Frontpage() {
                 </button>
             </div>
 
-            <div>
+            <div className= "w-5-6">
 
 
                 <h3 className="mt-4 text-center text text-2xl"> Popular travel destinations</h3>
 
                 <div className="mt-4 mb-4">
 
-                    <div className="flex justify-evenly">
-                        <button >
-                            <img src={Aalesund} alt="Ålesund" className="w-48 h-48 object-cover"/>
+                    <div className="flex justify-around ml-28 mr-28">
+                        <button className="">
+                            <img src={Aalesund} alt="Ålesund" className="w-44 h-44 object-cover"/>
                             <p className="text-center text-2xl">Ålesund</p>
                             <p className="text-center">4 destinations</p>
                         </button>
 
                         <button className="">
-                            <img src={Bergen} alt="Bergen" className="w-48 h-48 object-cover"/>
+                            <img src={Bergen} alt="Bergen" className="w-44 h-44 object-cover"/>
                             <p className="text-center text-2xl">Bergen</p>
                             <p className="text-center">4 destinations</p>
                         </button>
 
                         <button className="">
-                            <img src={logo3} alt="Oslo" className="w-48 h-48 object-cover"/>
+                            <img src={logo3} alt="Oslo" className="w-44 h-44 object-cover"/>
                             <p className="text-center text-2xl">Oslo</p>
                             <p className="text-center">4 destinations</p>
                         </button>
 
                         <button className="">
-                            <img src={logo} alt="Trondheim" className="w-48 h-48 object-cover"/>
+                            <img src={logo} alt="Trondheim" className="w-44 h-44 object-cover"/>
                             <p className="text-center text-2xl">Trondheim</p>
-                            <p className="text-center">2 destinations</p>
+                            <p className="text-center">4 destinations</p>
                         </button>
 
+
                         <button className="">
-                            <img src={logo2} alt="Stryn" className="w-48 h-48 object-cover"/>
+                            <img src={logo2} alt="Stryn" className="w-44 h-44 object-cover"/>
                             <p className="text-center text-2xl">Stryn</p>
                             <p className="text-center">4 destinations</p>
                         </button>
                     </div>
+                </div>
+            </div>
 
+            <div>
+                <h4 className="mt-4 text-center text text-2xl"> Why choose stay Finder?</h4>
+            </div>
 
+            <div className="flex justify-around ml-32 mr-32 mb-4 mt-4">
+                <div className="box-border border w-1/3">
+                </div>
+
+                <div className="box-border border w-1/3 text-center">
+                    TO BE STYLED
+                </div>
+
+                <div className="box-border border w-1/3">
                 </div>
 
             </div>
+
         </div>
 
     );

@@ -1,12 +1,12 @@
 .card {
     width: 35%;
-    background-color: #f0f0f0;
     margin: 10px;
-    padding: 10px;
-    text-align: center;
-    border-radius: 12px;
+    border-width: 1px;
 }
 
+.custom-color {
+    color: #4C73FF;
+}
 
 .shuffle {
     width: 50px;
@@ -17,6 +17,7 @@
     cursor: pointer;
     outline: none;
     position: absolute;
+    top: 18%;
     margin-top: 5%;
     align-content: baseline;
     right: 0;
@@ -43,6 +44,7 @@
     cursor: pointer;
     outline: none;
     position: absolute;
+    top: 18%;
     margin-top: 5%;
     align-content: baseline;
     left: 0;

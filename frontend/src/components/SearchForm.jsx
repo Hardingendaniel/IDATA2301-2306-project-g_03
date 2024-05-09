@@ -23,7 +23,7 @@ function SearchForm() {
 
     return (
 
-        <form action="/browse" className="justify-center w-4/5 mb-8" method="GET">
+        <form action="/browse" className="justify-center w-11/12 lg:w-11/12 mb-8" method="GET">
             <div className="join w-full flex justify-center">
 
                 <select className='w-1/5 join-item rounded-s-2xl'
@@ -59,7 +59,8 @@ function SearchForm() {
                 </select>
 
                 <button
-                    className="btn join-item rounded-r-2xl bg-main text-white text-lg font-bold h-14 w-1/5 hover:bg-header">SEARCH
+                    className="btn join-item rounded-r-2xl bg-main text-white text-lg font-bold h-14 w-1/5 hover:bg-header">
+                    SEARCH
                 </button>
             </div>
         </form>
