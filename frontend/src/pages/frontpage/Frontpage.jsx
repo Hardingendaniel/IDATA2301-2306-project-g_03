@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import logo from "../../img/hotel1.jpg";
 import logo2 from "../../img/hotel2.jpg";
 import logo3 from "../../img/hotel3.jpg";
+import Aalesund from "../../img/Ålesund.jpg"
+import Bergen from "../../img/Bergen.jpg"
 import SearchForm from "../../components/SearchForm";
 
 function Frontpage() {
@@ -30,9 +32,10 @@ function Frontpage() {
         <div>
             <div className="static navbar h-48 bg-header flex flex-col">
                 <div className="flex flex-col text-white text-2xl font-bold">
-                    <p>We at Stay Finder want to help you</p>
-                    <p>Booking...</p>
-                    <p>Even More...</p>
+                    <p>Welcome to Stay Finder, your </p>
+                    <p>premier destination for discovering
+                        </p>
+                    <p>the most exceptional accommodation deals</p>
 
                 </div>
 
@@ -72,6 +75,50 @@ function Frontpage() {
                 >
                     <span className="arrow2"/>
                 </button>
+            </div>
+
+            <div>
+
+
+                <h3 className="mt-4 text-center text text-2xl"> Popular travel destinations</h3>
+
+                <div className="mt-4 mb-4">
+
+                    <div className="flex justify-evenly">
+                        <button >
+                            <img src={Aalesund} alt="Ålesund" className="w-48 h-48 object-cover"/>
+                            <p className="text-center text-2xl">Ålesund</p>
+                            <p className="text-center">4 destinations</p>
+                        </button>
+
+                        <button className="">
+                            <img src={Bergen} alt="Bergen" className="w-48 h-48 object-cover"/>
+                            <p className="text-center text-2xl">Bergen</p>
+                            <p className="text-center">4 destinations</p>
+                        </button>
+
+                        <button className="">
+                            <img src={logo3} alt="Oslo" className="w-48 h-48 object-cover"/>
+                            <p className="text-center text-2xl">Oslo</p>
+                            <p className="text-center">4 destinations</p>
+                        </button>
+
+                        <button className="">
+                            <img src={logo} alt="Trondheim" className="w-48 h-48 object-cover"/>
+                            <p className="text-center text-2xl">Trondheim</p>
+                            <p className="text-center">2 destinations</p>
+                        </button>
+
+                        <button className="">
+                            <img src={logo2} alt="Stryn" className="w-48 h-48 object-cover"/>
+                            <p className="text-center text-2xl">Stryn</p>
+                            <p className="text-center">4 destinations</p>
+                        </button>
+                    </div>
+
+
+                </div>
+
             </div>
         </div>
 
