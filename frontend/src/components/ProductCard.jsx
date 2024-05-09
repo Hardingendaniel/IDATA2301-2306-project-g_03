@@ -58,7 +58,13 @@ const ProductCard = () => {
                             <span className="font-normal text-font text-base">/night</span>
                         </p>
                         <NavLink to="/hotel">
-                            <div className="btn text-white font-bold rounded-2xl bg-main hover:bg-header">View deal</div>
+                            <div className="btn text-white font-bold rounded-2xl bg-main hover:bg-header">View deal
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-white">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/>
+                                </svg>
+
+                            </div>
                         </NavLink>
                     </div>
                 </div>
