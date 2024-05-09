@@ -5,12 +5,12 @@ import {NavLink} from "react-router-dom";
 const ProductCard = () => {
     return (
             <div
-                className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 border rounded-2xl max-w-xs md:max-w-4xl mx-auto bg-white">
+                className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 border rounded-2xl max-w-xs md:max-w-4xl mx-auto bg-white my-3">
                 <div className="w-full md:w-1/3 grid place-items-center">
                     <img
                         src={img1}
                         alt="hotel 1"
-                        className="md:rounded-l-2xl rounded-t-2xl"/>
+                        className="md:rounded-l-2xl rounded-t-2xl h-full"/>
                 </div>
                 <div className="w-full md:w-2/3 flex flex-col space-y-2 p-3">
                     <div className="flex justify-between item-center">
