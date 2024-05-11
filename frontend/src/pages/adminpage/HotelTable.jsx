@@ -9,6 +9,7 @@ import img7 from "../../img/hotel3/4.png";
 import img8 from "../../img/hotel4/4.png";
 import img9 from "../../img/hotel2/3.png";
 import img10 from "../../img/hotel1/5.png";
+import EditButton from "../../components/EditButton";
 
 function HotelTable() {
     return (
@@ -64,14 +65,7 @@ function HotelTable() {
                     NOK 4.200
                 </td>
                 <th>
-                    <button className="btn btn-ghost btn-xs">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                  d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/>
-                        </svg>
-
-                    </button>
+                    <EditButton />
                 </th>
             </tr>
             {/* row 2 */}
@@ -107,14 +101,7 @@ function HotelTable() {
                     NOK 6.900
                 </td>
                 <th>
-                    <button className="btn btn-ghost btn-xs">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                  d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/>
-                        </svg>
-
-                    </button>
+                    <EditButton />
                 </th>
             </tr>
             {/* row 3 */}
@@ -125,7 +112,7 @@ function HotelTable() {
                     </label>
                 </th>
                 <td>
-                    <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3">
                         <div className="avatar">
                             <div className="mask mask-squircle w-12 h-12">
                                 <img src={img3}
@@ -150,14 +137,7 @@ function HotelTable() {
                     NOK 3.999
                 </td>
                 <th>
-                    <button className="btn btn-ghost btn-xs">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                  d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/>
-                        </svg>
-
-                    </button>
+                    <EditButton />
                 </th>
             </tr>
             {/* row 4 */}
@@ -193,14 +173,7 @@ function HotelTable() {
                     NOK 5.200
                 </td>
                 <th>
-                    <button className="btn btn-ghost btn-xs">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                  d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/>
-                        </svg>
-
-                    </button>
+                    <EditButton />
                 </th>
             </tr>
             {/* row 5 */}
@@ -236,14 +209,7 @@ function HotelTable() {
                     NOK 7.500
                 </td>
                 <th>
-                    <button className="btn btn-ghost btn-xs">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                  d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/>
-                        </svg>
-
-                    </button>
+                    <EditButton />
                 </th>
             </tr>
             {/* row 6 */}
@@ -279,14 +245,7 @@ function HotelTable() {
                     NOK 5.800
                 </td>
                 <th>
-                    <button className="btn btn-ghost btn-xs">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                  d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/>
-                        </svg>
-
-                    </button>
+                    <EditButton />
                 </th>
             </tr>
             {/* row 7 */}
@@ -322,13 +281,7 @@ function HotelTable() {
                     NOK 2.500
                 </td>
                 <th>
-                    <button className="btn btn-ghost btn-xs">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                  d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/>
-                        </svg>
-                    </button>
+                    <EditButton />
                 </th>
             </tr>
             {/* row 8 */}
@@ -364,14 +317,7 @@ function HotelTable() {
                     NOK 6.500
                 </td>
                 <th>
-                    <button className="btn btn-ghost btn-xs">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                  d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/>
-                        </svg>
-
-                    </button>
+                    <EditButton />
                 </th>
             </tr>
             {/* row 9 */}
@@ -407,14 +353,7 @@ function HotelTable() {
                     NOK 4.800
                 </td>
                 <th>
-                    <button className="btn btn-ghost btn-xs">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                  d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/>
-                        </svg>
-
-                    </button>
+                    <EditButton />
                 </th>
             </tr>
             {/* row 10 */}
@@ -450,14 +389,7 @@ function HotelTable() {
                     NOK 6.200
                 </td>
                 <th>
-                    <button className="btn btn-ghost btn-xs">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                  d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/>
-                        </svg>
-
-                    </button>
+                    <EditButton />
                 </th>
             </tr>
             </tbody>
