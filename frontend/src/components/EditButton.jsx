@@ -1,4 +1,5 @@
 import React from "react";
+import {ChangeModal} from "./Modal/ChangeModal";
 
 /**
  * Component for 3 dot dropdown menu
@@ -6,6 +7,9 @@ import React from "react";
  * @constructor
  */
 const EditButton = () => {
+    const openChangeModal = () => {
+        document.getElementById("changeModal").showModal();
+    }
   return (
       <div className="dropdown dropdown-bottom dropdown-end">
           <div tabIndex={0} role="button" className="btn m-1 btn-ghost btn-xs rounded-2xl">
@@ -17,9 +21,12 @@ const EditButton = () => {
           </div>
           <ul tabIndex={0}
               className="dropdown-content z-[1] menu p-2 font-normal shadow bg-base-100 rounded-2xl w-36">
-              <li><a>Edit</a></li>
+              <li><a onClick={openChangeModal}>Edit</a></li>
               <li><a>Delete</a></li>
           </ul>
+          <dialog id="changeModal" className="modal">
+              <ChangeModal />
+          </dialog>
       </div>
   )
 }
