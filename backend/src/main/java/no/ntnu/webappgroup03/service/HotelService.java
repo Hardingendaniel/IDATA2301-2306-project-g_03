@@ -32,6 +32,7 @@ public class HotelService {
    * @return a list of all hotels
    */
   public List<Hotel> findAllHotels() {
+
     return (List<Hotel>) hotelRepository.findAll();
   }
 

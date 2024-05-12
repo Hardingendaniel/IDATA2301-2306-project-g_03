@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Code adapted from ...
  */
 @RestController
-@RequestMapping("/hotels")
+@RequestMapping("/api/hotels")
 public class HotelController {
   private Map<Integer, Hotel> hotels;
   private int latestId;
