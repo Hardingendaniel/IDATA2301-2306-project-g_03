@@ -13,10 +13,25 @@ export function HotelPage2() {
     const sectionAboutRef = useRef();
     const sectionLocationRef = useRef();
 
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await fetch('http://localhost:8080/api/hotels');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                setHotelData(data);
+            } catch (error) {
+                console.error('Error fetching data: ', error);
+            }
+        };
+        fetchData();
+    }, []);
+
     const scrollToSection = (ref) => {
         ref.current.scrollIntoView({behavior: 'smooth'});
     }
-
 
     const [stickyClass, setStickyClass] = useState('relative');
 
