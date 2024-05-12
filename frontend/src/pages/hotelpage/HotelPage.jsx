@@ -25,6 +25,13 @@ export function HotelPage() {
         fetchData().catch(error => console.error('Failed to fetch data:', error));
     }, []);
 
+    useEffect(() => {
+        fetch('http://localhost:8080/api/hotels')
+            .then(response => response.json())
+            .then(data => setHotelData(data))
+            .catch(error => console.error('Error fetching data:', error));
+    }, []);
+
     return (
         <div className="flex flex-col items-center w-4/5 mx-auto">
             <main className="my-4 w-4/5 mx-auto">
