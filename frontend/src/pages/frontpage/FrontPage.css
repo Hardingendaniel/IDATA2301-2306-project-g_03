@@ -1,40 +1,12 @@
-.main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.subheading {
-    font-size: 26px;
-    color: black;
-}
-
-
-
-.cards {
-    display: flex;
-    justify-content: space-around;
-    position: relative;
-}
 .card {
-    width: 40%;
-    background-color: #f0f0f0;
+    width: 35%;
     margin: 10px;
-    padding: 10px;
-    text-align: center;
-    border-radius: 12px;
-}
-
-
-.card .rating {
-    color: #4C73FF;
+    border-width: 1px;
 }
 
 .custom-color {
     color: #4C73FF;
 }
-
 
 .shuffle {
     width: 50px;
@@ -45,6 +17,7 @@
     cursor: pointer;
     outline: none;
     position: absolute;
+    top: 18%;
     margin-top: 5%;
     align-content: baseline;
     right: 0;
@@ -71,6 +44,7 @@
     cursor: pointer;
     outline: none;
     position: absolute;
+    top: 18%;
     margin-top: 5%;
     align-content: baseline;
     left: 0;
@@ -86,11 +60,4 @@
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-top: 10px solid #fff;
-}
-
-.card img {
-    height: 13em;
-    width: auto;
-    display: block;
-    margin: 0 auto;
 }

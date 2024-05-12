@@ -18,7 +18,8 @@ module.exports = {
       white: '#ffffff',
       font: "#484848",
       lightgrey: "#D9D9D9",
-      inputField: "#EBEBEB"
+      inputField: "#EBEBEB",
+      tableHover: "#F9FAFB"
     },
     borderRadius: {
       '2xl': '1rem',

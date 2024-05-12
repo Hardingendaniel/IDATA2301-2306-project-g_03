@@ -1,7 +1,9 @@
 import {Route, Routes} from "react-router-dom";
 import Frontpage from "./pages/frontpage/Frontpage";
 import {HotelPage} from "./pages/hotelpage/HotelPage"
+import {HotelPage2} from "./pages/hotelpage/HotelPage2";
 import BrowsePage from "./pages/browsepage/BrowsePage";
+import AdminPage from "./pages/adminpage/AdminPage"
 
 /**
  * Represents the main content of the page
@@ -14,7 +16,8 @@ export function MainContent() {
             <Routes>
                 <Route path="/" element={<Frontpage/>}/>
                 <Route path="/browse" element={<BrowsePage/>}/>
-                <Route path="/hotel" element={<HotelPage/>}/>
+                <Route path="/hotel" element={<HotelPage2/>}/>
+                <Route path="/admin" element={<AdminPage/>}/>
             </Routes>
         </main>
     );

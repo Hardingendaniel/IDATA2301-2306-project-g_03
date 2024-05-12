@@ -76,7 +76,7 @@ export function HotelPage() {
 
                         </div>
                     </div>
-                    <div className="card w-96 bg-primary text-primary-content">
+                    <div className="card w-96 bg-white text-primary-content">
                         <div className="card-body">
                             <div className="relative overflow-hidden flex items-left justify-center flex-col">
                                 <img
