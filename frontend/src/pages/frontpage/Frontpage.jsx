@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import logo from "../../img/hotel1.jpg";
 import logo2 from "../../img/hotel2.jpg";
 import logo3 from "../../img/hotel3.jpg";
@@ -12,6 +12,16 @@ function Frontpage() {
         { img: logo2, hotelName: "Totens fineste", review: "Amazing view and price" , rating: "★★★★★" },
         { img: logo3, hotelName: "Jugend Hotel", review: "Beautiful historic hotel" , rating: "★★★★★" }
     ];
+
+    // Fetch data for cards
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch("http://localhost:8080/api/hotels");
+            const data = await response.json();
+            setCardsData(data);
+        }
+        fetchData();
+    }, []);
 
     // Track the current index of the shown card
     const [currentIndex, setCurrentIndex] = useState(0);
