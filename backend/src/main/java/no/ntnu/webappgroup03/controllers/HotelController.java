@@ -41,7 +41,7 @@ public class HotelController {
    * @param id ID` of the hotel to be returned
    * @return Hotel with the given ID or status 404
    */
-  @GetMapping("/{id]")
+  @GetMapping("/{id}")
   public ResponseEntity<Hotel> getOne(@PathVariable Integer id) {
     ResponseEntity<Hotel> response;
     Hotel hotel = findHotelById(id);

@@ -1,10 +1,14 @@
 package no.ntnu.webappgroup03.security;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.function.Function;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -42,6 +46,11 @@ public class JwtUtil {
         .compact();
   }
 
+  private SecretKey getSigningKey() {
+    byte[] keyBytes = SECRET_KEY.getBytes(StandardCharsets.UTF_8);
+    return new SecretKeySpec(keyBytes, 0, keyBytes.length, "HmacSHA256");
+  }
+
   /**
    * Find username from a JWT token
    *
@@ -53,15 +62,17 @@ public class JwtUtil {
   }
 
   /**
-   * Check if a token is valid for a given user
+   * Check if a token is valid for a given user.
    *
    * @param token       Token to validate
    * @param userDetails Object containing user details
    * @return True if the token matches the current user and is still valid
    */
-  public Boolean validateToken(String token, UserDetails userDetails) {
+  public boolean validateToken(String token, UserDetails userDetails) throws JwtException {
     final String username = extractUsername(token);
-    return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+    return userDetails != null
+        && username.equals(userDetails.getUsername())
+        && !isTokenExpired(token);
   }
 
 

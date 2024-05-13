@@ -28,7 +28,7 @@ public class UserController {
    *
    * @return List of all users currently stored in the collection
    */
-  @GetMapping
+  @GetMapping("/user/")
   public Collection<User> getAll() {
     return users.values();
   }
@@ -44,12 +44,7 @@ public class UserController {
     return userService.findUserById(id);
   }
 
-  /**
-  @PutMapping("/{id}")
-  public User updateUser(@PathVariable int id, @RequestBody User userDetails) {
-    return userService.updateUser(id, userDetails);
-  }
-   */
+
 
   @DeleteMapping("/{id}")
   public ResponseEntity<?> deleteUser(@PathVariable int id) {

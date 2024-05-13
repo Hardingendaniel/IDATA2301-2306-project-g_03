@@ -25,7 +25,7 @@ public class BookingController {
    *
    * @return List of all bookings currently stored in the collection
    */
-  @GetMapping
+  @GetMapping("/bookings/")
   public Collection<Booking> getAll() {
     return bookings.values();
   }
