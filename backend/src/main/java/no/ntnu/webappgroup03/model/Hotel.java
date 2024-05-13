@@ -22,7 +22,7 @@ public class Hotel {
   private double price;
 
   @ManyToMany(mappedBy = "hotels")
-  private Set<User> users = new HashSet<>();
+  private Set<Booking> bookings = new HashSet<>();
 
   public Hotel() {
     // Intentionally left blank
@@ -99,12 +99,12 @@ public class Hotel {
   }
 
   /**
-   * Add a user to the user list of the Hotel
+   * Add a booking to the booking list of the Hotel
    *
-   * @param user The user to add
+   * @param booking The booking to add
    */
-  public void addUser(User user) {
-    users.add(user);
+  public void addBooking(Booking booking) {
+    bookings.add(booking);
   }
 
 }

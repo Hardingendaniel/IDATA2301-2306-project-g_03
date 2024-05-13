@@ -1,20 +1,9 @@
 package no.ntnu.webappgroup03.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -42,6 +31,7 @@ public class User {
       inverseJoinColumns = @JoinColumn(name = "role_id")
   )
   private Set<Role> roles = new LinkedHashSet<>();
+
 
   public User() {
     // Intentionally left blank

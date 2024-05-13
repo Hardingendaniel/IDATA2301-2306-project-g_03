@@ -1,14 +1,9 @@
 package no.ntnu.webappgroup03.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * Represents a hotel booking.
@@ -26,6 +21,8 @@ public class Booking  {
   private Hotel hotel;
   private Date startDate;
   private Date endDate;
+  @ManyToMany
+  private List<Hotel> hotels;
 
   public Booking() {
     //Intentionally left empty
