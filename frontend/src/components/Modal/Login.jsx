@@ -45,13 +45,17 @@ export function Login() {
                         <div className="flex items-center">
                             <span className="text-lg">Not a member?</span>
                             <button className="px-2 text-lg text-main"
-                            onClick={openSignUpModal}>Sign up</button>
+                                    onClick={openSignUpModal}>Sign up
+                            </button>
                         </div>
                     </div>
                 </div>
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
             </dialog>
             <dialog id="sign_up" className="modal">
-                <SignUp />
+                <SignUp/>
             </dialog>
         </div>
     )

@@ -22,7 +22,7 @@ const EditButton = () => {
           <ul tabIndex={0}
               className="dropdown-content z-[1] menu p-2 font-normal shadow bg-base-100 rounded-2xl w-36">
               <li><a onClick={openChangeModal}>Edit</a></li>
-              <li><a>Delete</a></li>
+              <li><a className="text-red">Delete</a></li>
           </ul>
           <dialog id="changeModal" className="modal">
               <ChangeModal />

@@ -11,107 +11,91 @@ const BrowsePage = () => {
                 <SearchForm/>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 w-4/5 mx-auto">
-                <div className="drawer lg:drawer-open flex basis-1/4">
-                    <input id="my-drawer-2" type="checkbox" className="drawer-toggle"/>
-                    <div className="drawer-content flex flex-col items-center justify-center">
-                        {/* Page content here */}
-                        <label htmlFor="my-drawer-2"
-                               className="btn bg-main text-white font-bold drawer-button lg:hidden">
-                            Show filter
-                        </label>
-                    </div>
-                    <div className="drawer-side mb-8">
-                        <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                        <ul className="p-4 w-80 min-h-full text-base-content">
-                            <div className="relative overflow-hidden flex items-center justify-center flex-col">
-                                <img
-                                    src={map}
-                                    alt="map"
-                                    className="rounded-2xl object-cover"
-                                />
-                                <div
-                                    className="absolute w-full h-full top-0 bottom-0 left-0 right-0 flex items-center justify-center">
-                                    <div className="btn bg-main text-white font-bold text-xl hover:bg-header">Show on
-                                        map
-                                    </div>
-                                </div>
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 w-3/4 mx-auto">
+                <aside className="flex flex-col w-64 py-4">
+                    <div className="relative overflow-hidden flex items-center justify-center flex-col my-4">
+                        <img
+                            src={map}
+                            alt="map"
+                            className="rounded-2xl object-cover"
+                        />
+                        <div
+                            className="absolute w-full h-full top-0 bottom-0 left-0 right-0 flex items-center justify-center">
+                            <div className="btn bg-main text-white font-bold text-xl hover:bg-header">Show on map
                             </div>
-
-                            <div className="flex flex-col w-full py-10">
-
-                                <div className="">
-                                    <div className="mb-4">
-                                        <label form="price-range" className="block text-gray-700 font-bold mb-2">Price
-                                            Range</label>
-                                        <input type="range" id="price-range" className="w-full accent-main"
-                                               min="0" max="1000" value="500" onInput="updatePrice(this.value)"/>
-                                    </div>
-                                    <div className="flex justify-between text-gray-500">
-                                        <span id="minPrice">NOK 0</span>
-                                        <span id="maxPrice">NOK 1000</span>
-                                    </div>
-                                </div>
-
-                                <div className="divider"></div>
-
-                                <div className="">
-                                    <p>First Filter:</p>
-                                    <div className="form-control">
-                                        <label className="label cursor-pointer">
-                                            <span className="label-text">Filter one</span>
-                                            <input type="radio" name="radio-10" className="radio checked:bg-main"
-                                                   checked/>
-                                        </label>
-                                    </div>
-                                    <div className="form-control">
-                                        <label className="label cursor-pointer">
-                                            <span className="label-text">Filter two</span>
-                                            <input type="radio" name="radio-10" className="radio checked:bg-main"
-                                                   checked/>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div className="divider"></div>
-                                <div className="">
-                                    <p>Meals:</p>
-                                    <div className="form-control">
-                                        <label className="label cursor-pointer">
-                                            <span className="label-text">Buffet</span>
-                                            <input type="radio" name="radio-10" className="radio checked:bg-main"
-                                                   checked/>
-                                        </label>
-                                    </div>
-                                    <div className="form-control">
-                                        <label className="label cursor-pointer">
-                                            <span className="label-text">Breakfast included</span>
-                                            <input type="radio" name="radio-10" className="radio checked:bg-main"
-                                                   checked/>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div className="divider"></div>
-                                <div className="">
-                                    <p>Star rating:</p>
-                                    <div className="rating">
-                                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
-                                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"
-                                               checked/>
-                                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
-                                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
-                                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
-                                    </div>
-                                </div>
-                                <div className="divider"></div>
-                                <div className="">Filter 4</div>
-                                <div className="divider"></div>
-                            </div>
-
-                        </ul>
+                        </div>
                     </div>
-                </div>
-                
+
+                    <div className="flex flex-col w-full py-2 px-2 my-4 border rounded-2xl ">
+                        <div className="text-lg font-bold">Filter by</div>
+                        <div className="divider"></div>
+                        <div>
+                            <h3 className="font-semibold text-base mx-1 mb-1">Search hotel:</h3>
+                            <label className="input input-bordered flex items-center gap-2">
+                                <input type="text" className="grow" placeholder="Search"/>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                     className="w-4 h-4 opacity-70">
+                                    <path fillRule="evenodd"
+                                          d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                                          clipRule="evenodd"/>
+                                </svg>
+                            </label>
+                        </div>
+                        <div className="divider"></div>
+                        <div>
+                            <h3 className="font-semibold text-base mx-1 mb-1">Price:</h3>
+                            <div className="h-full">
+                            <input type="range" min="0" max="100" className="w-full h-4 bg-main rounded-full"/>
+                            </div>
+                        </div>
+
+                        <div className="divider"></div>
+
+                        <div className="">
+                            <h3 className="font-semibold text-base mx-1 mb-1">Location:</h3>
+                            <select className="select select-bordered w-full max-w-xs">
+                                <option disabled selected>Select Location</option>
+                                <option>Alta</option>
+                                <option>Gjøvik</option>
+                                <option>Oslo</option>
+                                <option>Stryn</option>
+                                <option>Bergen</option>
+                                <option>Ålesund</option>
+                            </select>
+                        </div>
+
+                        <div className="divider"></div>
+
+                        <div className="">
+                            <h3 className="font-semibold text-base mx-1 mb-1">Room types:</h3>
+                            <div className="grid grid-cols-2 mx-1 my-2">
+                                Single
+                                <input type="checkbox" className="accent-main rounded-2xl"/>
+                            </div>
+                            <div className="grid grid-cols-2 mx-1 my-2">
+                                Double
+                                <input type="checkbox" className="accent-main rounded-2xl"/>
+                            </div>
+                            <div className="grid grid-cols-2 mx-1 my-2">
+                                Family
+                                <input type="checkbox" className="accent-main rounded-2xl"/>
+                            </div>
+                        </div>
+                        <div className="divider"></div>
+                        <div className="">
+                            <h3 className="font-semibold text-base mx-1 mb-1">Star rating:</h3>
+                            <div className="rating">
+                                <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
+                                <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"
+                                       checked/>
+                                <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
+                                <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
+                                <input type="radio" name="rating-2" className="mask mask-star-2 bg-main"/>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
                 <div className="basis-3/4 col-span-2 px-4 py-4">
                     <div>
                         <h2 className="text-font font-semibold">Results from Ålesund: 40 properties found</h2>
@@ -136,6 +120,13 @@ const BrowsePage = () => {
                         </div>
                     </div>
                     <div className="flex flex-col justify-center ">
+                        <ProductCard/>
+                        <ProductCard/>
+                        <ProductCard/>
+                        <ProductCard/>
+                        <ProductCard/>
+                        <ProductCard/>
+                        <ProductCard/>
                         <ProductCard/>
                         <ProductCard/>
                         <ProductCard/>

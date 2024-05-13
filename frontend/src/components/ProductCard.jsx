@@ -2,7 +2,8 @@ import React from "react";
 import img1 from "../img/hotel1/1.png";
 import {NavLink} from "react-router-dom";
 
-const ProductCard = () => {
+const ProductCard = ({hotel}) => {
+    //const {name, description, price} = hotel;
     return (
             <div
                 className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 border rounded-2xl max-w-xs md:max-w-4xl mx-auto bg-white my-3">
@@ -51,7 +52,7 @@ const ProductCard = () => {
                         </svg>
                     </div>
 
-                    <p className="md:text-lg text-header text-base">Breakfast included</p>
+                    <div className="badge bg-header p-3 text-white text-base">Single Room</div>
                     <div className="flex item-center justify-between mt-3">
                         <p className="text-xl font-black text-gray-800">
                             NOK 4,200

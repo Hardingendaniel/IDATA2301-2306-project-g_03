@@ -152,13 +152,31 @@ export function HotelPage2() {
                     </div>
                 </div>
                 <div className="w-96 border rounded-2xl m-2">
-                    <div className="bg-header rounded-2xl w-full h-24 border">
-                        <p className="text-2xl font-black text-gray-800">
+                    <div className="flex bg-lightblue rounded-2xl w-full h-24 border">
+                        <p className="text-2xl font-black m-auto items-center">
                             NOK 4,200
                             <span className="font-normal text-font text-base">/night</span>
                         </p>
+                        <div className="btn bg-main text-white rounded-2xl hover:bg-header m-auto items-center">Book
+                            now
+                        </div>
                     </div>
-                    <div>Selected:</div>
+                    <div className="font-semibold text-lg m-2">Selected:</div>
+                    <div className="divider"/>
+                    <div className="flex flex-col px-2">
+                        <div className="flex py-4">
+                            <h2 className="font-semibold pr-2">Hotel:</h2>
+                            <div>"SELECTED HOTEL"</div>
+                        </div>
+                        <div className="flex py-4">
+                            <h2 className="font-semibold pr-2">Start date:</h2>
+                            <div>"START DATE"</div>
+                        </div>
+                        <div className="flex py-4">
+                            <h2 className="font-semibold pr-2">End date:</h2>
+                            <div>"END DATE"</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -173,8 +191,27 @@ export function HotelPage2() {
             <div ref={sectionReviewsRef} className="pt-10">
                 <div className="divider"></div>
                 <h1 className="text-2xl font-bold">Reviews</h1>
-                <div className="">
-                    THis is a review
+                <div className="flex justify-evenly">
+                    <div className="rounded-2xl border p-2 w-72">
+                        <h2 className="font-semibold">Review 1</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a mauris facilisis diam lacinia
+                            interdum. Aliquam ultrices quam quis viverra molestie. Vivamus ultricies diam id nulla tempor
+                            gravida.</p>
+                    </div>
+                    <div className="rounded-2xl border p-2 w-72">
+                        <h2 className="font-semibold">Review 2</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a mauris facilisis diam lacinia
+                            interdum. Aliquam ultrices quam quis viverra molestie. Vivamus ultricies diam id nulla
+                            tempor
+                            gravida.</p>
+                    </div>
+                    <div className="rounded-2xl border p-2 w-72">
+                        <h2 className="font-semibold">Review 3</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a mauris facilisis diam lacinia
+                            interdum. Aliquam ultrices quam quis viverra molestie. Vivamus ultricies diam id nulla
+                            tempor
+                            gravida.</p>
+                    </div>
                 </div>
             </div>
 
@@ -182,7 +219,7 @@ export function HotelPage2() {
                 <div className="divider"></div>
                 <h1 className="text-2xl font-bold">About</h1>
                 <div className="">
-                    This is the description of the room
+                    Welcome to this hotel. Hope you enjoy yourself at your stay
                 </div>
             </div>
 

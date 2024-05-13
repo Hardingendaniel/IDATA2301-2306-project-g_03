@@ -19,7 +19,9 @@ module.exports = {
       font: "#484848",
       lightgrey: "#D9D9D9",
       inputField: "#EBEBEB",
-      tableHover: "#F9FAFB"
+      tableHover: "#F9FAFB",
+      red: "#EE4B2B",
+      lightblue: "#D9E4FF"
     },
     borderRadius: {
       '2xl': '1rem',
@@ -34,7 +36,7 @@ module.exports = {
     theme: {
       extend: {
         colors: {
-          "primary-muted": "#3E68FF",
+          "primary": "#7392FF",
         },
       },
     },
