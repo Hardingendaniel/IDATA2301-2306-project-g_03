@@ -7,11 +7,13 @@ import Bergen from "../../img/Bergen.jpg"
 import SearchForm from "../../components/SearchForm";
 
 function Frontpage() {
-    const cardsData = [
+
+
+    const [cardsData, setCardsData] = useState([
         { img: logo, hotelName: "Villa Gåseid", review: "A wonderful place to stay" , rating: "★★★★★" },
         { img: logo2, hotelName: "Totens fineste", review: "Amazing view and price" , rating: "★★★★★" },
         { img: logo3, hotelName: "Jugend Hotel", review: "Beautiful historic hotel" , rating: "★★★★★" }
-    ];
+    ]);
 
     // Fetch data for cards
     useEffect(() => {

@@ -12,6 +12,7 @@ export function HotelPage2() {
     const sectionReviewsRef = useRef();
     const sectionAboutRef = useRef();
     const sectionLocationRef = useRef();
+    const [hotelData, setHotelData] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
