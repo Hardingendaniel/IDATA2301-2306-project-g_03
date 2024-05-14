@@ -48,8 +48,8 @@ public class AccessUserService implements UserDetailsService {
   public User getSessionUser() {
     SecurityContext securityContext = SecurityContextHolder.getContext();
     Authentication authentication = securityContext.getAuthentication();
-    String username = authentication.getName();
-    return userRepository.findByEmail(username).orElse(null);
+    String email = authentication.getName();
+    return userRepository.findByEmail(email).orElse(null);
   }
 
   /**
