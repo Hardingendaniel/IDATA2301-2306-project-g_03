@@ -95,23 +95,5 @@ public class UserController {
     return response;
   }
 
-
-  @GetMapping
-  public Iterable<User> getAllUsers() {
-    return userService.getAll();
-  }
-
-  @GetMapping("/api/users/{id}")
-  public User getUserById(@PathVariable int id) {
-    return userService.findUserById(id);
-  }
-
-
-
-  @DeleteMapping("/api/users/{id}")
-  public ResponseEntity<?> deleteUser(@PathVariable int id) {
-    userService.deleteUser(id);
-    return ResponseEntity.ok().build();
-  }
-
+  //TODO: Lag flere metoder for users (delete,)
 }
