@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -89,6 +90,34 @@ public class HotelController {
 
     } else if (sessionUser == null) {
       response = new ResponseEntity<>("Hotel data accessible only to authenticated users",
+          HttpStatus.UNAUTHORIZED);
+    } else {
+      response = new ResponseEntity<>("Hotel data for other users not accessible",
+          HttpStatus.FORBIDDEN);
+    }
+    return response;
+  }
+
+  /**
+   * If a user is admin, add a new hotel.
+   *
+   * @param hotelDto hotel wanted to create.
+   * @return HTTP 200 OK or error code with error message.
+   */
+  @PostMapping("/api/hotels")
+  public ResponseEntity<?> add(@RequestBody HotelDto hotelDto) {
+    ResponseEntity<?> response;
+    User sessionUser = this.userService.getSessionUser();
+    if (sessionUser != null && sessionUser.isAdmin()) {
+      if (hotelDto != null) {
+        Hotel hotel = new Hotel(hotelDto.getHotelName(), hotelDto.getDescription(),
+            hotelDto.getLocation(), hotelDto.getRoomType(), hotelDto.getPrice());
+        response = new ResponseEntity<>(hotel, HttpStatus.OK);
+      } else {
+        response = new ResponseEntity<>("Hotel data not supplied", HttpStatus.BAD_REQUEST);
+      }
+    } else if (sessionUser == null) {
+      response = new ResponseEntity<>("Adding hotel accessible only to authenticated users",
           HttpStatus.UNAUTHORIZED);
     } else {
       response = new ResponseEntity<>("Hotel data for other users not accessible",

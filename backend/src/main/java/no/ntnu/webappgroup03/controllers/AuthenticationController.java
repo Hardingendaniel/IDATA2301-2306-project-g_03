@@ -44,7 +44,7 @@ public class AuthenticationController {
           authenticationRequest.getEmail(),
           authenticationRequest.getPassword()));
     } catch (BadCredentialsException e) {
-      return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
+      return new ResponseEntity<>("Invalid email or password", HttpStatus.UNAUTHORIZED);
     }
     final UserDetails userDetails = userService.loadUserByUsername(
         authenticationRequest.getEmail());

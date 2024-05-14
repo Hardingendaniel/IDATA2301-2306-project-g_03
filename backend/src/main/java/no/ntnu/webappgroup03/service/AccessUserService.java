@@ -149,4 +149,20 @@ public class AccessUserService implements UserDetailsService {
     userRepository.save(user);
     return true;
   }
+
+  /**
+   * Updates user password.
+   *
+   * @param user user to update
+   * @param password the password to set/hash
+   * @return If false, return the error message.
+   */
+  public String updateUserPassword(User user, String password) {
+    String errorMessage = checkPasswordRequirements(password);
+    if (errorMessage == null) {
+      user.setPassword(createHash(password));
+      userRepository.save(user);
+    }
+    return errorMessage;
+  }
 }
