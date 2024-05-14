@@ -37,7 +37,7 @@ public class HotelService {
   }
 
   /**
-   * Return all hotels.
+   * Get all the hotels stored in the database.
    *
    * @return all hotels.
    */

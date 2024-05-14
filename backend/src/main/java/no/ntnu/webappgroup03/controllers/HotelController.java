@@ -1,5 +1,5 @@
 package no.ntnu.webappgroup03.controllers;
-import java.util.Collection;
+
 import java.util.List;
 import java.util.Map;
 import no.ntnu.webappgroup03.model.Hotel;
@@ -7,17 +7,17 @@ import no.ntnu.webappgroup03.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * REST API Controller for hotel collection.
  * Code adapted from ...
  */
+@CrossOrigin
 @RestController
-@RequestMapping("/api/hotels")
 public class HotelController {
   private Map<Integer, Hotel> hotels;
   private int latestId;
@@ -30,9 +30,9 @@ public class HotelController {
    *
    * @return List of all hotels currently stored in the collection
    */
-  @GetMapping
-  public Collection<Hotel> getAll() {
-    return hotels.values();
+  @GetMapping("/api/hotels")
+  public Iterable<Hotel> getAll() {
+    return hotelService.getAll();
   }
 
   /**
@@ -41,7 +41,7 @@ public class HotelController {
    * @param id ID` of the hotel to be returned
    * @return Hotel with the given ID or status 404
    */
-  @GetMapping("/{id}")
+  @GetMapping("/api/hotels/{id}")
   public ResponseEntity<Hotel> getOne(@PathVariable Integer id) {
     ResponseEntity<Hotel> response;
     Hotel hotel = findHotelById(id);
@@ -53,6 +53,7 @@ public class HotelController {
     return response;
   }
 
+  //TODO: FIX THIS METHOD, this.hotels is not in use
   /**
    * Searches through the book collection, find the book with given ID.
    *
