@@ -1,7 +1,5 @@
 package no.ntnu.webappgroup03.controllers;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import no.ntnu.webappgroup03.dto.HotelDto;
 import no.ntnu.webappgroup03.model.Hotel;
@@ -12,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -85,7 +84,7 @@ public class HotelController {
               HttpStatus.INTERNAL_SERVER_ERROR);
         }
       } else {
-        response = new ResponseEntity<>("Profile data not supplied", HttpStatus.BAD_REQUEST);
+        response = new ResponseEntity<>("Hotel data not supplied", HttpStatus.BAD_REQUEST);
       }
 
     } else if (sessionUser == null) {
@@ -112,6 +111,7 @@ public class HotelController {
       if (hotelDto != null) {
         Hotel hotel = new Hotel(hotelDto.getHotelName(), hotelDto.getDescription(),
             hotelDto.getLocation(), hotelDto.getRoomType(), hotelDto.getPrice());
+        this.hotelService.add(hotel);
         response = new ResponseEntity<>(hotel, HttpStatus.OK);
       } else {
         response = new ResponseEntity<>("Hotel data not supplied", HttpStatus.BAD_REQUEST);
@@ -127,12 +127,36 @@ public class HotelController {
   }
 
   /**
-   * Get all hotels
+   * Deletes a hotel if the user is an admin.
    *
-   * @return return all the hotels
+   * @param id the hotel to delete
+   * @return HTTP 200 OK or error code with error message.
    */
-  public List<Hotel> getAllHotels() {
-    return hotelService.findAllHotels();
+  @DeleteMapping("/api/hotels/{id}")
+  public ResponseEntity<String> delete(@PathVariable int id) {
+    ResponseEntity<String> response;
+    User sessionUser = this.userService.getSessionUser();
+    if (sessionUser != null && sessionUser.isAdmin()) {
+      Optional<Hotel> hotel = this.hotelService.getOne(id);
+      if (hotel != null && hotel.isPresent()) {
+        if (this.hotelService.delete(id)) {
+          response = new ResponseEntity<>("", HttpStatus.OK);
+        } else {
+          response = new ResponseEntity<>("Could not delete hotel",
+              HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+      } else {
+        response = new ResponseEntity<>("Hotel not present", HttpStatus.BAD_REQUEST);
+      }
+
+    } else if (sessionUser == null) {
+      response = new ResponseEntity<>("Hotel data accessible only to authenticated users",
+          HttpStatus.UNAUTHORIZED);
+    } else {
+      response = new ResponseEntity<>("Hotel data for other users note accessible",
+          HttpStatus.FORBIDDEN);
+    }
+    return response;
   }
 
 }
