@@ -3,6 +3,7 @@ package no.ntnu.webappgroup03.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import no.ntnu.webappgroup03.dto.HotelDto;
 import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,32 @@ public class HotelService {
    */
   public Iterable<Hotel> getAll() {
     return hotelRepository.findAll();
+  }
+
+  /**
+   * Returns the hotel with the specified id
+   *
+   * @param id id of the wanted hotel.
+   * @return the wanted hotel.
+   */
+  public Optional<Hotel> getOne(int id) {
+    return this.hotelRepository.findById(id);
+  }
+
+  /**
+   * Updates hotel information for a hotel.
+   *
+   * @param hotel Hotel to update
+   * @param hotelDto Hotel data to set for the user
+   * @return True on success, false otherwise
+   */
+  public boolean updateHotel(Hotel hotel, HotelDto hotelDto) {
+    hotel.setHotelName(hotelDto.getHotelName());
+    hotel.setDescription(hotelDto.getDescription());
+    hotel.setLocation(hotelDto.getLocation());
+    hotel.setRoomTypes(hotelDto.getRoomType());
+    hotel.setPrice(hotelDto.getPrice());
+    return true;
   }
 
   /**
