@@ -101,13 +101,4 @@ public class SecurityConfiguration {
     return new BCryptPasswordEncoder();
   }
 
-  protected void configure(HttpSecurity http) throws Exception {
-    http.cors(cors -> cors.configurationSource(request -> {
-              CorsConfiguration config = new CorsConfiguration();
-              config.applyPermitDefaultValues();
-              return config;
-            }))
-            .authorizeRequests()
-            .anyRequest().authenticated();
-  }
 }
