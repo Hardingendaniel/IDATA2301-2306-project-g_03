@@ -114,52 +114,52 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
       // Hotel 1:
       Hotel hotel1 = new Hotel("Villa Gåseid",
           "Welcome to this hotel. Hope you enjoy your stay", "Ålesund",
-          "Single", 4200);
+          "Single", 4200, 6, "VERY GOOD HOTEL");
 
       // Hotel 2:
       Hotel hotel2 = new Hotel("Hotel Trondheim",
           "Welcome to this hotel. Hope you enjoy your stay", "Trondheim",
-          "Family", 6900);
+          "Family", 6900, 4, "VERY GOOD HOTEL" );
 
       // Hotel 3:
       Hotel hotel3 = new Hotel("Totens Fineste",
           "Welcome to this hotel. Hope you enjoy your stay", "Gjøvik",
-          "Single", 3999);
+          "Single", 3999, 2, "VERY GOOD HOTEL");
 
       // Hotel 4:
       Hotel hotel4 = new Hotel("Scandic Alta",
           "Welcome to this hotel. Hope you enjoy your stay", "Alta",
-          "Double", 5200);
+          "Double", 5200, 5,"VERY GOOD HOTEL");
 
       // Hotel 5:
       Hotel hotel5 = new Hotel("Slotsgata Hotel",
           "Welcome to this hotel. Hope you enjoy your stay", "Oslo",
-          "Double", 7500);
+          "Double", 7500, 4, "VERY GOOD HOTEL");
 
       // Hotel 6:
       Hotel hotel6 = new Hotel("Jugend Hotel",
           "Welcome to this hotel. Hope you enjoy your stay", "Ålesund",
-          "Single", 5800);
+          "Single", 5800, 5, "VERY GOOD HOTEL");
 
       // Hotel 7:
       Hotel hotel7 = new Hotel("Stryns Fineste",
           "Welcome to this hotel. Hope you enjoy your stay", "Stryn",
-          "Family", 2500);
+          "Family", 2500, 5, "VERY GOOD HOTEL");
 
       // Hotel 8:
       Hotel hotel8 = new Hotel("Molde Hotel",
           "Welcome to this hotel. Hope you enjoy your stay", "Molde",
-          "Double", 6500);
+          "Double", 6500, 2, "VERY GOOD HOTEL");
 
       // Hotel 9:
       Hotel hotel9 = new Hotel("Gløshaugen Hotel",
           "Welcome to this hotel. Hope you enjoy your stay", "Trondheim",
-          "Single", 4800);
+          "Single", 4800, 4, "VERY GOOD HOTEL");
 
       // Hotel 10:
       Hotel hotel10 = new Hotel("Stavanger Hotel",
           "Welcome to this hotel. Hope you enjoy your stay", "Stavanger",
-          "Double", 6200);
+          "Double", 6200, 4, "VERY GOOD HOTEL");
 
       this.hotelService.add(hotel1);
       this.hotelService.add(hotel2);
