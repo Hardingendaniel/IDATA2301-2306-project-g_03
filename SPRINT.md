@@ -152,3 +152,44 @@ tuesday, wednesday and friday on school for a longer session. More session will 
 every member has to meet physically for these sessions. We will attempt to implement frontend functionality first on the
 backend side before implementing it visually at the frontend.
 
+Sprint review: Due to exams in other subject we didn't manage to complete our sprint goals in time. We decided to 
+extend the sprint till our goals was reached before starting the next sprint before the final deadline. In this sprint
+we all started to work on the backend. We were struggling to make a breakthrough tho. We used a lot of time figuring out
+what to do. As more time was being used on the backend with little to no progress. Sander and Daniel decided to add a 
+lot more content and design to the website to make it look more complete. Sten had some ideas on how to connect the 
+front and backend ,so he was spending the time in trying to glue the components together. After our exam however we had 
+more time to focus on the project. It was during the period between 8th may and the 15th we made the most of our 
+progress especially from the 12th -15th. Sander made the first breakthrough at the backend with discovering an error. 
+With a localhost connection we saw our data from the database in the JSON format. We created some Postman tests to 
+ensure that data was being read correctly. The database now had a proper connection to the backend. Sten was the first 
+one to fetch the data to the frontend by displaying the hotel name on one of our card components showing different
+hotels with their respective reviews. 
+
+What went good?
+We managed to make the design more responsive. There is still some designing to do, but it improved a lot this sprint. 
+Everyone attended the work session we planned together. 
+
+What went bad? / What can be improved?
+Something that can be improved upon is reviewing each other code and ideas. When we made the biggest progress was when 
+we sat down and helped each other finding the errors. There were code bits that we just assumed were correct without 
+reviewing it properly ,and therefore we didn't find the errors as early as we would have wanted. 
+
+## Sprint 6
+
+15th may - 22nd may
+This will be the last sprint before the final hand in, a lot has to be done and this sprint needs to be planned 
+thoroughly. The first part of the sprint will be to fulfill all the minimum requirements. The database sketch need to 
+be reviewed one final time. The contents from the database will now be displayed at the frontend ,and therefore we need
+to have the correct mapping. There is some design and features that we have had on our website for a long time, now that
+there is backend communication we need to start with the required functionality first. Fun to have functionality can not 
+be the main focus of this sprint going forward, this can be added the last days. A proper presentation for this project
+is also something that needs to be done. We can not start on the presentation the day before.
+
+To achieve what we want we will be using localhost connection to experiment with the database. There is a data 
+initializer class that makes it easy to reload the data if we want to experiment on the localhost. The communication 
+going forward needs to be good. We need to inform each other what we will be working on ,so we avoid heavy merge 
+conflicts. There is some Postman tests for testing and a lot more of them needs to be added to secure that the 
+application work as intended. A lot of issues will be made in our GitHub. 
+
+
+
