@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import  React, {useEffect, useState} from "react";
 import logo from "../../img/hotel1.jpg";
 import logo2 from "../../img/hotel2.jpg";
 import logo3 from "../../img/hotel3.jpg";
@@ -8,19 +8,26 @@ import SearchForm from "../../components/SearchForm";
 
 function Frontpage() {
 
-
     const [cardsData, setCardsData] = useState([
-        { img: logo, hotelName: "Villa Gåseid", review: "A wonderful place to stay" , rating: "★★★★★" },
-        { img: logo2, hotelName: "Totens fineste", review: "Amazing view and price" , rating: "★★★★★" },
-        { img: logo3, hotelName: "Jugend Hotel", review: "Beautiful historic hotel" , rating: "★★★★★" }
+        { img: logo, hotelName: "Hotel", review: "Reviews" , rating: "★★★★★" },
+        { img: logo2, hotelName: "Hotel", review: "Reviews" , rating: "★★★★★" },
+        { img: logo3, hotelName: "Hotel", review: "Reviews" , rating: "★★★★★" }
     ]);
+
+    //
+
+    const [data1, setData1] = useState([]);
 
     // Fetch data for cards
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch("http://localhost:8080/api/hotels");
-            const data = await response.json();
-            setCardsData(data);
+            try {
+                const response = await fetch("http://localhost:8080/api/hotels");
+                const data = await response.json();
+                setData1(data);
+            } catch (error) {
+                console.error('Failed to fetch data:', error);
+            }
         }
         fetchData();
     }, []);
@@ -30,14 +37,14 @@ function Frontpage() {
 
     // Calculate and update the visible cards based on the current index
     const visibleCards = () => {
-        const totalCards = cardsData.length;
+        const totalCards = data1.length;
         const indexes = [
             currentIndex % totalCards,
             (currentIndex + 1) % totalCards,
             (currentIndex + 2) % totalCards,
         ];
 
-        return indexes.map(index => cardsData[index]);
+        return indexes.map(index => data1[index]);
     };
 
     return (
@@ -63,11 +70,10 @@ function Frontpage() {
             <div className="flex justify-evenly relative w-4-5 mr-28 ml-28">
                 {visibleCards().map((card, index) => (
                     <div key={index} className="card">
-                        <img src={card.img} alt={`Hotel ${index + 1}`} className="w-full h-48 object-cover rounded-t-2xl"/>
+                        <img src="" alt={`Hotel ${index + 1}`} className="w-full h-48 object-cover rounded-t-2xl"/>
                         <div className="text-center p-4">
-                            <h3 className="text-lg font-semibold">{card.hotelName}</h3>
-                            <p className="text-lg font-semibold">{card.review}</p>
-                            <div className="mt-2 custom-color">{card.rating}</div>
+                            <h3 className="text-lg font-semibold">{card ? card.hotelName : ""}</h3>
+                            <p className="text-lg font-semibold">{card ? card.description : ""}</p>
                         </div>
                     </div>
                 ))}

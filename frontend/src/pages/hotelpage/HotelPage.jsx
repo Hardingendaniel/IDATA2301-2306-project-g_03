@@ -14,19 +14,18 @@ export function HotelPage() {
     const sectionLocationRef = useRef();
     const [hotelData, setHotelData] = useState([]);
 
+    const [data2, setData2] = useState([]);
+
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch('http://localhost:8080/api/hotels');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
+                const response = await fetch("http://localhost:8080/api/hotels");
                 const data = await response.json();
-                setHotelData(data);
+                setData1(data);
             } catch (error) {
-                console.error('Error fetching data: ', error);
+                console.error('Failed to fetch data:', error);
             }
-        };
+        }
         fetchData();
     }, []);
 
