@@ -77,7 +77,7 @@ public class HotelController {
     User sessionUser = this.userService.getSessionUser();
     if (sessionUser != null && sessionUser.isAdmin()) {
       if (hotelData != null && hotel.isPresent()) {
-        if (this.hotelService.updateHotel(hotel.get(), hotelData)) {
+        if (this.hotelService.updateHotel(id, hotelData)) {
           response = new ResponseEntity<>("", HttpStatus.OK);
         } else  {
           response = new ResponseEntity<>("Could not update Hotel data",
@@ -86,7 +86,6 @@ public class HotelController {
       } else {
         response = new ResponseEntity<>("Hotel data not supplied", HttpStatus.BAD_REQUEST);
       }
-
     } else if (sessionUser == null) {
       response = new ResponseEntity<>("Hotel data accessible only to authenticated users",
           HttpStatus.UNAUTHORIZED);

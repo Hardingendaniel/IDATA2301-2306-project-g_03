@@ -59,19 +59,28 @@ public class HotelService {
   /**
    * Updates hotel information for a hotel.
    *
-   * @param hotel Hotel to update
-   * @param hotelDto Hotel data to set for the user
+   * @param id id of the hotel to update
+   * @param hotelData Hotel data to set for the user
    * @return True on success, false otherwise
    */
-  public boolean updateHotel(Hotel hotel, HotelDto hotelDto) {
-    hotel.setHotelName(hotelDto.getHotelName());
-    hotel.setDescription(hotelDto.getDescription());
-    hotel.setLocation(hotelDto.getLocation());
-    hotel.setRoomTypes(hotelDto.getRoomType());
-    hotel.setPrice(hotelDto.getPrice());
-    hotel.setRating(hotelDto.getRating());
-    hotel.setReview(hotelDto.getReview());
-    return true;
+  public boolean updateHotel(int id, HotelDto hotelData) {
+    Optional<Hotel> hotel = this.hotelRepository.findById(id);
+    boolean updated;
+    if (hotel.isPresent()) {
+      Hotel existingHotel = hotel.get();
+      existingHotel.setHotelName(hotelData.getHotelName());
+      existingHotel.setDescription(hotelData.getDescription());
+      existingHotel.setLocation(hotelData.getLocation());
+      existingHotel.setRoomTypes(hotelData.getRoomType());
+      existingHotel.setPrice(hotelData.getPrice());
+      existingHotel.setRating(hotelData.getRating());
+      existingHotel.setReview(hotelData.getReview());
+      this.hotelRepository.save(existingHotel);
+      updated = true;
+    } else {
+      updated = false;
+    }
+    return updated;
   }
 
   /**
