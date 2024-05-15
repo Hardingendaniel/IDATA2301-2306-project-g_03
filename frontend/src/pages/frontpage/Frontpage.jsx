@@ -8,15 +8,13 @@ import SearchForm from "../../components/SearchForm";
 
 function Frontpage() {
 
+    const [data1, setData1] = useState([]);
+
     const [cardsData, setCardsData] = useState([
         { img: logo, hotelName: "Hotel", review: "Reviews" , rating: "★★★★★" },
         { img: logo2, hotelName: "Hotel", review: "Reviews" , rating: "★★★★★" },
         { img: logo3, hotelName: "Hotel", review: "Reviews" , rating: "★★★★★" }
     ]);
-
-    //
-
-    const [data1, setData1] = useState([]);
 
     // Fetch data for cards
     useEffect(() => {
