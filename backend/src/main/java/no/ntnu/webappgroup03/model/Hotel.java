@@ -21,6 +21,10 @@ public class Hotel {
   private String roomTypes;
   private double price;
 
+  private int rating;
+
+  private String review;
+
   @ManyToMany(mappedBy = "hotels")
   private Set<Booking> bookings = new HashSet<>();
 
@@ -38,12 +42,14 @@ public class Hotel {
    * @param price       The price for the hotel
    */
   public Hotel(String hotelName, String description, String location,
-      String roomTypes, double price) {
+      String roomTypes, double price, int rating, String review) {
     this.hotelName = hotelName;
     this.location = location;
     this.roomTypes = roomTypes;
     this.price = price;
     this.description = description;
+    this.review = review;
+    this.rating = rating;
   }
 
   public int getId() {
@@ -94,10 +100,27 @@ public class Hotel {
     this.description = description;
   }
 
+  public void setRating(int rating) {
+    this.rating = rating;
+  }
+
+  public int getRating(){
+    return rating;
+  }
+
+  public void setReview(String review) {
+    this.review = review;
+  }
+
+  public String getReview() {
+    return review;
+  }
+
   public boolean isValid() {
     return hotelName != null && !hotelName.equals("");
   }
 
+  //TODO should this be on the user class instead
   /**
    * Add a booking to the booking list of the Hotel
    *

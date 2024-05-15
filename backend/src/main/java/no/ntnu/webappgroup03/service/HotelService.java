@@ -69,6 +69,8 @@ public class HotelService {
     hotel.setLocation(hotelDto.getLocation());
     hotel.setRoomTypes(hotelDto.getRoomType());
     hotel.setPrice(hotelDto.getPrice());
+    hotel.setRating(hotelDto.getRating());
+    hotel.setReview(hotelDto.getReview());
     return true;
   }
 
