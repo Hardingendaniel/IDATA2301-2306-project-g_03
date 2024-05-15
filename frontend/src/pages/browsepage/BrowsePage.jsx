@@ -1,10 +1,27 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import map from '../../img/7652611.jpg'
 import {NavLink} from "react-router-dom";
 import ProductCard from "../../components/ProductCard";
 import SearchForm from "../../components/SearchForm";
 
 const BrowsePage = () => {
+
+    const [data3, setData3] = useState([]);
+
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await fetch("http://localhost:8080/api/hotels");
+                const data = await response.json();
+                setData3(data);
+            } catch (error) {
+                console.error('Failed to fetch data:', error);
+            }
+        }
+        fetchData();
+    }, []);
+
     return (
         <div className="">
             <div className="navbar h-20 bg-header flex flex-col">

@@ -19,9 +19,9 @@ export function HotelPage() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch("http://localhost:8080/api/hotels");
+                const response = await fetch("http://localhost:8080/api/hotels/2");
                 const data = await response.json();
-                setData1(data);
+                setData2(data);
             } catch (error) {
                 console.error('Failed to fetch data:', error);
             }
@@ -53,7 +53,7 @@ export function HotelPage() {
 
     return (
         <div className="flex w-4/5 flex-col mx-auto">
-            <h1 className="font-bold py-2 text-4xl">Villa Gåseid</h1>
+            <h1 className="font-bold py-2 text-4xl">{data2.hotelName}</h1>
             <div className="flex py-2 space-x-1">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                      className="w-6 h-6 text-header">
@@ -188,9 +188,7 @@ export function HotelPage() {
             <div ref={sectionOverviewRef} className="flex flex-row pt-16">
                 <div className="divider"></div>
                 <div className="w-96 rounded-2xl p-2 m-2">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a mauris facilisis diam lacinia
-                        interdum. Aliquam ultrices quam quis viverra molestie. Vivamus ultricies diam id nulla tempor
-                        gravida.</p>
+                    <p>{data2.description}</p>
                 </div>
                 <div className="w-96 m-2 relative overflow-hidden flex items-center justify-center flex-col">
                     <img
@@ -208,7 +206,7 @@ export function HotelPage() {
                 <div className="w-96 border rounded-2xl m-2">
                     <div className="flex bg-lightblue rounded-2xl w-full h-24 border">
                         <p className="text-2xl font-black m-auto items-center">
-                            NOK 4,200
+                            NOK {data2.price}
                             <span className="font-normal text-font text-base">/night</span>
                         </p>
                         <div className="btn bg-main text-white rounded-2xl hover:bg-header m-auto items-center">Book
@@ -220,7 +218,7 @@ export function HotelPage() {
                     <div className="flex flex-col px-2">
                         <div className="flex py-4">
                             <h2 className="font-semibold pr-2">Hotel:</h2>
-                            <div>"SELECTED HOTEL"</div>
+                            <div>{data2.hotelName}</div>
                         </div>
                         <div className="flex py-4">
                             <h2 className="font-semibold pr-2">Start date:</h2>
@@ -238,7 +236,7 @@ export function HotelPage() {
                 <div className="divider"></div>
                 <h1 className="text-2xl font-bold">Rooms</h1>
                 <div className="">
-                    Family
+                    {data2.roomType}
                 </div>
             </div>
 
