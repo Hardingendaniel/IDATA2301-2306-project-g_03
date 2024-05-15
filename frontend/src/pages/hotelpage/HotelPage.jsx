@@ -19,7 +19,7 @@ export function HotelPage() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch("http://localhost:8080/api/hotels/2");
+                const response = await fetch("http://localhost:8080/api/hotels/4");
                 const data = await response.json();
                 setData2(data);
             } catch (error) {
