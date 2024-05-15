@@ -75,15 +75,26 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
       User admin = new User("Chuck", "Norris", "chuck_norris@stay-finder.com",
           12345678, "temp");
 
+      User regUser = new User("Dave", "Dangerous", "dave_dangerous@stay-finder.com",
+          98765432, "temp");
+
+      // Create Roles
       Role userRole = this.roleRepository.findOneByName("ROLE_USER");
       Role adminRole = this.roleRepository.findOneByName("ROLE_ADMIN");
 
+      // Add right roles to right user
       admin.addRole(userRole);
       admin.addRole(adminRole);
 
-      this.userService.add(admin);
+      regUser.addRole(userRole);
 
-      this.accessUserService.updateUserPassword(admin, "Nunchucks79");
+      // Add users to database
+      this.userService.add(admin);
+      this.userService.add(regUser);
+
+      // Update password
+      this.accessUserService.updateUserPassword(admin, "Nunchucks2024");
+      this.accessUserService.updateUserPassword(regUser, "Dangerous2024");
 
       this.logger.info("Done loading user data");
     } else {
