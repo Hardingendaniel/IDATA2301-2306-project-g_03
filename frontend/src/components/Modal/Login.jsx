@@ -1,11 +1,46 @@
-import React from "react";
+import React, {useState} from "react";
 import {SignUp} from "./SignUp";
+import {sendAuthenticationRequest} from "../../tools/authentication";
+import {useNavigate} from "react-router-dom"
 
-export function Login() {
 
+/**
+ * Represents a login modal.
+ */
+export function Login(props) {
     const openSignUpModal = () => {
         document.getElementById("sign_up").showModal();
     }
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
+
+    function submitForm(event) {
+        event.preventDefault();
+        console.log("Submitting login form");
+        sendAuthenticationRequest(
+            email,
+            password,
+            onLoginSuccess,
+            (errorMessage) => setError(errorMessage)
+        );
+    }
+
+    /**
+     * This function is called when login is successful
+     */
+    function onLoginSuccess(userData) {
+        props.setUser(userData);
+        navigate("/");
+    }
+
+    let errorMessage = null;
+    if (error){
+        errorMessage = <p className="error">{error}</p>
+    }
+
+
     return (
         <div>
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
@@ -19,8 +54,9 @@ export function Login() {
                     <h3 className="font-bold text-lg">Log in or sign up</h3>
                     <div className="divider"></div>
 
-                    <div className="flex flex-col">
-                        <label className="input input-bordered rounded-2xl flex items-center my-4 gap-2">
+                    <form className="flex flex-col">
+                        <label htmlFor="email"
+                            className="input input-bordered rounded-2xl flex items-center my-4 gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                                  className="w-4 h-4 opacity-70">
                                 <path
@@ -28,27 +64,38 @@ export function Login() {
                                 <path
                                     d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z"/>
                             </svg>
-                            <input type="email" className="grow" placeholder="Email"/>
+                            <input type="email"
+                                   name="email"
+                                   value={email}
+                                   onChange={(event) => setEmail(event.target.value)}
+                                   className="grow" placeholder="Email"/>
                         </label>
-                        <label className="input input-bordered rounded-2xl flex items-center my-4 gap-2">
+                        <label htmlFor="password"
+                            className="input input-bordered rounded-2xl flex items-center my-4 gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                                  className="w-4 h-4 opacity-70">
                                 <path fillRule="evenodd"
                                       d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
                                       clipRule="evenodd"/>
                             </svg>
-                            <input type="password" className="grow" placeholder="Password"/>
+                            <input type="password"
+                                   name="password"
+                                   value={password}
+                                   onChange={(event) => setPassword(event.target.value)}
+                                   className="grow" placeholder="Password"/>
                         </label>
+                        {errorMessage}
 
-                        <div className="btn bg-main font-bold text-white rounded-2xl hover:bg-header w-full my-4">Log in
-                        </div>
+                        <button type="submit" onClick={submitForm}
+                            className="btn bg-main font-bold text-white rounded-2xl hover:bg-header w-full my-4">Log in
+                        </button>
                         <div className="flex items-center">
                             <span className="text-lg">Not a member?</span>
                             <button className="px-2 text-lg text-main"
                                     onClick={openSignUpModal}>Sign up
                             </button>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <form method="dialog" className="modal-backdrop">
                     <button>close</button>
