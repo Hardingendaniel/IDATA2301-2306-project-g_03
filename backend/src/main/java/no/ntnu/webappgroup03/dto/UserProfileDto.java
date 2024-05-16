@@ -23,6 +23,34 @@ public class UserProfileDto {
     this.active = active;
   }
 
+  public int getId() {
+    return id;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public int getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public boolean isActive() {
+    return active;
+  }
+
   public UserProfileDto() {
   }
 
