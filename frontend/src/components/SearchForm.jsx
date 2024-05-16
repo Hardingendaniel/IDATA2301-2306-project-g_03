@@ -65,7 +65,12 @@ function SearchForm() {
                 </select>
 
                 <DatePicker
-                    selected={startDate} onChange={(date) => setStartDate(date)}
+                    selected={startDate} onChange={(date) => {
+                    setStartDate(date);
+                    const nextDay = new Date(date);
+                    nextDay.setDate(nextDay.getDate() + 1);
+                    setEndDate(nextDay);
+                }}
                     placeholderText="Check In Date"
                     className="custom-datepicker join-item h-14"
                 />
@@ -74,6 +79,8 @@ function SearchForm() {
                     selected={endDate} onChange={(date) => setEndDate(date)}
                     placeholderText="Check Out Date"
                     className="custom-datepicker join-item h-14"
+                    minDate = {startDate || new Date()}
+                    startDate ={startDate}
                 />
 
 
