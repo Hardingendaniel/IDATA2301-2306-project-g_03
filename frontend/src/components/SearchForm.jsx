@@ -1,5 +1,5 @@
 import DatePicker from "react-datepicker";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "react-datepicker/dist/react-datepicker.css";
 
 function SearchForm() {
@@ -8,33 +8,60 @@ function SearchForm() {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [location, setLocation] = useState('');
+    const [roomTypes, setRoomTypes] = useState('');
     const [searchButtonDisabled, setSearchButtonDisabled] = useState(true);
 
-    const searchNames = ['Ålesund', 'Gjøkvik', 'Oslo',
-        'Stryn', 'Trondheim', 'ALta'];
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await fetch("http://localhost:8080/api/hotels");
+                const hotelsData = await response.json();
+                const uniqueLocations = Array.from(new Set(hotelsData.map(location => location.location)));
+                // Create an array of objects with unique location types
+                uniqueLocations.sort();
+                const uniqueLocationData = uniqueLocations.map(location => {
+                    return hotelsData.find(item => item.location === location);
+                });
+                setLocation(uniqueLocationData);
+
+                const roomTypesResponse =  await fetch("http://localhost:8080/api/hotels");
+                const roomTypesData = await roomTypesResponse.json();
+                const uniqueRoomTypes = Array.from(new Set(roomTypesData.map(roomTypes => roomTypes.roomTypes)));
+                // Create an array to remove duolicates
+                const uniqueRoomTypesData = uniqueRoomTypes.map(roomTypes => {
+                    return roomTypesData.find(item => item.roomTypes === roomTypes);
+                })
+                setRoomTypes(uniqueRoomTypesData);
+
+            } catch (error) {
+                console.error('Failed to fetch data:', error);
+            }
+        }
+        fetchData();
+    }, []);
 
     //to be worked on
     function suggestionClick(e) {
         setLocation(e.target.value)
-        if (location !== '') {
-            setSearchButtonDisabled(true);
-        }
+            setSearchButtonDisabled(false);
     }
+    /*value={location}
+    onChange={(e) => suggestionClick(e)}*/
+
 
     return (
 
         <form action="/browse" className="justify-center w-11/12 lg:w-11/12 mb-8" method="GET">
             <div className="join w-full flex justify-center">
-
                 <select className='w-1/5 join-item rounded-s-2xl'
-                        value={location}
-                        onChange={(e) => suggestionClick(e)}>
+                        >
                     <option value="" style={{display: 'none'}}>Where to?</option>
-                    <option value="Ålesund">Ålesund</option>
-                    <option value="Trondheim">Trondheim</option>
-                    <option value="GJØKVIK">GJØKVIK</option>
-                    <option value="ALTA">ALTA</option>
-                    <option value="Sten">Sten</option>
+                    {location
+                        ? location.map((location) => {
+                        return <option key={location.id} value={location.id}>{location.location}</option>;
+                    })
+                    :null}
                 </select>
 
                 <DatePicker
@@ -52,10 +79,12 @@ function SearchForm() {
 
                 <select className='join-item w-1/5'
                 >
-                    <option value="" style={{display: 'none'}}>Number of Rooms</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
+                    <option value="" style={{display: 'none'}}>Room type</option>
+                    {roomTypes
+                        ? roomTypes.map((roomTypes) => {
+                            return <option key={roomTypes.id} value={roomTypes.id}>{roomTypes.roomTypes}</option>;
+                        })
+                        :null}
                 </select>
 
                 <button
