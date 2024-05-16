@@ -1,5 +1,6 @@
 package no.ntnu.webappgroup03.service;
 
+import java.util.Optional;
 import no.ntnu.webappgroup03.model.User;
 import no.ntnu.webappgroup03.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Service
 public class UserService {
+
   @Autowired
   private UserRepository userRepository;
 
@@ -27,8 +29,8 @@ public class UserService {
    * @param id ID of the user to look up
    * @return The user or null if none found
    */
-  public User findUserById(Integer id) {
-    return userRepository.findById(id).orElse(null);
+  public Optional<User> findUserById(Integer id) {
+    return userRepository.findById(id);
   }
 
   /**
@@ -66,62 +68,10 @@ public class UserService {
    */
   public boolean deleteUser(int id) {
     boolean deleted = false;
-    if (findUserById(id) != null) {
+    if (findUserById(id).isPresent()) {
       userRepository.deleteById(id);
       deleted = true;
     }
     return deleted;
   }
-
-  /**
-   * Try to update a user in the application state (database).
-   *
-   * @param id   ID of the user to update
-   * @param user The updated user values
-   * @return null on success, error message on error
-   */
-  public String updateUser(int id, User user) {
-    User existingUser = findUserById(id);
-    String errorMessage = null;
-    if (existingUser == null) {
-      errorMessage = "No user with id " + id + " found";
-    }
-    if (user == null || !user.isValid()) {
-      errorMessage = "Wrong data in request body";
-    } else if (user.getId() != id) {
-      errorMessage = "User ID in the URL does not match the ID in JSON data (response body)";
-    }
-
-    if (errorMessage == null) {
-      userRepository.save(user);
-    }
-    return errorMessage;
-  }
-
-  //METODER SOM KANSKJE KAN IMPLEMENTERES MEN FOR USER
-  /**
-   *
-   *   public Iterable<Book> getAllByGenre(String genre) {
-   *     return bookRepository.findByGenreNameContainingIgnoreCase(genre);
-   *   }
-   *
-   *   public Iterable<Book> getAllByAuthor(String author) {
-   *     return bookRepository.findByAuthorsFirstNameContainingIgnoreCase(author);
-   *   }
-   *
-   *   public Iterable<Book> getAllByAuthorAndGenre(String author, String genre) {
-   *     return bookRepository
-   *         .findByAuthorsFirstNameContainingIgnoreCaseAndGenreNameContainingIgnoreCase(author, genre);
-   *   }
-   *
-
-  /**
-   * Get the number of users in the database.
-   *
-   * @return The total number of user stored in the database.
-   */
-  public long getCount() {
-    return userRepository.count();
-  }
-
 }
