@@ -3,38 +3,6 @@ import img1 from "../img/hotel1/1.png";
 import {NavLink} from "react-router-dom";
 
 const ProductCard = ({hotel}) => {
-    //const {name, description, price} = hotel;
-
-    const [data4, setData4] = useState([]);
-
-    // Fetch data for cards
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const response = await fetch("http://localhost:8080/api/hotels/4    ");
-                const data = await response.json();
-                setData4(data);
-            } catch (error) {
-                console.error('Failed to fetch data:', error);
-            }
-        }
-        fetchData();
-    }, []);
-
-    // Track the current index of the shown card
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    // Calculate and update the visible cards based on the current index
-    const visibleCards = () => {
-        const totalCards = data4.length;
-        const indexes = [
-            currentIndex % totalCards,
-            (currentIndex + 1) % totalCards,
-            (currentIndex + 2) % totalCards,
-        ];
-
-        return indexes.map(index => data4[index]);
-    };
 
     return (
             <div
@@ -49,7 +17,7 @@ const ProductCard = ({hotel}) => {
                     <div className="flex justify-between item-center">
 
                     </div>
-                    <h3 className="font-black text-gray-800 md:text-3xl text-xl">{data4.hotelName}</h3>
+                        <h3 className="font-black text-gray-800 md:text-3xl text-xl">{hotel ? hotel.hotelName : ""}</h3>
 
                     <div className="flex space-x-1">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -84,10 +52,10 @@ const ProductCard = ({hotel}) => {
                         </svg>
                     </div>
 
-                    <div className="badge bg-header p-3 text-white text-base">{data4.roomType}</div>
+                    <div className="badge bg-header p-3 text-white text-base">{hotel ? hotel.roomType : ""}</div>
                     <div className="flex item-center justify-between mt-3">
                         <p className="text-xl font-black text-gray-800">
-                            NOK {data4.price}
+                            NOK {hotel ? hotel.price : ""}
                             <span className="font-normal text-font text-base">/night</span>
                         </p>
                         <NavLink to="/hotel">
