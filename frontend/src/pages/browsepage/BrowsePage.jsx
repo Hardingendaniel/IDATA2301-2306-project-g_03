@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from "react";
 import map from '../../img/7652611.jpg'
-import {NavLink} from "react-router-dom";
 import ProductCard from "../../components/ProductCard";
 import SearchForm from "../../components/SearchForm";
 
 const BrowsePage = () => {
 
-    const [data3, setData3] = useState([]);
+    const [data4, setData4] = useState([]);
 
 
     useEffect(() => {
@@ -14,13 +13,29 @@ const BrowsePage = () => {
             try {
                 const response = await fetch("http://localhost:8080/api/hotels");
                 const data = await response.json();
-                setData3(data);
+                setData4(data);
             } catch (error) {
                 console.error('Failed to fetch data:', error);
             }
         }
         fetchData();
     }, []);
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    // Calculate and update the visible cards based on the current index
+    const visibleCards = () => {
+        const totalCards = data4.length;
+        const indexes = [
+            currentIndex % totalCards,
+            (currentIndex + 1) % totalCards,
+            (currentIndex + 2) % totalCards,
+            (currentIndex + 3) % totalCards,
+            (currentIndex + 4) % totalCards,
+
+        ];
+        return indexes.map(index => data4[index]);
+    };
 
     return (
         <div className="">
@@ -137,16 +152,9 @@ const BrowsePage = () => {
                         </div>
                     </div>
                     <div className="flex flex-col justify-center ">
-                        <ProductCard/>
-                        <ProductCard/>
-                        <ProductCard/>
-                        <ProductCard/>
-                        <ProductCard/>
-                        <ProductCard/>
-                        <ProductCard/>
-                        <ProductCard/>
-                        <ProductCard/>
-                        <ProductCard/>
+                        {visibleCards().map((hotel, index) => (
+                            <ProductCard key={index} hotel={hotel} />
+                        ))}
                     </div>
                 </div>
             </div>
