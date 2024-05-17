@@ -32,9 +32,26 @@ export function SignUp() {
         return firstName && lastName && email && phoneNumber && password;
     }
 
-    const handleCreateUser = () => {
-        //TODO: actual API call
-        setUserCreated(true);
+    // Creates a new user
+    const handleCreateUser = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/api/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                setUserCreated(true);
+            } else {
+                const errorData = await response.json();
+                console.error('Error:', errorData);
+            }
+        } catch (error) {
+            console.error('There was an error creating the user!', error);
+        }
     }
 
     return (
