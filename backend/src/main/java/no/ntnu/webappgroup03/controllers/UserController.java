@@ -84,7 +84,7 @@ public class UserController {
    * @param user the user to be created.
    * @return returns the new user. /**
    */
-  @PostMapping("/signup")
+  @PostMapping("")
   public ResponseEntity<?> registerUser(@RequestBody User user) {
     try {
       User createdUser = userService.registerUser(user);

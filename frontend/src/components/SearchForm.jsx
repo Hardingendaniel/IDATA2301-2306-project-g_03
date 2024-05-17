@@ -59,7 +59,7 @@ function SearchForm() {
     //to be worked on
     function suggestionClick(e) {
         setLocation(e.target.value)
-            setSearchButtonDisabled(false);
+        setSearchButtonDisabled(false);
     }
 
 
@@ -70,13 +70,13 @@ function SearchForm() {
             <div className="join w-full flex justify-center">
                 <select className='w-1/5 join-item rounded-s-2xl'
                         onChange={handleLocationChange}
-                        >
+                >
                     <option value="" style={{display: 'none'}}>Where to?</option>
                     {location
                         ? location.map((location) => {
-                        return <option key={location.id} value={location.id}>{location.location}</option>;
-                    })
-                    :null}
+                            return <option key={location.id} value={location.id}>{location.location}</option>;
+                        })
+                        :null}
                 </select>
 
                 <DatePicker
@@ -114,7 +114,7 @@ function SearchForm() {
 
                 <button
                     className="btn join-item rounded-r-2xl bg-main text-white text-lg font-bold h-14 w-1/5 hover:bg-header"
-                    //TODO make appearance the same when disabled, and get a message when pressing the button, wo location
+                    //TODO form validation instead of disabling button
                     disabled={!locationSelected}
                 >
                     SEARCH
