@@ -5,29 +5,31 @@ import img3 from "../../img/hotel1/3.png"
 import img4 from "../../img/hotel1/4.png"
 import img5 from "../../img/hotel1/5.png"
 import map from '../../img/7652611.jpg'
+import {useLocation, Link, useParams} from "react-router-dom";
 
 export function HotelPage() {
+    const { id } = useParams();
+    const location = useLocation();
+    const [hotel, setHotel] = useState(location.state?.hotel || null);
+
     const sectionOverviewRef = useRef();
     const sectionRoomsRef = useRef();
     const sectionReviewsRef = useRef();
     const sectionAboutRef = useRef();
     const sectionLocationRef = useRef();
-    const [hotelData, setHotelData] = useState([]);
-
-    const [data2, setData2] = useState([]);
 
     useEffect(() => {
-        async function fetchData() {
+        async function fetchHotel() {
             try {
-                const response = await fetch("http://localhost:8080/api/hotels/7");
+                const response = await fetch(`http://localhost:8080/api/hotels/${id}`);
                 const data = await response.json();
-                setData2(data);
+                setHotel(data);
             } catch (error) {
                 console.error('Failed to fetch data:', error);
             }
         }
-        fetchData();
-    }, []);
+        fetchHotel();
+    },[id, hotel]);
 
     const scrollToSection = (ref) => {
         ref.current.scrollIntoView({behavior: 'smooth'});
@@ -53,36 +55,53 @@ export function HotelPage() {
 
     return (
         <div className="flex w-4/5 flex-col mx-auto">
-            <h1 className="font-bold py-2 text-4xl">{data2.hotelName}</h1>
+            {hotel ? (
+                <>
+            <h1 className="font-bold py-2 text-4xl">{hotel.hotelName}</h1>
             <div className="flex py-2 space-x-1">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                      className="w-6 h-6 text-header">
                     <path fillRule="evenodd"
-                          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
+                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
+                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
+                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
                           clipRule="evenodd"/>
                 </svg>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                      className="w-6 h-6 text-header">
                     <path fillRule="evenodd"
-                          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
+                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
+                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
+                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
                           clipRule="evenodd"/>
                 </svg>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                      className="w-6 h-6 text-header">
                     <path fillRule="evenodd"
-                          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
+                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
+                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
+                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
                           clipRule="evenodd"/>
                 </svg>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                      className="w-6 h-6 text-header">
                     <path fillRule="evenodd"
-                          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
+                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
+                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
+                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
                           clipRule="evenodd"/>
                 </svg>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                      className="w-6 h-6 text-lightgrey">
                     <path fillRule="evenodd"
-                          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
+                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
+                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
+                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
                           clipRule="evenodd"/>
                 </svg>
             </div>
@@ -188,7 +207,7 @@ export function HotelPage() {
             <div ref={sectionOverviewRef} className="flex flex-row pt-16">
                 <div className="divider"></div>
                 <div className="w-96 rounded-2xl p-2 m-2">
-                    <p>{data2.description}</p>
+                    <p>{hotel.description}</p>
                 </div>
                 <div className="w-96 m-2 relative overflow-hidden flex items-center justify-center flex-col">
                     <img
@@ -206,7 +225,7 @@ export function HotelPage() {
                 <div className="w-96 border rounded-2xl m-2">
                     <div className="flex bg-lightblue rounded-2xl w-full h-24 border">
                         <p className="text-2xl font-black m-auto items-center">
-                            NOK {data2.price}
+                            NOK {hotel.price}
                             <span className="font-normal text-font text-base">/night</span>
                         </p>
                         <div className="btn bg-main text-white rounded-2xl hover:bg-header m-auto items-center">Book
@@ -218,7 +237,7 @@ export function HotelPage() {
                     <div className="flex flex-col px-2">
                         <div className="flex py-4">
                             <h2 className="font-semibold pr-2">Hotel:</h2>
-                            <div>{data2.hotelName}</div>
+                            <div>{hotel.hotelName}</div>
                         </div>
                         <div className="flex py-4">
                             <h2 className="font-semibold pr-2">Start date:</h2>
@@ -236,7 +255,7 @@ export function HotelPage() {
                 <div className="divider"></div>
                 <h1 className="text-2xl font-bold">Rooms</h1>
                 <div className="">
-                    {data2.roomType}
+                    {hotel.roomType}
                 </div>
             </div>
 
@@ -293,7 +312,10 @@ export function HotelPage() {
                     </div>
                 </div>
             </div>
-
+                </>
+            ) : (
+                <div>Loading...</div>
+            )}
         </div>
     );
 }
