@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
+@RequestMapping("/api")
 public class UserController {
 
   @Autowired
@@ -75,16 +77,21 @@ public class UserController {
     return response;
   }
 
+
   /**
    * Method that creates a new user.
    *
    * @param user the user to be created.
-   * @return returns the new user.
-   * @throws Exception Exception to be
+   * @return returns the new user. /**
    */
-  @PostMapping
-  public User registerUser(@RequestBody User user) throws Exception {
-    return userService.registerUser(user);
+  @PostMapping("/signup")
+  public ResponseEntity<?> registerUser(@RequestBody User user) {
+    try {
+      User createdUser = userService.registerUser(user);
+      return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+    } catch (Exception e) {
+      return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
   }
 
   //TODO: Sjekk om denne funker
