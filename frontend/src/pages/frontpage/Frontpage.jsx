@@ -12,7 +12,7 @@ function Frontpage() {
     const StarRating = ({ rating }) => {
         // Function to generate the star rating string
         const getStars = (rating) => {
-            //TODO it should be five, however there is a rating of 6 in the database currently.
+            //TODO it should be five, however there is a rating of 6 in the database currently and that leads to error.
             const maxStars = 6;
             return '★'.repeat(rating) + '☆'.repeat(maxStars - rating);
         };
@@ -25,6 +25,7 @@ function Frontpage() {
     };
 
     const [data1, setData1] = useState([]);
+    const [locationCounts, setLocationCounts] = useState([]);
 
     // Fetch data for cards
     useEffect(() => {
@@ -33,6 +34,15 @@ function Frontpage() {
                 const response = await fetch("http://localhost:8080/api/hotels");
                 const data = await response.json();
                 setData1(data);
+
+                // Process data to count destinations per location
+                const counts = data.reduce((acc, hotel) => {
+                    const location = hotel.location || "Unknown";
+                    acc[location] = (acc[location] || 0) + 1;
+                    return acc;
+                }, {});
+                setLocationCounts(counts);
+
             } catch (error) {
                 console.error('Failed to fetch data:', error);
             }
@@ -81,7 +91,7 @@ function Frontpage() {
                         <img src={Aalesund} alt={`Hotel ${index + 1}`} className="w-full h-48 object-cover rounded-t-2xl"/>
                         <div className="text-center p-4">
                             <h3 className="text-lg font-semibold">{card ? card.hotelName : ""}</h3>
-                            <p className="text-lg font-semibold">{card ? card.description : ""}</p>
+                            <p className="text-lg font-light">{card ? card.description : ""}</p>
                             <StarRating rating={card ? card.rating : 0} />
                         </div>
                     </div>
@@ -104,44 +114,24 @@ function Frontpage() {
                 </button>
             </div>
 
-            <div className= "w-5-6">
-
-
-                <h3 className="mt-4 text-center text text-2xl"> Popular travel destinations</h3>
-
+            <div className="w-5-6">
+                <h3 className="mt-4 text-center text text-2xl">Popular travel destinations</h3>
                 <div className="mt-4 mb-4">
-
                     <div className="flex justify-around ml-28 mr-28">
-                        <button className="">
-                            <img src={Aalesund} alt="Ålesund" className="w-44 h-44 object-cover"/>
-                            <p className="text-center text-2xl">Ålesund</p>
-                            <p className="text-center">4 destinations</p>
-                        </button>
-
-                        <button className="">
-                            <img src={Bergen} alt="Stavanger" className="w-44 h-44 object-cover"/>
-                            <p className="text-center text-2xl">Stavanger</p>
-                            <p className="text-center">4 destinations</p>
-                        </button>
-
-                        <button className="">
-                            <img src={logo3} alt="Oslo" className="w-44 h-44 object-cover"/>
-                            <p className="text-center text-2xl">Oslo</p>
-                            <p className="text-center">4 destinations</p>
-                        </button>
-
-                        <button className="">
-                            <img src={logo} alt="Trondheim" className="w-44 h-44 object-cover"/>
-                            <p className="text-center text-2xl">Trondheim</p>
-                            <p className="text-center">4 destinations</p>
-                        </button>
-
-
-                        <button className="">
-                            <img src={logo2} alt="Stryn" className="w-44 h-44 object-cover"/>
-                            <p className="text-center text-2xl">Stryn</p>
-                            <p className="text-center">4 destinations</p>
-                        </button>
+                        {["Ålesund", "Gjøvik", "Oslo", "Trondheim", "Stryn"].map((location, index) => (
+                            <button key={index} className="">
+                                <img src={
+                                    location === "Ålesund" ? Aalesund : location === "Gjøvik" ? Bergen :
+                                    location === "Gjøvik" ? logo3 : location === "Trondheim" ? logo : logo2
+                                }
+                                     alt={location} className="w-44 h-44 object-cover" />
+                                <p className="text-center text-2xl">{location}</p>
+                                <p className="text-center font-light">
+                                    {locationCounts[location] || 0} {locationCounts[location] === 1 ?
+                                    "destination" :"destinations"}
+                                </p>
+                            </button>
+                        ))}
                     </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@ function SearchForm() {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [location, setLocation] = useState('');
+    const [locationSelected, setLocationSelected] = useState(false);
     const [roomTypes, setRoomTypes] = useState('');
     const [searchButtonDisabled, setSearchButtonDisabled] = useState(true);
 
@@ -25,7 +26,7 @@ function SearchForm() {
                 });
                 setLocation(uniqueLocationData);
 
-                const roomTypesResponse =  await fetch("http://localhost:8080/api/hotels");
+                const roomTypesResponse = await fetch("http://localhost:8080/api/hotels");
                 const roomTypesData = await roomTypesResponse.json();
                 const uniqueRoomTypes = Array.from(new Set(roomTypesData.map(roomTypes => roomTypes.roomTypes)));
                 // Create an array to remove duolicates
@@ -38,16 +39,29 @@ function SearchForm() {
                 console.error('Failed to fetch data:', error);
             }
         }
+
         fetchData();
     }, []);
+
+    const handleLocationChange = (event) => {
+        const selectedLocation = event.target.value;
+        setLocationSelected(selectedLocation !== '');
+    };
+
+    const handleButtonClick = () => {
+        if (!locationSelected) {
+            alert('Please fill in a valid location');
+        } else{
+        }
+    };
+
 
     //to be worked on
     function suggestionClick(e) {
         setLocation(e.target.value)
             setSearchButtonDisabled(false);
     }
-    /*value={location}
-    onChange={(e) => suggestionClick(e)}*/
+
 
 
     return (
@@ -55,6 +69,7 @@ function SearchForm() {
         <form action="/browse" className="justify-center w-11/12 lg:w-11/12 mb-8" method="GET">
             <div className="join w-full flex justify-center">
                 <select className='w-1/5 join-item rounded-s-2xl'
+                        onChange={handleLocationChange}
                         >
                     <option value="" style={{display: 'none'}}>Where to?</option>
                     {location
@@ -98,15 +113,15 @@ function SearchForm() {
                 </select>
 
                 <button
-                    className="btn join-item rounded-r-2xl bg-main text-white text-lg font-bold h-14 w-1/5 hover:bg-header">
+                    className="btn join-item rounded-r-2xl bg-main text-white text-lg font-bold h-14 w-1/5 hover:bg-header"
+                    //TODO make appearance the same when disabled, and get a message when pressing the button, wo location
+                    disabled={!locationSelected}
+                >
                     SEARCH
                 </button>
             </div>
         </form>
 
     );
-
-
 }
-
 export default SearchForm;
