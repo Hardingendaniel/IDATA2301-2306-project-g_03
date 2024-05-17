@@ -60,7 +60,8 @@ public class SecurityConfiguration {
         .csrf(AbstractHttpConfigurer::disable)
         .cors(AbstractHttpConfigurer::disable)
         // Authentication and signup is accessible for everyone
-        .authorizeHttpRequests((auth) ->auth.requestMatchers("/api/hotels/**").permitAll())
+        .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/hotels/**").permitAll())
+        .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/users/**").permitAll())
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/authenticate").permitAll())
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/signup").permitAll())
         // Products are also available to everyone

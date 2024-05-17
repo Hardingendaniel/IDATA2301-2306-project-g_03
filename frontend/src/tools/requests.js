@@ -1,10 +1,10 @@
 // All code for sending requests to backend is stored in this file
 
 // The base path where the API is running, loaded from the REACT_BASE_URL environment variable
-import {getCookie} from "./tools";
+import {getCookie} from "./cookies";
 import {HttpResponseError} from "./HttpResponseError";
 
-const API_BASE_URL = process.env.REACT_APP_BASE_URL;
+const API_BASE_URL = "http://localhost:8080";
 
 /**
  * Send and asynchronous request to the remote API.
@@ -17,26 +17,26 @@ const API_BASE_URL = process.env.REACT_APP_BASE_URL;
  * @throws {HttpResponseError} Error code and message from the response body
  */
 export function asyncApiRequest(method, url, requestBody = null, returnPlainText = false) {
-  const fullUrl = API_BASE_URL + url;
-  let body = null;
-  let headers = {};
-  if (method.toLowerCase() !== "get" && requestBody) {
-    headers["Content-Type"] = "application/json";
-    body = JSON.stringify(requestBody);
-  }
-  const jwtToken = getCookie("jwt");
-  if (jwtToken) {
-    headers["Authorization"] = "Bearer " + jwtToken;
-  }
+    const fullUrl = API_BASE_URL + url;
+    let body = null;
+    let headers = {};
+    if (method.toLowerCase() !== "get" && requestBody) {
+        headers["Content-Type"] = "application/json";
+        body = JSON.stringify(requestBody);
+    }
+    const jwtToken = getCookie("jwt");
+    if (jwtToken) {
+        headers["Authorization"] = "Bearer " + jwtToken;
+    }
 
-  return fetch(fullUrl, {
-    method: method,
-    mode: "cors",
-    headers: headers,
-    body: body,
-  })
-  .then(handleErrors)
-  .then((response) => returnPlainText ? response : response.json());
+    return fetch(fullUrl, {
+        method: method,
+        mode: "cors",
+        headers: headers,
+        body: body,
+    })
+        .then(handleErrors)
+        .then((response) => returnPlainText ? response : response.json());
 }
 
 /**
@@ -47,9 +47,9 @@ export function asyncApiRequest(method, url, requestBody = null, returnPlainText
  * @throws Error containing the response code and text from the response body
  */
 async function handleErrors(response) {
-  if (!response.ok) {
-    const responseText = await response.text();
-    throw new HttpResponseError(response.status, responseText);
-  }
-  return response;
+    if (!response.ok) {
+        const responseText = await response.text();
+        throw new HttpResponseError(response.status, responseText);
+    }
+    return response;
 }

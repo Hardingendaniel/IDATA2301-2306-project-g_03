@@ -8,13 +8,23 @@ import SearchForm from "../../components/SearchForm";
 
 function Frontpage() {
 
-    const [data1, setData1] = useState([]);
+    // StarRating component that converts the rating into stars
+    const StarRating = ({ rating }) => {
+        // Function to generate the star rating string
+        const getStars = (rating) => {
+            //TODO it should be five, however there is a rating of 6 in the database currently.
+            const maxStars = 6;
+            return '★'.repeat(rating) + '☆'.repeat(maxStars - rating);
+        };
 
-    const [cardsData, setCardsData] = useState([
-        { img: logo, hotelName: "Hotel", review: "Reviews" , rating: "★★★★★" },
-        { img: logo2, hotelName: "Hotel", review: "Reviews" , rating: "★★★★★" },
-        { img: logo3, hotelName: "Hotel", review: "Reviews" , rating: "★★★★★" }
-    ]);
+        return (
+            <p className="text-lg font-semibold text-main">
+                {getStars(rating)}
+            </p>
+        );
+    };
+
+    const [data1, setData1] = useState([]);
 
     // Fetch data for cards
     useEffect(() => {
@@ -68,10 +78,11 @@ function Frontpage() {
             <div className="flex justify-evenly relative w-4-5 mr-28 ml-28">
                 {visibleCards().map((card, index) => (
                     <div key={index} className="card">
-                        <img src="" alt={`Hotel ${index + 1}`} className="w-full h-48 object-cover rounded-t-2xl"/>
+                        <img src={Aalesund} alt={`Hotel ${index + 1}`} className="w-full h-48 object-cover rounded-t-2xl"/>
                         <div className="text-center p-4">
                             <h3 className="text-lg font-semibold">{card ? card.hotelName : ""}</h3>
                             <p className="text-lg font-semibold">{card ? card.description : ""}</p>
+                            <StarRating rating={card ? card.rating : 0} />
                         </div>
                     </div>
                 ))}
@@ -108,8 +119,8 @@ function Frontpage() {
                         </button>
 
                         <button className="">
-                            <img src={Bergen} alt="Bergen" className="w-44 h-44 object-cover"/>
-                            <p className="text-center text-2xl">Bergen</p>
+                            <img src={Bergen} alt="Stavanger" className="w-44 h-44 object-cover"/>
+                            <p className="text-center text-2xl">Stavanger</p>
                             <p className="text-center">4 destinations</p>
                         </button>
 

@@ -1,9 +1,8 @@
 // Authentication stuff
 // Code adapted from https://github.com/strazdinsg/web-examples/blob/main/public_html/examples/react/15-react-jwt-auth/src/tools/authentication.js
 
-import {deleteCookie, getCookie, setCookie} from "./tools";
+import {deleteCookie, getCookie, setCookie} from "./cookies";
 import {asyncApiRequest} from "./requests";
-import {redirect} from "react-router-dom";
 
 /**
  * Get the currently authenticated user
@@ -11,12 +10,12 @@ import {redirect} from "react-router-dom";
  */
 export function getAuthenticatedUser() {
     let user = null;
-    const username = getCookie("current_username");
+    const email = getCookie("current_email");
     const commaSeparatedRoles = getCookie("current_user_roles");
-    if (username && commaSeparatedRoles) {
+    if (email && commaSeparatedRoles) {
         const roles = commaSeparatedRoles.split(",");
         user = {
-            username: username,
+            username: email,
             roles: roles,
         };
     }
@@ -34,28 +33,28 @@ export function isAdmin(user) {
 
 /**
  * Send authentication request to the API
- * @param username Username
+ * @param email Username
  * @param password Password, plain text
  * @param successCallback Function to call on success
  * @param errorCallback Function to call on error, with response text as the parameter
  */
 export async function sendAuthenticationRequest(
-    username,
+    email,
     password,
     successCallback,
     errorCallback
 ) {
     const postData = {
-        username: username,
+        email: email,
         password: password,
     };
     try {
-        const jwtResponse = await asyncApiRequest("POST", "/authenticate", postData);
+        const jwtResponse = await asyncApiRequest("POST", "/api/authenticate", postData);
         if (jwtResponse && jwtResponse.jwt) {
             setCookie("jwt", jwtResponse.jwt);
             const userData = parseJwtUser(jwtResponse.jwt);
             if (userData) {
-                setCookie("current_username", userData.username);
+                setCookie("current_username", userData.email);
                 setCookie("current_user_roles", userData.roles.join(","));
                 successCallback(userData);
             }
@@ -96,7 +95,7 @@ function parseJwtUser(jwtString) {
     const jwtObject = parseJwt(jwtString);
     if (jwtObject) {
         user = {
-            username: jwtObject.sub,
+            email: jwtObject.sub,
             roles: jwtObject.roles.map((r) => r.authority),
         };
     }
@@ -108,6 +107,6 @@ function parseJwtUser(jwtString) {
  */
 export function deleteAuthorizationCookies() {
     deleteCookie("jwt");
-    deleteCookie("current_username");
+    deleteCookie("current_email");
     deleteCookie("current_user_roles");
 }
