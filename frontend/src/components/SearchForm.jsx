@@ -67,12 +67,15 @@ function SearchForm() {
                 <DatePicker
                     selected={startDate} onChange={(date) => {
                     setStartDate(date);
-                    const nextDay = new Date(date);
-                    nextDay.setDate(nextDay.getDate() + 1);
-                    setEndDate(nextDay);
+                    if (date && (!endDate || date >= startDate)){
+                        const nextDay = new Date(date);
+                        nextDay.setDate(nextDay.getDate() + 1);
+                        setEndDate(nextDay);
+                    }
                 }}
                     placeholderText="Check In Date"
                     className="custom-datepicker join-item h-14"
+                    minDate ={new Date()}
                 />
 
                 <DatePicker
