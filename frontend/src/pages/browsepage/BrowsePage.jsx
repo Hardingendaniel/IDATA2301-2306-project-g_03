@@ -2,17 +2,19 @@ import React, {useEffect, useState} from "react";
 import map from '../../img/7652611.jpg'
 import ProductCard from "../../components/ProductCard";
 import SearchForm from "../../components/SearchForm";
+import {NavLink, useLocation} from "react-router-dom";
+import {HotelPage} from "../hotelpage/HotelPage";
 
 const BrowsePage = () => {
 
     const [data4, setData4] = useState([]);
-
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await fetch("http://localhost:8080/api/hotels");
                 const data = await response.json();
+
                 setData4(data);
             } catch (error) {
                 console.error('Failed to fetch data:', error);
@@ -24,7 +26,9 @@ const BrowsePage = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     // Calculate and update the visible cards based on the current index
+    // Also ensures this function only returns cards when properly populated
     const visibleCards = () => {
+        if (data4.length === 0) return [];
         const totalCards = data4.length;
         const indexes = [
             currentIndex % totalCards,
@@ -32,7 +36,6 @@ const BrowsePage = () => {
             (currentIndex + 2) % totalCards,
             (currentIndex + 3) % totalCards,
             (currentIndex + 4) % totalCards,
-
         ];
         return indexes.map(index => data4[index]);
     };

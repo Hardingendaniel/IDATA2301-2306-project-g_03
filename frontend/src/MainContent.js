@@ -15,7 +15,7 @@ export function MainContent() {
             <Routes>
                 <Route path="/" element={<Frontpage/>}/>
                 <Route path="/browse" element={<BrowsePage/>}/>
-                <Route path="/hotel" element={<HotelPage/>}/>
+                <Route path="/hotel/:id" element={<HotelPage/>}/>
                 <Route path="/admin" element={<AdminPage/>}/>
             </Routes>
         </main>
