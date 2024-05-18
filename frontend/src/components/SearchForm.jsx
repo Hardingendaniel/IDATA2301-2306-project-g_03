@@ -17,22 +17,15 @@ function SearchForm() {
             try {
                 const response = await fetch("http://localhost:8080/api/hotels");
                 const hotelsData = await response.json();
-                const uniqueLocations = Array.from(new Set(hotelsData.map(location => location.location)));
-                // Create an array of objects with unique location types
-                uniqueLocations.sort();
-                const uniqueLocationData = uniqueLocations.map(location => {
-                    return hotelsData.find(item => item.location === location);
-                });
-                setLocation(uniqueLocationData);
 
-                const roomTypesResponse = await fetch("http://localhost:8080/api/hotels");
-                const roomTypesData = await roomTypesResponse.json();
-                const uniqueRoomTypes = Array.from(new Set(roomTypesData.map(roomTypes => roomTypes.roomTypes)));
-                // Create an array to remove duolicates
-                const uniqueRoomTypesData = uniqueRoomTypes.map(roomTypes => {
-                    return roomTypesData.find(item => item.roomTypes === roomTypes);
-                })
-                setRoomTypes(uniqueRoomTypesData);
+                const uniqueLocations = Array.from(new Set(hotelsData.map(hotel => hotel.location)))
+                    .sort()
+                    .map(location => hotelsData.find(hotel => hotel.location === location));
+                setLocation(uniqueLocations);
+
+                const uniqueRoomTypes = Array.from(new Set(hotelsData.map(hotel => hotel.roomTypes)))
+                    .map(roomType => hotelsData.find(hotel => hotel.roomTypes === roomType));
+                setRoomTypes(uniqueRoomTypes);
 
             } catch (error) {
                 console.error('Failed to fetch data:', error);
@@ -41,6 +34,7 @@ function SearchForm() {
 
         fetchData();
     }, []);
+
 
     const handleLocationChange = (event) => {
         const selectedLocation = event.target.value;
