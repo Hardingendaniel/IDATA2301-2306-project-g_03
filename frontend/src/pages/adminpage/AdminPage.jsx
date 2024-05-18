@@ -1,13 +1,44 @@
-import React, {useState} from "react";
-import HotelTable from "./HotelTable"
+import React, { useEffect, useState } from "react";
+import HotelTable from "./HotelTable";
 import UserTable from "./UserTable";
 
 function AdminPage() {
     const [selectedTable, setSelectedTable] = useState('hotel');
+    const [hotels, setHotels] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleTableChange = (table) => {
         setSelectedTable(table);
-    }
+    };
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await fetch("http://localhost:8080/api/hotels");
+                const data = await response.json();
+                console.log('Fetched data:', data);  // Log fetched data
+                setHotels(data);
+            } catch (error) {
+                console.error('Failed to fetch data:', error);
+            }
+        }
+        fetchData();
+    }, []);
+
+    const visibleHotels = () => {
+        if (hotels.length === 0) return [];
+        const totalHotels = hotels.length;
+        const indexes = [
+            currentIndex % totalHotels,
+            (currentIndex + 1) % totalHotels,
+            (currentIndex + 2) % totalHotels,
+            (currentIndex + 3) % totalHotels,
+            (currentIndex + 4) % totalHotels,
+        ];
+        return indexes.map(index => hotels[index]);
+    };
+
+    console.log('Visible hotels:', visibleHotels());  // Log visible hotels
 
     return (
         <div className="flex">
@@ -57,10 +88,9 @@ function AdminPage() {
 
             <main className="flex flex-col w-full h-full">
                 <div className="overflow-x-auto rounded-2xl w-full h-full pb-20">
-                    {selectedTable === 'hotel' ? <HotelTable/> : <UserTable/>}
+                    {selectedTable === 'hotel' ? <HotelTable hotels={visibleHotels()} /> : <UserTable />}
                 </div>
             </main>
-
         </div>
     );
 }
