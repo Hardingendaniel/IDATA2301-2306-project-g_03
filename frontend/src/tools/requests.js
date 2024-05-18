@@ -4,7 +4,7 @@
 import {getCookie} from "./cookies";
 import {HttpResponseError} from "./HttpResponseError";
 
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = process.env.REACT_APP_BASE_URL;
 
 /**
  * Send and asynchronous request to the remote API.

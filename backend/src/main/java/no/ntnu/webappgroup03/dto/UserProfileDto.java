@@ -9,17 +9,16 @@ public class UserProfileDto {
   private String lastName;
   private String email;
   private int phoneNumber;
-  private String password;
+
   private boolean active = true;
 
   public UserProfileDto(int id, String firstName, String lastName, String email, int phoneNumber,
-      String password, boolean active) {
+      boolean active) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.phoneNumber = phoneNumber;
-    this.password = password;
     this.active = active;
   }
 
@@ -43,9 +42,6 @@ public class UserProfileDto {
     return phoneNumber;
   }
 
-  public String getPassword() {
-    return password;
-  }
 
   public boolean isActive() {
     return active;
@@ -56,13 +52,12 @@ public class UserProfileDto {
 
 
   public void setUserDetails(int id, String firstName, String lastName, String email, int phoneNumber,
-      String password, boolean active) {
+       boolean active) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.phoneNumber = phoneNumber;
-    this.password = password;
     this.active = active;
   }
 }

@@ -14,6 +14,13 @@ export function SignUp() {
     const [userCreated, setUserCreated] = useState(false);
     const [showModal, setShowModal] = useState(true);
 
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [password, setPassword] = useState("");
+
+
     useEffect(() => {
         // Reset form data when modal is displayed
         setFormData(initialFormData);
@@ -25,6 +32,12 @@ export function SignUp() {
             ...prevData,
             [name]: value,
         }));
+    }
+
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+        //TODO: Send api to backend
+
     }
 
     const isFormValid = () => {

@@ -22,7 +22,7 @@ import java.util.Optional;
  * Provides AccessUserDetails needed for authentication.
  */
 @Service
-public class AccessUserService implements UserDetailsService {
+public class  AccessUserService implements UserDetailsService {
 
   private static final int MIN_PASSWORD_LENGTH = 6;
   @Autowired

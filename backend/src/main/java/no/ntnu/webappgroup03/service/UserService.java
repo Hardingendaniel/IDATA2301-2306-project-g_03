@@ -34,6 +34,10 @@ public class UserService {
     return userRepository.findById(id);
   }
 
+  public Optional<User> findUserByEmail(String email) {
+    return userRepository.findByEmail(email);
+  }
+
   /**
    * Add a user to the database.
    *
@@ -85,11 +89,10 @@ public class UserService {
    * @return true when deleted, false on error
    */
   public boolean deleteUser(int id) {
-    boolean deleted = false;
-    if (findUserById(id).isPresent()) {
+    Optional<User> user = this.userRepository.findById(id);
+    if (user.isPresent()) {
       userRepository.deleteById(id);
-      deleted = true;
     }
-    return deleted;
+    return user.isPresent();
   }
 }
