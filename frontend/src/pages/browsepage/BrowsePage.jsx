@@ -8,6 +8,8 @@ import {HotelPage} from "../hotelpage/HotelPage";
 const BrowsePage = () => {
 
     const [data4, setData4] = useState([]);
+    const locationState = useLocation().state;
+
 
     useEffect(() => {
         async function fetchData() {
@@ -23,17 +25,24 @@ const BrowsePage = () => {
         fetchData();
     }, []);
 
+    const filteredHotels = data4.filter(hotel => {
+        return (
+            (!locationState.location || hotel.location === locationState.location) &&
+            (!locationState.roomType || hotel.roomTypes.includes(locationState.roomType))
+        );
+    });
+
     const [currentIndex, setCurrentIndex] = useState(0);
 
     // Calculate and update the visible cards based on the current index
     // Also ensures this function only returns cards when properly populated
     //TODO make the filter fill up the empty left side, when there is a lot of cards
     const visibleCards = () => {
-        if (data4.length === 0) return [];
-        const totalCards = data4.length;
-        const maxVisibleCards = Math.min(10, totalCards); // Show at most 5 cards or the total number of cards, whichever is smaller.
+        if (filteredHotels.length === 0) return [];
+        const totalCards = filteredHotels.length;
+        const maxVisibleCards = Math.min(10, totalCards);
         const indexes = Array.from({ length: maxVisibleCards }, (_, i) => (currentIndex + i) % totalCards);
-        return indexes.map(index => data4[index]);
+        return indexes.map(index => filteredHotels[index]);
     };
 
     return (
