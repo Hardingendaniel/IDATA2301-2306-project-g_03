@@ -27,16 +27,12 @@ const BrowsePage = () => {
 
     // Calculate and update the visible cards based on the current index
     // Also ensures this function only returns cards when properly populated
+    //TODO make the filter fill up the empty left side, when there is a lot of cards
     const visibleCards = () => {
         if (data4.length === 0) return [];
         const totalCards = data4.length;
-        const indexes = [
-            currentIndex % totalCards,
-            (currentIndex + 1) % totalCards,
-            (currentIndex + 2) % totalCards,
-            (currentIndex + 3) % totalCards,
-            (currentIndex + 4) % totalCards,
-        ];
+        const maxVisibleCards = Math.min(10, totalCards); // Show at most 5 cards or the total number of cards, whichever is smaller.
+        const indexes = Array.from({ length: maxVisibleCards }, (_, i) => (currentIndex + i) % totalCards);
         return indexes.map(index => data4[index]);
     };
 

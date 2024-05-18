@@ -5,6 +5,7 @@ import logo3 from "../../img/hotel3.jpg";
 import Aalesund from "../../img/Ålesund.jpg"
 import Bergen from "../../img/Bergen.jpg"
 import SearchForm from "../../components/SearchForm";
+import {useNavigate} from "react-router-dom";
 
 function Frontpage() {
 
@@ -26,6 +27,7 @@ function Frontpage() {
 
     const [data1, setData1] = useState([]);
     const [locationCounts, setLocationCounts] = useState([]);
+    const history = useNavigate();
 
     // Fetch data for cards
     useEffect(() => {
@@ -64,6 +66,11 @@ function Frontpage() {
 
         return indexes.map(index => data1[index]);
     };
+
+    //TODO should be mapped to the right location, now it only get routed to the browsepage
+    const handleChange = (location) => {
+      history('/browse');
+    }
 
     return (
         <div>
@@ -119,7 +126,7 @@ function Frontpage() {
                 <div className="mt-4 mb-4">
                     <div className="flex justify-around ml-28 mr-28">
                         {["Ålesund", "Gjøvik", "Oslo", "Trondheim", "Stryn"].map((location, index) => (
-                            <button key={index} className="">
+                            <button onClick={handleChange} key={index} className="" >
                                 <img src={
                                     location === "Ålesund" ? Aalesund : location === "Gjøvik" ? Bergen :
                                     location === "Gjøvik" ? logo3 : location === "Trondheim" ? logo : logo2
