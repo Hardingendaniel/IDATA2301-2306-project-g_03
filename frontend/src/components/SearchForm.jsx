@@ -10,7 +10,6 @@ function SearchForm() {
     const [location, setLocation] = useState('');
     const [locationSelected, setLocationSelected] = useState(false);
     const [roomTypes, setRoomTypes] = useState('');
-    const [searchButtonDisabled, setSearchButtonDisabled] = useState(true);
 
 
     useEffect(() => {
@@ -48,25 +47,20 @@ function SearchForm() {
         setLocationSelected(selectedLocation !== '');
     };
 
-    const handleButtonClick = () => {
+    const handleFormSubmit = (event) => {
         if (!locationSelected) {
-            alert('Please fill in a valid location');
-        } else{
+            event.preventDefault();
+            alert('Please select a location in "where to?"');
+        } else {
+            event.target.action ="/browse";
         }
-    };
-
-
-    //to be worked on
-    function suggestionClick(e) {
-        setLocation(e.target.value)
-        setSearchButtonDisabled(false);
     }
-
-
 
     return (
 
-        <form action="/browse" className="justify-center w-11/12 lg:w-11/12 mb-8" method="GET">
+        <form action="/browse" className="justify-center w-11/12 lg:w-11/12 mb-8" method="GET"
+              onSubmit={handleFormSubmit}
+        >
             <div className="join w-full flex justify-center">
                 <select className='w-1/5 join-item rounded-s-2xl'
                         onChange={handleLocationChange}
@@ -114,8 +108,6 @@ function SearchForm() {
 
                 <button
                     className="btn join-item rounded-r-2xl bg-main text-white text-lg font-bold h-14 w-1/5 hover:bg-header"
-                    //TODO form validation instead of disabling button
-                    disabled={!locationSelected}
                 >
                     SEARCH
                 </button>
