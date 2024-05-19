@@ -138,7 +138,8 @@ const BrowsePage = () => {
 
                 <div className="basis-3/4 col-span-2 px-4 py-4">
                     <div>
-                        <h2 className="text-font font-semibold">Results from Ålesund: 40 properties found</h2>
+                        <h2 className="text-font font-semibold">Results from {locationState.location}:
+                            {filteredHotels.length || 0} {filteredHotels.length === 1 ? "property" : "properties"} found</h2>
 
                         <div className="dropdown dropdown-bottom">
                             <div tabIndex={0} role="button"
