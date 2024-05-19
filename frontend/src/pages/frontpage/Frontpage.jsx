@@ -27,7 +27,7 @@ function Frontpage() {
 
     const [data1, setData1] = useState([]);
     const [locationCounts, setLocationCounts] = useState([]);
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     // Fetch data for cards
     useEffect(() => {
@@ -69,7 +69,11 @@ function Frontpage() {
 
     //TODO should be mapped to the right location, now it only get routed to the browsepage
     const handleChange = (location) => {
-      history('/browse');
+        navigate("/browse", {
+            state: {
+                location: location
+            }
+        });
     }
 
     return (
@@ -126,10 +130,13 @@ function Frontpage() {
                 <div className="mt-4 mb-4">
                     <div className="flex justify-around ml-28 mr-28">
                         {["Ålesund", "Gjøvik", "Oslo", "Trondheim", "Stryn"].map((location, index) => (
-                            <button onClick={handleChange} key={index} className="" >
-                                <img src={
-                                    location === "Ålesund" ? Aalesund : location === "Gjøvik" ? Bergen :
-                                    location === "Gjøvik" ? logo3 : location === "Trondheim" ? logo : logo2
+                            <button onClick={() => handleChange(location)} key={index} className="" >
+                                <img
+                                    src={
+                                        location === "Ålesund" ? Aalesund :
+                                            location === "Gjøvik" ? Bergen :
+                                                location === "Oslo" ? logo3 :
+                                                    location === "Trondheim" ? logo : logo2
                                 }
                                      alt={location} className="w-44 h-44 object-cover" />
                                 <p className="text-center text-2xl">{location}</p>
