@@ -37,6 +37,13 @@ const Header = () => {
                         </div>
                     </NavLink>
                 )}
+                {user?.roles.includes("ROLE_USER") && (
+                    <NavLink to="/profile">
+                        <div className="btn btn-ghost rounded-2xl text-xl font-bold text-white">
+                            Profile
+                        </div>
+                    </NavLink>
+                )}
                 <div className="">
                     {!user ? (
                         <Login/>
