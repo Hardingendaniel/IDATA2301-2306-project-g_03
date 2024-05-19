@@ -71,7 +71,7 @@ public class HotelController {
    */
   @PutMapping("/api/hotels/{id}")
   public ResponseEntity<String> updateHotel(@PathVariable int id,
-      @RequestBody HotelDto hotelData) {
+                                            @RequestBody HotelDto hotelData) {
     ResponseEntity<String> response;
     Optional<Hotel> hotel = this.hotelService.getOne(id);
     User sessionUser = this.userService.getSessionUser();

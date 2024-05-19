@@ -1,6 +1,7 @@
 package no.ntnu.webappgroup03.service;
 
 import no.ntnu.webappgroup03.model.Booking;
+import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,16 @@ public class BookingService {
   public Booking findById(int id) {
     Optional<Booking> booking = bookingRepository.findById(id);
     return booking.orElse(null);
+  }
+
+  /**
+   * Returns the booking with the specified id
+   *
+   * @param id id of the wanted booking.
+   * @return the wanted booking.
+   */
+  public Optional<Booking> getOne(int id) {
+    return this.bookingRepository.findById(id);
   }
 
   /**

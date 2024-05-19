@@ -1,18 +1,28 @@
 package no.ntnu.webappgroup03.controllers;
 
+import no.ntnu.webappgroup03.dto.BookingDto;
+import no.ntnu.webappgroup03.dto.HotelDto;
 import no.ntnu.webappgroup03.model.Booking;
+import no.ntnu.webappgroup03.model.Hotel;
+import no.ntnu.webappgroup03.model.User;
+import no.ntnu.webappgroup03.service.AccessUserService;
 import no.ntnu.webappgroup03.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
+@RequestMapping("/api/bookings")
 public class BookingController {
 
   @Autowired
   private BookingService bookingService;
+  @Autowired
+  private AccessUserService userService ;
 
   /**
    * Get all bookings.
@@ -20,10 +30,90 @@ public class BookingController {
    *
    * @return List of all bookings currently stored in the collection
    */
-  @GetMapping("/api/bookings")
+  @GetMapping
   public Iterable<Booking> getAll() {
     return bookingService.getAll();
   }
 
+  /**
+   * Get a specific booking.
+   * @param id ID of the booking to be returned
+   * @return booking with the given ID or status 404 (Not Found)
+   */
+  @GetMapping("/{id}")
+  public ResponseEntity<?> getOne(@PathVariable int id) {
+    ResponseEntity<?> response;
+    Optional<Booking> booking = this.bookingService.getOne(id);
+    if (booking.isPresent()) {
+      BookingDto bookingDto = new BookingDto(booking.get().getId(), booking.get().getHotel(), booking.get().getUser(),
+          booking.get().getStartDate(), booking.get().getEndDate());
+      response = new ResponseEntity<>(bookingDto, HttpStatus.OK);
+    } else {
+      response = new ResponseEntity<>("Booking with id " + id + "not found", HttpStatus.NOT_FOUND);
+    }
+    return response;
+  }
 
+  /**
+   * If the user is registered, add a new booking.
+   *
+   * @param bookingDto booking wanted to create.
+   * @return HTTP 200 OK or error code with error message.
+   */
+  @PostMapping
+  public ResponseEntity<?> add(@RequestBody BookingDto bookingDto) {
+    ResponseEntity<?> response;
+    User sessionUser = this.userService.getSessionUser();
+    if (sessionUser != null ) {
+      if (bookingDto != null) {
+        Booking booking = new Booking(bookingDto.getId(),bookingDto.getUser(), bookingDto.getHotel(),
+            bookingDto.getStartDate(), bookingDto.getEndDate());
+        this.bookingService.add(booking);
+        response = new ResponseEntity<>(booking, HttpStatus.OK);
+      } else {
+        response = new ResponseEntity<>("Booking data not supplied", HttpStatus.BAD_REQUEST);
+      }
+    } else {
+      response = new ResponseEntity<>("Booking data for no registered users not accessible",
+          HttpStatus.FORBIDDEN);
+    }
+    return response;
+  }
+  
+  
+  /**
+   * Deletes a booking if the user is an admin.
+   *
+   * @param id the booking to delete
+   * @return HTTP 200 OK or error code with error message.
+   */
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> delete(@PathVariable int id) {
+    ResponseEntity<String> response;
+    User sessionUser = this.userService.getSessionUser();
+    if (sessionUser != null && sessionUser.isAdmin()) {
+      Optional<Booking> booking = this.bookingService.getOne(id);
+      if (booking != null && booking.isPresent()) {
+        if (this.bookingService.delete(id)) {
+          response = new ResponseEntity<>("", HttpStatus.OK);
+        } else {
+          response = new ResponseEntity<>("Could not delete booking",
+              HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+      } else {
+        response = new ResponseEntity<>("User not present", HttpStatus.BAD_REQUEST);
+      }
+
+    } else if (sessionUser == null) {
+      response = new ResponseEntity<>("User data accessible only to authenticated users",
+          HttpStatus.UNAUTHORIZED);
+    } else {
+      response = new ResponseEntity<>("User data for other users note accessible",
+          HttpStatus.FORBIDDEN);
+    }
+    return response;
+  }
+
+
+  
 }

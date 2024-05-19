@@ -15,7 +15,7 @@ public class HotelDto {
 
 
   public HotelDto(int id, String hotelName, String description, String location, String roomType,
-      double price, int rating, String review) {
+                  double price, int rating, String review) {
     this.id = id;
     this.hotelName = hotelName;
     this.description = description;
@@ -27,7 +27,7 @@ public class HotelDto {
   }
 
   public void setHotelDetails(int id, String hotelName, String description, String location,
-      String roomType, double price, int rating, String review) {
+                              String roomType, double price, int rating, String review) {
     this.id = id;
     this.hotelName = hotelName;
     this.description = description;
