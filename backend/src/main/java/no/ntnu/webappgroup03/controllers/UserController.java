@@ -1,6 +1,7 @@
 package no.ntnu.webappgroup03.controllers;
 
 import java.util.Optional;
+import no.ntnu.webappgroup03.dto.SignupDto;
 import no.ntnu.webappgroup03.dto.UserProfileDto;
 import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.model.User;
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class UserController {
 
   @Autowired
@@ -36,12 +37,13 @@ public class UserController {
   private AccessUserService accessUserService;
 
   //TODO: Enten slette denne methoden, eller fiks for kun admin
+
   /**
    * Get all users. HTTP GET to /
    *
    * @return List of all users currently stored in the collection
    */
-  @GetMapping("/api/users")
+  @GetMapping
   public Iterable<User> getAll() {
     return userService.getAll();
   }
@@ -52,7 +54,7 @@ public class UserController {
    * @param id Username for which the profile is requested
    * @return The profile information or error code when not authorized
    */
-  @GetMapping("/api/users/{id}")
+  @GetMapping("/{id}")
   public ResponseEntity<?> getProfile(@PathVariable int id) {
     ResponseEntity<?> response;
     User sessionUser = accessUserService.getSessionUser();
@@ -61,7 +63,7 @@ public class UserController {
       if (user.isPresent()) {
         UserProfileDto profile = new UserProfileDto(user.get().getId(), user.get().getFirstName(),
             user.get().getLastName(), user.get().getEmail(), user.get().getPhoneNumber(),
-            user.get().getPassword(), user.get().isActive());
+            user.get().isActive());
         response = new ResponseEntity<>(profile, HttpStatus.OK);
       } else {
         response = new ResponseEntity<>("Could not fetch user information",
@@ -81,65 +83,75 @@ public class UserController {
   /**
    * Method that creates a new user.
    *
-   * @param user the user to be created.
+   * @param signupData the user to be created.
    * @return returns the new user. /**
    */
-  @PostMapping("")
-  public ResponseEntity<?> registerUser(@RequestBody User user) {
-    try {
-      User createdUser = userService.registerUser(user);
-      return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
-    } catch (Exception e) {
-      return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-    }
-  }
-
-  //TODO: Sjekk om denne funker
-  /**
-   * Update user profile information.
-   *
-   * @param id if for which the profile is updated
-   * @return HTTP 200 OK or error code with error message
-   */
-  @PutMapping("/api/users/{id}")
-  public ResponseEntity<String> updateProfile(@PathVariable int id,
-      @RequestBody UserProfileDto profileData) {
-    User sessionUser = accessUserService.getSessionUser();
-    ResponseEntity<String> response;
+  @PostMapping
+  public ResponseEntity<?> add(@RequestBody SignupDto signupData) {
+    ResponseEntity<?> response;
+    User sessionUser = this.accessUserService.getSessionUser();
     if (sessionUser != null && sessionUser.isAdmin()) {
-      if (profileData != null) {
-        if (accessUserService.updateProfile(sessionUser, profileData)) {
-          response = new ResponseEntity<>("", HttpStatus.OK);
-        } else {
-          response = new ResponseEntity<>("Could not update Profile data",
-              HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+      if (signupData != null) {
+        User user = new User(signupData.getFirstName(), signupData.getLastName(),
+            signupData.getEmail(), signupData.getPhoneNumber(), signupData.getPassword());
+        this.userService.add(user);
+        response = new ResponseEntity<>(user, HttpStatus.OK);
       } else {
-        response = new ResponseEntity<>("Profile data not supplied", HttpStatus.BAD_REQUEST);
+        response = new ResponseEntity<>("User data not supplied", HttpStatus.BAD_REQUEST);
       }
     } else if (sessionUser == null) {
-      response = new ResponseEntity<>("Profile data accessible only to authenticated users",
+      response = new ResponseEntity<>("Adding user accessible only to authenticated users",
           HttpStatus.UNAUTHORIZED);
     } else {
-      response = new ResponseEntity<>("Profile data for other users not accessible!",
+      response = new ResponseEntity<>("User data for other users not accessible",
           HttpStatus.FORBIDDEN);
     }
     return response;
   }
 
-  //TODO: Sjekk om denne funker
+  /**
+   * @param email
+   * @param password
+   * @return
+   */
+  @PutMapping("/{email}")
+  public ResponseEntity<?> updatePassword(@PathVariable String email,
+      @RequestBody String password) {
+    ResponseEntity<?> response;
+    User sessionUser = this.accessUserService.getSessionUser();
+    Optional<User> user = this.userService.findUserByEmail(email);
+    if (sessionUser != null && sessionUser.getEmail().equals(email)) {
+      if (password != null && user.isPresent()) {
+        this.accessUserService.updateUserPassword(user.get(), password);
+        response = new ResponseEntity<>("", HttpStatus.OK);
+      } else {
+        response = new ResponseEntity<>("Password not present",HttpStatus.NOT_FOUND);
+      }
+    } else if (sessionUser == null) {
+      response = new ResponseEntity<>("User data accessible only to authenticated users",
+          HttpStatus.UNAUTHORIZED);
+    } else {
+      response = new ResponseEntity<>("User data for other users not accessible",
+          HttpStatus.FORBIDDEN);
+    }
+    return response;
+  }
+
+  //TODO: TRENGER ADMIN RETTIGHETER
+
   /**
    * Deletes a user if the logged-in user is an admin.
    *
    * @param id id of the user to delete
    * @return HTTP 200 OK or error code with error message.
    */
-  @DeleteMapping("/api/users/{id}")
+  @DeleteMapping("/{id}")
   public ResponseEntity<String> delete(@PathVariable int id) {
     ResponseEntity<String> response;
     User sessionUser = this.accessUserService.getSessionUser();
     if (sessionUser != null && sessionUser.isAdmin()) {
-      if (sessionUser.getId() == id) {
+      Optional<User> user = this.userService.findUserById(id);
+      if (user != null && user.isPresent()) {
         if (this.userService.deleteUser(id)) {
           response = new ResponseEntity<>("", HttpStatus.OK);
         } else {
@@ -158,5 +170,4 @@ public class UserController {
     }
     return response;
   }
-  //TODO: Lag flere metoder for users (delete,)
 }
