@@ -48,33 +48,30 @@ public class UserController {
     return userService.getAll();
   }
 
-  /**
-   * Return user profile information.
-   *
-   * @param id Username for which the profile is requested
-   * @return The profile information or error code when not authorized
-   */
-  @GetMapping("/{id}")
-  public ResponseEntity<?> getProfile(@PathVariable int id) {
+
+
+  @GetMapping("/{email}")
+  public ResponseEntity<?> getProfileWithMail(@PathVariable String email) {
     ResponseEntity<?> response;
     User sessionUser = accessUserService.getSessionUser();
-    Optional<User> user = this.userService.findUserById(id);
-    if (sessionUser != null && sessionUser.isAdmin()) {
+    if (sessionUser != null) {
+      Optional<User> user = this.userService.findUserByEmail(email);
       if (user.isPresent()) {
-        UserProfileDto profile = new UserProfileDto(user.get().getId(), user.get().getFirstName(),
-            user.get().getLastName(), user.get().getEmail(), user.get().getPhoneNumber(),
-            user.get().isActive());
-        response = new ResponseEntity<>(profile, HttpStatus.OK);
+        if (sessionUser.getEmail().equals(email) || sessionUser.isAdmin()) {
+          UserProfileDto profile = new UserProfileDto(user.get().getId(), user.get().getFirstName(),
+              user.get().getLastName(), user.get().getEmail(), user.get().getPhoneNumber(),
+              user.get().isActive());
+          response = new ResponseEntity<>(profile, HttpStatus.OK);
+      } else {
+          response = new ResponseEntity<>("Forbidden", HttpStatus.FORBIDDEN);
+        }
       } else {
         response = new ResponseEntity<>("Could not fetch user information",
             HttpStatus.BAD_REQUEST);
       }
-    } else if (sessionUser == null) {
+    } else {
       response = new ResponseEntity<>("User data accessible only to authenticated users",
           HttpStatus.UNAUTHORIZED);
-    } else {
-      response = new ResponseEntity<>("User with id: " + id + " not found",
-          HttpStatus.NOT_FOUND);
     }
     return response;
   }
