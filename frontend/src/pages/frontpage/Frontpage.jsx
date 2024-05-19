@@ -67,13 +67,21 @@ function Frontpage() {
         return indexes.map(index => data1[index]);
     };
 
-    //TODO should be mapped to the right location, now it only get routed to the browsepage
     const handleChange = (location) => {
         navigate("/browse", {
             state: {
                 location: location
             }
         });
+    }
+
+    //Directs to a hotel with a given id
+    const handleCard = (hotel) => {
+        navigate(`/hotel/${hotel.id}`, {
+            state: {
+                hotel: hotel
+            }
+        })
     }
 
     return (
@@ -97,15 +105,17 @@ function Frontpage() {
 
             <h2 className="mt-4 text-center text text-2xl">Get the best experience with Stay Finder</h2>
             <div className="flex justify-evenly relative w-4-5 mr-28 ml-28">
-                {visibleCards().map((card, index) => (
-                    <div key={index} className="card">
+                {visibleCards().map((hotel, index) => (
+                    <button key={index} className="card"
+                            onClick={() => handleCard(hotel)}>
+
                         <img src={Aalesund} alt={`Hotel ${index + 1}`} className="w-full h-48 object-cover rounded-t-2xl"/>
                         <div className="text-center p-4">
-                            <h3 className="text-lg font-semibold">{card ? card.hotelName : ""}</h3>
-                            <p className="text-lg font-light">{card ? card.description : ""}</p>
-                            <StarRating rating={card ? card.rating : 0} />
+                            <h3 className="text-lg font-semibold">{hotel ? hotel.hotelName : ""}</h3>
+                            <p className="text-lg font-light">{hotel ? hotel.description : ""}</p>
+                            <StarRating rating={hotel ? hotel.rating : 0} />
                         </div>
-                    </div>
+                    </button>
                 ))}
 
                 <button
@@ -124,6 +134,7 @@ function Frontpage() {
                     <span className="arrow2"/>
                 </button>
             </div>
+
 
             <div className="w-5-6">
                 <h3 className="mt-4 text-center text text-2xl">Popular travel destinations</h3>
