@@ -49,7 +49,7 @@ export async function sendAuthenticationRequest(
         password: password,
     };
     try {
-        const jwtResponse = await asyncApiRequest("POST", "/api/authenticate", postData);
+        const jwtResponse = await asyncApiRequest("POST", "/authenticate", postData);
         if (jwtResponse && jwtResponse.jwt) {
             setCookie("jwt", jwtResponse.jwt);
             const userData = parseJwtUser(jwtResponse.jwt);
