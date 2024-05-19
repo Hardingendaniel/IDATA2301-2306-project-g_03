@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { SignUp } from "./SignUp";
 import { sendAuthenticationRequest } from "../../tools/authentication";
-import { useNavigate } from "react-router-dom";
+import {useUser} from "../../UserContext";
 
 /**
  * Represents a login modal.
  */
-export function Login(props) {
+export function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [showSignUpModal, setShowSignUpModal] = useState(false);
-    const navigate = useNavigate();
+    const { login } = useUser();
 
     function submitForm(event) {
         event.preventDefault();
@@ -28,8 +28,7 @@ export function Login(props) {
      * This function is called when login is successful
      */
     function onLoginSuccess(userData) {
-        props.setUser(userData);
-        navigate("/");
+        login(userData);
     }
 
     let errorMessage = null;
