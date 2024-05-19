@@ -2,11 +2,11 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import {Login} from "./Modal/Login";
 import AdminPage from "../pages/adminpage/AdminPage";
-import { useAuth } from './AuthContext';
+import {useUser} from "../UserContext";
 
 const Header = () => {
 
-    const { user } = useAuth();
+    const {user, logout} = useUser();
 
     return (
         <div className="navbar bg-header">
@@ -30,7 +30,7 @@ const Header = () => {
             </div>
 
             <div className="navbar-end">
-                {user && user.role === 'admin' && (
+                {user?.roles.includes('ROLE_ADMIN') && (
                     <NavLink to="/admin">
                         <div className="btn btn-ghost rounded-2xl text-xl font-bold text-white">
                             Admin
@@ -38,7 +38,13 @@ const Header = () => {
                     </NavLink>
                 )}
                 <div className="">
-                    <Login/>
+                    {!user ? (
+                        <Login/>
+                    ) : (
+                        <button onClick={logout} className="btn btn-ghost rounded-2xl text-xl font-bold text-white">
+                            Logout
+                        </button>
+                    )}
                 </div>
             </div>
         </div>
