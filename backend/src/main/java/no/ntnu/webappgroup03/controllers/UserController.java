@@ -14,6 +14,7 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,7 +38,6 @@ public class UserController {
   private AccessUserService accessUserService;
 
   //TODO: Enten slette denne methoden, eller fiks for kun admin
-
   /**
    * Get all users. HTTP GET to /
    *
@@ -81,10 +81,10 @@ public class UserController {
 
 
   /**
-   * Method that creates a new user.
+   * Method that creates a new user, if the admin is logged in.
    *
    * @param signupData the user to be created.
-   * @return returns the new user. /**
+   * @return returns the new user.
    */
   @PostMapping
   public ResponseEntity<?> add(@RequestBody SignupDto signupData) {
@@ -110,22 +110,24 @@ public class UserController {
   }
 
   /**
-   * @param email
-   * @param password
-   * @return
+   * Updates an already existing user with user information (not password).
+   *
+   * @param email the email to the user to change
+   * @param userData the new userdata for the user
+   * @return the new user
    */
   @PutMapping("/{email}")
-  public ResponseEntity<?> updatePassword(@PathVariable String email,
-      @RequestBody String password) {
+  public ResponseEntity<?> updateUser(@PathVariable String email,
+      @RequestBody UserProfileDto userData) {
     ResponseEntity<?> response;
     User sessionUser = this.accessUserService.getSessionUser();
     Optional<User> user = this.userService.findUserByEmail(email);
     if (sessionUser != null && sessionUser.getEmail().equals(email)) {
-      if (password != null && user.isPresent()) {
-        this.accessUserService.updateUserPassword(user.get(), password);
+      if (userData != null && user.isPresent()) {
+        this.accessUserService.updateProfile(user.get(), userData);
         response = new ResponseEntity<>("", HttpStatus.OK);
       } else {
-        response = new ResponseEntity<>("Password not present",HttpStatus.NOT_FOUND);
+        response = new ResponseEntity<>("user data not present",HttpStatus.NOT_FOUND);
       }
     } else if (sessionUser == null) {
       response = new ResponseEntity<>("User data accessible only to authenticated users",
@@ -137,7 +139,40 @@ public class UserController {
     return response;
   }
 
-  //TODO: TRENGER ADMIN RETTIGHETER
+  /**
+   * Updates the users password
+   *
+   * @param email the email to the user to change password.
+   * @param password the new password for the user
+   * @return the new user with updated password.
+   */
+  @PatchMapping("/{email}")
+  public ResponseEntity<?> updatePassword(@PathVariable String email,
+      @RequestBody String password) {
+    ResponseEntity<?> response = null;
+    User sessionUser = this.accessUserService.getSessionUser();
+    Optional<User> user = this.userService.findUserByEmail(email);
+
+    if (sessionUser == null){
+      response = new ResponseEntity<>("User data accessible only to authenticated users",
+          HttpStatus.UNAUTHORIZED);
+    }
+
+    if (user.isEmpty()) {
+      response = new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+    }
+
+    if (password == null || password.isEmpty()) {
+      response = new ResponseEntity<>("Password cannot be empty", HttpStatus.BAD_REQUEST);
+    }
+    if (user.isPresent()) {
+      this.accessUserService.updateUserPassword(user.get(), password);
+      response = new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+
+    return response;
+  }
 
   /**
    * Deletes a user if the logged-in user is an admin.
