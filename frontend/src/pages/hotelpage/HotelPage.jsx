@@ -52,6 +52,7 @@ export function HotelPage() {
         }
         return images;
     };
+
     const hotelImages = hotel ? getHotelImages(id) : [];
 
     useEffect(() => {
@@ -115,24 +116,82 @@ export function HotelPage() {
                         </svg>
                     </div>
 
-
                     <div className="container mx-auto items-center py-2">
                         <div className="md:grid md:grid-cols-6 md:grid-rows-2 grid-flow-col gap-2 md:h-72 h-full flex flex-col">
-                            {hotelImages.map((image, index) => (
-                                <div key={index} className={`md:col-span-${index === 0 ? 3 : 2} md:row-span-2 w-full transition-opacity hover:opacity-85`}>
-                                    <img src={image} alt={`hotel${index + 1}`}
-                                         className="rounded-2xl inset-0 h-full w-full object-cover object-center"
-                                         onClick={() => document.getElementById(`image_modal${index + 1}`).showModal()} />
-                                    <dialog id={`image_modal${index + 1}`} className="modal">
-                                        <div className="modal-box w-11/12 max-w-5xl">
-                                            <img src={image} alt={`Hotel${index + 1}`} className="w-full" />
-                                        </div>
-                                        <form method="dialog" className="modal-backdrop">
-                                            <button>close</button>
-                                        </form>
-                                    </dialog>
+                            <div className="md:col-span-3 md:row-span-2 w-full transition-opacity hover:opacity-85">
+                                <img src={hotelImages[0]} alt="hotel1"
+                                     className="rounded-2xl inset-0 h-full w-full object-cover object-center"
+                                     onClick={() => document.getElementById('image_modal1').showModal()} />
+                            </div>
+                            <dialog id="image_modal1" className="modal">
+                                <div className="modal-box w-11/12 max-w-5xl">
+                                    <img src={hotelImages[0]} alt={"Hotel1"}
+                                         className="w-full" />
                                 </div>
-                            ))}
+                                <form method="dialog" className="modal-backdrop">
+                                    <button>close</button>
+                                </form>
+                            </dialog>
+
+                            <div className="md:row-span-2 md:col-start-4 w-full transition-opacity hover:opacity-85">
+                                <img src={hotelImages[2]} alt="hotel2"
+                                     className="rounded-2xl inset-0 h-full w-full object-cover object-center"
+                                     onClick={() => document.getElementById('image_modal2').showModal()} />
+                            </div>
+                            <dialog id="image_modal2" className="modal">
+                                <div className="modal-box w-11/12 max-w-5xl">
+                                    <img src={hotelImages[2]} alt={"Hotel2"}
+                                         className="w-full" />
+                                </div>
+                                <form method="dialog" className="modal-backdrop">
+                                    <button>close</button>
+                                </form>
+                            </dialog>
+
+                            <div className="md:col-span-2 md:col-start-5 w-full transition-opacity hover:opacity-85">
+                                <img src={hotelImages[1]} alt="hotel3"
+                                     className="rounded-2xl inset-0 h-full w-full object-cover object-center"
+                                     onClick={() => document.getElementById('image_modal3').showModal()} />
+                            </div>
+                            <dialog id="image_modal3" className="modal">
+                                <div className="modal-box w-11/12 max-w-5xl">
+                                    <img src={hotelImages[1]} alt={"Hotel3"}
+                                         className="w-full" />
+                                </div>
+                                <form method="dialog" className="modal-backdrop">
+                                    <button>close</button>
+                                </form>
+                            </dialog>
+
+                            <div className="md:col-start-5 md:row-start-2 w-full transition-opacity hover:opacity-85">
+                                <img src={hotelImages[3]} alt="hotel4"
+                                     className="rounded-2xl inset-0 h-full w-full object-cover object-center"
+                                     onClick={() => document.getElementById('image_modal4').showModal()} />
+                            </div>
+                            <dialog id="image_modal4" className="modal">
+                                <div className="modal-box w-11/12 max-w-5xl">
+                                    <img src={hotelImages[3]} alt={"Hotel4"}
+                                         className="w-full" />
+                                </div>
+                                <form method="dialog" className="modal-backdrop">
+                                    <button>close</button>
+                                </form>
+                            </dialog>
+
+                            <div className="md:col-start-6 md:row-start-2 w-full transition-opacity hover:opacity-85">
+                                <img src={hotelImages[4]} alt="hotel5"
+                                     className="rounded-2xl inset-0 h-full w-full object-cover object-center"
+                                     onClick={() => document.getElementById('image_modal5').showModal()} />
+                            </div>
+                            <dialog id="image_modal5" className="modal">
+                                <div className="modal-box w-11/12 max-w-5xl">
+                                    <img src={hotelImages[4]} alt={"Hotel5"}
+                                         className="w-full" />
+                                </div>
+                                <form method="dialog" className="modal-backdrop">
+                                    <button>close</button>
+                                </form>
+                            </dialog>
                         </div>
                     </div>
 
