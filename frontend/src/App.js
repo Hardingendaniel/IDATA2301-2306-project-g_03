@@ -12,6 +12,7 @@ import {
     getAuthenticatedUser,
 } from "./tools/authentication";
 import ScrollToTop from "./components/ScrollToTop";
+import { AuthProvider } from './components/AuthContext';
 
 /**
  * A component representing the whole application
@@ -24,11 +25,13 @@ export function App() {
     useEffect(tryRestoreUserSession);
     return (
         <Router>
+            <AuthProvider>
             <ScrollToTop />
             {/*<Navigation user={user} logoutFunction={doLogout}/> */}
             <Header/>
             <MainContent/>
             <Footer/>
+            </AuthProvider>
         </Router>
     );
 
