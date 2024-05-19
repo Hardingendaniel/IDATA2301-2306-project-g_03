@@ -2,8 +2,12 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import {Login} from "./Modal/Login";
 import AdminPage from "../pages/adminpage/AdminPage";
+import { useAuth } from './AuthContext';
 
 const Header = () => {
+
+    const { user } = useAuth();
+
     return (
         <div className="navbar bg-header">
             <div className="navbar-start">
@@ -26,14 +30,15 @@ const Header = () => {
             </div>
 
             <div className="navbar-end">
-                <NavLink to="/admin">
-                    <div className="btn btn-ghost rounded-2xl text-xl font-bold text-white">
-                        Admin
-                    </div>
-                </NavLink>
-
+                {user && user.role === 'admin' && (
+                    <NavLink to="/admin">
+                        <div className="btn btn-ghost rounded-2xl text-xl font-bold text-white">
+                            Admin
+                        </div>
+                    </NavLink>
+                )}
                 <div className="">
-                <Login/>
+                    <Login/>
                 </div>
             </div>
         </div>
