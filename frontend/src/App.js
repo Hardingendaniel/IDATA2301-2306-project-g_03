@@ -11,6 +11,7 @@ import {
     deleteAuthorizationCookies,
     getAuthenticatedUser,
 } from "./tools/authentication";
+import ScrollToTop from "./components/ScrollToTop";
 
 /**
  * A component representing the whole application
@@ -23,6 +24,7 @@ export function App() {
     useEffect(tryRestoreUserSession);
     return (
         <Router>
+            <ScrollToTop />
             {/*<Navigation user={user} logoutFunction={doLogout}/> */}
             <Header/>
             <MainContent/>
