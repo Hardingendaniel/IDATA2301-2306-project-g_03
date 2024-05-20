@@ -14,6 +14,15 @@ function SearchForm() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        // Function to refresh local storage
+        if (sessionStorage.getItem('isPageRefreshed')) {
+            localStorage.clear();
+            sessionStorage.removeItem('isPageRefreshed');
+        }
+
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('isPageRefreshed', 'true');
+        });
         async function fetchData() {
             try {
                 const response = await fetch("http://localhost:8080/api/hotels");
@@ -48,6 +57,26 @@ function SearchForm() {
             }
         });
     };
+
+    useEffect(() => {
+        const savedLocation = localStorage.getItem('selectedLocation');
+        const savedRoomType = localStorage.getItem('selectedRoomType');
+        const savedStartDate = localStorage.getItem('startDate');
+        const savedEndDate = localStorage.getItem('endDate');
+
+        if (savedLocation) setSelectedLocation(savedLocation);
+        if (savedRoomType) setSelectedRoomType(savedRoomType);
+        if (savedStartDate) setStartDate(new Date(savedStartDate));
+        if (savedEndDate) setEndDate(new Date(savedEndDate));
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('selectedLocation', selectedLocation);
+        localStorage.setItem('selectedRoomType', selectedRoomType);
+        if (startDate) localStorage.setItem('startDate', startDate.toISOString());
+        if (endDate) localStorage.setItem('endDate', endDate.toISOString());
+    }, [selectedLocation, selectedRoomType, startDate, endDate]);
+
 
     const handleStartDateChange = (date) => {
         setStartDate(date);
