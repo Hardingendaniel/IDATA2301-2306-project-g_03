@@ -16,7 +16,6 @@ public class Booking  {
   @ManyToOne(fetch = FetchType.EAGER)
   //@JoinColumn(name = "userId", referencedColumnName = "id")
   private User user;
-  private int totalPrice;
   @ManyToOne(fetch = FetchType.EAGER)
   //@JoinColumn(name = "hotelId", referencedColumnName = "id")
   private Hotel hotel;
@@ -66,14 +65,6 @@ public class Booking  {
 
   public Hotel getHotel() {
     return hotel;
-  }
-
-  public int getTotalPrice() {
-    return totalPrice;
-  }
-
-  public void setTotalPrice(int totalPrice) {
-    this.totalPrice = totalPrice;
   }
 
   public void setHotel(Hotel hotel) {

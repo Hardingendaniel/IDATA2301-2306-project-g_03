@@ -10,9 +10,6 @@ public class BookingDto {
   private Date startDate;
   private Date endDate;
 
-
-
-
   public BookingDto(Date startDate, Date endDate) {
     this.startDate = startDate;
     this.endDate = endDate;
