@@ -45,9 +45,22 @@ public class UserController {
    * @return List of all users currently stored in the collection
    */
   @GetMapping
-  public ResponseEntity<List<UserProfileDto>> getAll() {
-    List<UserProfileDto> users = this.userService.getAllUsers();
-    return ResponseEntity.ok(users);
+  public ResponseEntity<?> getAll() {
+    ResponseEntity<?> response;
+    User sessionUser = accessUserService.getSessionUser();
+    if (sessionUser != null) {
+      if (sessionUser.isAdmin()) {
+        List<UserProfileDto> users = this.userService.getAllUsers();
+        response = new ResponseEntity<>(users, HttpStatus.OK);
+      } else {
+        response = new ResponseEntity<>("User data for other users not accessible",
+            HttpStatus.FORBIDDEN);
+      }
+    } else {
+      response = new ResponseEntity<>("User data accessible only to authenticated users",
+          HttpStatus.UNAUTHORIZED);
+    }
+    return response;
   }
 
   @GetMapping("/{email}")
