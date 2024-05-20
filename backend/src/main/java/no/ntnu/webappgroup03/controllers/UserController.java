@@ -1,5 +1,6 @@
 package no.ntnu.webappgroup03.controllers;
 
+import java.util.List;
 import java.util.Optional;
 import no.ntnu.webappgroup03.dto.SignupDto;
 import no.ntnu.webappgroup03.dto.UserProfileDto;
@@ -44,11 +45,10 @@ public class UserController {
    * @return List of all users currently stored in the collection
    */
   @GetMapping
-  public Iterable<User> getAll() {
-    return userService.getAll();
+  public ResponseEntity<List<UserProfileDto>> getAll() {
+    List<UserProfileDto> users = this.userService.getAllUsers();
+    return ResponseEntity.ok(users);
   }
-
-
 
   @GetMapping("/{email}")
   public ResponseEntity<?> getProfileWithMail(@PathVariable String email) {

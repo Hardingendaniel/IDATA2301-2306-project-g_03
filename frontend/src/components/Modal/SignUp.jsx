@@ -1,30 +1,32 @@
 import React, {useEffect, useState} from "react";
+import {asyncApiRequest} from "../../tools/requests";
 
 export function SignUp() {
 
-    const initialFormData = {
+    const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
         email: "",
         phoneNumber: "",
         password: "",
-    };
+    });
 
-    const [formData, setFormData] = useState(initialFormData);
+    const [isFormValid, setIsFormValid] = useState(false);
     const [userCreated, setUserCreated] = useState(false);
+    const [error, setError] = useState(null);
     const [showModal, setShowModal] = useState(true);
 
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [password, setPassword] = useState("");
-
-
     useEffect(() => {
-        // Reset form data when modal is displayed
-        setFormData(initialFormData);
-    }, [showModal]);
+        checkFormValidity();
+    }, [formData]);
+
+
+    const checkFormValidity = () => {
+        const {firstName, lastName, email, phoneNumber, password} = formData;
+        setIsFormValid(
+            firstName && lastName && email && phoneNumber && password
+        );
+    };
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
@@ -36,16 +38,28 @@ export function SignUp() {
 
     const handleSignUp = async (e) => {
         e.preventDefault();
-        //TODO: Send api to backend
+        if (!isFormValid) return;
 
-    }
+        try {
+            const response = await asyncApiRequest("POST", "/signup", formData);
 
-    const isFormValid = () => {
-        const {firstName, lastName, email, phoneNumber, password} = formData;
-        return firstName && lastName && email && phoneNumber && password;
-    }
+            if (response.ok) {
+                setUserCreated(true);
+                setError(null);
+            } else {
+                setUserCreated(false);
+                setError("Sign up failed");
+            }
+        } catch (error) {
+            setUserCreated(false);
+            console.error("An error occurred:", error.message);
+        }
+    };
 
-    // Creates a new user
+    /**
+     * Creates a new user.
+     * @returns {Promise<void>}
+     */
     const handleCreateUser = async () => {
         try {
             const response = await fetch('http://localhost:8080/api/signup', {
@@ -60,7 +74,7 @@ export function SignUp() {
                 setUserCreated(true);
             } else {
                 const errorData = await response.json();
-                console.error('Error:', errorData);
+                console.error('Error creating user:', errorData);
             }
         } catch (error) {
             console.error('There was an error creating the user!', error);
@@ -76,7 +90,7 @@ export function SignUp() {
             <h3 className="font-bold text-lg">Sign up</h3>
             <div className="divider"></div>
 
-            <div className="flex flex-col">
+            <form className="flex flex-col" onSubmit={handleSignUp}>
                 <label className="input input-bordered rounded-2xl flex items-center my-4 gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                          className="w-4 h-4 opacity-70">
@@ -139,9 +153,10 @@ export function SignUp() {
                            onChange={handleInputChange} className="grow" placeholder="Password"/>
                 </label>
 
-                <button className="btn bg-main font-bold text-lg text-white rounded-2xl hover:bg-header w-full my-4"
-                        disabled={!isFormValid()}
-                        onClick={handleCreateUser}
+                <button
+                    className={`btn bg-main font-bold text-lg text-white rounded-2xl hover:bg-header w-full my-4 ${!isFormValid && 'opacity-50 cursor-no-allowed'}`}
+                        type="submit"
+                        disabled={!isFormValid}
                 >
                     Create User
                 </button>
@@ -150,7 +165,7 @@ export function SignUp() {
                         User successfully created!
                     </div>
                 )}
-            </div>
+            </form>
         </div>
-    )
+    );
 }

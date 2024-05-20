@@ -15,6 +15,7 @@ function HotelTable({ hotels }) {
             <thead className="uppercase">
             <tr>
                 <th></th>
+                <lh>Hotel ID</lh>
                 <th>Hotel name</th>
                 <th>Description</th>
                 <th>Status</th>
@@ -25,21 +26,16 @@ function HotelTable({ hotels }) {
             <tbody>
             {hotels.map((hotel, index) => (
                 <tr key={index} className="hover:bg-tableHover">
-                    <th>
-                        <label>
-                            <input type="checkbox" className="checkbox"/>
-                        </label>
-                    </th>
+                    <th></th>
                     <td>
                         <div className="flex items-center gap-3">
-                            <div className="avatar">
-                                <div className="mask mask-squircle w-12 h-12">
-                                    <img src={img2}
-                                         alt={`hotel${index + 1}`}/>
-                                </div>
-                            </div>
+                            <div className="font-bold">{hotel.id}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div className="flex items-center gap-3">
                             <div>
-                                <div className="font-bold">{hotel.hotelName}</div>
+                                <div className="font-medium">{hotel.hotelName}</div>
                                 <div className="text-sm opacity-50">{hotel.location}</div>
                             </div>
                         </div>
@@ -53,10 +49,10 @@ function HotelTable({ hotels }) {
                         <span className="badge badge-ghost badge-md">Active</span>
                     </td>
                     <td>
-                        {hotel.price}
+                        NOK {hotel.price}
                     </td>
                     <th>
-                        <EditButton />
+                        <EditButton/>
                     </th>
                 </tr>
             ))}
