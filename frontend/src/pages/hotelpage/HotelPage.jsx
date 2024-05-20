@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import map from '../../img/7652611.jpg';
 import { useLocation, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import {useUser} from "../../UserContext";
 
 export function HotelPage() {
     const { id } = useParams();
     const location = useLocation();
     const [hotel, setHotel] = useState(location.state?.hotel || null);
+    const {user, logout} = useUser();
 
     const sectionOverviewRef = useRef();
     const sectionRoomsRef = useRef();
@@ -15,6 +17,7 @@ export function HotelPage() {
     const sectionLocationRef = useRef();
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
+    const [bookingInfo, setBookingInfo] = useState();
 
     const handleStartDateChange = (date) => {
         setStartDate(date);
@@ -86,6 +89,38 @@ export function HotelPage() {
             window.removeEventListener('scroll', stickNavbar);
         };
     }, []);
+
+    const handleBooking = async () => {
+        if (!user?.roles.includes("ROLE_USER")) {
+            alert('Please log in to book now.');
+            return;
+        }
+
+        try {
+            const response = await fetch('http://localhost:8080/api/bookings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    hotel: { id: id },
+                    startDate: bookingInfo.startDate,
+                    endDate: bookingInfo.endDate,
+                    totalPrice: bookingInfo.totalPrice,
+                }),
+            });
+
+            if (response.ok) {
+                alert('Booking successful!');
+            } else {
+                alert('Booking failed.');
+            }
+        } catch (error) {
+            console.error('Failed to book the hotel:', error);
+        }
+    };
+
+
 
     return (
         <div className="flex w-4/5 flex-col mx-auto">
@@ -250,7 +285,7 @@ export function HotelPage() {
                                     NOK {hotel.price}
                                     <span className="font-normal text-font text-base">/night</span>
                                 </p>
-                                <div className="btn bg-main text-white rounded-2xl hover:bg-header m-auto items-center">Book
+                                <div className="btn bg-main text-white rounded-2xl hover:bg-header m-auto items-center" onClick={handleBooking}>Book
                                     now
                                 </div>
                             </div>

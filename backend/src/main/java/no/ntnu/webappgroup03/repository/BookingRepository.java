@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Service
 public interface BookingRepository extends CrudRepository<Booking, Integer> {
-  Optional<Booking> findById(int id);
+  Optional<Booking> findById(long id);
 }
