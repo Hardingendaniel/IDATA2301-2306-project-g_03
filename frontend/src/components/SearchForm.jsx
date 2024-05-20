@@ -49,6 +49,15 @@ function SearchForm() {
         });
     };
 
+    const handleStartDateChange = (date) => {
+        setStartDate(date);
+        // Automatically set endDate to one day after startDate
+        const nextDay = new Date(date);
+        nextDay.setDate(nextDay.getDate() + 1);
+        setEndDate(nextDay);
+    };
+
+
     return (
         <form className="justify-center w-11/12 lg:w-11/12 mb-8" onSubmit={handleFormSubmit}>
             <div className="join w-full flex justify-center">
@@ -65,7 +74,7 @@ function SearchForm() {
 
                 <DatePicker
                     selected={startDate}
-                    onChange={(date) => setStartDate(date)}
+                    onChange={handleStartDateChange}
                     placeholderText="Check In Date"
                     className="custom-datepicker join-item h-14"
                     minDate={new Date()}

@@ -16,6 +16,7 @@ public class Booking  {
   @ManyToOne(fetch = FetchType.EAGER)
   //@JoinColumn(name = "userId", referencedColumnName = "id")
   private User user;
+  private int totalPrice;
   @ManyToOne(fetch = FetchType.EAGER)
   //@JoinColumn(name = "hotelId", referencedColumnName = "id")
   private Hotel hotel;
@@ -35,12 +36,13 @@ public class Booking  {
    * @param startDate the startDate for booking.
    * @param endDate the endDate for booking.
    */
-  public Booking(long id, User user, Hotel hotel, Date startDate, Date endDate) {
+  public Booking(long id, User user, Hotel hotel, Date startDate, Date endDate, int totalPrice) {
     this.id = id;
     this.user = user;
     this.hotel = hotel;
     this.startDate = startDate;
     this.endDate = endDate;
+    this.totalPrice = totalPrice;
   }
 
   public long getId() {
@@ -77,6 +79,14 @@ public class Booking  {
 
   public Hotel getHotel() {
     return hotel;
+  }
+
+  public int getTotalPrice() {
+    return totalPrice;
+  }
+
+  public void setTotalPrice(int totalPrice) {
+    this.totalPrice = totalPrice;
   }
 
   public void setHotel(Hotel hotel) {

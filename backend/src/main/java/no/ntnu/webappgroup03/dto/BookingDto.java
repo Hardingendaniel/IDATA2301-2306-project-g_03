@@ -14,23 +14,26 @@ public class BookingDto {
   private User user;
   private Date startDate;
   private Date endDate;
+  private int totalPrice;
 
 
 
-  public BookingDto(long id, Hotel hotel, User user, Date startDate, Date endDate ) {
+  public BookingDto(long id, Hotel hotel, User user, Date startDate, Date endDate, int totalPrice ) {
     this.id = id;
     this.hotel = hotel;
     this.user = user;
     this.startDate = startDate;
     this.endDate = endDate;
+    this.totalPrice = totalPrice;
   }
 
-  public void setBookingDetails(long id, Hotel hotel, User user, Date startDate, Date endDate)  {
+  public void setBookingDetails(long id, Hotel hotel, User user, Date startDate, Date endDate, int totalPrice)  {
     this.id = id;
     this.hotel = hotel;
     this.user = user;
     this.startDate = startDate;
     this.endDate = endDate;
+    this.totalPrice = totalPrice;
   }
 
   public long getId() {
@@ -51,6 +54,10 @@ public class BookingDto {
 
   public Date getEndDate() {
     return endDate;
+  }
+
+  public int getTotalPrice() {
+    return totalPrice;
   }
 
   public BookingDto() {

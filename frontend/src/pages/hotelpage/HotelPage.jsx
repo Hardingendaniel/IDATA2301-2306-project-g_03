@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import map from '../../img/7652611.jpg';
 import { useLocation, useParams } from "react-router-dom";
+import DatePicker from "react-datepicker";
 
 export function HotelPage() {
     const { id } = useParams();
@@ -12,6 +13,21 @@ export function HotelPage() {
     const sectionReviewsRef = useRef();
     const sectionAboutRef = useRef();
     const sectionLocationRef = useRef();
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+
+    const handleStartDateChange = (date) => {
+        setStartDate(date);
+        // Automatically set endDate to one day after startDate
+        const nextDay = new Date(date);
+        nextDay.setDate(nextDay.getDate() + 1);
+        setEndDate(nextDay);
+    };
+
+    const handleEndDateChange = (date) => {
+        setEndDate(date);
+    };
+
 
     useEffect(() => {
         async function fetchHotel() {
@@ -25,6 +41,15 @@ export function HotelPage() {
         }
         fetchHotel();
     }, [id]);
+
+    const calculateTotalPrice = () => {
+        if (startDate && endDate) {
+            const oneDay = 24 * 60 *60 * 1000;
+            const days = Math.round((Math.abs(endDate-startDate)/oneDay));
+            return days * hotel.price;
+        }
+        return 0;
+    }
 
     const scrollToSection = (ref) => {
         ref.current.scrollIntoView({ behavior: 'smooth' });
@@ -200,7 +225,6 @@ export function HotelPage() {
                         <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionRoomsRef)}>Rooms</button>
                         <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionReviewsRef)}>Reviews</button>
                         <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionAboutRef)}>About</button>
-                        <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionLocationRef)}>Location</button>
                     </div>
                     <div ref={sectionOverviewRef} className="flex flex-row pt-16">
                         <div className="divider"></div>
@@ -230,20 +254,35 @@ export function HotelPage() {
                                     now
                                 </div>
                             </div>
-                            <div className="font-semibold text-lg m-2">Selected:</div>
-                            <div className="divider" />
+
                             <div className="flex flex-col px-2">
                                 <div className="flex py-4">
                                     <h2 className="font-semibold pr-2">Hotel:</h2>
                                     <div>{hotel.hotelName}</div>
                                 </div>
-                                <div className="flex py-4">
-                                    <h2 className="font-semibold pr-2">Start date:</h2>
-                                    <div>"START DATE"</div>
+                                <div className="flex items-center py-4">
+                                    <h2 className="font-semibold pr-5">Start date:</h2>
+                                    <DatePicker
+                                        selected={startDate}
+                                        onChange={handleStartDateChange}
+                                        placeholderText="Check In Date"
+                                        className="custom-datepicker join-item h-14"
+                                        minDate={new Date()}
+                                    />
                                 </div>
-                                <div className="flex py-4">
-                                    <h2 className="font-semibold pr-2">End date:</h2>
-                                    <div>"END DATE"</div>
+                                <div className="flex items-center py-4">
+                                    <h2 className="font-semibold pr-5">End date:</h2>
+                                    <DatePicker
+                                        selected={endDate}
+                                        onChange={handleEndDateChange}
+                                        placeholderText="Check Out Date"
+                                        className="custom-datepicker join-item h-14"
+                                        minDate={startDate || new Date()}
+                                    />
+                                </div>
+                                <div className="flex items-center py-4">
+                                    <h2 className="font-semibold pr-5">Total Price/NOK:</h2>
+                                    <div>{calculateTotalPrice()}</div>
                                 </div>
                             </div>
                         </div>
@@ -263,7 +302,7 @@ export function HotelPage() {
                         <div className="flex justify-evenly">
                             <div className="rounded-2xl border p-2 w-72">
                                 <h2 className="font-semibold">Review 1</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a mauris facilisis diam lacinia interdum. Aliquam ultrices quam quis viverra molestie. Vivamus ultricies diam id nulla tempor gravida.</p>
+                                <p>{hotel.review}</p>
                             </div>
                             <div className="rounded-2xl border p-2 w-72">
                                 <h2 className="font-semibold">Review 2</h2>
@@ -279,26 +318,8 @@ export function HotelPage() {
                     <div ref={sectionAboutRef} className="pt-10">
                         <div className="divider"></div>
                         <h1 className="text-2xl font-bold">About</h1>
-                        <div className="">
+                        <div className="pb-6">
                             Welcome to this hotel. Hope you enjoy yourself at your stay
-                        </div>
-                    </div>
-
-                    <div ref={sectionLocationRef} className="pt-10">
-                        <div className="divider"></div>
-                        <h1 className="text-2xl font-bold">Location</h1>
-                        <div className="w-96 m-2 relative overflow-hidden flex items-center justify-center flex-col">
-                            <img
-                                src={map}
-                                alt="map"
-                                className="rounded-2xl object-cover"
-                            />
-                            <div
-                                className="absolute w-full h-full top-0 bottom-0 left-0 right-0 flex items-center justify-center">
-                                <div className="btn bg-main roudned-2xl text-white font-bold text-xl hover:bg-header">Show on
-                                    map
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </>

@@ -46,7 +46,7 @@ public class BookingController {
     Optional<Booking> booking = this.bookingService.getOne(id);
     if (booking.isPresent()) {
       BookingDto bookingDto = new BookingDto(booking.get().getId(), booking.get().getHotel(), booking.get().getUser(),
-          booking.get().getStartDate(), booking.get().getEndDate());
+          booking.get().getStartDate(), booking.get().getEndDate(), booking.get().getTotalPrice());
       response = new ResponseEntity<>(bookingDto, HttpStatus.OK);
     } else {
       response = new ResponseEntity<>("Booking with id " + id + "not found", HttpStatus.NOT_FOUND);
@@ -67,7 +67,7 @@ public class BookingController {
     if (sessionUser != null ) {
       if (bookingDto != null) {
         Booking booking = new Booking(bookingDto.getId(),bookingDto.getUser(), bookingDto.getHotel(),
-            bookingDto.getStartDate(), bookingDto.getEndDate());
+            bookingDto.getStartDate(), bookingDto.getEndDate(), bookingDto.getTotalPrice());
         this.bookingService.add(booking);
         response = new ResponseEntity<>(booking, HttpStatus.OK);
       } else {
