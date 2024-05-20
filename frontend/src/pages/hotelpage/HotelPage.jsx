@@ -9,12 +9,10 @@ export function HotelPage() {
     const location = useLocation();
     const [hotel, setHotel] = useState(location.state?.hotel || null);
     const {user, logout} = useUser();
-
     const sectionOverviewRef = useRef();
     const sectionRoomsRef = useRef();
     const sectionReviewsRef = useRef();
     const sectionAboutRef = useRef();
-    const sectionLocationRef = useRef();
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [bookingInfo, setBookingInfo] = useState();
@@ -44,6 +42,16 @@ export function HotelPage() {
         }
         fetchHotel();
     }, [id]);
+
+    useEffect(() => {
+        // Retrieve data from localStorage
+        const savedStartDate = localStorage.getItem('startDate');
+        const savedEndDate = localStorage.getItem('endDate');
+
+        if (savedStartDate) setStartDate(new Date(savedStartDate));
+        if (savedEndDate) setEndDate(new Date(savedEndDate));
+    }, []);
+
 
     const calculateTotalPrice = () => {
         if (startDate && endDate) {
