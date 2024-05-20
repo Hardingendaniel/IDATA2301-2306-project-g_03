@@ -1,7 +1,10 @@
 import React from "react";
 import EditButton from "../../components/EditButton";
 
-function UserTable() {
+function UserTable( {users} ) {
+
+
+
     return (
         <table className="table table-lg">
             <caption
@@ -18,227 +21,37 @@ function UserTable() {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
-                <th>Password</th>
                 <th>Role</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-            {/* row 1 */}
-            <tr className="hover:bg-tableHover">
-                <th>
-                    <label>
-                        <input type="checkbox" className="checkbox"/>
-                    </label>
-                </th>
-                <td>
-                    <div className="flex items-center gap-3">
-                        <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                     className="w-12 h-12">
-                                    <path fillRule="evenodd"
-                                          d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-                                          clipRule="evenodd"/>
-                                </svg>
-                            </div>
+            {users.map((user) => (
+                <tr className="hover:bg-tableHover">
+                    <th>
+                    </th>
+                    <td>
+                        <div className="flex items-center gap-3">
+                            <div className="font-bold">{user.id}</div>
                         </div>
-                        <div>
-                            <div className="font-bold">1</div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    Chuck Norris
-                </td>
-                <td>
-                    Chuck_Norris@stay-finder.com
-                </td>
-                <td>
-                    +47 999 88 777
-                </td>
-                <td>
-                    Nunchucks!79
-                </td>
-                <td>
-                    <span className="badge badge-ghost badge-md">Admin</span>
-                </td>
-                <td>
-                    <EditButton />
-                </td>
-            </tr>
-            {/* row 2 */}
-            <tr className="hover:bg-tableHover">
-                <th>
-                    <label>
-                        <input type="checkbox" className="checkbox"/>
-                    </label>
-                </th>
-                <td>
-                    <div className="flex items-center gap-3">
-                        <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                     className="w-12 h-12 text-main">
-                                    <path fillRule="evenodd"
-                                          d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-                                          clipRule="evenodd"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="font-bold">2</div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    John Doe
-                </td>
-                <td>
-                    john.doe@gmail.com
-                </td>
-                <td>
-                    +47 123 45 678
-                </td>
-                <td>
-                    johnDoeIsCool
-                </td>
-                <td>
-                    <span className="badge badge-ghost badge-md">User</span>
-                </td>
-                <td>
-                    <EditButton />
-                </td>
-            </tr>
-            {/* row 3 */}
-            <tr className="hover:bg-tableHover">
-                <th>
-                    <label>
-                        <input type="checkbox" className="checkbox"/>
-                    </label>
-                </th>
-                <td>
-                    <div className="flex items-center gap-3">
-                        <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                     className="w-12 h-12 text-font">
-                                    <path fillRule="evenodd"
-                                          d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-                                          clipRule="evenodd"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="font-bold">3</div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    Sander Grimstad
-                </td>
-                <td>
-                    sander.grimstad00@gmail.com
-                </td>
-                <td>
-                    +47 986 28 486
-                </td>
-                <td>
-                    DetteErEtPassord123!
-                </td>
-                <td>
-                    <span className="badge badge-ghost badge-md">Admin</span>
-                </td>
-                <td>
-                    <EditButton />
-                </td>
-            </tr>
-            {/* row 4 */}
-            <tr className="hover:bg-tableHover">
-                <th>
-                    <label>
-                        <input type="checkbox" className="checkbox"/>
-                    </label>
-                </th>
-                <td>
-                    <div className="flex items-center gap-3">
-                        <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                     className="w-12 h-12 text-main">
-                                    <path fillRule="evenodd"
-                                          d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-                                          clipRule="evenodd"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="font-bold">4</div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    Daniel Kjøsi Eikås
-                </td>
-                <td>
-                    daniea@stud.ntnu.no
-                </td>
-                <td>
-                    +47 999 88 777
-                </td>
-                <td>
-                    DanielPassord6969!
-                </td>
-                <td>
-                    <span className="badge badge-ghost badge-md">User</span>
-                </td>
-                <td>
-                    <EditButton />
-                </td>
-            </tr>
-            {/* row 5 */}
-            <tr className="hover:bg-tableHover">
-                <th>
-                    <label>
-                        <input type="checkbox" className="checkbox"/>
-                    </label>
-                </th>
-                <td>
-                    <div className="flex items-center gap-3">
-                        <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                     className="w-12 h-12">
-                                    <path fillRule="evenodd"
-                                          d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-                                          clipRule="evenodd"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="font-bold">5</div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    Sten "The Rock" Halse
-                </td>
-                <td>
-                    therock@sten.no
-                </td>
-                <td>
-                    +47 987 65 432
-                </td>
-                <td>
-                    stenTheRockHalse123!
-                </td>
-                <td>
-                    <span className="badge badge-ghost badge-md">User</span>
-                </td>
-                <td>
-                    <EditButton />
-                </td>
-            </tr>
+                    </td>
+                    <td>
+                        {user.firstName} {user.lastName}
+                    </td>
+                    <td>
+                        {user.email}
+                    </td>
+                    <td>
+                        +47 {user.phoneNumber}
+                    </td>
+                    <td>
+                        <span className="badge badge-ghost badge-md">{user.roles}</span>
+                    </td>
+                    <td>
+                        <EditButton/>
+                    </td>
+                </tr>
+            ))}
             </tbody>
         </table>
     )

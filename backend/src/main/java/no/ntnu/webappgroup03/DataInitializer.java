@@ -45,6 +45,7 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
     this.loadUserRoles();
     this.loadUsers();
     this.loadHotels();
+    this.loadBookings();
     this.logger.info("Done importing data");
   }
 
@@ -191,20 +192,22 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
     if (bookingIt.hasNext()) {
       isEmpty = false;
     }
-    this.logger.info("Loading hotel data...");
+    this.logger.info("Loading booking data...");
     if (isEmpty) {
       // Hotel 1:
-      Booking booking1 = new Booking(new User("chuck_norris@stay-finder.com", "Nunchucks2024"), new Hotel("Stavanger Hotel",
-          "Welcome to this hotel. Hope you enjoy your stay", "Stavanger",
-          "Double", 6200, 4, "VERY GOOD HOTEL"), new Date(1716190510), new Date(1716363310), 5000);
+      Booking booking1 = new Booking( new Date(1716190510000l), new Date(1716201314000l));
 
-      Booking booking2 = new Booking(new User("dave_dangerous@stay-finder.com", "Dangerous2024"), new Hotel("Totens Fineste",
-          "Welcome to this hotel. Hope you enjoy your stay", "Gjøvik",
-          "Single", 3999, 2, "VERY GOOD HOTEL"), new Date(1716190510), new Date(1716363310), 5000);
+      Booking booking2 = new Booking(new Date(1716190510000l), new Date(1716806114000l));
 
+
+      booking1.setUser(this.userService.findUserByEmail("chuck_norris@stay-finder.com").get());
+      booking2.setUser(this.userService.findUserByEmail("dave_dangerous@stay-finder.com").get());
+      booking1.setHotel(this.hotelService.getOne(1).get());
+      booking2.setHotel(this.hotelService.getOne(2).get());
 
       this.bookingService.add(booking1);
       this.bookingService.add(booking2);
+
 
 
       this.logger.info("Done loading booking data");

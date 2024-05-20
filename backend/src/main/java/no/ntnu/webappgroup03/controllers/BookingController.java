@@ -7,6 +7,7 @@ import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.model.User;
 import no.ntnu.webappgroup03.service.AccessUserService;
 import no.ntnu.webappgroup03.service.BookingService;
+import no.ntnu.webappgroup03.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,8 @@ public class BookingController {
   private BookingService bookingService;
   @Autowired
   private AccessUserService userService ;
+  @Autowired
+  private HotelService hotelService;
 
   /**
    * Get all bookings.
@@ -45,8 +48,8 @@ public class BookingController {
     ResponseEntity<?> response;
     Optional<Booking> booking = this.bookingService.getOne(id);
     if (booking.isPresent()) {
-      BookingDto bookingDto = new BookingDto(booking.get().getId(), booking.get().getHotel(), booking.get().getUser(),
-          booking.get().getStartDate(), booking.get().getEndDate(), booking.get().getTotalPrice());
+      BookingDto bookingDto = new BookingDto(
+          booking.get().getStartDate(), booking.get().getEndDate());
       response = new ResponseEntity<>(bookingDto, HttpStatus.OK);
     } else {
       response = new ResponseEntity<>("Booking with id " + id + "not found", HttpStatus.NOT_FOUND);
@@ -60,16 +63,27 @@ public class BookingController {
    * @param bookingDto booking wanted to create.
    * @return HTTP 200 OK or error code with error message.
    */
-  @PostMapping
-  public ResponseEntity<?> add(@RequestBody BookingDto bookingDto) {
+  @PostMapping("/{hotelId}")
+  public ResponseEntity<?> add(@PathVariable int hotelId, @RequestBody BookingDto bookingDto) {
     ResponseEntity<?> response;
     User sessionUser = this.userService.getSessionUser();
     if (sessionUser != null ) {
       if (bookingDto != null) {
-        Booking booking = new Booking(bookingDto.getUser(), bookingDto.getHotel(),
-            bookingDto.getStartDate(), bookingDto.getEndDate(), bookingDto.getTotalPrice());
-        this.bookingService.add(booking);
-        response = new ResponseEntity<>(booking, HttpStatus.OK);
+        Booking booking = new Booking(
+            bookingDto.getStartDate(), bookingDto.getEndDate());
+        Optional<Hotel> hotel = hotelService.getOne(hotelId);
+        if (hotel.isPresent()) {
+          booking.setHotel(hotel.get());
+          try {
+            this.bookingService.add(booking);
+            response = new ResponseEntity<>(booking, HttpStatus.OK);
+          } catch (IllegalArgumentException e) {
+            response = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+          }
+
+        } else {
+          response = new ResponseEntity<>("Hotel Not found", HttpStatus.NOT_FOUND);
+        }
       } else {
         response = new ResponseEntity<>("Booking data not supplied", HttpStatus.BAD_REQUEST);
       }

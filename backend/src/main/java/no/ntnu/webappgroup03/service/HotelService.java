@@ -84,26 +84,6 @@ public class HotelService {
   }
 
   /**
-   * Filters the hotels based on location
-   *
-   * @param location the location of the hotel
-   * @return hotelsByLocation the hotels with desired location.
-   */
-  public Iterable<Hotel> getAllHotelsByLocation(String location) {
-    //Retrieve all hotels from the repository
-    Iterable<Hotel> allHotels = getAll();
-
-    //Filter hotels by location
-    List<Hotel> hotelsByLocation = new ArrayList<>();
-    for (Hotel hotel : allHotels) {
-      if (hotel.getLocation().equalsIgnoreCase(location)) {
-        hotelsByLocation.add(hotel);
-      }
-    }
-    return hotelsByLocation;
-  }
-
-  /**
    * Look up Hotel in the application state.
    *
    * @param id ID of the Hotel to look up
@@ -144,38 +124,5 @@ public class HotelService {
       hotelRepository.deleteById(id);
     }
     return hotel.isPresent();
-  }
-
-  /**
-   * Update a hotel in the application state (persist in the database).
-   *
-   * @param hotel Hotel to update
-   * @return null on success, error message on error
-   */
-  public String update(Integer id, Hotel hotel) {
-    // Error checking first
-    String errorMessage = null;
-    Hotel existingHotel = findById(id);
-    if (existingHotel == null) {
-      errorMessage = "No hotel with id " + id + " found";
-    } else if (hotel == null || !hotel.isValid()) {
-      errorMessage = "Wrong data in request body";
-    } else if (hotel.getId() != id) {
-      errorMessage = "Hotel ID in the URL does not match the ID in JSON data (response body)";
-    }
-
-    if (errorMessage == null) {
-      hotelRepository.save(hotel);
-    }
-    return errorMessage;
-  }
-
-  /**
-   * Get the number of hotels in the database.
-   *
-   * @return The total number of hotels stored in the database.
-   */
-  public long GetCount() {
-    return hotelRepository.count();
   }
 }

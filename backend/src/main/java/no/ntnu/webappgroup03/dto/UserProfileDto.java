@@ -1,5 +1,7 @@
 package no.ntnu.webappgroup03.dto;
 
+import java.util.List;
+
 /**
  * Data transfer object (DTO) for submitting changes to user profile data.
  */
@@ -9,8 +11,19 @@ public class UserProfileDto {
   private String lastName;
   private String email;
   private int phoneNumber;
-
   private boolean active = true;
+  private List<String> roles;
+
+  public UserProfileDto(int id, String firstName, String lastName, String email, int phoneNumber,
+      boolean active, List<String> roles) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.phoneNumber = phoneNumber;
+    this.active = active;
+    this.roles = roles;
+  }
 
   public UserProfileDto(int id, String firstName, String lastName, String email, int phoneNumber,
       boolean active) {
@@ -20,6 +33,10 @@ public class UserProfileDto {
     this.email = email;
     this.phoneNumber = phoneNumber;
     this.active = active;
+  }
+
+  public UserProfileDto() {
+    //Intentionally left blank
   }
 
   public int getId() {
@@ -42,22 +59,11 @@ public class UserProfileDto {
     return phoneNumber;
   }
 
-
   public boolean isActive() {
     return active;
   }
 
-  public UserProfileDto() {
-  }
-
-
-  public void setUserDetails(int id, String firstName, String lastName, String email, int phoneNumber,
-       boolean active) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.phoneNumber = phoneNumber;
-    this.active = active;
+  public List<String> getRoles() {
+    return roles;
   }
 }

@@ -63,6 +63,7 @@ public class SecurityConfiguration {
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/hotels/**").permitAll())
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/users/**").permitAll())
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/authenticate").permitAll())
+        .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/bookings/**").permitAll())
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/signup").permitAll())
         // Products are also available to everyone
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/products").permitAll())
