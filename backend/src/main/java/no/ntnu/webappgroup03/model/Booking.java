@@ -32,12 +32,10 @@ public class Booking  {
   /**
    * Constructor for booking
    *
-   * @param id the id for booking.
    * @param startDate the startDate for booking.
    * @param endDate the endDate for booking.
    */
-  public Booking(long id, User user, Hotel hotel, Date startDate, Date endDate, int totalPrice) {
-    this.id = id;
+  public Booking(User user, Hotel hotel, Date startDate, Date endDate, int totalPrice) {
     this.user = user;
     this.hotel = hotel;
     this.startDate = startDate;

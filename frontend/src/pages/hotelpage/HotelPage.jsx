@@ -91,7 +91,7 @@ export function HotelPage() {
     }, []);
 
     const handleBooking = async () => {
-        if (!user || user.role !== 'user') {
+        if (!user?.roles.includes("ROLE_USER")) {
             alert('Please log in to book now.');
             return;
         }

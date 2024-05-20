@@ -66,7 +66,7 @@ public class BookingController {
     User sessionUser = this.userService.getSessionUser();
     if (sessionUser != null ) {
       if (bookingDto != null) {
-        Booking booking = new Booking(bookingDto.getId(),bookingDto.getUser(), bookingDto.getHotel(),
+        Booking booking = new Booking(bookingDto.getUser(), bookingDto.getHotel(),
             bookingDto.getStartDate(), bookingDto.getEndDate(), bookingDto.getTotalPrice());
         this.bookingService.add(booking);
         response = new ResponseEntity<>(booking, HttpStatus.OK);

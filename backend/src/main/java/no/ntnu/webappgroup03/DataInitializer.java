@@ -1,11 +1,15 @@
 package no.ntnu.webappgroup03;
 
+import java.sql.Date;
 import java.util.Iterator;
+
+import no.ntnu.webappgroup03.model.Booking;
 import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.model.Role;
 import no.ntnu.webappgroup03.model.User;
 import no.ntnu.webappgroup03.repository.RoleRepository;
 import no.ntnu.webappgroup03.service.AccessUserService;
+import no.ntnu.webappgroup03.service.BookingService;
 import no.ntnu.webappgroup03.service.HotelService;
 import no.ntnu.webappgroup03.service.UserService;
 import org.slf4j.Logger;
@@ -26,6 +30,8 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
   private AccessUserService accessUserService;
   @Autowired
   private HotelService hotelService;
+  @Autowired
+  private BookingService bookingService;
   private final Logger logger = LoggerFactory.getLogger(DataInitializer.class);
 
   /**
@@ -177,4 +183,36 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
       this.logger.info("Hotels already in the database, not loading data");
     }
   }
+
+  private void loadBookings() {
+    boolean isEmpty = true;
+    Iterable<Booking> existingBooking = this.bookingService.getAll();
+    Iterator<Booking> bookingIt = existingBooking.iterator();
+    if (bookingIt.hasNext()) {
+      isEmpty = false;
+    }
+    this.logger.info("Loading hotel data...");
+    if (isEmpty) {
+      // Hotel 1:
+      Booking booking1 = new Booking(new User("chuck_norris@stay-finder.com", "Nunchucks2024"), new Hotel("Stavanger Hotel",
+          "Welcome to this hotel. Hope you enjoy your stay", "Stavanger",
+          "Double", 6200, 4, "VERY GOOD HOTEL"), new Date(1716190510), new Date(1716363310), 5000);
+
+      Booking booking2 = new Booking(new User("dave_dangerous@stay-finder.com", "Dangerous2024"), new Hotel("Totens Fineste",
+          "Welcome to this hotel. Hope you enjoy your stay", "Gjøvik",
+          "Single", 3999, 2, "VERY GOOD HOTEL"), new Date(1716190510), new Date(1716363310), 5000);
+
+
+      this.bookingService.add(booking1);
+      this.bookingService.add(booking2);
+
+
+      this.logger.info("Done loading booking data");
+    } else {
+      this.logger.info("Bookings already in the database, not loading data");
+    }
+
+  }
+
+
 }
