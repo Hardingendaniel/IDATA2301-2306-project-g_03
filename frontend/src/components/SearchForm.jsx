@@ -59,10 +59,10 @@ function SearchForm() {
 
 
     return (
-        <form className="justify-center w-11/12 lg:w-11/12 mb-8" onSubmit={handleFormSubmit}>
+        <form className="justify-center w-full mb-8" onSubmit={handleFormSubmit}>
             <div className="join w-full flex justify-center">
                 <select
-                    className='w-1/5 join-item rounded-s-2xl'
+                    className='w-1/5 join-item rounded-s-2xl pl-2'
                     value={selectedLocation}
                     onChange={(e) => setSelectedLocation(e.target.value)}
                 >
@@ -76,7 +76,7 @@ function SearchForm() {
                     selected={startDate}
                     onChange={handleStartDateChange}
                     placeholderText="Check In Date"
-                    className="custom-datepicker join-item h-14"
+                    className="custom-datepicker pl-2 join-item h-14 border-x 2xl:w-64 lg:w-40 md:w-24 w-14"
                     minDate={new Date()}
                 />
 
@@ -84,12 +84,12 @@ function SearchForm() {
                     selected={endDate}
                     onChange={(date) => setEndDate(date)}
                     placeholderText="Check Out Date"
-                    className="custom-datepicker join-item h-14"
+                    className="custom-datepicker pl-2 join-item h-14 border-x 2xl:w-64 lg:w-40 md:w-24 w-14"
                     minDate={startDate || new Date()}
                 />
 
                 <select
-                    className='join-item w-1/5'
+                    className='join-item w-1/5 pl-2'
                     value={selectedRoomType}
                     onChange={(e) => setSelectedRoomType(e.target.value)}
                 >
