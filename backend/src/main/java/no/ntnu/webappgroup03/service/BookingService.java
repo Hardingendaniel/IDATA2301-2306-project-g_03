@@ -1,7 +1,7 @@
 package no.ntnu.webappgroup03.service;
 
+import no.ntnu.webappgroup03.dto.BookingDto;
 import no.ntnu.webappgroup03.model.Booking;
-import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,21 +42,39 @@ public class BookingService {
     return this.bookingRepository.findById(id);
   }
 
+
+  /**
+   * Updates booking information for a booking.
+   *
+   * @param id id of the hotel to update
+   * @param bookingData Hotel data to set for the user
+   * @return True on success, false otherwise
+   */
+  public boolean updateBooking(int id, BookingDto bookingData) {
+    Optional<Booking> booking = this.bookingRepository.findById(id);
+    boolean updated;
+    if (booking.isPresent()) {
+      Booking existingBooking = booking.get();
+      existingBooking.setStartDate(bookingData.getStartDate());
+      existingBooking.setEndDate(bookingData.getEndDate());
+      updated = true;
+    } else {
+      updated = false;
+    }
+    return updated;
+  }
+
   /**
    * Add a booking to the application state (persist in the database).
    *
    * @param booking to persist
    * @return true when Booking added, false on error
    */
-  public boolean add(Booking booking) {
-    boolean added = false;
-    Booking existingBooking = findById((int) booking.getId());
-    if (existingBooking == null) {
-      bookingRepository.save(booking);
-      added = true;
+  public void add(Booking booking) {
+    if (!booking.isValid()) {
+      throw new IllegalArgumentException("Booking not valid");
     }
-
-    return added;
+      bookingRepository.save(booking);
   }
 
   /**
