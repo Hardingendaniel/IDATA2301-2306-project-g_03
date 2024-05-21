@@ -305,11 +305,15 @@ export function HotelPage() {
                         </div>
                         <div className="w-96 border rounded-2xl m-2">
                             <div className="flex bg-lightblue rounded-2xl w-full h-24 border">
-                                <p className="text-2xl font-black m-auto items-center">
-                                    NOK {hotel.price}
-                                    <span className="font-normal text-font text-base">/night</span>
-                                </p>
-                                <div className="btn bg-main text-white rounded-2xl hover:bg-header m-auto items-center" onClick={handleBooking}>Book
+                                <div className="flex flex-col m-auto">
+                                    <p className="text-2xl font-black m-auto items-center">
+                                        NOK {hotel.price}
+                                        <span className="font-normal text-font text-base">/night</span>
+                                    </p>
+                                    <div className=" font-semibold">{hotel.providers}</div>
+                                </div>
+                                <div className="btn bg-main text-white rounded-2xl hover:bg-header m-auto items-center"
+                                     onClick={handleBooking}>Book
                                     now
                                 </div>
                             </div>

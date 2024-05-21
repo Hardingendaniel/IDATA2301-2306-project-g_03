@@ -82,11 +82,19 @@ const BrowsePage = () => {
                             </label>
                         </div>
                         <div className="divider"></div>
-                        <div>
-                            <h3 className="font-semibold text-base mx-1 mb-1">Price:</h3>
-                            <div className="h-full">
-                            <input type="range" min="0" max="100" className="w-full h-4 bg-main rounded-full"/>
-                            </div>
+                        <div className="">
+                            <h3 className="font-semibold text-base mx-1 mb-1">Providers:</h3>
+                            <select className="select select-bordered w-full max-w-xs">
+                                <option disabled selected>Select Provider</option>
+                                <option>Booking.com</option>
+                                <option>Agoda</option>
+                                <option>Momondo</option>
+                                <option>Airbnb</option>
+                                <option>Kayak</option>
+                                <option>Hotels.com</option>
+                                <option>Tripadvisor</option>
+                                <option>Trip.com</option>
+                            </select>
                         </div>
 
                         <div className="divider"></div>
@@ -138,8 +146,7 @@ const BrowsePage = () => {
 
                 <div className="basis-3/4 col-span-2 px-4 py-4">
                     <div>
-                        <h2 className="text-font font-semibold">Results from {locationState.location}:
-                            {filteredHotels.length || 0} {filteredHotels.length === 1 ? "property" : "properties"} found</h2>
+                        <h2 className="text-font font-semibold">Results from {locationState.location}: {filteredHotels.length || 0} {filteredHotels.length === 1 ? "property" : "properties"} found</h2>
 
                         <div className="dropdown dropdown-bottom">
                             <div tabIndex={0} role="button"

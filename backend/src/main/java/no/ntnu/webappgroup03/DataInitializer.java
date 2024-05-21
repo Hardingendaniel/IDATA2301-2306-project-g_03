@@ -81,10 +81,20 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
     this.logger.info("Loading user data...");
     if (isEmpty) {
       User admin = new User("Chuck", "Norris", "chuck_norris@stay-finder.com",
-              12345678, "temp");
+          12345678, "temp");
 
       User regUser = new User("Dave", "Dangerous", "dave_dangerous@stay-finder.com",
-              98765432, "temp");
+          98765432, "temp");
+
+      User user0 = new User("John", "Doe", "john_doe@gmail.com",
+          48273926, "temp");
+
+      User user = new User("Jane", "Doe", "jane_doe@gmail.com",
+          94738491, "temp");
+
+
+      User user1 = new User("Sander", "Grimstad", "sandegr@ntnu.no",
+          98628486, "temp");
 
       // Create Roles
       Role userRole = this.roleRepository.findOneByName("ROLE_USER");
@@ -96,13 +106,23 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
 
       regUser.addRole(userRole);
 
+      user0.addRole(userRole);
+      user.addRole(userRole);
+      user1.addRole(userRole);
+
       // Add users to database
       this.userService.add(admin);
       this.userService.add(regUser);
+      this.userService.add(user0);
+      this.userService.add(user);
+      this.userService.add(user1);
 
       // Update password
       this.accessUserService.updateUserPassword(admin, "Nunchucks2024");
       this.accessUserService.updateUserPassword(regUser, "Dangerous2024");
+      this.accessUserService.updateUserPassword(user0, "JohnDoe123");
+      this.accessUserService.updateUserPassword(user, "JaneDoe123");
+      this.accessUserService.updateUserPassword(user1, "Passord123");
 
       this.logger.info("Done loading user data");
     } else {
@@ -121,53 +141,53 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
     if (isEmpty) {
       // Hotel 1:
       Hotel hotel1 = new Hotel("Villa Gåseid",
-              "Welcome to this hotel. Hope you enjoy your stay", "Ålesund",
-              "Single", 4200, 6, "VERY GOOD HOTEL");
+          "Welcome to this hotel. Hope you enjoy your stay", "Ålesund",
+          "Single", 4200, "Booking.com", 5, "VERY GOOD HOTEL");
 
       // Hotel 2:
       Hotel hotel2 = new Hotel("Hotel Trondheim",
-              "Welcome to this hotel. Hope you enjoy your stay", "Trondheim",
-              "Family", 6900, 4, "VERY GOOD HOTEL" );
+          "Welcome to this hotel. Hope you enjoy your stay", "Trondheim",
+          "Family", 6900, "Agoda", 4, "VERY GOOD HOTEL");
 
       // Hotel 3:
       Hotel hotel3 = new Hotel("Totens Fineste",
-              "Welcome to this hotel. Hope you enjoy your stay", "Gjøvik",
-              "Single", 3999, 2, "VERY GOOD HOTEL");
+          "Welcome to this hotel. Hope you enjoy your stay", "Gjøvik",
+          "Single", 3999, "Momondo", 2, "VERY GOOD HOTEL");
 
       // Hotel 4:
       Hotel hotel4 = new Hotel("Scandic Alta",
-              "Welcome to this hotel. Hope you enjoy your stay", "Alta",
-              "Double", 5200, 5,"VERY GOOD HOTEL");
+          "Welcome to this hotel. Hope you enjoy your stay", "Alta",
+          "Double", 5200, "Expedia", 5, "VERY GOOD HOTEL");
 
       // Hotel 5:
       Hotel hotel5 = new Hotel("Slotsgata Hotel",
-              "Welcome to this hotel. Hope you enjoy your stay", "Oslo",
-              "Double", 7500, 4, "VERY GOOD HOTEL");
+          "Welcome to this hotel. Hope you enjoy your stay", "Oslo",
+          "Double", 7500, "Kayak", 4, "VERY GOOD HOTEL");
 
       // Hotel 6:
       Hotel hotel6 = new Hotel("Jugend Hotel",
-              "Welcome to this hotel. Hope you enjoy your stay", "Ålesund",
-              "Single", 5800, 5, "VERY GOOD HOTEL");
+          "Welcome to this hotel. Hope you enjoy your stay", "Ålesund",
+          "Single", 5800, "Airbnb", 3, "VERY GOOD HOTEL");
 
       // Hotel 7:
       Hotel hotel7 = new Hotel("Stryns Fineste",
-              "Welcome to this hotel. Hope you enjoy your stay", "Stryn",
-              "Family", 2500, 5, "VERY GOOD HOTEL");
+          "Welcome to this hotel. Hope you enjoy your stay", "Stryn",
+          "Family", 2500, "Hotels.com", 5, "VERY GOOD HOTEL");
 
       // Hotel 8:
       Hotel hotel8 = new Hotel("Molde Hotel",
-              "Welcome to this hotel. Hope you enjoy your stay", "Molde",
-              "Double", 6500, 2, "VERY GOOD HOTEL");
+          "Welcome to this hotel. Hope you enjoy your stay", "Molde",
+          "Double", 6500, "TripAdvisor", 2, "VERY GOOD HOTEL");
 
       // Hotel 9:
       Hotel hotel9 = new Hotel("Gløshaugen Hotel",
-              "Welcome to this hotel. Hope you enjoy your stay", "Trondheim",
-              "Single", 4800, 4, "VERY GOOD HOTEL");
+          "Welcome to this hotel. Hope you enjoy your stay", "Trondheim",
+          "Single", 4800, "Trip.com", 4, "VERY GOOD HOTEL");
 
       // Hotel 10:
       Hotel hotel10 = new Hotel("Stavanger Hotel",
-              "Welcome to this hotel. Hope you enjoy your stay", "Stavanger",
-              "Double", 6200, 4, "VERY GOOD HOTEL");
+          "Welcome to this hotel. Hope you enjoy your stay", "Stavanger",
+          "Double", 6200, "Booking.com", 4, "VERY GOOD HOTEL");
 
       this.hotelService.add(hotel1);
       this.hotelService.add(hotel2);
