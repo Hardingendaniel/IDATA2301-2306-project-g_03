@@ -1,5 +1,5 @@
 import React from "react";
-import EditButton from "../../components/EditButton";
+import EditHotelButton from "../../components/buttons/EditHotelButton";
 
 function HotelTable({ hotels }) {
     return (
@@ -52,7 +52,7 @@ function HotelTable({ hotels }) {
                         NOK {hotel.price}
                     </td>
                     <th>
-                        <EditButton hotelId={hotel.id} initialStatus={hotel.active}/>
+                        <EditHotelButton hotelId={hotel.id} initialStatus={hotel.active}/>
                     </th>
                 </tr>
             ))}

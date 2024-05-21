@@ -1,13 +1,13 @@
 import React, {useState} from "react";
-import {UpdateUserModal} from "./Modal/UpdateUserModal";
-import {asyncApiRequest} from "../tools/requests";
+import {UpdateUserModal} from "../Modal/UpdateUserModal";
+import {asyncApiRequest} from "../../tools/requests";
 
 /**
  * Component for 3 dot dropdown menu
  * @returns {Element}
  * @constructor
  */
-const EditButton = ({hotelId, initialStatus}) => {
+const EditHotelButton = ({hotelId, initialStatus}) => {
     const [status, setStatus] = useState(initialStatus);
     const openChangeModal = () => {
         document.getElementById("changeModal").showModal();
@@ -48,7 +48,6 @@ const EditButton = ({hotelId, initialStatus}) => {
           </div>
           <ul tabIndex={0}
               className="dropdown-content z-[1] menu p-2 font-normal shadow bg-base-100 rounded-2xl w-36">
-              <li><a onClick={openChangeModal}>Edit</a></li>
               <li><a onClick={handleToggleClick}>{status ? "Hide" : "Show"}</a></li>
               <li><a onClick={handleDeleteClick} className="text-red">Delete</a></li>
           </ul>
@@ -59,4 +58,4 @@ const EditButton = ({hotelId, initialStatus}) => {
   )
 }
 
-export default EditButton;
+export default EditHotelButton;

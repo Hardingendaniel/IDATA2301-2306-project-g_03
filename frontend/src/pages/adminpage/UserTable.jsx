@@ -1,5 +1,5 @@
 import React from "react";
-import EditButton from "../../components/EditButton";
+import EditUserButton from "../../components/buttons/EditUserButton";
 
 function UserTable( {users} ) {
 
@@ -48,7 +48,7 @@ function UserTable( {users} ) {
                         <span className="badge badge-ghost badge-md">{user.roles}</span>
                     </td>
                     <td>
-                        <EditButton/>
+                        <EditUserButton userId={user.id}/>
                     </td>
                 </tr>
             ))}
