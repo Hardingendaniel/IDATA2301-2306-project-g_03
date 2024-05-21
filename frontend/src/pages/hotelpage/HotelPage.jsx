@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import map from '../../img/7652611.jpg';
 import { useLocation, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import {useUser} from "../../UserContext";
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import StarRating from '../../components/StarRating';
 import {asyncApiRequest} from "../../tools/requests";
+=======
+>>>>>>> c6761912f3709d5b64b15c771d2285bdf9a76e28
 
 
 export function HotelPage() {
@@ -257,25 +259,11 @@ export function HotelPage() {
                         <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionReviewsRef)}>Reviews</button>
                         <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionAboutRef)}>About</button>
                     </div>
-                    <div ref={sectionOverviewRef} className="flex flex-row pt-16">
-                        <div className="divider"></div>
-                        <div className="w-96 rounded-2xl p-2 m-2">
-                            <p>{hotel.description}</p>
+                    <div ref={sectionOverviewRef} className="flex flex-row justify-between pt-16">
+                        <div className="w-96 rounded-2xl p-2 pl-6">
+                            <p className="font-normal text-lg">{hotel.description}</p>
                         </div>
-                        <div className="w-96 m-2 relative overflow-hidden flex items-center justify-center flex-col">
-                            <img
-                                src={map}
-                                alt="map"
-                                className="rounded-2xl object-cover"
-                            />
-                            <div
-                                className="absolute w-full h-full top-0 bottom-0 left-0 right-0 flex items-center justify-center">
-                                <div className="btn bg-main roudned-2xl text-white font-bold text-xl hover:bg-header">Show on
-                                    map
-                                </div>
-                            </div>
-                        </div>
-                        <div className="w-96 border rounded-2xl m-2">
+                        <div className="w-96 border rounded-2xl">
                             <div className="flex bg-lightblue rounded-2xl w-full h-24 border">
                                 <div className="flex flex-col m-auto">
                                     <p className="text-2xl font-black m-auto items-center">
