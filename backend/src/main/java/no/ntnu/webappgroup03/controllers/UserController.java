@@ -1,5 +1,6 @@
 package no.ntnu.webappgroup03.controllers;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 import no.ntnu.webappgroup03.dto.SignupDto;
@@ -30,7 +31,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/api/users")
 public class UserController {
 
   @Autowired
@@ -46,7 +46,7 @@ public class UserController {
    *
    * @return List of all users currently stored in the collection
    */
-  @GetMapping
+  @GetMapping("/api/users")
   public ResponseEntity<?> getAll() {
     ResponseEntity<?> response;
     User sessionUser = accessUserService.getSessionUser();
@@ -65,7 +65,7 @@ public class UserController {
     return response;
   }
 
-  @GetMapping("/{email}")
+  @GetMapping("/api/users/{email}")
   public ResponseEntity<?> getProfileWithMail(@PathVariable String email) {
     ResponseEntity<?> response;
     User sessionUser = accessUserService.getSessionUser();
@@ -98,7 +98,7 @@ public class UserController {
    * @param signupData the user to be created.
    * @return returns the new user.
    */
-  @PostMapping
+  @PostMapping("/api/users")
   public ResponseEntity<?> add(@RequestBody SignupDto signupData) {
     ResponseEntity<?> response;
     User sessionUser = this.accessUserService.getSessionUser();
@@ -128,7 +128,7 @@ public class UserController {
    * @param userData the new userdata for the user
    * @return the new user
    */
-  @PutMapping("/{email}")
+  @PutMapping("/api/users/{email}")
   public ResponseEntity<?> updateUser(@PathVariable String email,
       @RequestBody UserProfileDto userData) {
     ResponseEntity<?> response;
@@ -158,7 +158,7 @@ public class UserController {
    * @param password the new password for the user
    * @return the new user with updated password.
    */
-  @PatchMapping("/{email}")
+  @PatchMapping("/api/users/{email}")
   public ResponseEntity<?> updatePassword(@PathVariable String email,
       @RequestBody String password) {
     ResponseEntity<?> response = null;
@@ -192,7 +192,7 @@ public class UserController {
    * @param id id of the user to delete
    * @return HTTP 200 OK or error code with error message.
    */
-  @DeleteMapping("/{id}")
+  @DeleteMapping("/api/users/{id}")
   public ResponseEntity<String> delete(@PathVariable int id) {
     ResponseEntity<String> response;
     User sessionUser = this.accessUserService.getSessionUser();
@@ -223,7 +223,7 @@ public class UserController {
    *
    * @return HTTP 200 OK or error code with error message.
    */
-  @PutMapping("/{hotelId}")
+  @PutMapping("/api/favorites/{hotelId}")
   public ResponseEntity<String> toggleFavorite(@PathVariable int hotelId) {
     ResponseEntity<String> response;
     User sessionUser = this.accessUserService.getSessionUser();
@@ -232,6 +232,9 @@ public class UserController {
       if (hotel.isPresent()) {
         if (!sessionUser.getFavorites().contains(hotel.get())) {
           sessionUser.addToFavorites(hotel.get());
+          for (Hotel hotelf : sessionUser.getFavorites()) {
+            System.out.println(hotelf.getHotelName());
+          }
         } else {
           sessionUser.removeFromFavorites(hotel.get());
         }

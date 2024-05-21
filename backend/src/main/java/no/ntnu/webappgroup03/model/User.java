@@ -5,12 +5,12 @@ import jakarta.persistence.*;
 
 import java.util.*;
 
-
 /**
  * Represents a user.
  */
 @Entity(name = "users")
 public class User {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
@@ -33,14 +33,11 @@ public class User {
   )
   private Set<Role> roles = new LinkedHashSet<>();
 
-
-
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "favorite",
-  joinColumns = @JoinColumn(name = "user_id"),
-  inverseJoinColumns = @JoinColumn(name = "hotel_id"))
+      joinColumns = @JoinColumn(name = "user_id"),
+      inverseJoinColumns = @JoinColumn(name = "hotel_id"))
   private Set<Hotel> favorites = new LinkedHashSet<>();
-
 
   public User() {
     // Intentionally left blank
@@ -60,7 +57,6 @@ public class User {
     this.phoneNumber = phoneNumber;
     this.password = password;
   }
-
 
   public User(String email, String password) {
     this.email = email;
@@ -151,7 +147,7 @@ public class User {
   /**
    * Add a hotel to a user favorites.
    */
-  public void addToFavorites(Hotel hotel){
+  public void addToFavorites(Hotel hotel) {
     favorites.add(hotel);
   }
 
