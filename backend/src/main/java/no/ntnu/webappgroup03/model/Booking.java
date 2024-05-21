@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Represents a hotel booking.
@@ -21,8 +22,6 @@ public class Booking  {
   private Hotel hotel;
   private Date startDate;
   private Date endDate;
-  @ManyToMany
-  private List<Hotel> hotels;
 
   public Booking() {
     //Intentionally left empty

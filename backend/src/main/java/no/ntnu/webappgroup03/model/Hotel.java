@@ -20,12 +20,13 @@ public class Hotel {
   private String location;
   private String roomTypes;
   private double price;
+  private boolean active = true;
 
   private int rating;
 
   private String review;
 
-  @ManyToMany(mappedBy = "hotels")
+  @OneToMany(mappedBy = "hotel")
   private Set<Booking> bookings = new HashSet<>();
 
   public Hotel() {
@@ -98,6 +99,14 @@ public class Hotel {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public boolean isActive() {
+    return active;
+  }
+
+  public void setActive(boolean active) {
+    this.active = active;
   }
 
   public void setRating(int rating) {

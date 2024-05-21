@@ -1,6 +1,5 @@
 package no.ntnu.webappgroup03.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import no.ntnu.webappgroup03.dto.HotelDto;
@@ -73,6 +72,7 @@ public class HotelService {
       existingHotel.setLocation(hotelData.getLocation());
       existingHotel.setRoomTypes(hotelData.getRoomType());
       existingHotel.setPrice(hotelData.getPrice());
+      existingHotel.setActive(hotelData.isActive());
       existingHotel.setRating(hotelData.getRating());
       existingHotel.setReview(hotelData.getReview());
       this.hotelRepository.save(existingHotel);
@@ -124,5 +124,18 @@ public class HotelService {
       hotelRepository.deleteById(id);
     }
     return hotel.isPresent();
+  }
+
+  /**
+   * Update active status for given hotel.
+   *
+   * @param hotel to update
+   * @param active new active status
+   */
+  public void updateActiveStatus(Hotel hotel, boolean active) {
+    boolean newStatus;
+    newStatus = active;
+    hotel.setActive(newStatus);
+    this.hotelRepository.save(hotel);
   }
 }

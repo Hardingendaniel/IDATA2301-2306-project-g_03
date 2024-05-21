@@ -41,8 +41,8 @@ public class UserService {
         .collect(Collectors.toList());
   }
 
-  public Optional<User> getOne(int userId) {
-    return this.userRepository.findById(userId);
+  public Optional<User> getOne(int id) {
+    return this.userRepository.findById(id);
   }
 
   /**
@@ -106,22 +106,6 @@ public class UserService {
     return user != null && user.isValid()
         && (userRepository.findById(user.getId()).isEmpty());
     // user.getId() == null ||
-  }
-
-  /**
-   * Method to create a new user and checks if
-   * email already exist.
-   *
-   * @param user the user to be created.
-   * @return returns the new user.
-   * @throws Exception exception to be cast if email already exists.
-   */
-  public User registerUser(User user) throws Exception {
-    if (userRepository.existsByEmail(user.getEmail())) {
-      throw new Exception("Email already exists");
-    }
-    user.setPassword(user.getPassword());
-    return userRepository.save(user);
   }
 
 
