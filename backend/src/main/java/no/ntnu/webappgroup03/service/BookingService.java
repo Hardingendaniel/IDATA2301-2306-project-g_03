@@ -51,17 +51,15 @@ public class BookingService {
    * @return True on success, false otherwise
    */
   public boolean updateBooking(int id, BookingDto bookingData) {
-    Optional<Booking> booking = this.bookingRepository.findById(id);
-    boolean updated;
+    Optional<Booking> booking = bookingRepository.findById(id);
     if (booking.isPresent()) {
       Booking existingBooking = booking.get();
       existingBooking.setStartDate(bookingData.getStartDate());
       existingBooking.setEndDate(bookingData.getEndDate());
-      updated = true;
-    } else {
-      updated = false;
+      bookingRepository.save(existingBooking);
+      return true;
     }
-    return updated;
+    return false;
   }
 
   /**
@@ -84,11 +82,12 @@ public class BookingService {
    * @return true when booking deleted, false when booking was not found in the database
    */
   public boolean delete(int id) {
-    Optional<Booking> booking1 = bookingRepository.findById(id);
-    if (booking1.isPresent()) {
+    Optional<Booking> booking = bookingRepository.findById(id);
+    if (booking.isPresent()) {
       bookingRepository.deleteById(id);
+      return true;
     }
-    return booking1.isPresent();
+    return false;
   }
 
 }

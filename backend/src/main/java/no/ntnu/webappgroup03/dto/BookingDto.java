@@ -16,9 +16,15 @@ public class BookingDto {
 
   }
 
+  /**
   public void setBookingDetails( User user, Date startDate, Date endDate)  {
     this.startDate = startDate;
     this.endDate = endDate;
+  }
+   */
+
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
   }
 
   public Date getStartDate() {

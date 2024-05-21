@@ -107,39 +107,34 @@ public class BookingController {
    */
   @PostMapping("/{hotelId}/{userId}")
   public ResponseEntity<?> add(@PathVariable int hotelId, @PathVariable int userId, @RequestBody BookingDto bookingDto) {
-    ResponseEntity<?> response;
-    User sessionUser = this.accessUserService.getSessionUser();
-    if (sessionUser != null ) {
-      if (bookingDto != null) {
-        Booking booking = new Booking(
-            bookingDto.getStartDate(), bookingDto.getEndDate());
-        Optional<User> user = userService.getOne(userId);
-        if (user.isPresent()) {
-          booking.setUser(user.get());
-        } else {
-          return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
-        }
-        Optional<Hotel> hotel = hotelService.getOne(hotelId);
-        if (hotel.isPresent()) {
-          booking.setHotel(hotel.get());
-          try {
-            this.bookingService.add(booking);
-            response = new ResponseEntity<>(booking, HttpStatus.OK);
-          } catch (IllegalArgumentException e) {
-            response = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-          }
-
-        } else {
-          response = new ResponseEntity<>("Hotel Not found", HttpStatus.NOT_FOUND);
-        }
-      } else {
-        response = new ResponseEntity<>("Booking data not supplied", HttpStatus.BAD_REQUEST);
-      }
-    } else {
-      response = new ResponseEntity<>("Booking data for no registered users not accessible",
-          HttpStatus.FORBIDDEN);
+    User sessionUser = accessUserService.getSessionUser();
+    if (sessionUser == null) {
+      return new ResponseEntity<>("Booking data for no registered users not accessible", HttpStatus.FORBIDDEN);
     }
-    return response;
+
+    if (bookingDto == null) {
+      return new ResponseEntity<>("Booking data not supplied", HttpStatus.BAD_REQUEST);
+    }
+
+    Booking booking = new Booking(bookingDto.getStartDate(), bookingDto.getEndDate());
+    Optional<User> user = userService.getOne(userId);
+    if (!user.isPresent()) {
+      return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+    }
+    booking.setUser(user.get());
+
+    Optional<Hotel> hotel = hotelService.getOne(hotelId);
+    if (!hotel.isPresent()) {
+      return new ResponseEntity<>("Hotel Not found", HttpStatus.NOT_FOUND);
+    }
+    booking.setHotel(hotel.get());
+
+    try {
+      bookingService.add(booking);
+      return new ResponseEntity<>(booking, HttpStatus.OK);
+    } catch (IllegalArgumentException e) {
+      return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
   }
   
   

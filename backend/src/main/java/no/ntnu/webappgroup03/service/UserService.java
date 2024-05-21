@@ -41,8 +41,8 @@ public class UserService {
         .collect(Collectors.toList());
   }
 
-  public Optional<User> getOne(int id) {
-    return this.userRepository.findById(id);
+  public Optional<User> getOne(int userId) {
+    return this.userRepository.findById(userId);
   }
 
   /**
