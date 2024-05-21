@@ -43,7 +43,10 @@ function HotelTable({ hotels }) {
                         <span className="badge badge-ghost badge-sm">{hotel.roomTypes}</span>
                     </td>
                     <td>
-                        <span className="badge badge-ghost badge-md">{String(hotel.active)}</span>
+                        <span className={`badge badge-md ${
+                            hotel.active ? 'badge-success text-white' : 'badge-error text-white'
+                        }`}>
+                            {String(hotel.active)}</span>
                     </td>
                     <td>
                         NOK {hotel.price}
