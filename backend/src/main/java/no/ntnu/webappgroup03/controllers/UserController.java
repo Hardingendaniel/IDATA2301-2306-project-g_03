@@ -7,11 +7,11 @@ import no.ntnu.webappgroup03.dto.UserProfileDto;
 import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.model.User;
 import no.ntnu.webappgroup03.service.AccessUserService;
+import no.ntnu.webappgroup03.service.HotelService;
 import no.ntnu.webappgroup03.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +37,9 @@ public class UserController {
   private UserService userService;
   @Autowired
   private AccessUserService accessUserService;
+
+  @Autowired
+  private HotelService hotelService;
 
   /**
    * Get all users. HTTP GET to /
@@ -214,4 +217,33 @@ public class UserController {
     }
     return response;
   }
+
+  /**
+   * Toggles the hotel from favorite to not.
+   *
+   * @return HTTP 200 OK or error code with error message.
+   */
+  @PutMapping("/{hotelId}")
+  public ResponseEntity<String> toggleFavorite(@PathVariable int hotelId) {
+    ResponseEntity<String> response;
+    User sessionUser = this.accessUserService.getSessionUser();
+    if (sessionUser != null) {
+      Optional<Hotel> hotel = hotelService.getOne(hotelId);
+      if (hotel.isPresent()) {
+        if (!sessionUser.getFavorites().contains(hotel.get())) {
+          sessionUser.addToFavorites(hotel.get());
+        } else {
+          sessionUser.removeFromFavorites(hotel.get());
+        }
+        response = new ResponseEntity<>("", HttpStatus.OK);
+      } else {
+        response = new ResponseEntity<>("Hotel not found", HttpStatus.NOT_FOUND);
+      }
+    } else {
+      response = new ResponseEntity<>("Hotel data accessible only to authenticated users",
+          HttpStatus.UNAUTHORIZED);
+    }
+    return response;
+  }
+
 }

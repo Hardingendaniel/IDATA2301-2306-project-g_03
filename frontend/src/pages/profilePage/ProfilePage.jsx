@@ -63,6 +63,15 @@ function ProfilePage() {
                 <div className="">Booking 4</div>
 
             </div>
+
+            <div className="bookings mt-8 bg-white p-6 rounded-2xl shadow-md">
+                <h2 className="text-2xl font-bold mb-4">Favourites</h2>
+                <div className="">Booking 1</div>
+                <div className="">Booking 2</div>
+                <div className="">Booking 3</div>
+                <div className="">Booking 4</div>
+
+            </div>
             <dialog id="update_user" className="modal" open={showUpdateModal}>
                 <UpdateUserModal user={userInfo} showModal={showUpdateModal} setShowModal={setShowUpdateModal} />
 
