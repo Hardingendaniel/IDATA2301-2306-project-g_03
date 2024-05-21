@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * REST API Controller serving endpoints for users Code adapted from <a
- * href="https://github.com/strazdinsg/app-dev/blob/main/security-demos/07-backend-frontend-
+ * REST API Controller serving endpoints for users
+ * Code adapted from <a href="https://github.com/strazdinsg/app-dev/blob/main/security-demos/07-backend-frontend-
  * jwt-auth/backend/src/main/java/no/ntnu/controllers/UserController.java">UserController.java</a>
  */
 @CrossOrigin
@@ -38,7 +38,6 @@ public class UserController {
   @Autowired
   private AccessUserService accessUserService;
 
-  //TODO: Enten slette denne methoden, eller fiks for kun admin
   /**
    * Get all users. HTTP GET to /
    *

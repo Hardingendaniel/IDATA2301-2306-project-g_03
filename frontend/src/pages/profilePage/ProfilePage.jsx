@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {useUser} from "../../UserContext";
 import {asyncApiRequest} from "../../tools/requests";
+import {UpdateUserModal} from "../../components/Modal/UpdateUserModal";
 
 function ProfilePage() {
     const {user} = useUser();
     const [userInfo, setUserInfo] = useState(null)
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -44,7 +46,11 @@ function ProfilePage() {
                             <p className="text-xl px-2">{userInfo.phoneNumber}</p>
                         </div>
 
-                        <button className="btn bg-main mt-2 font-bold rounded-2xl text-white hover:bg-header">Edit Profile</button>
+                        <button type="button" className="btn bg-main mt-2 font-bold rounded-2xl text-white hover:bg-header"
+                                onClick={() => {
+                                    setShowUpdateModal(true);
+                                }}
+                        >Edit Profile</button>
                     </div>
                 </div>
             </div>
@@ -57,6 +63,10 @@ function ProfilePage() {
                 <div className="">Booking 4</div>
 
             </div>
+            <dialog id="update_user" className="modal" open={showUpdateModal}>
+                <UpdateUserModal user={userInfo} showModal={showUpdateModal} setShowModal={setShowUpdateModal} />
+
+            </dialog>
         </div>
     );
 };

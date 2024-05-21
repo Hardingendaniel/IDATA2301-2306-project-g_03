@@ -1,5 +1,5 @@
 import React from "react";
-import {ChangeModal} from "./Modal/ChangeModal";
+import {UpdateUserModal} from "./Modal/UpdateUserModal";
 
 /**
  * Component for 3 dot dropdown menu
@@ -26,7 +26,7 @@ const EditButton = () => {
               <li><a className="text-red">Delete</a></li>
           </ul>
           <dialog id="changeModal" className="modal">
-              <ChangeModal />
+              <UpdateUserModal />
           </dialog>
       </div>
   )
