@@ -45,6 +45,14 @@ public class HotelService {
     return hotelRepository.findAll();
   }
 
+  public Iterable<Hotel> getHotelsForUser(boolean isAdmin) {
+    if (isAdmin) {
+      return hotelRepository.findAll();
+    } else {
+      return hotelRepository.findByActive(true);
+    }
+  }
+
   /**
    * Returns the hotel with the specified id
    *

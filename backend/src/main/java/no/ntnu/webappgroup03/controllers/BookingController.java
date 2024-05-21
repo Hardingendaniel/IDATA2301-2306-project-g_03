@@ -130,14 +130,14 @@ public class BookingController {
     booking.setHotel(hotel.get());
 
     try {
-      bookingService.add(booking);
+      bookingService.addBooking(bookingDto);
       return new ResponseEntity<>(booking, HttpStatus.OK);
     } catch (IllegalArgumentException e) {
       return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
   }
-  
-  
+
+
   /**
    * Deletes a booking if the user is an admin.
    *

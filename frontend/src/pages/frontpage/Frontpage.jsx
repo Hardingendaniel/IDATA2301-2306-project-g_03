@@ -6,6 +6,7 @@ import Trondheim from "../../img/Trondheim.jpg"
 import Stryn from "../../img/Stryn.jpg"
 import SearchForm from "../../components/SearchForm";
 import { useNavigate } from "react-router-dom";
+import {useUser} from "../../UserContext";
 
 function Frontpage() {
     const StarRating = ({ rating }) => {
@@ -24,8 +25,14 @@ function Frontpage() {
     const [data1, setData1] = useState([]);
     const [locationCounts, setLocationCounts] = useState([]);
     const navigate = useNavigate();
+    const {loggedIn} = useUser();
 
     useEffect(() => {
+        if (loggedIn) {
+         fetchData();
+        }
+
+
         async function fetchData() {
             try {
                 const response = await fetch("http://localhost:8080/api/hotels");

@@ -2,6 +2,7 @@ package no.ntnu.webappgroup03.service;
 
 import no.ntnu.webappgroup03.dto.BookingDto;
 import no.ntnu.webappgroup03.model.Booking;
+import no.ntnu.webappgroup03.model.User;
 import no.ntnu.webappgroup03.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class BookingService {
 
   @Autowired
   private BookingRepository bookingRepository;
+
+  @Autowired
+  private UserService userService;
 
   /**
    * Return all the bookings
@@ -65,14 +69,40 @@ public class BookingService {
   /**
    * Add a booking to the application state (persist in the database).
    *
-   * @param booking to persist
    * @return true when Booking added, false on error
-   */
+   *
   public void add(Booking booking) {
     if (!booking.isValid()) {
       throw new IllegalArgumentException("Booking not valid");
     }
       bookingRepository.save(booking);
+  }
+  */
+
+  public BookingDto addBooking(BookingDto bookingDto) {
+    Booking booking = new Booking();
+
+
+    // Fetch user details
+    Optional<User> user = userService.findUserById(bookingDto.getUserId());
+    if (user.isPresent()) {
+      booking.setUser(user.get());
+    }
+
+    Booking savedBooking = bookingRepository.save(booking);
+    return convertToDto(savedBooking);
+  }
+
+
+  public BookingDto convertToDto(Booking booking) {
+    BookingDto bookingDto = new BookingDto();
+
+    // Include user information
+    if (booking.getUser() != null) {
+      bookingDto.setUserId(booking.getUser().getId());
+      bookingDto.setUserName(booking.getUser().getFirstName() + " " + booking.getUser().getLastName());
+    }
+    return bookingDto;
   }
 
   /**

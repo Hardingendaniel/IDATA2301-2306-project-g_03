@@ -1,7 +1,4 @@
 import React from "react";
-import img1 from "../../img/hotel1/1.png";
-import img2 from "../../img/hotel2/1.png";
-// Import other images as necessary
 import EditButton from "../../components/EditButton";
 
 function HotelTable({ hotels }) {
@@ -15,7 +12,7 @@ function HotelTable({ hotels }) {
             <thead className="uppercase">
             <tr>
                 <th></th>
-                <lh>Hotel ID</lh>
+                <th>Hotel ID</th>
                 <th>Hotel name</th>
                 <th>Description</th>
                 <th>Status</th>
@@ -46,13 +43,16 @@ function HotelTable({ hotels }) {
                         <span className="badge badge-ghost badge-sm">{hotel.roomTypes}</span>
                     </td>
                     <td>
-                        <span className="badge badge-ghost badge-md">Active</span>
+                        <span className={`badge badge-md ${
+                            hotel.active ? 'badge-success text-white' : 'badge-error text-white'
+                        }`}>
+                            {String(hotel.active)}</span>
                     </td>
                     <td>
                         NOK {hotel.price}
                     </td>
                     <th>
-                        <EditButton/>
+                        <EditButton hotelId={hotel.id} initialStatus={hotel.active}/>
                     </th>
                 </tr>
             ))}
