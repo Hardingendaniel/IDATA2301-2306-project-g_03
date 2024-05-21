@@ -10,33 +10,34 @@ public class HotelDto {
   private String location;
   private String roomType;
   private double price;
+  private boolean active = true;
   private int rating;
   private String review;
 
-
+  /**
+   * Constructor for Hotel Dto.
+   *
+   * @param id id of the hotel
+   * @param hotelName hotel name
+   * @param description hotel description
+   * @param location hotel location
+   * @param roomType room types for the hotel
+   * @param price hotel price
+   * @param active active status for the hotel
+   * @param rating hotel rating
+   * @param review hotel reviews.
+   */
   public HotelDto(int id, String hotelName, String description, String location, String roomType,
-                  double price, int rating, String review) {
+                  double price, boolean active, int rating, String review) {
     this.id = id;
     this.hotelName = hotelName;
     this.description = description;
     this.location = location;
     this.roomType = roomType;
     this.price = price;
+    this.active = active;
     this.rating = rating;
     this.review = review;
-  }
-
-  public void setHotelDetails(int id, String hotelName, String description, String location,
-                              String roomType, double price, int rating, String review) {
-    this.id = id;
-    this.hotelName = hotelName;
-    this.description = description;
-    this.location = location;
-    this.roomType = roomType;
-    this.price = price;
-    this.rating = rating;
-    this.review = review;
-
   }
 
   public int getId() {
@@ -61,6 +62,9 @@ public class HotelDto {
 
   public double getPrice() {
     return price;
+  }
+  public boolean isActive() {
+    return active;
   }
 
   public int getRating() {

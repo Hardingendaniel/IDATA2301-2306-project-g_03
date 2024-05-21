@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,20 +20,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * REST API Controller for hotel collection.
- * Code adapted from ...
+ * REST API Controller for hotel collection. Code adapted from ...
  */
 @CrossOrigin
 @RestController
 public class HotelController {
+
   @Autowired
   private HotelService hotelService;
   @Autowired
-  private AccessUserService userService ;
+  private AccessUserService userService;
 
   /**
-   * Get all hotels.
-   * HTTP GET to /hotels
+   * Get all hotels. HTTP GET to /hotels
    *
    * @return List of all hotels currently stored in the collection
    */
@@ -54,10 +54,11 @@ public class HotelController {
     if (hotel.isPresent()) {
       HotelDto hotelDto = new HotelDto(hotel.get().getId(), hotel.get().getHotelName(),
           hotel.get().getDescription(), hotel.get().getLocation(), hotel.get().getRoomTypes(),
-          hotel.get().getPrice(), hotel.get().getRating(), hotel.get().getReview());
+          hotel.get().getPrice(), hotel.get().isActive(), hotel.get().getRating(),
+          hotel.get().getReview());
       response = new ResponseEntity<>(hotelDto, HttpStatus.OK);
     } else {
-      response = new ResponseEntity<>("Hotel with id: " + id +" not found",
+      response = new ResponseEntity<>("Hotel with id: " + id + " not found",
           HttpStatus.NOT_FOUND);
     }
     return response;
@@ -71,7 +72,7 @@ public class HotelController {
    */
   @PutMapping("/api/hotels/{id}")
   public ResponseEntity<String> updateHotel(@PathVariable int id,
-                                            @RequestBody HotelDto hotelData) {
+      @RequestBody HotelDto hotelData) {
     ResponseEntity<String> response;
     Optional<Hotel> hotel = this.hotelService.getOne(id);
     User sessionUser = this.userService.getSessionUser();
@@ -79,7 +80,7 @@ public class HotelController {
       if (hotelData != null && hotel.isPresent()) {
         if (this.hotelService.updateHotel(id, hotelData)) {
           response = new ResponseEntity<>("", HttpStatus.OK);
-        } else  {
+        } else {
           response = new ResponseEntity<>("Could not update Hotel data",
               HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -97,6 +98,39 @@ public class HotelController {
   }
 
   /**
+   * Partially update hotel details information.
+   *
+   * @param id     for which hotel to update
+   * @param active containing the fields to update
+   * @return HTTP 200 OK or error code with error message
+   */
+  @PatchMapping("api/hotels/{id}")
+  public ResponseEntity<?> updateHotelStatus(@PathVariable int id,
+      @RequestBody boolean active) {
+    ResponseEntity<?> response = null;
+    User sessionUser = this.userService.getSessionUser();
+    Optional<Hotel> hotel = this.hotelService.getOne(id);
+
+    if (sessionUser != null && sessionUser.isAdmin()) {
+      if (hotel.isEmpty()) {
+        response = new ResponseEntity<>("Hotel not found", HttpStatus.NOT_FOUND);
+      }
+      if (hotel.isPresent()) {
+        this.hotelService.updateActiveStatus(hotel.get(), active);
+        response = new ResponseEntity<>("", HttpStatus.OK);
+      }
+    } else if (sessionUser == null) {
+      response = new ResponseEntity<>("Hotel data accessible only to authenticated users",
+          HttpStatus.UNAUTHORIZED);
+    } else {
+      response = new ResponseEntity<>("Hotel data for other users not accessible",
+          HttpStatus.FORBIDDEN);
+    }
+    return response;
+  }
+
+
+  /**
    * If a user is admin, add a new hotel.
    *
    * @param hotelDto hotel wanted to create.
@@ -109,7 +143,8 @@ public class HotelController {
     if (sessionUser != null && sessionUser.isAdmin()) {
       if (hotelDto != null) {
         Hotel hotel = new Hotel(hotelDto.getHotelName(), hotelDto.getDescription(),
-            hotelDto.getLocation(), hotelDto.getRoomType(), hotelDto.getPrice(), hotelDto.getRating(),
+            hotelDto.getLocation(), hotelDto.getRoomType(), hotelDto.getPrice(),
+            hotelDto.getRating(),
             hotelDto.getReview());
         this.hotelService.add(hotel);
         response = new ResponseEntity<>(hotel, HttpStatus.OK);

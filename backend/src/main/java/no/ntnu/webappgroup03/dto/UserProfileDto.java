@@ -14,6 +14,17 @@ public class UserProfileDto {
   private boolean active = true;
   private List<String> roles;
 
+  /**
+   * Constructor for User Profile Dto.
+   *
+   * @param id id of the user
+   * @param firstName first name of user
+   * @param lastName last name of user
+   * @param email email of user
+   * @param phoneNumber phone number of user
+   * @param active active status for user
+   * @param roles roles for the user
+   */
   public UserProfileDto(int id, String firstName, String lastName, String email, int phoneNumber,
       boolean active, List<String> roles) {
     this.id = id;
@@ -25,6 +36,16 @@ public class UserProfileDto {
     this.roles = roles;
   }
 
+  /**
+   * Constructor for User Profile Dto without roles.
+   *
+   * @param id id of the user
+   * @param firstName first name of user
+   * @param lastName last name of user
+   * @param email email of user
+   * @param phoneNumber phone number of user
+   * @param active active status for user
+   */
   public UserProfileDto(int id, String firstName, String lastName, String email, int phoneNumber,
       boolean active) {
     this.id = id;
