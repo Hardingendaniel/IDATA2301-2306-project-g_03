@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import React, {useEffect, useRef, useState} from "react";
+import {useLocation, useParams} from "react-router-dom";
 import DatePicker from "react-datepicker";
 import {useUser} from "../../UserContext";
 import PropTypes from 'prop-types';
@@ -8,7 +8,7 @@ import StarRating from '../../components/StarRating';
 
 
 export function HotelPage() {
-    const { id } = useParams();
+    const {id} = useParams();
     const location = useLocation();
     const [hotel, setHotel] = useState(location.state?.hotel || null);
     const {user, logout} = useUser();
@@ -58,6 +58,7 @@ export function HotelPage() {
                 console.error('Failed to fetch data:', error);
             }
         }
+
         fetchHotel();
     }, [id]);
 
@@ -82,7 +83,7 @@ export function HotelPage() {
     }
 
     const scrollToSection = (ref) => {
-        ref.current.scrollIntoView({ behavior: 'smooth' });
+        ref.current.scrollIntoView({behavior: 'smooth'});
     };
 
     const [stickyClass, setStickyClass] = useState('relative');
@@ -161,62 +162,35 @@ export function HotelPage() {
         <div className="flex w-4/5 flex-col mx-auto">
             {hotel ? (
                 <>
-                    <div className=" flex flex-row">
-                    <h1 className="font-bold py-2 text-4xl">{hotel.hotelName}</h1>
-                        <button className={`inline-block pl-2 ${color ? 'text-red' : ''}`}
-                                onClick={toggleColor}>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                                <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
-                            </svg>
+                    <div className="flex flex-row justify-between">
+                        <div className="flex flex-col">
+                            <h1 className="font-bold py-2 text-4xl">{hotel.hotelName}</h1>
+                            <div className="flex py-2 space-x-1">
+                                {/* Render stars here */}
+                                <div className="hotel">
+                                    <StarRating rating={hotel.rating}/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button
+                            onClick={handleToggleFavorite}
+                            className="my-auto"
+                        >
+                            {isFavorite ? (
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                     className="w-16 h-16 text-main">
+                                    <path
+                                        d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"/>
+                                </svg>
+                            ) : (
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     strokeWidth={1.5} stroke="currentColor" className="w-16 h-16 text-main">
+                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                          d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                                </svg>
+                            )}
                         </button>
-                    </div>
-                    <div className="flex py-2 space-x-1">
-                        {/* Render stars here */}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                             className="w-6 h-6 text-header">
-                            <path fillRule="evenodd"
-                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
-                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
-                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
-                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                  clipRule="evenodd" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                             className="w-6 h-6 text-header">
-                            <path fillRule="evenodd"
-                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
-                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
-                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
-                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                  clipRule="evenodd" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                             className="w-6 h-6 text-header">
-                            <path fillRule="evenodd"
-                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
-                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
-                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
-                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                  clipRule="evenodd" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                             className="w-6 h-6 text-header">
-                            <path fillRule="evenodd"
-                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
-                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
-                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
-                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                  clipRule="evenodd" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                             className="w-6 h-6 text-lightgrey">
-                            <path fillRule="evenodd"
-                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
-                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
-                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
-                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                  clipRule="evenodd" />
-                        </svg>
                     </div>
 
 
@@ -301,10 +275,18 @@ export function HotelPage() {
                     </div>
 
                     <div className={`navbar sticky w-full bg-white border-lightgrey border-b ${stickyClass}`}>
-                    <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionOverviewRef)}>Overview</button>
-                        <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionRoomsRef)}>Rooms</button>
-                        <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionReviewsRef)}>Reviews</button>
-                        <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionAboutRef)}>About</button>
+                        <button className="btn btn-ghost text-xl rounded-2xl"
+                                onClick={() => scrollToSection(sectionOverviewRef)}>Overview
+                        </button>
+                        <button className="btn btn-ghost text-xl rounded-2xl"
+                                onClick={() => scrollToSection(sectionRoomsRef)}>Rooms
+                        </button>
+                        <button className="btn btn-ghost text-xl rounded-2xl"
+                                onClick={() => scrollToSection(sectionReviewsRef)}>Reviews
+                        </button>
+                        <button className="btn btn-ghost text-xl rounded-2xl"
+                                onClick={() => scrollToSection(sectionAboutRef)}>About
+                        </button>
                     </div>
                     <div ref={sectionOverviewRef} className="flex flex-row justify-between pt-16">
                         <div className="w-96 rounded-2xl p-2 pl-6">
@@ -376,11 +358,15 @@ export function HotelPage() {
                             </div>
                             <div className="rounded-2xl border p-2 w-72">
                                 <h2 className="font-semibold">Review 2</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a mauris facilisis diam lacinia interdum. Aliquam ultrices quam quis viverra molestie. Vivamus ultricies diam id nulla tempor gravida.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a mauris facilisis diam
+                                    lacinia interdum. Aliquam ultrices quam quis viverra molestie. Vivamus ultricies
+                                    diam id nulla tempor gravida.</p>
                             </div>
                             <div className="rounded-2xl border p-2 w-72">
                                 <h2 className="font-semibold">Review 3</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a mauris facilisis diam lacinia interdum. Aliquam ultrices quam quis viverra molestie. Vivamus ultricies diam id nulla tempor gravida.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a mauris facilisis diam
+                                    lacinia interdum. Aliquam ultrices quam quis viverra molestie. Vivamus ultricies
+                                    diam id nulla tempor gravida.</p>
                             </div>
                         </div>
                     </div>
