@@ -3,6 +3,7 @@ package no.ntnu.webappgroup03;
 import java.sql.Date;
 import java.util.Iterator;
 
+import no.ntnu.webappgroup03.dto.BookingDto;
 import no.ntnu.webappgroup03.model.Booking;
 import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.model.Role;
@@ -80,10 +81,10 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
     this.logger.info("Loading user data...");
     if (isEmpty) {
       User admin = new User("Chuck", "Norris", "chuck_norris@stay-finder.com",
-          12345678, "temp");
+              12345678, "temp");
 
       User regUser = new User("Dave", "Dangerous", "dave_dangerous@stay-finder.com",
-          98765432, "temp");
+              98765432, "temp");
 
       // Create Roles
       Role userRole = this.roleRepository.findOneByName("ROLE_USER");
@@ -120,53 +121,53 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
     if (isEmpty) {
       // Hotel 1:
       Hotel hotel1 = new Hotel("Villa Gåseid",
-          "Welcome to this hotel. Hope you enjoy your stay", "Ålesund",
-          "Single", 4200, 6, "VERY GOOD HOTEL");
+              "Welcome to this hotel. Hope you enjoy your stay", "Ålesund",
+              "Single", 4200, 6, "VERY GOOD HOTEL");
 
       // Hotel 2:
       Hotel hotel2 = new Hotel("Hotel Trondheim",
-          "Welcome to this hotel. Hope you enjoy your stay", "Trondheim",
-          "Family", 6900, 4, "VERY GOOD HOTEL" );
+              "Welcome to this hotel. Hope you enjoy your stay", "Trondheim",
+              "Family", 6900, 4, "VERY GOOD HOTEL" );
 
       // Hotel 3:
       Hotel hotel3 = new Hotel("Totens Fineste",
-          "Welcome to this hotel. Hope you enjoy your stay", "Gjøvik",
-          "Single", 3999, 2, "VERY GOOD HOTEL");
+              "Welcome to this hotel. Hope you enjoy your stay", "Gjøvik",
+              "Single", 3999, 2, "VERY GOOD HOTEL");
 
       // Hotel 4:
       Hotel hotel4 = new Hotel("Scandic Alta",
-          "Welcome to this hotel. Hope you enjoy your stay", "Alta",
-          "Double", 5200, 5,"VERY GOOD HOTEL");
+              "Welcome to this hotel. Hope you enjoy your stay", "Alta",
+              "Double", 5200, 5,"VERY GOOD HOTEL");
 
       // Hotel 5:
       Hotel hotel5 = new Hotel("Slotsgata Hotel",
-          "Welcome to this hotel. Hope you enjoy your stay", "Oslo",
-          "Double", 7500, 4, "VERY GOOD HOTEL");
+              "Welcome to this hotel. Hope you enjoy your stay", "Oslo",
+              "Double", 7500, 4, "VERY GOOD HOTEL");
 
       // Hotel 6:
       Hotel hotel6 = new Hotel("Jugend Hotel",
-          "Welcome to this hotel. Hope you enjoy your stay", "Ålesund",
-          "Single", 5800, 5, "VERY GOOD HOTEL");
+              "Welcome to this hotel. Hope you enjoy your stay", "Ålesund",
+              "Single", 5800, 5, "VERY GOOD HOTEL");
 
       // Hotel 7:
       Hotel hotel7 = new Hotel("Stryns Fineste",
-          "Welcome to this hotel. Hope you enjoy your stay", "Stryn",
-          "Family", 2500, 5, "VERY GOOD HOTEL");
+              "Welcome to this hotel. Hope you enjoy your stay", "Stryn",
+              "Family", 2500, 5, "VERY GOOD HOTEL");
 
       // Hotel 8:
       Hotel hotel8 = new Hotel("Molde Hotel",
-          "Welcome to this hotel. Hope you enjoy your stay", "Molde",
-          "Double", 6500, 2, "VERY GOOD HOTEL");
+              "Welcome to this hotel. Hope you enjoy your stay", "Molde",
+              "Double", 6500, 2, "VERY GOOD HOTEL");
 
       // Hotel 9:
       Hotel hotel9 = new Hotel("Gløshaugen Hotel",
-          "Welcome to this hotel. Hope you enjoy your stay", "Trondheim",
-          "Single", 4800, 4, "VERY GOOD HOTEL");
+              "Welcome to this hotel. Hope you enjoy your stay", "Trondheim",
+              "Single", 4800, 4, "VERY GOOD HOTEL");
 
       // Hotel 10:
       Hotel hotel10 = new Hotel("Stavanger Hotel",
-          "Welcome to this hotel. Hope you enjoy your stay", "Stavanger",
-          "Double", 6200, 4, "VERY GOOD HOTEL");
+              "Welcome to this hotel. Hope you enjoy your stay", "Stavanger",
+              "Double", 6200, 4, "VERY GOOD HOTEL");
 
       this.hotelService.add(hotel1);
       this.hotelService.add(hotel2);
@@ -194,32 +195,28 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
     }
     this.logger.info("Loading booking data...");
     if (isEmpty) {
-      // Hotel 1:
-      Booking booking1 = new Booking( new Date(1716190510000l), new Date(1716201314000l));
+      // Booking 1:
+      Booking booking1 = new Booking(new Date(1716190510000L), new Date(1716201314000L));
+      Booking booking2 = new Booking(new Date(1716190510000L), new Date(1716806114000L));
 
-      Booking booking2 = new Booking(new Date(1716190510000l), new Date(1716806114000l));
-
-      //TODO user is not set in booking
+      // Set users in booking
       booking1.setUser(this.userService.findUserByEmail("chuck_norris@stay-finder.com").get());
       booking2.setUser(this.userService.findUserByEmail("dave_dangerous@stay-finder.com").get());
-      //booking1.setUser(this.userService.getOne(1).get());
-      //booking1.setUser(this.userService.getOne(2).get());
+
+      // Set hotels in booking
       booking1.setHotel(this.hotelService.getOne(1).get());
       booking2.setHotel(this.hotelService.getOne(2).get());
 
+      // Convert to BookingDto
+      BookingDto bookingDto1 = this.bookingService.convertToDto(booking1);
+      BookingDto bookingDto2 = this.bookingService.convertToDto(booking2);
 
-      this.bookingService.add(booking1);
-      this.bookingService.add(booking2);
-
-
-
+      this.bookingService.addBooking(bookingDto1);
+      this.bookingService.addBooking(bookingDto2);
 
       this.logger.info("Done loading booking data");
     } else {
       this.logger.info("Bookings already in the database, not loading data");
     }
-
   }
-
-
 }

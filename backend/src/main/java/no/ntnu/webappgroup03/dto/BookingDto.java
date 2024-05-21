@@ -9,6 +9,8 @@ import java.sql.Date;
 public class BookingDto {
   private Date startDate;
   private Date endDate;
+  private Integer userId;
+  private String userName;
 
   public BookingDto(Date startDate, Date endDate) {
     this.startDate = startDate;
@@ -37,5 +39,21 @@ public class BookingDto {
 
   public BookingDto() {
     // Intentionally left blank.
+  }
+
+  public void setUserId(Integer userId) {
+    this.userId = userId;
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
+
+  public Integer getUserId() {
+    return userId;
   }
 }

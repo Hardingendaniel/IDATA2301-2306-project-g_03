@@ -3,6 +3,8 @@ import map from '../../img/7652611.jpg';
 import { useLocation, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import {useUser} from "../../UserContext";
+import PropTypes from 'prop-types';
+
 
 export function HotelPage() {
     const { id } = useParams();
@@ -16,6 +18,8 @@ export function HotelPage() {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [bookingInfo, setBookingInfo] = useState();
+    const [totalPrice, setTotalPrice] = useState(0);
+
 
     const handleStartDateChange = (date) => {
         setStartDate(date);
@@ -54,12 +58,13 @@ export function HotelPage() {
 
 
     const calculateTotalPrice = () => {
+        let totalPrice = 0;
         if (startDate && endDate) {
-            const oneDay = 24 * 60 *60 * 1000;
-            const days = Math.round((Math.abs(endDate-startDate)/oneDay));
-            return days * hotel.price;
+            const oneDay = 24 * 60 * 60 * 1000;
+            const days = Math.round(Math.abs(endDate - startDate) / oneDay);
+            totalPrice = days * hotel.price;
         }
-        return 0;
+        return totalPrice;
     }
 
     const scrollToSection = (ref) => {
@@ -99,6 +104,8 @@ export function HotelPage() {
     }, []);
 
     const handleBooking = async () => {
+
+
         if (!user?.roles.includes("ROLE_USER")) {
             alert('Please log in to book now.');
             return;
@@ -110,10 +117,9 @@ export function HotelPage() {
         }
 
         const bookingData = {
-            hotel: { id: id },
-            startDate: startDate.toISOString().split('T')[0], // ISO
+
+            startDate: startDate.toISOString().split('T')[0],
             endDate: endDate.toISOString().split('T')[0],
-            totalPrice: calculateTotalPrice(),
         };
 
         try {
@@ -122,21 +128,19 @@ export function HotelPage() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    hotel: { id: id },
-                    startDate: bookingInfo.startDate,
-                    endDate: bookingInfo.endDate,
-                    totalPrice: bookingInfo.totalPrice,
-                }),
+                body: JSON.stringify(bookingData),
             });
 
             if (response.ok) {
                 alert('Booking successful!');
             } else {
-                alert('Booking failed.');
+                const responseData = await response.json();
+                console.error('Booking failed:', responseData);
+                alert(`Booking failed`);
             }
         } catch (error) {
             console.error('Failed to book the hotel:', error);
+            alert('Booking failed due to a network error.');
         }
     };
 
@@ -384,3 +388,9 @@ export function HotelPage() {
         </div>
     );
 }
+
+HotelPage.propTypes = {
+    hotel: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
+};
+

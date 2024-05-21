@@ -70,7 +70,7 @@ public class Booking  {
     this.hotel = hotel;
   }
 
-  private User getUser() {
+  public User getUser() {
     return user;
   }
 
