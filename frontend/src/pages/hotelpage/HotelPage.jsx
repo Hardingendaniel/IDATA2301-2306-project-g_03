@@ -3,11 +3,8 @@ import { useLocation, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import {useUser} from "../../UserContext";
 import PropTypes from 'prop-types';
-<<<<<<< HEAD
-import StarRating from '../../components/StarRating';
 import {asyncApiRequest} from "../../tools/requests";
-=======
->>>>>>> c6761912f3709d5b64b15c771d2285bdf9a76e28
+import StarRating from '../../components/StarRating';
 
 
 export function HotelPage() {
@@ -24,8 +21,19 @@ export function HotelPage() {
     const [bookingInfo, setBookingInfo] = useState();
     const [totalPrice, setTotalPrice] = useState(0);
     const [color, setOtherColor] = useState(false);
-    const [favorite, setFavorite] = useState(null);
+    const [isFavorite, setIsFavorite] = useState(false);
 
+    const handleToggleFavorite = async () => {
+        setIsFavorite(!isFavorite);
+        if (isFavorite) {
+            try {
+                const requestBody = "";
+                const response = await asyncApiRequest("PUT", `/users/${id}`, requestBody);
+            } catch (error) {
+                console.log("An error occurred while adding to favorites");
+            }
+        }
+    }
 
     const handleStartDateChange = (date) => {
         setStartDate(date);
@@ -111,7 +119,6 @@ export function HotelPage() {
 
     const handleBooking = async () => {
 
-
         if (!user?.roles.includes("ROLE_USER")) {
             alert('Please log in to book now.');
             return;
@@ -150,12 +157,6 @@ export function HotelPage() {
         }
     };
 
-    const toggleColor = () => {
-        setOtherColor(!color);
-    };
-
-
-
     return (
         <div className="flex w-4/5 flex-col mx-auto">
             {hotel ? (
@@ -169,22 +170,68 @@ export function HotelPage() {
                             </svg>
                         </button>
                     </div>
-                    <div className="hotel">
-                        <h2>{hotel.name}</h2>
-                        <StarRating rating={hotel.rating} />
+                    <div className="flex py-2 space-x-1">
+                        {/* Render stars here */}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                             className="w-6 h-6 text-header">
+                            <path fillRule="evenodd"
+                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
+                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
+                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
+                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                  clipRule="evenodd" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                             className="w-6 h-6 text-header">
+                            <path fillRule="evenodd"
+                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
+                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
+                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
+                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                  clipRule="evenodd" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                             className="w-6 h-6 text-header">
+                            <path fillRule="evenodd"
+                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
+                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
+                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
+                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                  clipRule="evenodd" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                             className="w-6 h-6 text-header">
+                            <path fillRule="evenodd"
+                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
+                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
+                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
+                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                  clipRule="evenodd" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                             className="w-6 h-6 text-lightgrey">
+                            <path fillRule="evenodd"
+                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
+                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
+                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
+                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                  clipRule="evenodd" />
+                        </svg>
                     </div>
 
+
                     <div className="container mx-auto items-center py-2">
-                        <div className="md:grid md:grid-cols-6 md:grid-rows-2 grid-flow-col gap-2 md:h-72 h-full flex flex-col">
+                        <div
+                            className="md:grid md:grid-cols-6 md:grid-rows-2 grid-flow-col gap-2 md:h-72 h-full flex flex-col">
                             <div className="md:col-span-3 md:row-span-2 w-full transition-opacity hover:opacity-85">
                                 <img src={hotelImages[0]} alt="hotel1"
                                      className="rounded-2xl inset-0 h-full w-full object-cover object-center"
-                                     onClick={() => document.getElementById('image_modal1').showModal()} />
+                                     onClick={() => document.getElementById('image_modal1').showModal()}/>
                             </div>
                             <dialog id="image_modal1" className="modal">
                                 <div className="modal-box w-11/12 max-w-5xl">
                                     <img src={hotelImages[0]} alt={"Hotel1"}
-                                         className="w-full" />
+                                         className="w-full"/>
                                 </div>
                                 <form method="dialog" className="modal-backdrop">
                                     <button>close</button>
@@ -194,12 +241,12 @@ export function HotelPage() {
                             <div className="md:row-span-2 md:col-start-4 w-full transition-opacity hover:opacity-85">
                                 <img src={hotelImages[2]} alt="hotel2"
                                      className="rounded-2xl inset-0 h-full w-full object-cover object-center"
-                                     onClick={() => document.getElementById('image_modal2').showModal()} />
+                                     onClick={() => document.getElementById('image_modal2').showModal()}/>
                             </div>
                             <dialog id="image_modal2" className="modal">
                                 <div className="modal-box w-11/12 max-w-5xl">
                                     <img src={hotelImages[2]} alt={"Hotel2"}
-                                         className="w-full" />
+                                         className="w-full"/>
                                 </div>
                                 <form method="dialog" className="modal-backdrop">
                                     <button>close</button>
@@ -209,12 +256,12 @@ export function HotelPage() {
                             <div className="md:col-span-2 md:col-start-5 w-full transition-opacity hover:opacity-85">
                                 <img src={hotelImages[1]} alt="hotel3"
                                      className="rounded-2xl inset-0 h-full w-full object-cover object-center"
-                                     onClick={() => document.getElementById('image_modal3').showModal()} />
+                                     onClick={() => document.getElementById('image_modal3').showModal()}/>
                             </div>
                             <dialog id="image_modal3" className="modal">
                                 <div className="modal-box w-11/12 max-w-5xl">
                                     <img src={hotelImages[1]} alt={"Hotel3"}
-                                         className="w-full" />
+                                         className="w-full"/>
                                 </div>
                                 <form method="dialog" className="modal-backdrop">
                                     <button>close</button>
@@ -224,12 +271,12 @@ export function HotelPage() {
                             <div className="md:col-start-5 md:row-start-2 w-full transition-opacity hover:opacity-85">
                                 <img src={hotelImages[3]} alt="hotel4"
                                      className="rounded-2xl inset-0 h-full w-full object-cover object-center"
-                                     onClick={() => document.getElementById('image_modal4').showModal()} />
+                                     onClick={() => document.getElementById('image_modal4').showModal()}/>
                             </div>
                             <dialog id="image_modal4" className="modal">
                                 <div className="modal-box w-11/12 max-w-5xl">
                                     <img src={hotelImages[3]} alt={"Hotel4"}
-                                         className="w-full" />
+                                         className="w-full"/>
                                 </div>
                                 <form method="dialog" className="modal-backdrop">
                                     <button>close</button>
@@ -239,12 +286,12 @@ export function HotelPage() {
                             <div className="md:col-start-6 md:row-start-2 w-full transition-opacity hover:opacity-85">
                                 <img src={hotelImages[4]} alt="hotel5"
                                      className="rounded-2xl inset-0 h-full w-full object-cover object-center"
-                                     onClick={() => document.getElementById('image_modal5').showModal()} />
+                                     onClick={() => document.getElementById('image_modal5').showModal()}/>
                             </div>
                             <dialog id="image_modal5" className="modal">
                                 <div className="modal-box w-11/12 max-w-5xl">
                                     <img src={hotelImages[4]} alt={"Hotel5"}
-                                         className="w-full" />
+                                         className="w-full"/>
                                 </div>
                                 <form method="dialog" className="modal-backdrop">
                                     <button>close</button>
@@ -254,7 +301,7 @@ export function HotelPage() {
                     </div>
 
                     <div className={`navbar sticky w-full bg-white border-lightgrey border-b ${stickyClass}`}>
-                        <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionOverviewRef)}>Overview</button>
+                    <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionOverviewRef)}>Overview</button>
                         <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionRoomsRef)}>Rooms</button>
                         <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionReviewsRef)}>Reviews</button>
                         <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionAboutRef)}>About</button>
