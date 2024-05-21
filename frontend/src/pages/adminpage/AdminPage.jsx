@@ -9,7 +9,6 @@ function AdminPage() {
     const [selectedTable, setSelectedTable] = useState('hotel');
     const [hotels, setHotels] = useState([]);
     const [users, setUsers] = useState(null);
-    const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleTableChange = (table) => {
         setSelectedTable(table);
@@ -25,7 +24,6 @@ function AdminPage() {
             }
         };
 
-
         const fetchHotelData = async () => {
             try {
                 const hotelsData = await asyncApiRequest("GET", "/hotels");
@@ -35,35 +33,9 @@ function AdminPage() {
             }
         }
 
-        async function fetchData() {
-            try {
-                const response = await fetch("http://localhost:8080/api/hotels");
-                const data = await response.json();
-                console.log('Fetched data:', data);  // Log fetched data
-                setHotels(data);
-            } catch (error) {
-                console.error('Failed to fetch data:', error);
-            }
-        }
         fetchHotelData();
         fetchUserData()
     }, []);
-
-    const visibleHotels = () => {
-        if (hotels.length === 0) return [];
-        const totalHotels = hotels.length;
-        const indexes = [
-            currentIndex % totalHotels,
-            (currentIndex + 1) % totalHotels,
-            (currentIndex + 2) % totalHotels,
-            (currentIndex + 3) % totalHotels,
-            (currentIndex + 4) % totalHotels,
-        ];
-        return indexes.map(index => hotels[index]);
-    };
-
-
-    console.log('Visible hotels:', visibleHotels());  // Log visible hotels
 
     return (
         <div className="flex">
