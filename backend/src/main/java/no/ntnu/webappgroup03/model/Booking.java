@@ -70,6 +70,11 @@ public class Booking  {
   public void setHotel(Hotel hotel) {
     this.hotel = hotel;
   }
+
+  private User getUser() {
+    return user;
+  }
+
   public void setUser(User user) {
     this.user = user;
   }

@@ -27,7 +27,7 @@ public class BookingService {
     return bookingRepository.findAll();
   }
 
-  public Booking findById(int id) {
+  public Booking findById(long id) {
     Optional<Booking> booking = bookingRepository.findById(id);
     return booking.orElse(null);
   }
@@ -84,11 +84,11 @@ public class BookingService {
    * @return true when booking deleted, false when booking was not found in the database
    */
   public boolean delete(int id) {
-    Optional<Booking> booking = bookingRepository.findById(id);
-    if (booking.isPresent()) {
+    Optional<Booking> booking1 = bookingRepository.findById(id);
+    if (booking1.isPresent()) {
       bookingRepository.deleteById(id);
     }
-    return booking.isPresent();
+    return booking1.isPresent();
   }
 
 }

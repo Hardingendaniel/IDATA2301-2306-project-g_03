@@ -3,6 +3,7 @@ package no.ntnu.webappgroup03.service;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import no.ntnu.webappgroup03.dto.UserProfileDto;
+import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.model.Role;
 import no.ntnu.webappgroup03.model.User;
 import no.ntnu.webappgroup03.repository.UserRepository;
@@ -38,6 +39,10 @@ public class UserService {
         .stream()
         .map(this::convertToDto)
         .collect(Collectors.toList());
+  }
+
+  public Optional<User> getOne(int id) {
+    return this.userRepository.findById(id);
   }
 
   /**

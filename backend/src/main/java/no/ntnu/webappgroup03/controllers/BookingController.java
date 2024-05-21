@@ -8,6 +8,7 @@ import no.ntnu.webappgroup03.model.User;
 import no.ntnu.webappgroup03.service.AccessUserService;
 import no.ntnu.webappgroup03.service.BookingService;
 import no.ntnu.webappgroup03.service.HotelService;
+import no.ntnu.webappgroup03.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +24,14 @@ public class BookingController {
   @Autowired
   private BookingService bookingService;
   @Autowired
-  private AccessUserService userService ;
+  private AccessUserService accessUserService;
   @Autowired
   private HotelService hotelService;
+
+  @Autowired
+  private UserService userService;
+
+
 
   /**
    * Get all bookings.
@@ -44,7 +50,8 @@ public class BookingController {
    * @return booking with the given ID or status 404 (Not Found)
    */
   @GetMapping("/{id}")
-  public ResponseEntity<?> getOne(@PathVariable int id) {
+  public ResponseEntity<?> getOne(@PathVariable int id,
+                                  @RequestBody String email) {
     ResponseEntity<?> response;
     Optional<Booking> booking = this.bookingService.getOne(id);
     if (booking.isPresent()) {
@@ -57,20 +64,61 @@ public class BookingController {
     return response;
   }
 
+
+  /**
+   * Update hotel details information.
+   *
+   * @param id for which hotel to update
+   * @return HTTP 200 OK or error code with error message
+   */
+  @PutMapping("/{id}")
+  public ResponseEntity<String> updateBooking(@PathVariable int id,
+                                              @RequestBody BookingDto bookingData) {
+    ResponseEntity<String> response;
+    Optional<Booking> booking = this.bookingService.getOne(id);
+    User sessionUser = this.accessUserService.getSessionUser();
+    if (sessionUser != null ) {
+      if (bookingData != null && booking.isPresent()) {
+        if (this.bookingService.updateBooking(id, bookingData)) {
+          response = new ResponseEntity<>("", HttpStatus.OK);
+        } else  {
+          response = new ResponseEntity<>("Could not update Booking data",
+              HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+      } else {
+        response = new ResponseEntity<>("Booking data not supplied", HttpStatus.BAD_REQUEST);
+      }
+    } else if (sessionUser == null) {
+      response = new ResponseEntity<>("Booking data accessible only to authenticated users",
+          HttpStatus.UNAUTHORIZED);
+    } else {
+      response = new ResponseEntity<>("Booking data for other users not accessible",
+          HttpStatus.FORBIDDEN);
+    }
+    return response;
+  }
+
+  //TODO user not set in bookings
   /**
    * If the user is registered, add a new booking.
    *
    * @param bookingDto booking wanted to create.
    * @return HTTP 200 OK or error code with error message.
    */
-  @PostMapping("/{hotelId}")
-  public ResponseEntity<?> add(@PathVariable int hotelId, @RequestBody BookingDto bookingDto) {
+  @PostMapping("/{hotelId}/{userId}")
+  public ResponseEntity<?> add(@PathVariable int hotelId, @PathVariable int userId, @RequestBody BookingDto bookingDto) {
     ResponseEntity<?> response;
-    User sessionUser = this.userService.getSessionUser();
+    User sessionUser = this.accessUserService.getSessionUser();
     if (sessionUser != null ) {
       if (bookingDto != null) {
         Booking booking = new Booking(
             bookingDto.getStartDate(), bookingDto.getEndDate());
+        Optional<User> user = userService.getOne(userId);
+        if (user.isPresent()) {
+          booking.setUser(user.get());
+        } else {
+          return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
         Optional<Hotel> hotel = hotelService.getOne(hotelId);
         if (hotel.isPresent()) {
           booking.setHotel(hotel.get());
@@ -104,7 +152,7 @@ public class BookingController {
   @DeleteMapping("/{id}")
   public ResponseEntity<String> delete(@PathVariable int id) {
     ResponseEntity<String> response;
-    User sessionUser = this.userService.getSessionUser();
+    User sessionUser = this.accessUserService.getSessionUser();
     if (sessionUser != null && sessionUser.isAdmin()) {
       Optional<Booking> booking = this.bookingService.getOne(id);
       if (booking != null && booking.isPresent()) {
