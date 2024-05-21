@@ -1,5 +1,5 @@
 import React from "react";
-import EditButton from "../../components/EditButton";
+import EditHotelButton from "../../components/buttons/EditHotelButton";
 
 function HotelTable({ hotels }) {
     return (
@@ -16,6 +16,7 @@ function HotelTable({ hotels }) {
                 <th>Hotel name</th>
                 <th>Description</th>
                 <th>Status</th>
+                <th>Providers</th>
                 <th>Price</th>
                 <th></th>
             </tr>
@@ -49,10 +50,13 @@ function HotelTable({ hotels }) {
                             {String(hotel.active)}</span>
                     </td>
                     <td>
+                        {hotel.providers}
+                    </td>
+                    <td>
                         NOK {hotel.price}
                     </td>
                     <th>
-                        <EditButton hotelId={hotel.id} initialStatus={hotel.active}/>
+                        <EditHotelButton hotelId={hotel.id} initialStatus={hotel.active}/>
                     </th>
                 </tr>
             ))}

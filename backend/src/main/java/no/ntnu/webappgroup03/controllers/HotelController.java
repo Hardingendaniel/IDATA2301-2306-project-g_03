@@ -61,7 +61,7 @@ public class HotelController {
     if (hotel.isPresent()) {
       HotelDto hotelDto = new HotelDto(hotel.get().getId(), hotel.get().getHotelName(),
           hotel.get().getDescription(), hotel.get().getLocation(), hotel.get().getRoomTypes(),
-          hotel.get().getPrice(), hotel.get().isActive(), hotel.get().getRating(),
+          hotel.get().getPrice(), hotel.get().getProviders(), hotel.get().isActive(), hotel.get().getRating(),
           hotel.get().getReview());
       response = new ResponseEntity<>(hotelDto, HttpStatus.OK);
     } else {
@@ -151,8 +151,7 @@ public class HotelController {
       if (hotelDto != null) {
         Hotel hotel = new Hotel(hotelDto.getHotelName(), hotelDto.getDescription(),
             hotelDto.getLocation(), hotelDto.getRoomType(), hotelDto.getPrice(),
-            hotelDto.getRating(),
-            hotelDto.getReview());
+            hotelDto.getProviders(), hotelDto.getRating(), hotelDto.getReview());
         this.hotelService.add(hotel);
         response = new ResponseEntity<>(hotel, HttpStatus.OK);
       } else {

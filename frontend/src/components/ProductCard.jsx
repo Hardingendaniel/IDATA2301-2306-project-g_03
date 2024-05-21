@@ -54,14 +54,15 @@ const ProductCard = ({hotel}) => {
 
                     <div className="badge bg-header p-3 text-white text-base">{hotel ? hotel.roomTypes : ""}</div>
                     <div className="flex item-center justify-between mt-3">
-                        <p className="text-xl font-black text-gray-800">
+                        <div className=" font-semibold my-auto">{hotel.providers}</div>
+                        <p className="text-xl font-black my-auto text-gray-800">
                             NOK {hotel ? hotel.price : ""}
                             <span className="font-normal text-font text-base">/night</span>
                         </p>
 
                         <NavLink to={{
                             pathname: `/hotel/${hotel.id}`,
-                            state: { hotel }
+                            state: {hotel}
                         }}>
                             <div className="btn text-white font-bold rounded-2xl bg-main hover:bg-header">View deal
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
