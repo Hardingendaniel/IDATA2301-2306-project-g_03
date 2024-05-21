@@ -16,6 +16,7 @@ function HotelTable({ hotels }) {
                 <th>Hotel name</th>
                 <th>Description</th>
                 <th>Status</th>
+                <th>Providers</th>
                 <th>Price</th>
                 <th></th>
             </tr>
@@ -47,6 +48,9 @@ function HotelTable({ hotels }) {
                             hotel.active ? 'badge-success text-white' : 'badge-error text-white'
                         }`}>
                             {String(hotel.active)}</span>
+                    </td>
+                    <td>
+                        {hotel.providers}
                     </td>
                     <td>
                         NOK {hotel.price}
