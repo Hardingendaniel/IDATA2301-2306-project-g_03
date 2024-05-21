@@ -123,7 +123,7 @@ export function HotelPage() {
         };
 
         try {
-            const response = await fetch(`http://localhost:8080/api/bookings/${id}/${user.id}`, {
+            const response = await fetch(`http://localhost:8080/api/bookings/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
