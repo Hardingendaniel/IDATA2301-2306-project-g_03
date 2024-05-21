@@ -200,8 +200,8 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
       Booking booking2 = new Booking(new Date(1716190510000l), new Date(1716806114000l));
 
       //TODO user is not set in booking
-      //booking1.setUser(this.userService.findUserByEmail("chuck_norris@stay-finder.com").get());
-      //booking2.setUser(this.userService.findUserByEmail("dave_dangerous@stay-finder.com").get());
+      booking1.setUser(this.userService.findUserByEmail("chuck_norris@stay-finder.com").get());
+      booking2.setUser(this.userService.findUserByEmail("dave_dangerous@stay-finder.com").get());
       //booking1.setUser(this.userService.getOne(1).get());
       //booking1.setUser(this.userService.getOne(2).get());
       booking1.setHotel(this.hotelService.getOne(1).get());

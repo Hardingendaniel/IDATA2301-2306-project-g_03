@@ -26,7 +26,7 @@ public class Hotel {
 
   private String review;
 
-  @ManyToMany(mappedBy = "hotels")
+  @OneToMany(mappedBy = "hotel")
   private Set<Booking> bookings = new HashSet<>();
 
   public Hotel() {

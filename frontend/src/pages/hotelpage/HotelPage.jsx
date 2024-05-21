@@ -104,8 +104,20 @@ export function HotelPage() {
             return;
         }
 
+        if (!startDate || !endDate) {
+            alert('Please select start and end dates for your booking.');
+            return;
+        }
+
+        const bookingData = {
+            hotel: { id: id },
+            startDate: startDate.toISOString().split('T')[0], // ISO
+            endDate: endDate.toISOString().split('T')[0],
+            totalPrice: calculateTotalPrice(),
+        };
+
         try {
-            const response = await fetch('http://localhost:8080/api/bookings', {
+            const response = await fetch(`http://localhost:8080/api/bookings/${id}/${user.id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

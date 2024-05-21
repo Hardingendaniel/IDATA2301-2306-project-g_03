@@ -10,6 +10,8 @@ function SearchForm() {
     const [selectedLocation, setSelectedLocation] = useState('');
     const [roomTypes, setRoomTypes] = useState([]);
     const [selectedRoomType, setSelectedRoomType] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
 
     const navigate = useNavigate();
 
@@ -45,7 +47,7 @@ function SearchForm() {
     const handleFormSubmit = (event) => {
         event.preventDefault();
         if (!selectedLocation) {
-            alert('Please select a location in "Where to?"');
+            setErrorMessage('Select a location');
             return;
         }
         navigate("/browse", {
@@ -88,7 +90,8 @@ function SearchForm() {
 
 
     return (
-        <form className="justify-center w-full mb-8" onSubmit={handleFormSubmit}>
+        <div className="w-full flex-col items-start">
+        <form className="justify-center w-full" onSubmit={handleFormSubmit}>
             <div className="join w-full flex justify-center">
                 <select
                     className='w-1/5 join-item rounded-s-2xl pl-2'
@@ -135,7 +138,13 @@ function SearchForm() {
                     SEARCH
                 </button>
             </div>
+
         </form>
+            {errorMessage && (
+                <div className= "pl-[25%] tooltip tooltip-open tooltip-bottom tooltip-error " data-tip={errorMessage}>
+                </div>
+            )}
+        </div>
     );
 }
 
