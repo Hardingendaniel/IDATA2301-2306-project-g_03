@@ -4,6 +4,7 @@ import { useLocation, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import {useUser} from "../../UserContext";
 import PropTypes from 'prop-types';
+import {getCookie} from "../../tools/cookies";
 
 
 export function HotelPage() {
@@ -103,9 +104,8 @@ export function HotelPage() {
         };
     }, []);
 
+
     const handleBooking = async () => {
-
-
         if (!user?.roles.includes("ROLE_USER")) {
             alert('Please log in to book now.');
             return;
@@ -117,17 +117,23 @@ export function HotelPage() {
         }
 
         const bookingData = {
-
             startDate: startDate.toISOString().split('T')[0],
             endDate: endDate.toISOString().split('T')[0],
         };
 
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+
+        const jwtToken = getCookie("jwt");
+        if (jwtToken) {
+            headers["Authorization"] = "Bearer " + jwtToken;
+        }
+
         try {
             const response = await fetch(`http://localhost:8080/api/bookings/${id}`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: headers,
                 body: JSON.stringify(bookingData),
             });
 
@@ -136,13 +142,14 @@ export function HotelPage() {
             } else {
                 const responseData = await response.json();
                 console.error('Booking failed:', responseData);
-                alert(`Booking failed`);
+                alert(`Booking failed: ${responseData.message || responseData.error || 'Unknown error'}`);
             }
         } catch (error) {
             console.error('Failed to book the hotel:', error);
             alert('Booking failed due to a network error.');
         }
     };
+
 
 
 
