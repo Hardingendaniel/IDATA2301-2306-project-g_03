@@ -21,6 +21,7 @@ module.exports = {
       inputField: "#EBEBEB",
       tableHover: "#F9FAFB",
       red: "#EE4B2B",
+      error: "#BE3C22",
       lightblue: "#D9E4FF"
     },
     borderRadius: {

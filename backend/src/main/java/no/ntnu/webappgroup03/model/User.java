@@ -22,7 +22,7 @@ public class User {
   private String password;
   private boolean active = true;
   @JsonIgnore
-  @ManyToMany(fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "user")
   //TODO: finne ut av relasjonen
   private Set<Booking> bookings = new HashSet<>();
   @ManyToMany(fetch = FetchType.EAGER)
