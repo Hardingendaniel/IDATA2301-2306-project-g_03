@@ -108,22 +108,6 @@ public class UserService {
     // user.getId() == null ||
   }
 
-  /**
-   * Method to create a new user and checks if
-   * email already exist.
-   *
-   * @param user the user to be created.
-   * @return returns the new user.
-   * @throws Exception exception to be cast if email already exists.
-   */
-  public User registerUser(User user) throws Exception {
-    if (userRepository.existsByEmail(user.getEmail())) {
-      throw new Exception("Email already exists");
-    }
-    user.setPassword(user.getPassword());
-    return userRepository.save(user);
-  }
-
 
   /**
    * Delete a user from application state (database).
