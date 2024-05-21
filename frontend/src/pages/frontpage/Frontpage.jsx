@@ -7,20 +7,9 @@ import Stryn from "../../img/Stryn.jpg"
 import SearchForm from "../../components/SearchForm";
 import { useNavigate } from "react-router-dom";
 import {useUser} from "../../UserContext";
+import StarRating from "../../components/StarRating";
 
 function Frontpage() {
-    const StarRating = ({ rating }) => {
-        const getStars = (rating) => {
-            const maxStars = 6; // ensure this matches your max rating logic
-            return '★'.repeat(rating) + '☆'.repeat(maxStars - rating);
-        };
-
-        return (
-            <p className="text-lg font-semibold text-main">
-                {getStars(rating)}
-            </p>
-        );
-    };
 
     const [data1, setData1] = useState([]);
     const [locationCounts, setLocationCounts] = useState([]);
@@ -121,7 +110,10 @@ function Frontpage() {
                                 <div className="text-center p-4">
                                     <h3 className="text-lg font-semibold">{hotel ? hotel.hotelName : ""}</h3>
                                     <p className="text-lg font-light">{hotel ? hotel.description : ""}</p>
-                                    <StarRating rating={hotel ? hotel.rating : 0}/>
+                                        <h2>{hotel.name}</h2>
+                                    <div className="flex justify-center">
+                                        <StarRating rating={hotel.rating} />
+                                    </div>
                                 </div>
                             </button>
                         )

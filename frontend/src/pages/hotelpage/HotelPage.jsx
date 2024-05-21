@@ -1,14 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
-import map from '../../img/7652611.jpg';
-import { useLocation, useParams } from "react-router-dom";
+import React, {useEffect, useRef, useState} from "react";
+import {useLocation, useParams} from "react-router-dom";
 import DatePicker from "react-datepicker";
 import {useUser} from "../../UserContext";
 import PropTypes from 'prop-types';
+import {asyncApiRequest} from "../../tools/requests";
+import StarRating from '../../components/StarRating';
 import {getCookie} from "../../tools/cookies";
 
 
 export function HotelPage() {
-    const { id } = useParams();
+    const {id} = useParams();
     const location = useLocation();
     const [hotel, setHotel] = useState(location.state?.hotel || null);
     const {user, logout} = useUser();
@@ -20,7 +21,20 @@ export function HotelPage() {
     const [endDate, setEndDate] = useState(null);
     const [bookingInfo, setBookingInfo] = useState();
     const [totalPrice, setTotalPrice] = useState(0);
+    const [color, setOtherColor] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(false);
 
+    const handleToggleFavorite = async () => {
+        setIsFavorite(!isFavorite);
+        if (isFavorite) {
+            try {
+                const requestBody = "";
+                const response = await asyncApiRequest("PUT", `/users/${id}`, requestBody);
+            } catch (error) {
+                console.log("An error occurred while adding to favorites");
+            }
+        }
+    }
 
     const handleStartDateChange = (date) => {
         setStartDate(date);
@@ -45,6 +59,7 @@ export function HotelPage() {
                 console.error('Failed to fetch data:', error);
             }
         }
+
         fetchHotel();
     }, [id]);
 
@@ -69,7 +84,7 @@ export function HotelPage() {
     }
 
     const scrollToSection = (ref) => {
-        ref.current.scrollIntoView({ behavior: 'smooth' });
+        ref.current.scrollIntoView({behavior: 'smooth'});
     };
 
     const [stickyClass, setStickyClass] = useState('relative');
@@ -104,8 +119,8 @@ export function HotelPage() {
         };
     }, []);
 
-
     const handleBooking = async () => {
+
         if (!user?.roles.includes("ROLE_USER")) {
             alert('Please log in to book now.');
             return;
@@ -117,6 +132,7 @@ export function HotelPage() {
         }
 
         const bookingData = {
+
             startDate: startDate.toISOString().split('T')[0],
             endDate: endDate.toISOString().split('T')[0],
         };
@@ -130,6 +146,7 @@ export function HotelPage() {
             headers["Authorization"] = "Bearer " + jwtToken;
         }
 
+
         try {
             const response = await fetch(`http://localhost:8080/api/bookings/${id}`, {
                 method: 'POST',
@@ -142,7 +159,7 @@ export function HotelPage() {
             } else {
                 const responseData = await response.json();
                 console.error('Booking failed:', responseData);
-                alert(`Booking failed: ${responseData.message || responseData.error || 'Unknown error'}`);
+                alert(`Booking failed`);
             }
         } catch (error) {
             console.error('Failed to book the hotel:', error);
@@ -150,74 +167,54 @@ export function HotelPage() {
         }
     };
 
-
-
-
     return (
         <div className="flex w-4/5 flex-col mx-auto">
             {hotel ? (
                 <>
-                    <h1 className="font-bold py-2 text-4xl">{hotel.hotelName}</h1>
-                    <div className="flex py-2 space-x-1">
-                        {/* Render stars here */}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                             className="w-6 h-6 text-header">
-                            <path fillRule="evenodd"
-                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
-                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
-                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
-                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                  clipRule="evenodd" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                             className="w-6 h-6 text-header">
-                            <path fillRule="evenodd"
-                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
-                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
-                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
-                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                  clipRule="evenodd" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                             className="w-6 h-6 text-header">
-                            <path fillRule="evenodd"
-                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
-                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
-                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
-                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                  clipRule="evenodd" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                             className="w-6 h-6 text-header">
-                            <path fillRule="evenodd"
-                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
-                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
-                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
-                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                  clipRule="evenodd" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                             className="w-6 h-6 text-lightgrey">
-                            <path fillRule="evenodd"
-                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749
-                          2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373
-                          21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273
-                          -4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                  clipRule="evenodd" />
-                        </svg>
+                    <div className="flex flex-row justify-between">
+                        <div className="flex flex-col">
+                            <h1 className="font-bold py-2 text-4xl">{hotel.hotelName}</h1>
+                            <div className="flex py-2 space-x-1">
+                                {/* Render stars here */}
+                                <div className="hotel">
+                                    <StarRating rating={hotel.rating}/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button
+                            onClick={handleToggleFavorite}
+                            className="my-auto"
+                        >
+                            {isFavorite ? (
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                     className="w-16 h-16 text-main">
+                                    <path
+                                        d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"/>
+                                </svg>
+                            ) : (
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     strokeWidth={1.5} stroke="currentColor" className="w-16 h-16 text-main">
+                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                          d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>
+                                </svg>
+                            )}
+                        </button>
                     </div>
 
+
                     <div className="container mx-auto items-center py-2">
-                        <div className="md:grid md:grid-cols-6 md:grid-rows-2 grid-flow-col gap-2 md:h-72 h-full flex flex-col">
+                        <div
+                            className="md:grid md:grid-cols-6 md:grid-rows-2 grid-flow-col gap-2 md:h-72 h-full flex flex-col">
                             <div className="md:col-span-3 md:row-span-2 w-full transition-opacity hover:opacity-85">
                                 <img src={hotelImages[0]} alt="hotel1"
                                      className="rounded-2xl inset-0 h-full w-full object-cover object-center"
-                                     onClick={() => document.getElementById('image_modal1').showModal()} />
+                                     onClick={() => document.getElementById('image_modal1').showModal()}/>
                             </div>
                             <dialog id="image_modal1" className="modal">
                                 <div className="modal-box w-11/12 max-w-5xl">
                                     <img src={hotelImages[0]} alt={"Hotel1"}
-                                         className="w-full" />
+                                         className="w-full"/>
                                 </div>
                                 <form method="dialog" className="modal-backdrop">
                                     <button>close</button>
@@ -227,12 +224,12 @@ export function HotelPage() {
                             <div className="md:row-span-2 md:col-start-4 w-full transition-opacity hover:opacity-85">
                                 <img src={hotelImages[2]} alt="hotel2"
                                      className="rounded-2xl inset-0 h-full w-full object-cover object-center"
-                                     onClick={() => document.getElementById('image_modal2').showModal()} />
+                                     onClick={() => document.getElementById('image_modal2').showModal()}/>
                             </div>
                             <dialog id="image_modal2" className="modal">
                                 <div className="modal-box w-11/12 max-w-5xl">
                                     <img src={hotelImages[2]} alt={"Hotel2"}
-                                         className="w-full" />
+                                         className="w-full"/>
                                 </div>
                                 <form method="dialog" className="modal-backdrop">
                                     <button>close</button>
@@ -242,12 +239,12 @@ export function HotelPage() {
                             <div className="md:col-span-2 md:col-start-5 w-full transition-opacity hover:opacity-85">
                                 <img src={hotelImages[1]} alt="hotel3"
                                      className="rounded-2xl inset-0 h-full w-full object-cover object-center"
-                                     onClick={() => document.getElementById('image_modal3').showModal()} />
+                                     onClick={() => document.getElementById('image_modal3').showModal()}/>
                             </div>
                             <dialog id="image_modal3" className="modal">
                                 <div className="modal-box w-11/12 max-w-5xl">
                                     <img src={hotelImages[1]} alt={"Hotel3"}
-                                         className="w-full" />
+                                         className="w-full"/>
                                 </div>
                                 <form method="dialog" className="modal-backdrop">
                                     <button>close</button>
@@ -257,12 +254,12 @@ export function HotelPage() {
                             <div className="md:col-start-5 md:row-start-2 w-full transition-opacity hover:opacity-85">
                                 <img src={hotelImages[3]} alt="hotel4"
                                      className="rounded-2xl inset-0 h-full w-full object-cover object-center"
-                                     onClick={() => document.getElementById('image_modal4').showModal()} />
+                                     onClick={() => document.getElementById('image_modal4').showModal()}/>
                             </div>
                             <dialog id="image_modal4" className="modal">
                                 <div className="modal-box w-11/12 max-w-5xl">
                                     <img src={hotelImages[3]} alt={"Hotel4"}
-                                         className="w-full" />
+                                         className="w-full"/>
                                 </div>
                                 <form method="dialog" className="modal-backdrop">
                                     <button>close</button>
@@ -272,12 +269,12 @@ export function HotelPage() {
                             <div className="md:col-start-6 md:row-start-2 w-full transition-opacity hover:opacity-85">
                                 <img src={hotelImages[4]} alt="hotel5"
                                      className="rounded-2xl inset-0 h-full w-full object-cover object-center"
-                                     onClick={() => document.getElementById('image_modal5').showModal()} />
+                                     onClick={() => document.getElementById('image_modal5').showModal()}/>
                             </div>
                             <dialog id="image_modal5" className="modal">
                                 <div className="modal-box w-11/12 max-w-5xl">
                                     <img src={hotelImages[4]} alt={"Hotel5"}
-                                         className="w-full" />
+                                         className="w-full"/>
                                 </div>
                                 <form method="dialog" className="modal-backdrop">
                                     <button>close</button>
@@ -287,30 +284,24 @@ export function HotelPage() {
                     </div>
 
                     <div className={`navbar sticky w-full bg-white border-lightgrey border-b ${stickyClass}`}>
-                        <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionOverviewRef)}>Overview</button>
-                        <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionRoomsRef)}>Rooms</button>
-                        <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionReviewsRef)}>Reviews</button>
-                        <button className="btn btn-ghost text-xl rounded-2xl" onClick={() => scrollToSection(sectionAboutRef)}>About</button>
+                        <button className="btn btn-ghost text-xl rounded-2xl"
+                                onClick={() => scrollToSection(sectionOverviewRef)}>Overview
+                        </button>
+                        <button className="btn btn-ghost text-xl rounded-2xl"
+                                onClick={() => scrollToSection(sectionRoomsRef)}>Rooms
+                        </button>
+                        <button className="btn btn-ghost text-xl rounded-2xl"
+                                onClick={() => scrollToSection(sectionReviewsRef)}>Reviews
+                        </button>
+                        <button className="btn btn-ghost text-xl rounded-2xl"
+                                onClick={() => scrollToSection(sectionAboutRef)}>About
+                        </button>
                     </div>
-                    <div ref={sectionOverviewRef} className="flex flex-row pt-16">
-                        <div className="divider"></div>
-                        <div className="w-96 rounded-2xl p-2 m-2">
-                            <p>{hotel.description}</p>
+                    <div ref={sectionOverviewRef} className="flex flex-row justify-between pt-16">
+                        <div className="w-96 rounded-2xl p-2 pl-6">
+                            <p className="font-normal text-lg">{hotel.description}</p>
                         </div>
-                        <div className="w-96 m-2 relative overflow-hidden flex items-center justify-center flex-col">
-                            <img
-                                src={map}
-                                alt="map"
-                                className="rounded-2xl object-cover"
-                            />
-                            <div
-                                className="absolute w-full h-full top-0 bottom-0 left-0 right-0 flex items-center justify-center">
-                                <div className="btn bg-main roudned-2xl text-white font-bold text-xl hover:bg-header">Show on
-                                    map
-                                </div>
-                            </div>
-                        </div>
-                        <div className="w-96 border rounded-2xl m-2">
+                        <div className="w-96 border rounded-2xl">
                             <div className="flex bg-lightblue rounded-2xl w-full h-24 border">
                                 <div className="flex flex-col m-auto">
                                     <p className="text-2xl font-black m-auto items-center">
@@ -376,11 +367,15 @@ export function HotelPage() {
                             </div>
                             <div className="rounded-2xl border p-2 w-72">
                                 <h2 className="font-semibold">Review 2</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a mauris facilisis diam lacinia interdum. Aliquam ultrices quam quis viverra molestie. Vivamus ultricies diam id nulla tempor gravida.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a mauris facilisis diam
+                                    lacinia interdum. Aliquam ultrices quam quis viverra molestie. Vivamus ultricies
+                                    diam id nulla tempor gravida.</p>
                             </div>
                             <div className="rounded-2xl border p-2 w-72">
                                 <h2 className="font-semibold">Review 3</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a mauris facilisis diam lacinia interdum. Aliquam ultrices quam quis viverra molestie. Vivamus ultricies diam id nulla tempor gravida.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a mauris facilisis diam
+                                    lacinia interdum. Aliquam ultrices quam quis viverra molestie. Vivamus ultricies
+                                    diam id nulla tempor gravida.</p>
                             </div>
                         </div>
                     </div>
@@ -404,4 +399,3 @@ HotelPage.propTypes = {
     hotel: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired
 };
-
