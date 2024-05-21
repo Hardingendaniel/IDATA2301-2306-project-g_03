@@ -135,6 +135,7 @@ export function HotelPage() {
 
             startDate: startDate.toISOString().split('T')[0],
             endDate: endDate.toISOString().split('T')[0],
+            userId: id
         };
 
         const headers = {
