@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from "react";
-import map from '../../img/7652611.jpg'
 import ProductCard from "../../components/ProductCard";
 import SearchForm from "../../components/SearchForm";
-import {NavLink, useLocation} from "react-router-dom";
-import {HotelPage} from "../hotelpage/HotelPage";
+import { useLocation} from "react-router-dom";
 
 const BrowsePage = () => {
 
@@ -53,19 +51,6 @@ const BrowsePage = () => {
 
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 w-3/4 mx-auto">
                 <aside className="flex flex-col w-64 py-4">
-                    <div className="relative overflow-hidden flex items-center justify-center flex-col my-4">
-                        <img
-                            src={map}
-                            alt="map"
-                            className="rounded-2xl object-cover"
-                        />
-                        <div
-                            className="absolute w-full h-full top-0 bottom-0 left-0 right-0 flex items-center justify-center">
-                            <div className="btn bg-main text-white font-bold text-xl hover:bg-header">Show on map
-                            </div>
-                        </div>
-                    </div>
-
                     <div className="flex flex-col w-full py-2 px-2 my-4 border rounded-2xl ">
                         <div className="text-lg font-bold">Filter by</div>
                         <div className="divider"></div>
@@ -159,7 +144,7 @@ const BrowsePage = () => {
                                 </svg>
                             </div>
                             <ul tabIndex={0}
-                                className="dropdown-content z-[1] menu p-2 bg-base-100 rounded-2xl w-52">
+                                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-2xl w-52">
                                 <li><a>Recommended</a></li>
                                 <li><a>Star Rating</a></li>
                                 <li><a>Price - Low to High</a></li>
