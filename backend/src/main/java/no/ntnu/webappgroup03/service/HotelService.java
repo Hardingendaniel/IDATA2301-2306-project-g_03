@@ -80,6 +80,7 @@ public class HotelService {
       existingHotel.setLocation(hotelData.getLocation());
       existingHotel.setRoomTypes(hotelData.getRoomType());
       existingHotel.setPrice(hotelData.getPrice());
+      existingHotel.setProviders(hotelData.getProviders());
       existingHotel.setActive(hotelData.isActive());
       existingHotel.setRating(hotelData.getRating());
       existingHotel.setReview(hotelData.getReview());

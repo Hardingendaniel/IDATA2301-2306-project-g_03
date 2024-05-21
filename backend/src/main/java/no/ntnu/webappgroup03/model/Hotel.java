@@ -21,6 +21,7 @@ public class Hotel {
   private String roomTypes;
   private double price;
   private boolean active = true;
+  private String providers;
 
   private int rating;
 
@@ -41,14 +42,18 @@ public class Hotel {
    * @param location    The location of the hotel
    * @param roomTypes   The type of the room
    * @param price       The price for the hotel
+   * @param providers   The provider of the hotel
+   * @param rating      The hotel's rating
+   * @param review      Review of the hotel
    */
   public Hotel(String hotelName, String description, String location,
-      String roomTypes, double price, int rating, String review) {
+      String roomTypes, double price, String providers, int rating, String review) {
     this.hotelName = hotelName;
     this.location = location;
     this.roomTypes = roomTypes;
     this.price = price;
     this.description = description;
+    this.providers = providers;
     this.review = review;
     this.rating = rating;
   }
@@ -101,6 +106,14 @@ public class Hotel {
     this.description = description;
   }
 
+  public String getProviders() {
+    return this.providers;
+  }
+
+  public void setProviders(String providers) {
+    this.providers = providers;
+  }
+
   public boolean isActive() {
     return active;
   }
@@ -113,7 +126,7 @@ public class Hotel {
     this.rating = rating;
   }
 
-  public int getRating(){
+  public int getRating() {
     return rating;
   }
 
@@ -130,6 +143,7 @@ public class Hotel {
   }
 
   //TODO should this be on the user class instead
+
   /**
    * Add a booking to the booking list of the Hotel
    *
