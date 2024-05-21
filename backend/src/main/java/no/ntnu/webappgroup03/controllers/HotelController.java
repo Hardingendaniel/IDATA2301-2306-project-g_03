@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -38,7 +39,13 @@ public class HotelController {
    */
   @GetMapping("/api/hotels")
   public Iterable<Hotel> getAll() {
-    return hotelService.getAll();
+    User sessionUser = userService.getSessionUser();
+    if (sessionUser == null) {
+      return this.hotelService.getHotelsForUser(false);
+    } else {
+      boolean isAdmin = sessionUser.isAdmin();
+      return this.hotelService.getHotelsForUser(isAdmin);
+    }
   }
 
   /**

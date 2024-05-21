@@ -11,4 +11,5 @@ import java.util.Optional;
 @Service
 public interface HotelRepository extends CrudRepository<Hotel, Integer> {
   Optional<Hotel> findById(int id);
+  List<Hotel> findByActive(boolean active);
 }

@@ -11,7 +11,6 @@ import java.util.*;
  */
 @Entity(name = "users")
 public class User {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
@@ -31,6 +30,14 @@ public class User {
       inverseJoinColumns = @JoinColumn(name = "role_id")
   )
   private Set<Role> roles = new LinkedHashSet<>();
+
+
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "favorite",
+  joinColumns = @JoinColumn(name = "user_id"),
+  inverseJoinColumns = @JoinColumn(name = "hotel_id"))
+  private Set<Hotel> favorites = new LinkedHashSet<>();
 
 
   public User() {
@@ -102,6 +109,10 @@ public class User {
     return password;
   }
 
+  public Set<Hotel> getFavorites() {
+    return favorites;
+  }
+
   public void setPassword(String password) {
     this.password = password;
   }
@@ -134,6 +145,18 @@ public class User {
   public boolean isAdmin() {
     return this.hashRole("ROLE_ADMIN");
   }
+
+  /**
+   * Add a hotel to a user favorites.
+   */
+  public void addToFavorites(Hotel hotel){
+    favorites.add(hotel);
+  }
+
+  public void removeFromFavorites(Hotel hotel) {
+    favorites.remove(hotel);
+  }
+
 
   /**
    * Check if the user has a specific role.
