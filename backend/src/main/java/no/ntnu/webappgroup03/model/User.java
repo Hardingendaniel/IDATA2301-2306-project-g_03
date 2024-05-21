@@ -18,13 +18,15 @@ public class User {
   private String lastName;
   private String email;
   private int phoneNumber;
-  private String password;
-  private boolean active = true;
   @JsonIgnore
+  private String password;
+  @JsonIgnore
+  private boolean active = true;
   @OneToMany(mappedBy = "user")
   //TODO: finne ut av relasjonen
   private Set<Booking> bookings = new HashSet<>();
   @ManyToMany(fetch = FetchType.EAGER)
+  @JsonIgnore
   @JoinTable(name = "user_role",
       joinColumns = @JoinColumn(name = "user_id"),
       inverseJoinColumns = @JoinColumn(name = "role_id")
