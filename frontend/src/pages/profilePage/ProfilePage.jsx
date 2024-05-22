@@ -9,14 +9,23 @@ function ProfilePage() {
     const {user} = useUser();
     const [userInfo, setUserInfo] = useState(null)
     const [showUpdateModal, setShowUpdateModal] = useState(false);
-    const [bookings, setBookings] = useState();
-    const [favorites, setFavorites] = useState();
+    const [bookings, setBookings] = useState([]);
+    const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
                 const data = await asyncApiRequest("GET", `/users/${user.email}`);
                 setUserInfo(data);
+            } catch (error) {
+                console.log("Error fetching user information", error);
+            }
+        }
+
+        const fetchBookingInfo = async () => {
+            try {
+                const bookings = await asyncApiRequest("GET", `/bookings`);
+                setBookings(bookings);
             } catch (error) {
                 console.log("Error fetching user information", error);
             }
@@ -34,6 +43,7 @@ function ProfilePage() {
         if (user) {
             fetchUserInfo();
             fetchFavoritesInfo();
+            fetchBookingInfo();
         }
     }, [user]);
 
@@ -71,7 +81,7 @@ function ProfilePage() {
 
             <div className="mt-8 bg-white p-6 rounded-2xl border">
                 <div className="">
-                    {/*<Bookings bookings={bookings}/>*/}
+                    <Bookings bookings={bookings}/>
                 </div>
 
             </div>
