@@ -2,6 +2,7 @@ package no.ntnu.webappgroup03.service;
 
 import no.ntnu.webappgroup03.dto.BookingDto;
 import no.ntnu.webappgroup03.model.Booking;
+import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.model.User;
 import no.ntnu.webappgroup03.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class BookingService {
 
   @Autowired
   private UserService userService;
+  @Autowired
+  private HotelService hotelService;
 
   /**
    * Return all the bookings
@@ -79,18 +82,29 @@ public class BookingService {
   }
   */
 
-  public BookingDto addBooking(BookingDto bookingDto) {
+  public Booking addBooking(BookingDto bookingDto) {
     Booking booking = new Booking();
 
+    // Set dates
+    booking.setStartDate(bookingDto.getStartDate());
+    booking.setEndDate(bookingDto.getEndDate());
 
-    // Fetch user details
+    // Fetch and set the User
     Optional<User> user = userService.findUserById(bookingDto.getUserId());
     if (user.isPresent()) {
       booking.setUser(user.get());
     }
 
-    Booking savedBooking = bookingRepository.save(booking);
-    return convertToDto(savedBooking);
+    /**
+    Optional<Hotel> hotel = hotelService.findById(bookingDto.getHotelId());
+    if (hotel.isPresent()) {
+      booking.setHotel(hotel.get());
+    } else {
+      throw new Exception("Hotel not found");
+    }
+     */
+
+    return bookingRepository.save(booking);
   }
 
 
