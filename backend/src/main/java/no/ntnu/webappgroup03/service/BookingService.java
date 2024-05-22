@@ -6,6 +6,9 @@ import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.model.User;
 import no.ntnu.webappgroup03.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -85,11 +88,9 @@ public class BookingService {
   public Booking addBooking(BookingDto bookingDto) {
     Booking booking = new Booking();
 
-    // Set dates
     booking.setStartDate(bookingDto.getStartDate());
     booking.setEndDate(bookingDto.getEndDate());
 
-    // Fetch and set the hotel id
     Optional<Hotel> hotelOpt = hotelService.getOne(bookingDto.getHotelId());
     if (!hotelOpt.isPresent()) {
       throw new IllegalStateException("Hotel with ID " + bookingDto.getHotelId() + " not found.");
