@@ -89,20 +89,12 @@ public class BookingService {
     booking.setStartDate(bookingDto.getStartDate());
     booking.setEndDate(bookingDto.getEndDate());
 
-    // Fetch and set the User
-    Optional<User> user = userService.findUserById(bookingDto.getUserId());
-    if (user.isPresent()) {
-      booking.setUser(user.get());
+    // Fetch and set the hotel id
+    Optional<Hotel> hotelOpt = hotelService.getOne(bookingDto.getHotelId());
+    if (!hotelOpt.isPresent()) {
+      throw new IllegalStateException("Hotel with ID " + bookingDto.getHotelId() + " not found.");
     }
-
-    /**
-    Optional<Hotel> hotel = hotelService.findById(bookingDto.getHotelId());
-    if (hotel.isPresent()) {
-      booking.setHotel(hotel.get());
-    } else {
-      throw new Exception("Hotel not found");
-    }
-     */
+    booking.setHotel(hotelOpt.get());
 
     return bookingRepository.save(booking);
   }
