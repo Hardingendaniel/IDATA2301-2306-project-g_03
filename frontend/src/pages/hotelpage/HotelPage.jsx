@@ -192,7 +192,7 @@ export function HotelPage() {
                             </div>
                         </div>
 
-                        <ToggleFavorites id={id} initialFavorite={isFavorite}/>
+                        <ToggleFavorites id={id}/>
                     </div>
 
                     <div className="container mx-auto items-center py-2">

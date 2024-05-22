@@ -8,6 +8,7 @@ import java.sql.Date;
  * Data transfer object (DTO) for submitting changes to booking data.
  */
 public class BookingDto {
+  private long id;
   private Date startDate;
   private Date endDate;
   private Integer userId;
@@ -18,6 +19,14 @@ public class BookingDto {
     this.startDate = startDate;
     this.endDate = endDate;
 
+  }
+
+  public long getId() {
+    return this.id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
   }
 
   public void setStartDate(Date startDate) {
