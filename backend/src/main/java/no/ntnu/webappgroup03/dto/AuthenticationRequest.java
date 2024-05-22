@@ -1,9 +1,11 @@
 package no.ntnu.webappgroup03.dto;
 
 /**
- * Data that the user will send in the login request.
+ * Data that the user will send in the login request. Code adapted from: <a
+ * href="https://github.com/strazdinsg/app-dev/blob/main/security-demos/07-backend-frontend-jwt-auth/backend/src/main/java/no/ntnu/dto/AuthenticationRequest.java">AuthenticationRequest.java</a>
  */
 public class AuthenticationRequest {
+
   private String email;
   private String password;
 

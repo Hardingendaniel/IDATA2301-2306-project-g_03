@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Data transfer object (DTO) for submitting changes to user profile data.
+ * Code adapted from: <a href="https://github.com/strazdinsg/app-dev/blob/main/security-demos/07-backend-frontend-jwt-auth/backend/src/main/java/no/ntnu/dto/UserProfileDto.java">UserProfileDto.java</a>
  */
 public class UserProfileDto {
   private int id;

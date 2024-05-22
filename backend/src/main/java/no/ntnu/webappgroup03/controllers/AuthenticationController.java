@@ -1,6 +1,8 @@
 package no.ntnu.webappgroup03.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import no.ntnu.webappgroup03.dto.AuthenticationRequest;
 import no.ntnu.webappgroup03.dto.AuthenticationResponse;
 import no.ntnu.webappgroup03.dto.SignupDto;
@@ -22,11 +24,13 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Controller responsible for authentication.
+ * Controller responsible for authentication. Code Adapted from: <a
+ * href="https://github.com/strazdinsg/app-dev/blob/main/security-demos/07-backend-frontend-jwt-auth/backend/src/main/java/no/ntnu/controllers/AuthenticationController.java">AuthenticationController.java</a>
  */
 @CrossOrigin
 @RestController
 public class AuthenticationController {
+
   @Autowired
   private AuthenticationManager authenticationManager;
   @Autowired
@@ -42,14 +46,16 @@ public class AuthenticationController {
    * @return OK + JWT token; Or UNAUTHORIZED
    */
   @PostMapping("/api/authenticate")
-  @Operation(
-      summary = "Sends a request to see if the user is authenticated "
-  )
-  public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse response) {
+  @Operation(summary = "Logs in a user", description = "Sends a request to try and logg in a user")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "401", description = "Invalid email or password")
+  })
+  public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest authenticationRequest,
+      HttpServletResponse response) {
     try {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-              authenticationRequest.getEmail(),
-              authenticationRequest.getPassword()));
+          authenticationRequest.getEmail(),
+          authenticationRequest.getPassword()));
     } catch (BadCredentialsException e) {
       return new ResponseEntity<>("Invalid email or password", HttpStatus.UNAUTHORIZED);
     }
@@ -65,12 +71,11 @@ public class AuthenticationController {
    * @return OK if sign-up is successful
    */
   @PostMapping("/api/signup")
-  @Operation(
-      summary = "Process data from the sign up form"
-  )
-  public ResponseEntity<String> signupProcess(@RequestBody SignupDto signupData, HttpServletResponse response) {
+  @Operation(summary = "Process data from the sign up form", description = "Initiates a create user")
+  public ResponseEntity<String> signupProcess(@RequestBody SignupDto signupData,
+      HttpServletResponse response) {
     userService.tryCreateNewUser(signupData.getFirstName(), signupData.getLastName(),
-            signupData.getEmail(), signupData.getPhoneNumber(), signupData.getPassword());
+        signupData.getEmail(), signupData.getPhoneNumber(), signupData.getPassword());
     UserDetails userDetails = userService.loadUserByUsername(signupData.getEmail());
     return (ResponseEntity<String>) generateJwtAndSetCookie(userDetails, response);
   }
@@ -82,7 +87,8 @@ public class AuthenticationController {
    * @param response    The HTTP response
    * @return ResponseEntity with JWT token
    */
-  private ResponseEntity<?> generateJwtAndSetCookie(UserDetails userDetails, HttpServletResponse response) {
+  private ResponseEntity<?> generateJwtAndSetCookie(UserDetails userDetails,
+      HttpServletResponse response) {
     String jwt = jwtUtil.generateToken(userDetails);
 
     Cookie cookie = new Cookie("auth", jwt);

@@ -9,9 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 
 /**
- * Contains authentication information
+ * Contains authentication information Code adapted from: <a
+ * href="https://github.com/strazdinsg/app-dev/blob/main/security-demos/07-backend-frontend-jwt-auth/backend/src/main/java/no/ntnu/security/AccessUserDetails.java">AccessUserDetails.java</a>
  */
 public class AccessUserDetails implements UserDetails {
+
   private final String username;
   private final String password;
   private final boolean isActive;
@@ -26,7 +28,7 @@ public class AccessUserDetails implements UserDetails {
 
   private void convertRoles(Set<Role> roles) {
     authorities.clear();
-    for (Role role: roles) {
+    for (Role role : roles) {
       authorities.add(new SimpleGrantedAuthority(role.getName()));
     }
   }

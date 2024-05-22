@@ -66,7 +66,7 @@ public class HotelService {
   /**
    * Updates hotel information for a hotel.
    *
-   * @param id id of the hotel to update
+   * @param id        id of the hotel to update
    * @param hotelData Hotel data to set for the user
    * @return True on success, false otherwise
    */
@@ -99,7 +99,7 @@ public class HotelService {
    * @return The hotel or null if none found by that ID
    */
   public Hotel findById(int id) {
-    Optional<Hotel> hotel= hotelRepository.findById(id);
+    Optional<Hotel> hotel = hotelRepository.findById(id);
     return hotel.orElse(null);
   }
 
@@ -138,7 +138,7 @@ public class HotelService {
   /**
    * Update active status for given hotel.
    *
-   * @param hotel to update
+   * @param hotel  to update
    * @param active new active status
    */
   public void updateActiveStatus(Hotel hotel, boolean active) {
