@@ -1,9 +1,15 @@
 package no.ntnu.webappgroup03.controllers;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import no.ntnu.webappgroup03.dto.SignupDto;
 import no.ntnu.webappgroup03.dto.UserProfileDto;
+import no.ntnu.webappgroup03.model.Booking;
 import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.model.User;
 import no.ntnu.webappgroup03.repository.UserRepository;
@@ -239,6 +245,53 @@ public class UserController {
         }
         userRepository.save(sessionUser);
         response = new ResponseEntity<>("", HttpStatus.OK);
+      } else {
+        response = new ResponseEntity<>("Hotel not found", HttpStatus.NOT_FOUND);
+      }
+    } else {
+      response = new ResponseEntity<>("Hotel data accessible only to authenticated users",
+          HttpStatus.UNAUTHORIZED);
+    }
+    return response;
+  }
+
+  /**
+   * Returns all bookings to the user currently logged in.
+   *
+   * @return HTTP 200 OK or error code with error message.
+   */
+  @GetMapping("/favorites")
+  public ResponseEntity<?> getFavoritesForUser() {
+    ResponseEntity<?> response;
+    User sessionUser = accessUserService.getSessionUser();
+    if (sessionUser != null) {
+      Set<Hotel> favorites = sessionUser.getFavorites();
+      List<Hotel> sortedFavorites = new ArrayList<>(favorites);
+      sortedFavorites.sort(Comparator.comparing(Hotel::getId));
+      response = new ResponseEntity<>(sortedFavorites, HttpStatus.OK);
+    } else {
+      response = new ResponseEntity<>("User must be logged in", HttpStatus.BAD_REQUEST);
+    }
+    return response;
+  }
+
+  /**
+   * Retrieves the favorite status of a specific hotel for the authenticated user.
+   *
+   * @param hotelId the id of the hotel
+   * @return HTTP 200 OK or error code with error message.
+   */
+  @GetMapping("/favorites/{hotelId}")
+  public ResponseEntity<?> getFavoriteStatus(@PathVariable int hotelId) {
+    ResponseEntity<?> response;
+    User sessionUser = this.accessUserService.getSessionUser();
+    if (sessionUser != null) {
+      Optional<Hotel> hotel = hotelService.getOne(hotelId);
+      if (hotel.isPresent()) {
+        boolean isFavorite = userService.isFavoriteHotel(sessionUser, hotelId);
+        Map<String, Boolean> fav = new HashMap<>();
+        fav.put("isFavorite", isFavorite);
+        response = new ResponseEntity<>(fav, HttpStatus.OK);
       } else {
         response = new ResponseEntity<>("Hotel not found", HttpStatus.NOT_FOUND);
       }
