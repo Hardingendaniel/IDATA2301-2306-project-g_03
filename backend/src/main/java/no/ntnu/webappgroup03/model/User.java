@@ -33,7 +33,7 @@ public class User {
   )
   private Set<Role> roles = new LinkedHashSet<>();
 
-  @ManyToMany(fetch = FetchType.EAGER)
+  @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE})
   @JoinTable(name = "favorite",
       joinColumns = @JoinColumn(name = "user_id"),
       inverseJoinColumns = @JoinColumn(name = "hotel_id"))
@@ -148,7 +148,7 @@ public class User {
    * Add a hotel to a user favorites.
    */
   public void addToFavorites(Hotel hotel) {
-    favorites.add(hotel);
+    this.favorites.add(hotel);
   }
 
   public void removeFromFavorites(Hotel hotel) {

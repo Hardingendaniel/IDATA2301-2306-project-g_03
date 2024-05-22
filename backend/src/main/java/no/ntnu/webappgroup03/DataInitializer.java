@@ -189,6 +189,55 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
           "Welcome to this hotel. Hope you enjoy your stay", "Stavanger",
           "Double", 6200, "Booking.com", 4, "VERY GOOD HOTEL");
 
+      Hotel hotel11 = new Hotel("Villa Gåseid",
+          "Welcome to this hotel. Hope you enjoy your stay", "Ålesund",
+          "Single", 4200, "Trip.com", 5, "VERY GOOD HOTEL");
+
+      // Hotel 2:
+      Hotel hotel12 = new Hotel("Hotel Trondheim",
+          "Welcome to this hotel. Hope you enjoy your stay", "Trondheim",
+          "Family", 6900, "Booking.com", 4, "VERY GOOD HOTEL");
+
+      // Hotel 3:
+      Hotel hotel13 = new Hotel("Totens Fineste",
+          "Welcome to this hotel. Hope you enjoy your stay", "Gjøvik",
+          "Single", 3999, "Agoda", 2, "VERY GOOD HOTEL");
+
+      // Hotel 4:
+      Hotel hotel14 = new Hotel("Scandic Alta",
+          "Welcome to this hotel. Hope you enjoy your stay", "Alta",
+          "Double", 5200, "Momondo", 5, "VERY GOOD HOTEL");
+
+      // Hotel 5:
+      Hotel hotel15 = new Hotel("Slotsgata Hotel",
+          "Welcome to this hotel. Hope you enjoy your stay", "Oslo",
+          "Double", 7500, "Expedia", 4, "VERY GOOD HOTEL");
+
+      // Hotel 6:
+      Hotel hotel16 = new Hotel("Jugend Hotel",
+          "Welcome to this hotel. Hope you enjoy your stay", "Ålesund",
+          "Single", 5800, "Kayak", 3, "VERY GOOD HOTEL");
+
+      // Hotel 7:
+      Hotel hotel17 = new Hotel("Stryns Fineste",
+          "Welcome to this hotel. Hope you enjoy your stay", "Stryn",
+          "Family", 2500, "Airbnb", 5, "VERY GOOD HOTEL");
+
+      // Hotel 8:
+      Hotel hotel18 = new Hotel("Molde Hotel",
+          "Welcome to this hotel. Hope you enjoy your stay", "Molde",
+          "Double", 6500, "Hotels.com", 2, "VERY GOOD HOTEL");
+
+      // Hotel 9:
+      Hotel hotel19 = new Hotel("Gløshaugen Hotel",
+          "Welcome to this hotel. Hope you enjoy your stay", "Trondheim",
+          "Single", 4800, "Tripadvisor", 4, "VERY GOOD HOTEL");
+
+      // Hotel 10:
+      Hotel hotel20 = new Hotel("Stavanger Hotel",
+          "Welcome to this hotel. Hope you enjoy your stay", "Stavanger",
+          "Double", 6200, "Agoda", 4, "VERY GOOD HOTEL");
+
       this.hotelService.add(hotel1);
       this.hotelService.add(hotel2);
       this.hotelService.add(hotel3);
@@ -199,6 +248,16 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
       this.hotelService.add(hotel8);
       this.hotelService.add(hotel9);
       this.hotelService.add(hotel10);
+      this.hotelService.add(hotel11);
+      this.hotelService.add(hotel12);
+      this.hotelService.add(hotel13);
+      this.hotelService.add(hotel14);
+      this.hotelService.add(hotel15);
+      this.hotelService.add(hotel16);
+      this.hotelService.add(hotel17);
+      this.hotelService.add(hotel18);
+      this.hotelService.add(hotel19);
+      this.hotelService.add(hotel20);
 
       this.logger.info("Done loading hotel data");
     } else {

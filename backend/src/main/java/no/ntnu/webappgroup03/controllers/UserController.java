@@ -1,12 +1,12 @@
 package no.ntnu.webappgroup03.controllers;
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 import no.ntnu.webappgroup03.dto.SignupDto;
 import no.ntnu.webappgroup03.dto.UserProfileDto;
 import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.model.User;
+import no.ntnu.webappgroup03.repository.UserRepository;
 import no.ntnu.webappgroup03.service.AccessUserService;
 import no.ntnu.webappgroup03.service.HotelService;
 import no.ntnu.webappgroup03.service.UserService;
@@ -31,22 +31,24 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
+@RequestMapping("/api")
 public class UserController {
 
   @Autowired
   private UserService userService;
   @Autowired
   private AccessUserService accessUserService;
-
   @Autowired
   private HotelService hotelService;
+  @Autowired
+  private UserRepository userRepository;
 
   /**
    * Get all users. HTTP GET to /
    *
    * @return List of all users currently stored in the collection
    */
-  @GetMapping("/api/users")
+  @GetMapping("/users")
   public ResponseEntity<?> getAll() {
     ResponseEntity<?> response;
     User sessionUser = accessUserService.getSessionUser();
@@ -65,7 +67,7 @@ public class UserController {
     return response;
   }
 
-  @GetMapping("/api/users/{email}")
+  @GetMapping("/users/{email}")
   public ResponseEntity<?> getProfileWithMail(@PathVariable String email) {
     ResponseEntity<?> response;
     User sessionUser = accessUserService.getSessionUser();
@@ -98,7 +100,7 @@ public class UserController {
    * @param signupData the user to be created.
    * @return returns the new user.
    */
-  @PostMapping("/api/users")
+  @PostMapping("/users")
   public ResponseEntity<?> add(@RequestBody SignupDto signupData) {
     ResponseEntity<?> response;
     User sessionUser = this.accessUserService.getSessionUser();
@@ -128,7 +130,7 @@ public class UserController {
    * @param userData the new userdata for the user
    * @return the new user
    */
-  @PutMapping("/api/users/{email}")
+  @PutMapping("/users/{email}")
   public ResponseEntity<?> updateUser(@PathVariable String email,
       @RequestBody UserProfileDto userData) {
     ResponseEntity<?> response;
@@ -158,7 +160,7 @@ public class UserController {
    * @param password the new password for the user
    * @return the new user with updated password.
    */
-  @PatchMapping("/api/users/{email}")
+  @PatchMapping("/users/{email}")
   public ResponseEntity<?> updatePassword(@PathVariable String email,
       @RequestBody String password) {
     ResponseEntity<?> response = null;
@@ -192,7 +194,7 @@ public class UserController {
    * @param id id of the user to delete
    * @return HTTP 200 OK or error code with error message.
    */
-  @DeleteMapping("/api/users/{id}")
+  @DeleteMapping("/users/{id}")
   public ResponseEntity<String> delete(@PathVariable int id) {
     ResponseEntity<String> response;
     User sessionUser = this.accessUserService.getSessionUser();
@@ -223,7 +225,7 @@ public class UserController {
    *
    * @return HTTP 200 OK or error code with error message.
    */
-  @PutMapping("/api/favorites/{hotelId}")
+  @PutMapping("/favorites/{hotelId}")
   public ResponseEntity<String> toggleFavorite(@PathVariable int hotelId) {
     ResponseEntity<String> response;
     User sessionUser = this.accessUserService.getSessionUser();
@@ -232,12 +234,10 @@ public class UserController {
       if (hotel.isPresent()) {
         if (!sessionUser.getFavorites().contains(hotel.get())) {
           sessionUser.addToFavorites(hotel.get());
-          for (Hotel hotelf : sessionUser.getFavorites()) {
-            System.out.println(hotelf.getHotelName());
-          }
         } else {
           sessionUser.removeFromFavorites(hotel.get());
         }
+        userRepository.save(sessionUser);
         response = new ResponseEntity<>("", HttpStatus.OK);
       } else {
         response = new ResponseEntity<>("Hotel not found", HttpStatus.NOT_FOUND);
