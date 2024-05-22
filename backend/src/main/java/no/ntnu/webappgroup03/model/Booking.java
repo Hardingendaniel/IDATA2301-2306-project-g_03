@@ -39,10 +39,9 @@ public class Booking  {
     return id;
   }
 
-  public void setId(long id) {
-    this.id = id;
+  public void setId(Long id) {
+    this.id = id == null ? 0 : id;
   }
-
   public Date getStartDate() {
     return startDate;
   }

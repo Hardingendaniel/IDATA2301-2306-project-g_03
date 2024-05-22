@@ -19,6 +19,9 @@ public class UserService {
   @Autowired
   private UserRepository userRepository;
 
+  @Autowired
+  private HotelService hotelService;
+
   /**
    * Get all user currently stored in the application state (database).
    *
@@ -121,5 +124,10 @@ public class UserService {
       userRepository.deleteById(id);
     }
     return user.isPresent();
+  }
+
+  public boolean isFavoriteHotel(User user, int hotelId) {
+    Optional<Hotel> hotel = hotelService.getOne(hotelId);
+    return hotel.isPresent() && user.getFavorites().contains(hotel.get());
   }
 }

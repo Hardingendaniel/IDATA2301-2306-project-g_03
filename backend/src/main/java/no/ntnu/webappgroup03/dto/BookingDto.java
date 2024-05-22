@@ -1,4 +1,5 @@
 package no.ntnu.webappgroup03.dto;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import no.ntnu.webappgroup03.model.User;
 
 import java.sql.Date;
@@ -11,6 +12,7 @@ public class BookingDto {
   private Date endDate;
   private Integer userId;
   private String userName;
+  private Integer hotelId;
 
   public BookingDto(Date startDate, Date endDate) {
     this.startDate = startDate;
@@ -48,5 +50,13 @@ public class BookingDto {
 
   public Integer getUserId() {
     return userId;
+  }
+
+  public Integer getHotelId() {
+    return hotelId;
+  }
+
+  public void setHotelId(Integer hotelId) {
+    this.hotelId = hotelId;
   }
 }

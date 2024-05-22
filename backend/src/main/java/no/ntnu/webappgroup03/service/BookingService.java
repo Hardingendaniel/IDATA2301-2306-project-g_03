@@ -2,9 +2,13 @@ package no.ntnu.webappgroup03.service;
 
 import no.ntnu.webappgroup03.dto.BookingDto;
 import no.ntnu.webappgroup03.model.Booking;
+import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.model.User;
 import no.ntnu.webappgroup03.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,6 +25,8 @@ public class BookingService {
 
   @Autowired
   private UserService userService;
+  @Autowired
+  private HotelService hotelService;
 
   /**
    * Return all the bookings
@@ -79,18 +85,32 @@ public class BookingService {
   }
   */
 
-  public BookingDto addBooking(BookingDto bookingDto) {
+  public Booking addBooking(BookingDto bookingDto) {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (auth == null || auth.getName() == null) {
+      throw new UsernameNotFoundException("User not authenticated");
+    }
+    String email = auth.getName();
+
+    Optional<User> userOpt = userService.findUserByEmail(email);
+    if (!userOpt.isPresent()) {
+      throw new UsernameNotFoundException("User with email " + email + " not found");
+    }
+    User user = userOpt.get();
+
     Booking booking = new Booking();
 
+    booking.setUser(user);
+    booking.setStartDate(bookingDto.getStartDate());
+    booking.setEndDate(bookingDto.getEndDate());
 
-    // Fetch user details
-    Optional<User> user = userService.findUserById(bookingDto.getUserId());
-    if (user.isPresent()) {
-      booking.setUser(user.get());
+    Optional<Hotel> hotelOpt = hotelService.getOne(bookingDto.getHotelId());
+    if (!hotelOpt.isPresent()) {
+      throw new IllegalStateException("Hotel with ID " + bookingDto.getHotelId() + " not found.");
     }
+    booking.setHotel(hotelOpt.get());
 
-    Booking savedBooking = bookingRepository.save(booking);
-    return convertToDto(savedBooking);
+    return bookingRepository.save(booking);
   }
 
 
