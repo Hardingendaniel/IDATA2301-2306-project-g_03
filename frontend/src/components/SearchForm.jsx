@@ -79,6 +79,12 @@ function SearchForm() {
         if (endDate) localStorage.setItem('endDate', endDate.toISOString());
     }, [selectedLocation, selectedRoomType, startDate, endDate]);
 
+    useEffect(() => {
+        if (selectedLocation) {
+            setErrorMessage('');
+        }
+    }, [selectedLocation]);
+
 
     const handleStartDateChange = (date) => {
         setStartDate(date);

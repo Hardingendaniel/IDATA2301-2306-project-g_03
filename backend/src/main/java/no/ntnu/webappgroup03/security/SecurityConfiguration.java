@@ -68,6 +68,13 @@ public class SecurityConfiguration {
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/signup").permitAll())
         // Products are also available to everyone
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/products").permitAll())
+        // Allow Swagger documentation endpoints
+        .authorizeHttpRequests((auth) -> auth.requestMatchers(
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/api-docs"
+        ).permitAll())
         // Allow HTTP OPTIONS requests - CORS pre-flight requests
         .authorizeHttpRequests((auth) -> auth.requestMatchers(HttpMethod.OPTIONS).permitAll())
         // Any other request will be authenticated with a stateless policy

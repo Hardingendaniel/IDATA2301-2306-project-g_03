@@ -1,5 +1,6 @@
 package no.ntnu.webappgroup03.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +13,9 @@ import java.util.Set;
  * User role (Admin, Regular user, etc.)
  */
 @Entity(name = "roles")
+@Schema(
+    description = "Represents a Role"
+)
 public class Role {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

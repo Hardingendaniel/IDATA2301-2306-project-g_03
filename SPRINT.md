@@ -191,5 +191,29 @@ going forward needs to be good. We need to inform each other what we will be wor
 conflicts. There is some Postman tests for testing and a lot more of them needs to be added to secure that the 
 application work as intended. A lot of issues will be made in our GitHub. 
 
+Sprint review
+We created a product that we are satisfied with. We can add a booking, we can add a hotel to favorites. An admin can 
+hide hotel from other users. The site is very similar to what we planned on early in february. In the last part of the 
+project every group member worked both on the frontend and the backend. Sander did a lot of Postman testing for the 
+backend and filled the other member up on how it worked. Sander handled for the most part the log in functionality and 
+the authorization. Sten managed to make methods for fetching the data to the frontend and handled the booking of the 
+frontend. Daniel made backend functions for booking  as well as implementing the favorites to the backend functionality. 
+Sander also participated for this and especially in the fetching to the frontend part. We made a lot of issues this s
+print and members took issues and started to implement them into code and informed each other what they were working on. 
+The sprint reports and the presentation are mostly made by Daniel the groups responsible for documentation. There has 
+been some documentation in this project and the last day was mostly used by Daniel to secure that part. A lot of minor
+designing technicalities were fixed by the members the last days.
+
+What went good?
+Every group member dedicated a lot of time and work into the last sprint of the project. The communication between each 
+other was very good, and if a member was stuck on a problem we helped each other to solve the problems. The progress day
+to day was very good, and we made many and defined issues. We also communicated with other groups and shared thoughts 
+and idea and this helped the both of us of progressing towards the final result. We read the requirements and our goal 
+was to check of at least one requirement each day, and we managed to do so. 
+
+What went bad?
+We picked up one of the mandatory requirements a bit too late in the project, so we needed to do a quick fix to match
+the requirements. If we managed to pick up this at an earlier stage we would have developed a more complete solution. 
+The solution we came up with is by now means bad and the rest of our work shows that we have learned a lot of skills.
 
 
