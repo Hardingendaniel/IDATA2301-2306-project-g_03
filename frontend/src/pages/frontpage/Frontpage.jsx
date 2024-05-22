@@ -75,13 +75,17 @@ function Frontpage() {
 
     const getHotelImages = (hotelId) => {
         const images = [];
-        for (let i = 1; i <= 1; i++) {
+        const totalHotels = 10;  // Number of unique hotel image sets
+        const actualHotelId = ((hotelId - 1) % totalHotels) + 1;  // Map hotelId to available image sets
+
+        for (let i = 1; i <= 1; i++) {  // Assuming only 1 image per hotel as in the original code
             try {
-                images.push(require(`../../img/hotel${hotelId}/${i}.png`));
+                images.push(require(`../../img/hotel${actualHotelId}/${i}.png`));
             } catch (err) {
-                console.error(`Error loading image ${i} for hotel ${hotelId}`, err);
+                console.error(`Error loading image ${i} for hotel ${actualHotelId}`, err);
             }
         }
+
         return images;
     };
 
@@ -109,6 +113,7 @@ function Frontpage() {
                                 ))}
                                 <div className="text-center p-4">
                                     <h3 className="text-lg font-semibold">{hotel ? hotel.hotelName : ""}</h3>
+                                    <p className="text-lg  text-header">{hotel ? hotel.providers : ""}</p>
                                     <p className="text-lg font-light">{hotel ? hotel.description : ""}</p>
                                         <h2>{hotel.name}</h2>
                                     <div className="flex justify-center">

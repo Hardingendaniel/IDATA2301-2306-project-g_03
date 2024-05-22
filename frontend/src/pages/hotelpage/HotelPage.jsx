@@ -20,8 +20,6 @@ export function HotelPage() {
     const sectionAboutRef = useRef();
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-    const [bookingInfo, setBookingInfo] = useState();
-    const [totalPrice, setTotalPrice] = useState(0);
     const [isFavorite, setIsFavorite] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -106,13 +104,17 @@ export function HotelPage() {
 
     const getHotelImages = (hotelId) => {
         const images = [];
-        for (let i = 1; i <= 5; i++) {
+        const totalHotels = 10;  // Number of unique hotel image sets
+        const actualHotelId = ((hotelId - 1) % totalHotels) + 1;  // Map hotelId to available image sets
+
+        for (let i = 1; i <= 5; i++) {  // Assuming 5 images per hotel
             try {
-                images.push(require(`../../img/hotel${hotelId}/${i}.png`));
+                images.push(require(`../../img/hotel${actualHotelId}/${i}.png`));
             } catch (err) {
-                console.error(`Error loading image ${i} for hotel ${hotelId}`, err);
+                console.error(`Error loading image ${i} for hotel ${actualHotelId}`, err);
             }
         }
+
         return images;
     };
 
