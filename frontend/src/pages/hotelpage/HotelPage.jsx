@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import {asyncApiRequest} from "../../tools/requests";
 import StarRating from '../../components/StarRating';
 import {getCookie} from "../../tools/cookies";
+import ToggleFavorites from "../../components/buttons/ToggleFavorites";
 
 
 export function HotelPage() {
@@ -21,17 +22,9 @@ export function HotelPage() {
     const [endDate, setEndDate] = useState(null);
     const [bookingInfo, setBookingInfo] = useState();
     const [totalPrice, setTotalPrice] = useState(0);
-    const [color, setOtherColor] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const handleToggleFavorite = async () => {
-        try {
-            const requestBody = "";
-            const response = await asyncApiRequest("PUT", `/favorites/${id}`, requestBody);
-        } catch (error) {
-            console.log("An error occurred while adding to favorites");
-        }
-    }
 
     const handleStartDateChange = (date) => {
         setStartDate(date);
@@ -45,7 +38,6 @@ export function HotelPage() {
         setEndDate(date);
     };
 
-
     useEffect(() => {
         async function fetchHotel() {
             try {
@@ -57,8 +49,25 @@ export function HotelPage() {
             }
         }
 
+
+
         fetchHotel();
     }, [id]);
+
+    useEffect(() => {
+        const fetchFavoriteStatus = async () => {
+            try {
+                const response = await asyncApiRequest("GET", `/favorites/${id}`);
+                setIsFavorite(!isFavorite)
+            } catch (error) {
+                console.log("An error occurred while fetching the favorites status", error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchFavoriteStatus();
+    }, [id])
+
 
     useEffect(() => {
         // Retrieve data from localStorage
@@ -165,6 +174,10 @@ export function HotelPage() {
         }
     };
 
+    if (loading) {
+        return <div>loading</div>;
+    }
+
     return (
         <div className="flex w-4/5 flex-col mx-auto">
             {hotel ? (
@@ -173,19 +186,14 @@ export function HotelPage() {
                         <div className="flex flex-col">
                             <h1 className="font-bold py-2 text-4xl">{hotel.hotelName}</h1>
                             <div className="flex py-2 space-x-1">
-                                {/* Render stars here */}
                                 <div className="hotel">
                                     <StarRating rating={hotel.rating}/>
                                 </div>
                             </div>
                         </div>
 
-                        <button onClick={handleToggleFavorite}
-                                className="btn">Add to favorites
-                        </button>
-
+                        <ToggleFavorites id={id} initialFavorite={isFavorite}/>
                     </div>
-
 
                     <div className="container mx-auto items-center py-2">
                         <div
