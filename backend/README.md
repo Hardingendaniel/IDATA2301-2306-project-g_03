@@ -7,6 +7,7 @@ This is our exam project in the courses: **IDATA2301 Web Technologies** and
 - [Installation](#installation)
 - [API Endpoints](#api-endpoints)
 - [Features](#features)
+- [Tests](#tests)
 
 ## Installation
 
@@ -59,3 +60,7 @@ List of key API endpoints:
 - **RESTful API**: API following REST principles
 - **MySql database**
 - **Security**: Authentication and authorization using jwt (JSON web tokens).
+
+## Tests
+Tests are made using Postman. The test set is stored as  **postmanTest.json** file in the main directory of 
+this repository. 
