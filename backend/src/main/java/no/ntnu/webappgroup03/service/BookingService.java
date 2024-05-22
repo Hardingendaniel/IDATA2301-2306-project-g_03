@@ -98,17 +98,16 @@ public class BookingService {
     }
     User user = userOpt.get();
 
-    Booking booking = new Booking();
-
-    booking.setUser(user);
-    booking.setStartDate(bookingDto.getStartDate());
-    booking.setEndDate(bookingDto.getEndDate());
-
     Optional<Hotel> hotelOpt = hotelService.getOne(bookingDto.getHotelId());
     if (!hotelOpt.isPresent()) {
       throw new IllegalStateException("Hotel with ID " + bookingDto.getHotelId() + " not found.");
     }
+
+    Booking booking = new Booking();
+    booking.setUser(user);
     booking.setHotel(hotelOpt.get());
+    booking.setStartDate(bookingDto.getStartDate());
+    booking.setEndDate(bookingDto.getEndDate());
 
     return bookingRepository.save(booking);
   }

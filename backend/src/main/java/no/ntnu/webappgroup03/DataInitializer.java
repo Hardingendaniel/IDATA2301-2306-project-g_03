@@ -46,7 +46,6 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
     this.loadUserRoles();
     this.loadUsers();
     this.loadHotels();
-    this.loadBookings();
     this.logger.info("Done importing data");
   }
 
@@ -262,40 +261,6 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
       this.logger.info("Done loading hotel data");
     } else {
       this.logger.info("Hotels already in the database, not loading data");
-    }
-  }
-
-  private void loadBookings() {
-    boolean isEmpty = true;
-    Iterable<Booking> existingBooking = this.bookingService.getAll();
-    Iterator<Booking> bookingIt = existingBooking.iterator();
-    if (bookingIt.hasNext()) {
-      isEmpty = false;
-    }
-    this.logger.info("Loading booking data...");
-    if (isEmpty) {
-      // Booking 1:
-      Booking booking1 = new Booking(new Date(1716190510000L), new Date(1716201314000L));
-      Booking booking2 = new Booking(new Date(1716190510000L), new Date(1716806114000L));
-
-      // Set users in booking
-      booking1.setUser(this.userService.findUserByEmail("chuck_norris@stay-finder.com").get());
-      booking2.setUser(this.userService.findUserByEmail("dave_dangerous@stay-finder.com").get());
-
-      // Set hotels in booking
-      booking1.setHotel(this.hotelService.getOne(1).get());
-      booking2.setHotel(this.hotelService.getOne(2).get());
-
-      // Convert to BookingDto
-      BookingDto bookingDto1 = this.bookingService.convertToDto(booking1);
-      BookingDto bookingDto2 = this.bookingService.convertToDto(booking2);
-
-      this.bookingService.addBooking(bookingDto1);
-      this.bookingService.addBooking(bookingDto2);
-
-      this.logger.info("Done loading booking data");
-    } else {
-      this.logger.info("Bookings already in the database, not loading data");
     }
   }
 }
