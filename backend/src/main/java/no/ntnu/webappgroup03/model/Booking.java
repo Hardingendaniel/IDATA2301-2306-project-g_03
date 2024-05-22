@@ -1,8 +1,10 @@
 package no.ntnu.webappgroup03.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import java.sql.Date;
+import java.util.Set;
 
 /**
  * Represents a hotel booking.
@@ -12,6 +14,7 @@ import java.sql.Date;
     description = "Represents a booking"
 )
 public class Booking  {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
@@ -23,6 +26,7 @@ public class Booking  {
   private Hotel hotel;
   private Date startDate;
   private Date endDate;
+
 
   public Booking() {
     //Intentionally left empty
@@ -69,6 +73,7 @@ public class Booking  {
   public void setHotel(Hotel hotel) {
     this.hotel = hotel;
   }
+
 
   public User getUser() {
     return user;

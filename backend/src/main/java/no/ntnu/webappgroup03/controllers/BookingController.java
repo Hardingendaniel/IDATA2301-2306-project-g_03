@@ -2,7 +2,6 @@ package no.ntnu.webappgroup03.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import no.ntnu.webappgroup03.dto.BookingDto;
-import no.ntnu.webappgroup03.dto.HotelDto;
 import no.ntnu.webappgroup03.model.Booking;
 import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.model.User;
@@ -15,7 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -185,6 +184,20 @@ public class BookingController {
     return response;
   }
 
+  /**
+   * Get a specific booking.
+   * @param id ID of the booking to be returned
+   * @return booking with the given ID or status 404 (Not Found)
+   */
+  @GetMapping("/me")
+  @Operation(
+      summary = "Get one specific booking"
+  )
+  public Iterable<Booking> getByCurrentUser() {
+    User sessionUser = this.accessUserService.getSessionUser();
+     return this.bookingService.getByUser(sessionUser);
+  }
 
-  
+
+
 }

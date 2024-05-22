@@ -24,7 +24,7 @@ function ProfilePage() {
 
         const fetchBookingInfo = async () => {
             try {
-                const bookings = await asyncApiRequest("GET", `/bookings`);
+                const bookings = await asyncApiRequest("GET", `/bookings/me`);
                 setBookings(bookings);
             } catch (error) {
                 console.log("Error fetching user information", error);

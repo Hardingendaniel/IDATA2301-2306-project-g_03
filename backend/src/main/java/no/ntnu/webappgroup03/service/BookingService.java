@@ -139,4 +139,8 @@ public class BookingService {
     return false;
   }
 
+  public Iterable<Booking> getByUser(User user){
+    return bookingRepository.findAllByUser(user);
+  }
+
 }
