@@ -41,7 +41,7 @@ export function HotelPage() {
     useEffect(() => {
         async function fetchHotel() {
             try {
-                const response = await fetch(`http://localhost:8080/api/hotels/${id}`);
+                const response = await fetch(process.env.REACT_APP_BASE_URL + `/hotels/${id}`);
                 const data = await response.json();
                 setHotel(data);
             } catch (error) {
@@ -155,7 +155,7 @@ export function HotelPage() {
 
 
         try {
-            const response = await fetch(`http://localhost:8080/api/bookings/${id}`, {
+            const response = await fetch(process.env.REACT_APP_BASE_URL + `/bookings/${id}`, {
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify(bookingData),

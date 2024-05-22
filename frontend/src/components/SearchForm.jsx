@@ -27,7 +27,7 @@ function SearchForm() {
         });
         async function fetchData() {
             try {
-                const response = await fetch("http://localhost:8080/api/hotels");
+                const response = await fetch(process.env.REACT_APP_BASE_URL + "/hotels");
                 const hotelsData = await response.json();
 
                 const uniqueLocations = Array.from(new Set(hotelsData.map(hotel => hotel.location)));
