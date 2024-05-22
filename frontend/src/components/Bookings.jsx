@@ -34,7 +34,7 @@ function Bookings({bookings}) {
                     <td>
                         <div className="flex items-center gap-3">
                             <div>
-                                <div className="font-medium">{booking.firstName}</div>
+                                <div className="font-medium">{booking.user.firstName} {booking.user.lastName}</div>
                                 <div className="text-sm opacity-50">{booking.email}</div>
                             </div>
                         </div>
@@ -42,8 +42,7 @@ function Bookings({bookings}) {
                     <td>
                         <div className="flex items-center gap-3">
                             <div>
-                                <div className="font-medium">{booking.hotelName ? booking.hotelName : "Not set"}</div>
-                                <div className="text-sm opacity-50">{booking.location ? booking.location : "Not set"}</div>
+                                <div className="font-medium">{booking.hotel.hotelName}</div>
                             </div>
                         </div>
                     </td>
@@ -54,8 +53,7 @@ function Bookings({bookings}) {
                         <div>{booking.endDate ? booking.endDate : "Not Set"}</div>
                     </td>
                     <td>
-                        <div className="text-sm opacity-50">NOK {booking.price} /night</div>
-                        <div className="font-medium">NOK {booking.totalPrice}</div>
+                        <div className="">NOK/night {booking.hotel.price}</div>
                     </td>
                 </tr>
             ))}
