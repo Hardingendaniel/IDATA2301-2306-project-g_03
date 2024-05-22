@@ -1,6 +1,7 @@
 package no.ntnu.webappgroup03.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.util.*;
@@ -9,6 +10,9 @@ import java.util.*;
  * Represents a user.
  */
 @Entity(name = "users")
+@Schema(
+    description = "Represents a user"
+)
 public class User {
 
   @Id

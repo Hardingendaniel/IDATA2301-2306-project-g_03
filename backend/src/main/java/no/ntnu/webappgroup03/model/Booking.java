@@ -1,5 +1,6 @@
 package no.ntnu.webappgroup03.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import java.sql.Date;
 
@@ -7,6 +8,9 @@ import java.sql.Date;
  * Represents a hotel booking.
  */
 @Entity(name="booking")
+@Schema(
+    description = "Represents a booking"
+)
 public class Booking  {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

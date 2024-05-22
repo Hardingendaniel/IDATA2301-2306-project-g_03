@@ -1,5 +1,6 @@
 package no.ntnu.webappgroup03.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import no.ntnu.webappgroup03.dto.BookingDto;
 import no.ntnu.webappgroup03.dto.HotelDto;
 import no.ntnu.webappgroup03.model.Booking;
@@ -40,6 +41,9 @@ public class BookingController {
    * @return List of all bookings currently stored in the collection
    */
   @GetMapping
+  @Operation(
+      summary = "Get all the bookings"
+  )
   public Iterable<Booking> getAll() {
     return bookingService.getAll();
   }
@@ -50,6 +54,9 @@ public class BookingController {
    * @return booking with the given ID or status 404 (Not Found)
    */
   @GetMapping("/{id}")
+  @Operation(
+      summary = "Get one specific booking"
+  )
   public ResponseEntity<?> getOne(@PathVariable int id,
                                   @RequestBody String email) {
     ResponseEntity<?> response;
@@ -66,12 +73,15 @@ public class BookingController {
 
 
   /**
-   * Update hotel details information.
+   * Update booking details information.
    *
-   * @param id for which hotel to update
+   * @param id for which booking to update
    * @return HTTP 200 OK or error code with error message
    */
   @PutMapping("/{id}")
+  @Operation(
+      summary = "Updates the booking "
+  )
   public ResponseEntity<String> updateBooking(@PathVariable int id,
                                               @RequestBody BookingDto bookingData) {
     ResponseEntity<String> response;
@@ -98,7 +108,6 @@ public class BookingController {
     return response;
   }
 
-  //TODO user not set in bookings
   /**
    * If the user is registered, add a new booking.
    *
@@ -106,6 +115,9 @@ public class BookingController {
    * @return HTTP 200 OK or error code with error message.
    */
   @PostMapping("/{hotelId}")
+  @Operation(
+      summary = "Add a new booking if the user is registered"
+  )
   public ResponseEntity<?> add(@PathVariable int hotelId, @RequestBody BookingDto bookingDto) {
     ResponseEntity<?> response;
     User sessionUser = this.accessUserService.getSessionUser();
@@ -144,6 +156,9 @@ public class BookingController {
    * @return HTTP 200 OK or error code with error message.
    */
   @DeleteMapping("/{id}")
+  @Operation(
+      summary = "Deletes a booking if the user is admin"
+  )
   public ResponseEntity<String> delete(@PathVariable int id) {
     ResponseEntity<String> response;
     User sessionUser = this.accessUserService.getSessionUser();

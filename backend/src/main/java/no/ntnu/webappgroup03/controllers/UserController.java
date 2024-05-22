@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+
+import io.swagger.v3.oas.annotations.Operation;
 import no.ntnu.webappgroup03.dto.SignupDto;
 import no.ntnu.webappgroup03.dto.UserProfileDto;
 import no.ntnu.webappgroup03.model.Booking;
@@ -55,6 +57,9 @@ public class UserController {
    * @return List of all users currently stored in the collection
    */
   @GetMapping("/users")
+  @Operation(
+      summary = "Get all the users"
+  )
   public ResponseEntity<?> getAll() {
     ResponseEntity<?> response;
     User sessionUser = accessUserService.getSessionUser();
@@ -74,6 +79,9 @@ public class UserController {
   }
 
   @GetMapping("/users/{email}")
+  @Operation(
+      summary = "Get a profile with mail"
+  )
   public ResponseEntity<?> getProfileWithMail(@PathVariable String email) {
     ResponseEntity<?> response;
     User sessionUser = accessUserService.getSessionUser();
@@ -107,6 +115,9 @@ public class UserController {
    * @return returns the new user.
    */
   @PostMapping("/users")
+  @Operation(
+      summary = "Creates a new user if the admin is logged in"
+  )
   public ResponseEntity<?> add(@RequestBody SignupDto signupData) {
     ResponseEntity<?> response;
     User sessionUser = this.accessUserService.getSessionUser();
@@ -137,6 +148,9 @@ public class UserController {
    * @return the new user
    */
   @PutMapping("/users/{email}")
+  @Operation(
+      summary = "Updates user information, not password"
+  )
   public ResponseEntity<?> updateUser(@PathVariable String email,
       @RequestBody UserProfileDto userData) {
     ResponseEntity<?> response;
@@ -167,6 +181,9 @@ public class UserController {
    * @return the new user with updated password.
    */
   @PatchMapping("/users/{email}")
+  @Operation(
+      summary = ("Updates the user password")
+  )
   public ResponseEntity<?> updatePassword(@PathVariable String email,
       @RequestBody String password) {
     ResponseEntity<?> response = null;
@@ -201,6 +218,9 @@ public class UserController {
    * @return HTTP 200 OK or error code with error message.
    */
   @DeleteMapping("/users/{id}")
+  @Operation(
+      summary = "Deletes a user"
+  )
   public ResponseEntity<String> delete(@PathVariable int id) {
     ResponseEntity<String> response;
     User sessionUser = this.accessUserService.getSessionUser();
@@ -232,6 +252,9 @@ public class UserController {
    * @return HTTP 200 OK or error code with error message.
    */
   @PutMapping("/favorites/{hotelId}")
+  @Operation(
+      summary = "Toggle between favorite hotel to not favorite hotel"
+  )
   public ResponseEntity<String> toggleFavorite(@PathVariable int hotelId) {
     ResponseEntity<String> response;
     User sessionUser = this.accessUserService.getSessionUser();
@@ -256,11 +279,14 @@ public class UserController {
   }
 
   /**
-   * Returns all bookings to the user currently logged in.
+   * Returns all favorites to the user currently logged in.
    *
    * @return HTTP 200 OK or error code with error message.
    */
   @GetMapping("/favorites")
+  @Operation(
+      summary = "Get all the favorites hotel from user"
+  )
   public ResponseEntity<?> getFavoritesForUser() {
     ResponseEntity<?> response;
     User sessionUser = accessUserService.getSessionUser();
@@ -282,6 +308,9 @@ public class UserController {
    * @return HTTP 200 OK or error code with error message.
    */
   @GetMapping("/favorites/{hotelId}")
+  @Operation(
+      summary = "Gets the favorite status of a specific hotel for authenticated user"
+  )
   public ResponseEntity<?> getFavoriteStatus(@PathVariable int hotelId) {
     ResponseEntity<?> response;
     User sessionUser = this.accessUserService.getSessionUser();

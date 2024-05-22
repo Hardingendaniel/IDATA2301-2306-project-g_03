@@ -1,5 +1,6 @@
 package no.ntnu.webappgroup03.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import no.ntnu.webappgroup03.dto.AuthenticationRequest;
 import no.ntnu.webappgroup03.dto.AuthenticationResponse;
 import no.ntnu.webappgroup03.dto.SignupDto;
@@ -41,6 +42,9 @@ public class AuthenticationController {
    * @return OK + JWT token; Or UNAUTHORIZED
    */
   @PostMapping("/api/authenticate")
+  @Operation(
+      summary = "Sends a request to see if the user is authenticated "
+  )
   public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse response) {
     try {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -61,6 +65,9 @@ public class AuthenticationController {
    * @return OK if sign-up is successful
    */
   @PostMapping("/api/signup")
+  @Operation(
+      summary = "Process data from the sign up form"
+  )
   public ResponseEntity<String> signupProcess(@RequestBody SignupDto signupData, HttpServletResponse response) {
     userService.tryCreateNewUser(signupData.getFirstName(), signupData.getLastName(),
             signupData.getEmail(), signupData.getPhoneNumber(), signupData.getPassword());

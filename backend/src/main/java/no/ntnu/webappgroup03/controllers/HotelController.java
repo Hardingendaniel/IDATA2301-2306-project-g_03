@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+
 /**
  * REST API Controller for hotel collection. Code adapted from ...
  */
@@ -38,6 +41,9 @@ public class HotelController {
    * @return List of all hotels currently stored in the collection
    */
   @GetMapping("/api/hotels")
+  @Operation(
+      summary = "Get all hotels"
+  )
   public Iterable<Hotel> getAll() {
     User sessionUser = userService.getSessionUser();
     if (sessionUser == null) {
@@ -55,6 +61,9 @@ public class HotelController {
    * @return Hotel with the given ID or status 404 (Not Found)
    */
   @GetMapping("/api/hotels/{id}")
+  @Operation(
+      summary = "Get one hotel"
+  )
   public ResponseEntity<?> getOne(@PathVariable int id) {
     ResponseEntity<?> response;
     Optional<Hotel> hotel = this.hotelService.getOne(id);
@@ -78,6 +87,9 @@ public class HotelController {
    * @return HTTP 200 OK or error code with error message
    */
   @PutMapping("/api/hotels/{id}")
+  @Operation(
+      summary = "Update the hotel parameters"
+  )
   public ResponseEntity<String> updateHotel(@PathVariable int id,
       @RequestBody HotelDto hotelData) {
     ResponseEntity<String> response;
@@ -112,6 +124,9 @@ public class HotelController {
    * @return HTTP 200 OK or error code with error message
    */
   @PatchMapping("api/hotels/{id}")
+  @Operation(
+      summary = "Update the active status for the hotels"
+  )
   public ResponseEntity<?> updateHotelStatus(@PathVariable int id,
       @RequestBody boolean active) {
     ResponseEntity<?> response = null;
@@ -144,6 +159,9 @@ public class HotelController {
    * @return HTTP 200 OK or error code with error message.
    */
   @PostMapping("/api/hotels")
+  @Operation(
+      summary = "Adds a new hotel, if user is admin"
+  )
   public ResponseEntity<?> add(@RequestBody HotelDto hotelDto) {
     ResponseEntity<?> response;
     User sessionUser = this.userService.getSessionUser();
@@ -174,6 +192,9 @@ public class HotelController {
    * @return HTTP 200 OK or error code with error message.
    */
   @DeleteMapping("/api/hotels/{id}")
+  @Operation(
+      summary = "Deletes a hotel form the"
+  )
   public ResponseEntity<String> delete(@PathVariable int id) {
     ResponseEntity<String> response;
     User sessionUser = this.userService.getSessionUser();
