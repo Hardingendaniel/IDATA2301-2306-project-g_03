@@ -185,14 +185,11 @@ public class BookingController {
   }
 
   /**
-   * Get a specific booking.
-   * @param id ID of the booking to be returned
-   * @return booking with the given ID or status 404 (Not Found)
+   * Get a specific users booking
+   * @return bookings from the specified user
    */
   @GetMapping("/me")
-  @Operation(
-      summary = "Get one specific booking"
-  )
+  @Operation(summary = "Get one specific booking", description = "Get bookings from logged in user")
   public Iterable<Booking> getByCurrentUser() {
     User sessionUser = this.accessUserService.getSessionUser();
      return this.bookingService.getByUser(sessionUser);
