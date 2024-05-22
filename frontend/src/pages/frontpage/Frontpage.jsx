@@ -162,13 +162,18 @@ function Frontpage() {
                 </div>
 
                 <div>
-                    <h4 className="mt-4 text-center text text-2xl"> Why choose stay Finder?</h4>
+                    <h4 className="mt-4 text-center text text-2xl"> About Stay Finder?</h4>
                 </div>
-
-                <div className="flex justify-around ml-[10%] mr-[10%] mb-4 mt-4">
-                    <div className="box-border border w-1/3"></div>
-                    <div className="box-border border w-1/3 text-center">TO BE STYLED</div>
-                    <div className="box-border border w-1/3"></div>
+                <div className="w-3/4 md:w-1/2 mx-auto mb-8 mt-4 text-center text-lg text-gray-800">
+                    <p className="mb-4">
+                        Welcome to our platform! Our mission is to simplify your search for the best accommodation prices and options.
+                    </p>
+                    <p className="mb-4">
+                        We achieve this by curating a selection of unique properties from trusted websites, all in one user-friendly platform.
+                    </p>
+                    <p className="mb-4">
+                        Save time and compare prices side-by-side with us, ensuring you get great value every time you book.
+                    </p>
                 </div>
             </main>
 
