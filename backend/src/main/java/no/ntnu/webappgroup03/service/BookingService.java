@@ -86,8 +86,21 @@ public class BookingService {
   */
 
   public Booking addBooking(BookingDto bookingDto) {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (auth == null || auth.getName() == null) {
+      throw new UsernameNotFoundException("User not authenticated");
+    }
+    String email = auth.getName();
+
+    Optional<User> userOpt = userService.findUserByEmail(email);
+    if (!userOpt.isPresent()) {
+      throw new UsernameNotFoundException("User with email " + email + " not found");
+    }
+    User user = userOpt.get();
+
     Booking booking = new Booking();
 
+    booking.setUser(user);
     booking.setStartDate(bookingDto.getStartDate());
     booking.setEndDate(bookingDto.getEndDate());
 
