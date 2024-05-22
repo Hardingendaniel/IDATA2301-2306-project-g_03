@@ -352,23 +352,8 @@ export function HotelPage() {
                     <div ref={sectionReviewsRef} className="pt-10">
                         <div className="divider"></div>
                         <h1 className="text-2xl font-bold">Reviews</h1>
-                        <div className="flex justify-evenly">
-                            <div className="rounded-2xl border p-2 w-72">
-                                <h2 className="font-semibold">Review 1</h2>
-                                <p>{hotel.review}</p>
-                            </div>
-                            <div className="rounded-2xl border p-2 w-72">
-                                <h2 className="font-semibold">Review 2</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a mauris facilisis diam
-                                    lacinia interdum. Aliquam ultrices quam quis viverra molestie. Vivamus ultricies
-                                    diam id nulla tempor gravida.</p>
-                            </div>
-                            <div className="rounded-2xl border p-2 w-72">
-                                <h2 className="font-semibold">Review 3</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a mauris facilisis diam
-                                    lacinia interdum. Aliquam ultrices quam quis viverra molestie. Vivamus ultricies
-                                    diam id nulla tempor gravida.</p>
-                            </div>
+                        <div className="">
+                            {hotel.review}
                         </div>
                     </div>
 
