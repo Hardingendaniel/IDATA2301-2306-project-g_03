@@ -1,5 +1,7 @@
 package no.ntnu.webappgroup03.controllers;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -11,7 +13,6 @@ import java.util.Set;
 import io.swagger.v3.oas.annotations.Operation;
 import no.ntnu.webappgroup03.dto.SignupDto;
 import no.ntnu.webappgroup03.dto.UserProfileDto;
-import no.ntnu.webappgroup03.model.Booking;
 import no.ntnu.webappgroup03.model.Hotel;
 import no.ntnu.webappgroup03.model.User;
 import no.ntnu.webappgroup03.repository.UserRepository;
@@ -33,8 +34,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * REST API Controller serving endpoints for users
- * Code adapted from <a href="https://github.com/strazdinsg/app-dev/blob/main/security-demos/07-backend-frontend-
+ * REST API Controller serving endpoints for users Code adapted from <a
+ * href="https://github.com/strazdinsg/app-dev/blob/main/security-demos/07-backend-frontend-
  * jwt-auth/backend/src/main/java/no/ntnu/controllers/UserController.java">UserController.java</a>
  */
 @CrossOrigin
@@ -57,9 +58,12 @@ public class UserController {
    * @return List of all users currently stored in the collection
    */
   @GetMapping("/users")
-  @Operation(
-      summary = "Get all the users"
-  )
+  @Operation(summary = "Get all profiles", description = "Get all profiles available")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Success"),
+      @ApiResponse(responseCode = "401", description = "User data accessible only to authenticated users"),
+      @ApiResponse(responseCode = "403", description = "User data for other users not accessible"),
+  })
   public ResponseEntity<?> getAll() {
     ResponseEntity<?> response;
     User sessionUser = accessUserService.getSessionUser();
@@ -79,9 +83,13 @@ public class UserController {
   }
 
   @GetMapping("/users/{email}")
-  @Operation(
-      summary = "Get a profile with mail"
-  )
+  @Operation(summary = "Get profile by email", description = "Get a profile with the specified email")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Success"),
+      @ApiResponse(responseCode = "400", description = "Could not fetch user information"),
+      @ApiResponse(responseCode = "401", description = "User data accessible only to authenticated users"),
+      @ApiResponse(responseCode = "403", description = "User data for other users not accessible"),
+  })
   public ResponseEntity<?> getProfileWithMail(@PathVariable String email) {
     ResponseEntity<?> response;
     User sessionUser = accessUserService.getSessionUser();
@@ -93,8 +101,9 @@ public class UserController {
               user.get().getLastName(), user.get().getEmail(), user.get().getPhoneNumber(),
               user.get().isActive());
           response = new ResponseEntity<>(profile, HttpStatus.OK);
-      } else {
-          response = new ResponseEntity<>("Forbidden", HttpStatus.FORBIDDEN);
+        } else {
+          response = new ResponseEntity<>("User data for other users not accessible",
+              HttpStatus.FORBIDDEN);
         }
       } else {
         response = new ResponseEntity<>("Could not fetch user information",
@@ -115,9 +124,13 @@ public class UserController {
    * @return returns the new user.
    */
   @PostMapping("/users")
-  @Operation(
-      summary = "Creates a new user if the admin is logged in"
-  )
+  @Operation(summary = "Creates a new user", description = "Creates a new user if the admin is logged in")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "User created successfully"),
+      @ApiResponse(responseCode = "400", description = "User data not supplied"),
+      @ApiResponse(responseCode = "401", description = "Adding user accessible only to authenticated users"),
+      @ApiResponse(responseCode = "403", description = "User data for other users not accessible")
+  })
   public ResponseEntity<?> add(@RequestBody SignupDto signupData) {
     ResponseEntity<?> response;
     User sessionUser = this.accessUserService.getSessionUser();
@@ -143,14 +156,19 @@ public class UserController {
   /**
    * Updates an already existing user with user information (not password).
    *
-   * @param email the email to the user to change
+   * @param email    the email to the user to change
    * @param userData the new userdata for the user
    * @return the new user
    */
   @PutMapping("/users/{email}")
   @Operation(
-      summary = "Updates user information, not password"
-  )
+      summary = "Updates user information", description = "Updates user information, not password")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "User updated successfully"),
+      @ApiResponse(responseCode = "404", description = "User data not present"),
+      @ApiResponse(responseCode = "401", description = "User data accessible only to authenticated users"),
+      @ApiResponse(responseCode = "403", description = "User data for other users not accessible")
+  })
   public ResponseEntity<?> updateUser(@PathVariable String email,
       @RequestBody UserProfileDto userData) {
     ResponseEntity<?> response;
@@ -161,7 +179,7 @@ public class UserController {
         this.accessUserService.updateProfile(user.get(), userData);
         response = new ResponseEntity<>("", HttpStatus.OK);
       } else {
-        response = new ResponseEntity<>("user data not present",HttpStatus.NOT_FOUND);
+        response = new ResponseEntity<>("user data not present", HttpStatus.NOT_FOUND);
       }
     } else if (sessionUser == null) {
       response = new ResponseEntity<>("User data accessible only to authenticated users",
@@ -176,21 +194,25 @@ public class UserController {
   /**
    * Updates the users password
    *
-   * @param email the email to the user to change password.
+   * @param email    the email to the user to change password.
    * @param password the new password for the user
    * @return the new user with updated password.
    */
   @PatchMapping("/users/{email}")
-  @Operation(
-      summary = ("Updates the user password")
-  )
+  @Operation(summary = "Update user password by email", description = "Updates the user password with the specified email")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "User password updated"),
+      @ApiResponse(responseCode = "400", description = "Password cannot be empty"),
+      @ApiResponse(responseCode = "401", description = "User data accessible only to authenticated users"),
+      @ApiResponse(responseCode = "404", description = "User not found")
+  })
   public ResponseEntity<?> updatePassword(@PathVariable String email,
       @RequestBody String password) {
     ResponseEntity<?> response = null;
     User sessionUser = this.accessUserService.getSessionUser();
     Optional<User> user = this.userService.findUserByEmail(email);
 
-    if (sessionUser == null){
+    if (sessionUser == null) {
       response = new ResponseEntity<>("User data accessible only to authenticated users",
           HttpStatus.UNAUTHORIZED);
     }
@@ -207,7 +229,6 @@ public class UserController {
       response = new ResponseEntity<>("", HttpStatus.OK);
     }
 
-
     return response;
   }
 
@@ -218,9 +239,14 @@ public class UserController {
    * @return HTTP 200 OK or error code with error message.
    */
   @DeleteMapping("/users/{id}")
-  @Operation(
-      summary = "Deletes a user"
-  )
+  @Operation(summary = "Deletes a user by user id", description = "Deletes a user by its user id")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "User deleted"),
+      @ApiResponse(responseCode = "400", description = "Hotel not present"),
+      @ApiResponse(responseCode = "401", description = "Hotel data accessible only to authenticated users"),
+      @ApiResponse(responseCode = "403", description = "Hotel data for other users note accessible"),
+      @ApiResponse(responseCode = "500", description = "Could not delete hotel")
+  })
   public ResponseEntity<String> delete(@PathVariable int id) {
     ResponseEntity<String> response;
     User sessionUser = this.accessUserService.getSessionUser();
@@ -252,9 +278,13 @@ public class UserController {
    * @return HTTP 200 OK or error code with error message.
    */
   @PutMapping("/favorites/{hotelId}")
-  @Operation(
-      summary = "Toggle between favorite hotel to not favorite hotel"
-  )
+  @Operation(summary = "Toggle a hotel between favorite or not", description =
+      "Toggle between add or remove a hotel from favorites")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Successfully toggled"),
+      @ApiResponse(responseCode = "401", description = "Hotel data accessible only to authenticated users"),
+      @ApiResponse(responseCode = "404", description = "Hotel not found"),
+  })
   public ResponseEntity<String> toggleFavorite(@PathVariable int hotelId) {
     ResponseEntity<String> response;
     User sessionUser = this.accessUserService.getSessionUser();
@@ -284,9 +314,12 @@ public class UserController {
    * @return HTTP 200 OK or error code with error message.
    */
   @GetMapping("/favorites")
-  @Operation(
-      summary = "Get all the favorites hotel from user"
-  )
+  @Operation(summary = "Get all the favorites hotel from user", description =
+      "Get all the favorites hotels for the logged in")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "List of all favorite hotels"),
+      @ApiResponse(responseCode = "401", description = "User must be logged in")
+  })
   public ResponseEntity<?> getFavoritesForUser() {
     ResponseEntity<?> response;
     User sessionUser = accessUserService.getSessionUser();
@@ -296,7 +329,7 @@ public class UserController {
       sortedFavorites.sort(Comparator.comparing(Hotel::getId));
       response = new ResponseEntity<>(sortedFavorites, HttpStatus.OK);
     } else {
-      response = new ResponseEntity<>("User must be logged in", HttpStatus.BAD_REQUEST);
+      response = new ResponseEntity<>("User must be logged in", HttpStatus.UNAUTHORIZED);
     }
     return response;
   }

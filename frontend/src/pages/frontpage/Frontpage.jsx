@@ -24,7 +24,7 @@ function Frontpage() {
 
         async function fetchData() {
             try {
-                const response = await fetch("http://localhost:8080/api/hotels");
+                const response = await fetch( process.env.REACT_APP_BASE_URL + "/hotels");
                 const data = await response.json();
                 setData1(data);
 

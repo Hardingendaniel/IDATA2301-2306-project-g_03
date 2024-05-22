@@ -1,9 +1,11 @@
 package no.ntnu.webappgroup03.dto;
 
 /**
- * Data transfer object (DTO) for data from the sign-up form.
+ * Data transfer object (DTO) for data from the sign-up form. Code adapted from: <a
+ * href="https://github.com/strazdinsg/app-dev/blob/main/security-demos/07-backend-frontend-jwt-auth/backend/src/main/java/no/ntnu/dto/SignupDto.java">SignupDto</a>
  */
 public class SignupDto {
+
   private final String firstName;
   private final String lastName;
   private final String email;
@@ -26,6 +28,7 @@ public class SignupDto {
   public String getLastName() {
     return lastName;
   }
+
   public String getEmail() {
     return email;
   }

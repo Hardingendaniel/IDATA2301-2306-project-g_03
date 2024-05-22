@@ -1,5 +1,7 @@
 package no.ntnu.webappgroup03.controllers;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.Optional;
 import no.ntnu.webappgroup03.dto.HotelDto;
 import no.ntnu.webappgroup03.model.Hotel;
@@ -17,14 +19,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 
 /**
- * REST API Controller for hotel collection. Code adapted from ...
+ * REST API Controller for hotel collection. Code adapted from <a
+ * href="https://github.com/strazdinsg/app-dev/blob/main/security-demos/07-backend-frontend-jwt-auth/backend/src/main/java/no/ntnu/controllers/ProductController.java">ProductController.java</a>
  */
 @CrossOrigin
 @RestController
@@ -41,9 +42,7 @@ public class HotelController {
    * @return List of all hotels currently stored in the collection
    */
   @GetMapping("/api/hotels")
-  @Operation(
-      summary = "Get all hotels"
-  )
+  @Operation(summary = "Get all hotels", description = "Get all hotels available")
   public Iterable<Hotel> getAll() {
     User sessionUser = userService.getSessionUser();
     if (sessionUser == null) {
@@ -61,16 +60,19 @@ public class HotelController {
    * @return Hotel with the given ID or status 404 (Not Found)
    */
   @GetMapping("/api/hotels/{id}")
-  @Operation(
-      summary = "Get one hotel"
-  )
+  @Operation(summary = "Get hotel by id", description = "Get one hotel with the specified id")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Success"),
+      @ApiResponse(responseCode = "404", description = "Hotel not found"),
+  })
   public ResponseEntity<?> getOne(@PathVariable int id) {
     ResponseEntity<?> response;
     Optional<Hotel> hotel = this.hotelService.getOne(id);
     if (hotel.isPresent()) {
       HotelDto hotelDto = new HotelDto(hotel.get().getId(), hotel.get().getHotelName(),
           hotel.get().getDescription(), hotel.get().getLocation(), hotel.get().getRoomTypes(),
-          hotel.get().getPrice(), hotel.get().getProviders(), hotel.get().isActive(), hotel.get().getRating(),
+          hotel.get().getPrice(), hotel.get().getProviders(), hotel.get().isActive(),
+          hotel.get().getRating(),
           hotel.get().getReview());
       response = new ResponseEntity<>(hotelDto, HttpStatus.OK);
     } else {
@@ -88,8 +90,14 @@ public class HotelController {
    */
   @PutMapping("/api/hotels/{id}")
   @Operation(
-      summary = "Update the hotel parameters"
-  )
+      summary = "Updates hotel information", description = "Updates hotel information")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Hotel updated successfully"),
+      @ApiResponse(responseCode = "400", description = "Hotel data not supplied"),
+      @ApiResponse(responseCode = "401", description = "Hotel data accessible only to authenticated users"),
+      @ApiResponse(responseCode = "403", description = "Hotel data for other users not accessible"),
+      @ApiResponse(responseCode = "500", description = "Could not update Hotel data")
+  })
   public ResponseEntity<String> updateHotel(@PathVariable int id,
       @RequestBody HotelDto hotelData) {
     ResponseEntity<String> response;
@@ -124,9 +132,14 @@ public class HotelController {
    * @return HTTP 200 OK or error code with error message
    */
   @PatchMapping("api/hotels/{id}")
-  @Operation(
-      summary = "Update the active status for the hotels"
-  )
+  @Operation(summary = "Update the active status for the hotels", description =
+      "Update the active status for the hotels")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Hotel status updated successfully"),
+      @ApiResponse(responseCode = "401", description = "Hotel data accessible only to authenticated users"),
+      @ApiResponse(responseCode = "403", description = "User data for other users not accessible"),
+      @ApiResponse(responseCode = "404", description = "Hotel data for other users not accessible")
+  })
   public ResponseEntity<?> updateHotelStatus(@PathVariable int id,
       @RequestBody boolean active) {
     ResponseEntity<?> response = null;
@@ -159,9 +172,13 @@ public class HotelController {
    * @return HTTP 200 OK or error code with error message.
    */
   @PostMapping("/api/hotels")
-  @Operation(
-      summary = "Adds a new hotel, if user is admin"
-  )
+  @Operation(summary = "Creates a new hotel", description = "Creates a new hotel if the admin is logged in")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Hotel created successfully"),
+      @ApiResponse(responseCode = "400", description = "Hotel data not supplied"),
+      @ApiResponse(responseCode = "401", description = "Adding hotel accessible only to authenticated users"),
+      @ApiResponse(responseCode = "403", description = "Hotel data for other users not accessible")
+  })
   public ResponseEntity<?> add(@RequestBody HotelDto hotelDto) {
     ResponseEntity<?> response;
     User sessionUser = this.userService.getSessionUser();
@@ -192,9 +209,14 @@ public class HotelController {
    * @return HTTP 200 OK or error code with error message.
    */
   @DeleteMapping("/api/hotels/{id}")
-  @Operation(
-      summary = "Deletes a hotel form the"
-  )
+  @Operation(summary = "Deletes a hotel by user id", description = "Deletes a hotel by its user id")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Hotel deleted"),
+      @ApiResponse(responseCode = "400", description = "Hotel not present"),
+      @ApiResponse(responseCode = "401", description = "Hotel data accessible only to authenticated users"),
+      @ApiResponse(responseCode = "403", description = "Hotel data for other users note accessible"),
+      @ApiResponse(responseCode = "500", description = "Could not delete hotel")
+  })
   public ResponseEntity<String> delete(@PathVariable int id) {
     ResponseEntity<String> response;
     User sessionUser = this.userService.getSessionUser();
